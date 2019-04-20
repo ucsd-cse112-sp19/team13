@@ -2,4 +2,8 @@
   "extends": [
     "airbnb-base",
   ]
+  
+  "plugins": [
+      "html"
+  ]
 }
