@@ -4,7 +4,9 @@
   "description": "an intro of team 13",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint . --ext .html",
+    "pretest": "npm run lint",
+    "test": "echo \"No tests\""
   },
   "repository": {
     "type": "git",
