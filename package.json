@@ -1,0 +1,27 @@
+{
+  "name": "team13intros",
+  "version": "1.0.0",
+  "description": "an intro of team 13",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .html",
+    "pretest": "npm run lint",
+    "test": "echo \"No tests\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucsd-cse112/team13.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucsd-cse112/team13/issues"
+  },
+  "homepage": "https://github.com/ucsd-cse112/team13#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-html": "^5.0.3",
+    "eslint-plugin-import": "^2.17.2"
+  }
+}
