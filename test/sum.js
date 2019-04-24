@@ -1,5 +1,6 @@
-import { expect } from 'chai';
 import sum from '../sum';
+
+const { expect } = require('chai').expect;
 
 describe('#sum()', () => {
   context('without arguments', () => {
