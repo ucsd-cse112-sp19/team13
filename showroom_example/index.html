@@ -3,21 +3,18 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Money Input Component</title>
+  <title>Countdown Component</title>
 </head>
 
 <body>
-  <h1>Money Input Component</h1>
+  <h1>Countdown Component</h1>
 
-  <h1>USD:</h1>
-  <input is="money-input" id="USD"></input>
-  <button onclick="document.getElementById('USD').clear()">Clear input field</button>
+  <countdown-component id="countdown"></countdown-component>
+  <button onclick='document.getElementById("countdown").start(30000)'>start</button>
+  <button onclick='document.getElementById("countdown").stop()'>stop</button>
+  <button onclick='document.getElementById("countdown").resume()'>resume</button>
 
-  <h1>CAD:</h1>
-  <input currency="CAD" is="money-input" id="CAD"></input>
-  <button onclick="document.getElementById('CAD').clear()">Clear input field</button>
-
-  <script src="money-input.js"></script>
+  <script src="countdown-component.js"></script>
 
 </body>
 
