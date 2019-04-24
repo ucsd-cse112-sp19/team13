@@ -14,5 +14,8 @@
     },
     "rules": {
     },
-    "plugins": ["html"]
+    "plugins": [
+        "html",
+        "mocha"
+    ]
 }
