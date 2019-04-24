@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Money Input Component</title>
+</head>
+
+<body>
+  <h1>Money Input Component</h1>
+
+  <h1>USD:</h1>
+  <input is="money-input" id="USD"></input>
+  <button onclick="document.getElementById('USD').clear()">Clear input field</button>
+
+  <h1>CAD:</h1>
+  <input currency="CAD" is="money-input" id="CAD"></input>
+  <button onclick="document.getElementById('CAD').clear()">Clear input field</button>
+
+  <script src="money-input.js"></script>
+
+</body>
+
+</html>
