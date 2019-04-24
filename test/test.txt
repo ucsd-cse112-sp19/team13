@@ -1,4 +1,0 @@
-
-    "lint": "eslint ./**/*.js ./**/*.html --ext .html; stylelint ./**/*.css ./**/*.html",
-    "pretest": "npm run lint",
-    "test": "echo \"No tests\""
