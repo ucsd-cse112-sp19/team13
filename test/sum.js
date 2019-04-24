@@ -1,5 +1,5 @@
-var sum = require('../sum.js');
-var expect = require('chai').expect;
+import { expect } from 'chai';
+import sum from '../sum';
 
 describe('#sum()', () => {
   context('without arguments', () => {
