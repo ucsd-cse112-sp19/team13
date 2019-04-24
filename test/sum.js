@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { sum } = require('../sum');
+const { sum } = require('../mocha_example/sum');
 
 describe('#sum()', () => {
   context('without arguments', () => {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Countdown Component</title>
+</head>
+
+<body>
+  <h1>Countdown Component</h1>
+
+  <countdown-component id="countdown"></countdown-component>
+  <button onclick='document.getElementById("countdown").start(30000)'>start</button>
+  <button onclick='document.getElementById("countdown").stop()'>stop</button>
+  <button onclick='document.getElementById("countdown").resume()'>resume</button>
+
+  <script src="countdown-component.js"></script>
+
+</body>
+
+</html>
