@@ -18,21 +18,8 @@
 notifications:
   slack: cse112-sp19-team13:nriQcbq5S0LQoYnTnFsRiEEe
 
-language: ruby
-
-# Cache gems
-cache:
-  bundler: true
-  directories:
-    - node_modules
-
-addons:
-  chrome: stable
-  #firefox: latest
-
 env:
-  global:
-    CC_TEST_REPORTER_ID=060d3f549ff61c04e238d60201ae8d770079b182df927a89c18095b9f318efe5
+  global: CC_TEST_REPORTER_ID=060d3f549ff61c04e238d60201ae8d770079b182df927a89c18095b9f318efe5
 
 language: ruby
 rvm:
@@ -41,7 +28,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-# script:
-#   - bundle exec rspec
+script:
+  - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
