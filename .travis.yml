@@ -1,19 +1,22 @@
-language: node_js
+# language: node_js
 
-# Version 10 is the most recent.
-node_js:
-  - '10'
+# # Version 10 is the most recent.
+# node_js:
+#   - '10'
 
-# npm version 6 comes with version 10.
-before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
+# # npm version 6 comes with version 10.
+# before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
 
-# Makes sure node_modules exists.
-cache:
-  directories:
-    - node_modules
+# # Makes sure node_modules exists.
+# cache:
+#   directories:
+#     - node_modules
 
 
-# multiple tests suites
+# # multiple tests suites
+
+notifications:
+  slack: cse112-sp19-team13:nriQcbq5S0LQoYnTnFsRiEEe
 
 language: ruby
 
