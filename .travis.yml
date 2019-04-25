@@ -1,19 +1,22 @@
-# language: node_js
+language: node_js
 
-# # Version 10 is the most recent.
-# node_js:
-#   - '10'
+# Version 10 is the most recent.
+node_js:
+  - '10'
 
-# # npm version 6 comes with version 10.
-# before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
+# npm version 6 comes with version 10.
+before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
 
-# # Makes sure node_modules exists.
-# cache:
-#   directories:
-#     - node_modules
-
+# Makes sure node_modules exists.
+cache:
+  directories:
+    - node_modules
 
 # single test suite, non-parallel build.
+addons:
+  code_climate:
+    repo_token:
+      -1p9dALgqKadhU2TVu7Oo2pVkJbju44s4oUoezzKMYGjhcsEJ6tzJGk46ZJeYW+34KkC7ikxbScxU/WAWW2MhzHbIah/k+hQMSQIXaGH/iZjWVVDRynr4sS6QoBMOTnNVw2j/BLD2em/IpfJlQBLnRUpKfElguNSowbiY8piK37KQXIlHqnuRwGd1jIKv/bmcZIznJzGlcM4qdUjpYjl4K8bbEu8RRvgvVL+TIHMDRdUEkIwI+fD/MI9X9xCnot6PMgXqugFRaoNmGefJM8ijHEvgAvrGD98JrWcMUE8IwP9bhKhpsX33091i2p4JB2hbpXxf4+A+U7r+aP6doMRcKwnr0kO1W+44C073aETvRf5k+gnFi2hXDKiZDmPp2ttWxc2qnVoIZpJfNsX5iKWrkHcZtM23h4JrnYAQ0LJFHNCRrjYr0t9T75ulgc9DXYVK4nR4K6WxpwprMOtIOlAS1fZDAgYUHeQFTiYgDP4pXqSd5wonR1mCc4hAYWdY5nVzMTDb/7603tm0RMgRUdNb6+1rBrFVYyxzLPf58218/F7LJ2kw2mSVdnnge4e1ROQG+dBEwyyPXE85kmm5mzGUNZ68Eja/mSzW2d3oAYOoYuflD8Y0TabJ6qpecVNnvgGEWgkFfQK5Tk1t/kHzH29QNg5iH7Tx/vcEsI88NJWLqpM=
 
 notifications:
   slack: cse112-sp19-team13:nriQcbq5S0LQoYnTnFsRiEEe
