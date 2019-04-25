@@ -39,7 +39,7 @@ before_script:
 #   - vendor/bin/test-reporter
 
 # script: istanbul cover node_modules/mocha/bin/_mocha -- -R spec
-script: istanbul cover npm run test -- -R spec
+script: istanbul cover npm run test
 before_script:
   - npm install codeclimate-test-reporter istanbul -g
 after_script:
