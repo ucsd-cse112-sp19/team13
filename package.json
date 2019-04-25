@@ -7,7 +7,7 @@
     "lint": "eslint ./**/*.js ./**/*.html --ext .html; stylelint ./**/*.css ./**/*.html",
     "pretest": "npm run lint",
     "test": "mocha --exit --timeout 5000",
-    "test": "nyc mocha"
+    "test": "nyc mocha --exit --timeout 10000"
   },
   "repository": {
     "type": "git",
