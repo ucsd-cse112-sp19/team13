@@ -35,5 +35,11 @@ before_script:
 #   - bundle exec rspec
 # after_script:
 #   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+# after_script:
+#   - vendor/bin/test-reporter
+
+script: istanbul cover node_modules/mocha/bin/_mocha -- -R spec
+before_script:
+  - npm install codeclimate-test-reporter istanbul -g
 after_script:
-  - vendor/bin/test-reporter
+  - codeclimate-test-reporter < ./coverage/lcov.info
