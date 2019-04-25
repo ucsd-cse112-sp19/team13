@@ -4,9 +4,8 @@
   "description": "an intro of team 13",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./**/*.js ./**/*.html --ext .html; stylelint ./**/*.css ./**/*.html",
-    "pretest": "npm run lint",
-    "test": "mocha --exit --timeout 5000"
+    "lint": "eslint ./**/*.js ./**/*.html --ext .html && stylelint ./**/*.css ./**/*.html",
+    "test": "npm run lint && mocha --exit --timeout 5000"
   },
   "repository": {
     "type": "git",
