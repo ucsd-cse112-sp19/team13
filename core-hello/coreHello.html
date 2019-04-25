@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>core-hello</title>
+</head>
+<body>
+    <h1>Core Hello Demo</h1>
+
+    <core-hello>Team 13</core-hello>
+    <br>
+    <core-hello>Presenting</core-hello>
+
+    <script type="module">
+        import {addPrefix} from './coreHello.js';
+
+        // run add prefix function when loading the page
+        window.onload=addPrefix;
+    </script>
+</body>
+</html>
