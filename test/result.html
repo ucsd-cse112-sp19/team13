@@ -9,7 +9,9 @@
   <!-- ADD LINK TO CORE-HELLO COMPONENT -->
 </head>
 <body>
-  <h1>Unit Test Results</h1>
+  <h2 id="testAreaTitle">Test Area</h2>
+  <div id="testArea"></div>
+  <h1 id="testTitle">Unit Test Results</h1>
   <div id="mocha"></div>
   <script src="https://unpkg.com/chai/chai.js"></script>
   <script src="https://unpkg.com/mocha/mocha.js"></script>
@@ -17,7 +19,7 @@
     mocha.setup('bdd');
     mocha.setup({ ignoreLeaks: true });
   </script>
-  <script src="core-hello.js"></script>
+  <script src="test/core-hello.js"></script>
   <script class="mocha-exec">
     mocha.run();
   </script>
