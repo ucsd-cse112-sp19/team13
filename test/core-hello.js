@@ -36,4 +36,26 @@ describe('p element', () => {
       chai.expect(testElement.innerHTML).to.equal(message);
     });
   });
+
+  // test 3: Determine if the lang attribute functions correctly
+  context('Lang attribute exist', () => {
+    it('should return true', () => {
+      const coreHelloElement = document.getElementById('testElement');
+
+      const langExist = coreHelloElement.hasAttribute('lang');
+
+      chai.expect(langExist).to.equal(true);
+    })
+  });
+
+  // test 4: Determine if the rainbow attribute functions properly
+  context('Rainbow attribute exist', () => {
+    it('should return true', () => {
+      const coreHelloElement = document.getElementById('testElement');
+
+      const rainbowExist = coreHelloElement.hasAttribute('rainbow');
+
+      chai.expect(rainbowExist).to.equal(true);
+    });
+  });
 });
