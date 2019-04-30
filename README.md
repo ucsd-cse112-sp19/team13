@@ -1,5 +1,5 @@
 # Thank God It's Friday
-Welcome To UCSD-CSE112's Public Repository for Team Friday
+Welcome To UCSD-CSE112's Public Repository for Team Friday!
 
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/Team%20Pics/logo.png)
 
