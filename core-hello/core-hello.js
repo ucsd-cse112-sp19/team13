@@ -1,11 +1,16 @@
 import { attachShadowRoot, createElement } from './wcutil';
 
-const HELLO_STRING = 'Hello World';
+const HELLO_STRING = {
+  en: 'Hello World',
+  es: 'Hola Mundo',
+  jp: 'こんにちは世界',
+  fr: 'Bonjour le monde',
+};
 
 /**
  * An element that displays "Hello" with the passed-in name.
  */
-export default class CoreHelloElement extends HTMLElement {
+class CoreHelloElement extends HTMLElement {
   /**
    * Creates a CoreHello element and attaches the shadow root
    * @constructor
@@ -15,22 +20,66 @@ export default class CoreHelloElement extends HTMLElement {
 
     const template = createElement('template', {}, `
             <label>
-                ${HELLO_STRING} <slot name="name"></slot>
+                <span id="hello">${HELLO_STRING.en}</span>
+                <slot></slot>
             </label>
             <style>
-                :host {
-                    display: block;
-                    contain: content;
-                }
+              :host {
+                display: block;
+                contain: content;
+            
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 16px;
+                color: black;
+              }
+              
+              :host([rainbow]) {
+                animation: rainbow 6s infinite; 
+              }
+              
+              @keyframes rainbow {
+                0%  { color: red }
+                15% { color: orange }
+                30% { color: yellow }
+                45% { color: green }
+                60% { color: blue }
+                75% { color: indigo }
+                90% { color: violet }
+                100%{ color: red }
+              }
             </style>
         `);
     attachShadowRoot(this, template);
+
+    this.helloElement = this.shadowRoot.querySelector('#hello');
   }
 
   /**
    * @override
    */
-  static get observedAttributes() { return []; }
+  // connectedCallback() { }
+
+  /**
+    * @override
+    */
+  // disconnectedCallback() { }
+
+  /**
+    * @override
+    */
+  attributeChangedCallback(attribute, oldValue, newValue) {
+    switch (attribute) {
+      case 'lang':
+        this.helloElement.textContent = HELLO_STRING[newValue] || HELLO_STRING.en;
+        break;
+      default:
+    }
+  }
+
+  /**
+   * @override
+   */
+  static get observedAttributes() { return ['lang']; }
 
   /**
    * Get the attribute that represents the name that will be displayed.
@@ -79,22 +128,8 @@ export default class CoreHelloElement extends HTMLElement {
    * @type {String}
    */
   set lang(opts) { this.setAttribute('lang', opts); }
-
-  /**
-   * @override
-   */
-  // connectedCallback() { }
-
-  /**
-    * @override
-    */
-  // disconnectedCallback() { }
-
-  /**
-    * @override
-    */
-  // attributeChangedCallback(attribute, oldValue, newValue) { }
 }
 
 // Define custom element for html
 window.customElements.define('core-hello', CoreHelloElement);
+export default CoreHelloElement;

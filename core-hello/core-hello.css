@@ -7,7 +7,7 @@
     color: black;
 }
 
-:host[rainbow] {
+:host([rainbow]) {
     animation: rainbow 6s infinite; 
 }
 
