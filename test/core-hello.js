@@ -1,3 +1,5 @@
+const chai = require('chai');
+
 // view result.html for more context
 describe('p element', () => {
   // set up test environment to have only one empty testElement in testArea
@@ -45,7 +47,7 @@ describe('p element', () => {
       const langExist = coreHelloElement.hasAttribute('lang');
 
       chai.expect(langExist).to.equal(true);
-    })
+    });
   });
 
   // test 4: Determine if the rainbow attribute functions properly
