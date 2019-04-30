@@ -11,33 +11,32 @@ const port = 3000;
 // like Express.js
 // Needs to read synchronosuly so that packet sends after we have
 // read the entire file.
-function read (strPath) {
+function read(strPath) {
   let contents = '';
-  contents = fs.readFileSync(strPath,'utf8');
+  contents = fs.readFileSync(strPath, 'utf8');
   return contents;
 }
 
 // serves up the requested files
-// only able to serve result.html and all files ending in .js inside 
+// only able to serve result.html and all files ending in .js inside
 // test directory
 http.createServer((req, res) => {
   // checks if the incoming request is for a test file
   // by checking if url is asking for the test directory
-  // and from in there for a file ending in .js 
-  let isTestFile = (req.url).startsWith('/test/') && (req.url).endsWith('.js');
+  // and from in there for a file ending in .js
+  const isTestFile = (req.url).startsWith('/test/') && (req.url).endsWith('.js');
   // handle sending back test files ending in .js
-  if(isTestFile){
+  if (isTestFile) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/javascript');
     res.write(read('test/core-hello.js'));
     res.end();
-  } 
-  else if (req.url == '/') {
+  } else if (req.url === '/') {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html');
     res.write(read('test/result.html'));
     res.end();
   }
 }).listen(port, hostname, () => {
-	  console.log(`Server running at http://${hostname}:${port}/`);
+  // console.log(`Server running at http://${hostname}:${port}/`);
 });
