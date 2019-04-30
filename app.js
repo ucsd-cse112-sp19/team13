@@ -25,11 +25,33 @@ http.createServer((req, res) => {
   // by checking if url is asking for the test directory
   // and from in there for a file ending in .js
   const isTestFile = (req.url).startsWith('/test/') && (req.url).endsWith('.js');
+  // checks if the incoming request is for a core-hello component js file
+  // by checking if url is asking for the dist directory
+  const isComponentFile = (req.url).startsWith('/dist/');
+  // resource to send back: removes beginning '/' in url
+  const resource = (req.url).slice(1);
+  // purpose is to get the file extension of the resource
+  const extension = resource.split('.')[1];
   // handle sending back test files ending in .js
   if (isTestFile) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/javascript');
     res.write(read('test/core-hello.js'));
+    res.end();
+  } else if (isComponentFile) {
+    // handle sending back the component
+    res.statusCode = 200;
+    // determine the Mimie-type
+    if (extension === 'html') {
+      res.setHeader('Content-Type', 'text/html');
+      // res.setHeader('Content-Type', 'application/javascript');
+    } else if (extension === 'css') {
+      res.setHeader('Content-Type', 'text/css');
+      // res.setHeader('Content-Type', 'application/javascript');
+    } else if (extension === 'js') {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+    res.write(read(resource));
     res.end();
   } else if (req.url === '/') {
     res.statusCode = 200;

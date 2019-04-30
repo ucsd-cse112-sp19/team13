@@ -5,8 +5,10 @@
   <title>Mocha Tests</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+  <!-- File to test-->
+  <script src="./dist/core-hello.js" ></script>
+  <!-- End File to test-->
   <!-- OPEN THIS DOCUMENT IN A WEB BROWSER TO RUN THE TESTS IN core-hello.js -->
-  <!-- ADD LINK TO CORE-HELLO COMPONENT -->
 </head>
 <body>
   <h2 id="testAreaTitle">Test Area</h2>
@@ -16,15 +18,12 @@
   <script src="https://unpkg.com/chai/chai.js"></script>
   <script src="https://unpkg.com/mocha/mocha.js"></script>
 
-  <!-- File to test-->
-  <script type="module" src="./src/core-hello.js" ></script>
-  <!-- End File to test-->
 
   <script class="mocha-init">
     mocha.setup('bdd');
     mocha.setup({ ignoreLeaks: true });
   </script>
-  <script type="module" src="./core-hello.js"></script>
+  <script src="./test/core-hello.js"></script>
   <script class="mocha-exec">
     mocha.run();
   </script>
