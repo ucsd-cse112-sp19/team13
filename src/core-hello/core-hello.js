@@ -29,16 +29,6 @@ class CoreHelloElement extends HTMLElement {
   /**
    * @override
    */
-  // connectedCallback() { }
-
-  /**
-    * @override
-    */
-  // disconnectedCallback() { }
-
-  /**
-   * @override
-   */
   attributeChangedCallback(attribute, oldValue, newValue) {
     switch (attribute) {
       case 'lang':
