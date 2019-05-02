@@ -6,7 +6,11 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
     "build": "webpack --mode production --config webpack.config.js && jsdoc --destination ./docs --readme ./README.md --recurse ./src/*",
+<<<<<<< HEAD
     "lint": "eslint './**/*.js' './**/*.html' --ext .html && stylelint './**/*.css/' './**/*.html/'",
+=======
+    "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
+>>>>>>> 69a73de33722bfa1245c5a3d541bd751a74d390c
     "test": "npm run lint && mocha --exit --timeout 5000"
   },
   "repository": {
