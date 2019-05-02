@@ -1,43 +1,64 @@
+const chai = require('chai');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const { document } = (new JSDOM(`<!DOCTYPE html><p>Hello world</p>`)).window;
+
 // view result.html for more context
 describe('core-hello element', () => {
   // set up test environment to have only one empty testElement in testArea
   beforeEach('init testing environment', () => {
-    // remove testArea and reinsert before the test results for a clean slate
-    document.body.removeChild(document.getElementById('testArea'));
-    const testArea = document.createElement('div');
-    testArea.setAttribute('id', 'testArea');
-    document.body.insertBefore(testArea, document.getElementById('testTitle'));
-    // create the test element
-    const testElement = document.createElement('core-hello');
-    // set id value
-    testElement.setAttribute('id', 'testElement');
-    // insert into DOM as child of element with id as testArea
-    testArea.appendChild(testElement);
+    /*const HELLO_STRING = {
+      en: 'Hello World',
+      es: 'Hola Mundo',
+      jp: 'こんにちは世界',
+      fr: 'Bonjour le monde',
+    };*/
+
+    // Setting core-hello for DOM testting (test 1)
+    // Setting core-hello for content testing (Test 2)
+    const contentTest = document.createElement('core-hello');
+    contentTest.setAttribute('id', 'contentTest');
+
+    // Setting core-hello for language testing (test 3)
+    const langTestEN = document.createElement('core-hello');
+    langTestEN.setAttribute('id', 'langTestEN');
+    const langTestES = document.createElement('core-hello');
+    langTestES.setAttribute('id', 'langTestES');
+    const langTestJP = document.createElement('core-hello');
+    //sdasasda
+    langTestJP.setAttribute('id', 'langTestJP');
+    const langTestFR = document.createElement('core-hello');
+    langTestFR.setAttribute('id', 'langTestFR');
+
+    // Setting core-hello for rainbow testing (test 4)
+    const rainbowTest = document.createElement('core-hello');
+    rainbowTest.setAttribute('rainbow');
   });
 
   // test 1: Check that testElement is inserted into the DOM
   context('Inserted in DOM', () => {
     it('should return non-null object', () => {
       // retrieve testElement from the DOM
-      const isRetrievable = document.getElementById('testElement');
+      const isRetrievable = document.getElementById('contentTest');
       chai.expect(isRetrievable).to.not.equal(null);
     });
   });
 
   // test 2: Check whatever's in the "slot" is displayed correctly
   context('Text in Slot', () => {
-    it('should be Hello World CSE 112', () => {
-      // retrieve the test element
-      const testElement = document.getElementById('testElement');
+    it('should be Hello World, Team 13', () => {
+      const document = window.document;
+      // retrieve testElement from the DOM
+      const contentTest = document.getElementById('contentTest');
       // the text in testElement slot
-      const message = 'CSE 112';
-      // set it's inner text
-      testElement.innerHTML = message;
-      chai.expect(testElement.innerHTML).to.equal(message);
+      const message = 'Hello World Team 13';
+
+      contentTest.innerHTML(message);
+
+      chai.expect(contentTest.innerHTML).to.equal(message);
     });
   });
-
-  // test 3: Determine if the lang attribute functions correctly
+  /*// test 3: Determine if the lang attribute functions correctly
   context('Lang attribute exist', () => {
     it('should return true', () => {
       const coreHelloElement = document.getElementById('testElement');
@@ -58,4 +79,5 @@ describe('core-hello element', () => {
       chai.expect(rainbowExist).to.equal(true);
     });
   });
+  */
 });
