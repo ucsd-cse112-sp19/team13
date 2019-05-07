@@ -1,4 +1,4 @@
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const showroom = require('showroom/puppeteer')();
 
 const HELLO_STRING = {
@@ -10,15 +10,15 @@ const HELLO_STRING = {
 
 
 describe('core-hello', () => {
-  before( async () => {
+  before(async () => {
     await showroom.start();
   });
 
-  after( async () => {
+  after(async () => {
     await showroom.stop();
   });
 
-  beforeEach( async () => {
+  beforeEach(async () => {
     await showroom.setTestSubject('core-hello');
   });
 
@@ -35,7 +35,7 @@ describe('core-hello', () => {
     const outerHello = await showroom.find('// span');
     const outerMessage = await showroom.getTextContent(outerHello);
 
-   assert.equal(outerMessage, HELLO_STRING.es);
+    assert.equal(outerMessage, HELLO_STRING.es);
   });
 
   it(`Message should be ${HELLO_STRING.jp}`, async () => {
@@ -56,9 +56,8 @@ describe('core-hello', () => {
 
   it('Rainbow attribute should exist and working', async () => {
     await showroom.setAttribute('rainbow');
-    const outerHello = await showroom.find('// span');
     const attrExist = await showroom.hasAttribute('rainbow');
 
-    assert.equal(outerMessage, HELLO_STRING.en);
+    assert.equal(attrExist, true);
   });
 });
