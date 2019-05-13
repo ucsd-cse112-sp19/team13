@@ -9,12 +9,12 @@ const HELLO_STRING = {
 };
 
 /**
- * Main testing method using mocha 
+ * Main testing method using mocha
  */
 
 describe('core-hello', () => {
   /**
-   * Starting showroom and puppeter in order to create the html document 
+   * Starting showroom and puppeter in order to create the html document
    * to be tested
    */
   before(async () => {
@@ -22,7 +22,7 @@ describe('core-hello', () => {
   });
 
   /**
-   * Stopping showroom and puppeter 
+   * Stopping showroom and puppeter
    */
   after(async () => {
     await showroom.stop();
