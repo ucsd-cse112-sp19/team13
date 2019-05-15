@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
 	entry: {
 		'core-hello': './src/core-hello/core-hello.js',
+		'core-slider': './src/core-slider/core-slider.js'
 	},
 	output: {
 		filename: '[name].js',
