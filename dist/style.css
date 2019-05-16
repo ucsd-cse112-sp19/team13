@@ -7,4 +7,16 @@ html, body {
 
 core-slider {
 	width: 200px;
+	height: auto;
+}
+
+core-slider[vertical] {
+	width: auto;
+	height: 200px;
+}
+
+#vert1 {
+	--thumb-color: yellowgreen;
+	--outline-color: darkgreen;
+	color: green;
 }

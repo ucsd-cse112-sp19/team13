@@ -22,10 +22,25 @@
                 <core-hello lang="jp">Team 13</core-hello>
             <label>)</label>
         </h1>
+        <h2>Vertical</h2>
+        <div>
+            <core-slider id="vert1" value="5" vertical></core-slider>
+            <core-slider id="vert2" value="10" vertical></core-slider>
+            <core-slider id="vert3" value="50" vertical></core-slider>
+            <core-slider id="vert4" value="100" vertical></core-slider>
+        </div>
 
         <script>
             const titleHello = document.getElementById('title-hello');
             const sizeSlider = document.getElementById('size-slider');
+            const vert1 = document.getElementById('vert1');
+            const vert2 = document.getElementById('vert2');
+            vert1.addEventListener('change', (e) => {
+                const value = parseInt(e.target.value, 10);
+                vert2.value = value * 2;
+                vert3.value = value / 2;
+                vert4.value = value + 10;
+            });
             sizeSlider.addEventListener('change', (e) => {
                 titleHello.style.fontSize = `${e.target.value}px`;
             });

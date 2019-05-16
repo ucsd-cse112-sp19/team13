@@ -31,20 +31,10 @@ class CoreSliderElement extends HTMLElement {
     switch (attribute) {
       case 'value':
         {
-          // Calculates the value with respect to the defined range (from this.min and this.max)
-          const minValue = parseInt(this.min, 10);
-          const maxValue = parseInt(this.max, 10);
-          const valueRange = maxValue - minValue;
-          const prevValue = parseInt(oldValue, 10);
           const nextValue = parseInt(newValue, 10);
+          this.updateThumbPosition(nextValue);
 
-          // Calculates the pixel position of the thumb from this.value
-          let progress = (nextValue - minValue) / valueRange;
-          if (progress > 1) progress = 1;
-          if (progress < 0) progress = 0;
-          const thumbWidth = this.sliderThumb.clientWidth;
-          this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-
+          const prevValue = parseInt(oldValue, 10);
           if (nextValue !== prevValue) {
             this.dispatchEvent(new Event('change', {
               bubbles: true,
@@ -74,6 +64,8 @@ class CoreSliderElement extends HTMLElement {
     }
     if (!this.hasAttribute('value')) {
       this.setAttribute('value', 0);
+    } else {
+      this.updateThumbPosition(parseInt(this.value, 10));
     }
   }
 
@@ -96,10 +88,20 @@ class CoreSliderElement extends HTMLElement {
    * @param {Event} e the input event
    */
   onMouseMove(e) {
-    const sliderX = this.slider.getBoundingClientRect().left;
-    const sliderWidth = parseInt(this.slider.clientWidth, 10);
-    const sliderPosition = e.clientX - sliderX;
-    const sliderRatio = sliderPosition / sliderWidth;
+    let sliderRatio;
+
+    // Depending on whether it is vertical, calculate the proportional value from the slider
+    if (!this.vertical) {
+      const sliderX = this.slider.getBoundingClientRect().left;
+      const sliderWidth = this.slider.clientWidth;
+      const sliderPosition = e.clientX - sliderX;
+      sliderRatio = sliderPosition / sliderWidth;
+    } else {
+      const sliderY = this.slider.getBoundingClientRect().top;
+      const sliderHeight = this.slider.clientHeight;
+      const sliderPosition = e.clientY - sliderY;
+      sliderRatio = sliderPosition / sliderHeight;
+    }
 
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
@@ -155,7 +157,31 @@ class CoreSliderElement extends HTMLElement {
     if (result > maxValue) result = maxValue;
     this.setAttribute('value', `${result}`);
   }
+  
+  /**
+   * Updates the thumb position to reflect the slider value.
+   *
+   * @private
+   * @param {Number} value the current slider value
+   */
+  updateThumbPosition(value) {
+    // Calculates the value with respect to the defined range (from this.min and this.max)
+    const minValue = parseInt(this.min, 10);
+    const maxValue = parseInt(this.max, 10);
+    const valueRange = maxValue - minValue;
 
+    // Calculates the pixel position of the thumb from this.value
+    let progress = (value - minValue) / valueRange;
+    if (progress > 1) progress = 1;
+    if (progress < 0) progress = 0;
+    const thumbWidth = this.sliderThumb.clientWidth;
+
+    if (!this.vertical) {
+      this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+    } else {
+      this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+    }
+  }
 
   /**
    * Disables the elements from receiving inputs. In other words, this will disable all
@@ -182,6 +208,21 @@ class CoreSliderElement extends HTMLElement {
   get step() { return this.getAttribute('step'); }
 
   set step(value) { this.setAttribute('step'); }
+
+  /**
+   * Whether the slider is orientated vertically.
+   *
+   * @type {Boolean}
+   */
+  get vertical() { return this.hasAttribute('vertical'); }
+
+  set vertical(value) {
+    if (value) {
+      this.setAttribute('vertical', '');
+    } else {
+      this.removeAttribute('vertical');
+    }
+  }
 }
 
 registerCustomTag('core-slider', CoreSliderElement);

@@ -1,7 +1,9 @@
 :host {
     display: inline-block;
-    width: 100%;
     contain: content;
+    
+    width: 100%;
+    height: auto;
     color: lightgray;
     
     --thumb-color: white;
@@ -29,10 +31,10 @@
     border: 1px solid var(--outline-color);
     border-radius: 10px;
 }
+
 #slider-thumb {
     position: absolute;
     top: calc(50% - 5px);
-    
     left: 0px;/* Will be controlled in code */
 
     display: block;
@@ -41,4 +43,26 @@
     background: var(--thumb-color);
     border: 1px solid var(--outline-color);
     border-radius: 50%;
+}
+
+:host([vertical]) {
+    width: auto;
+    height: 100%;
+}
+
+:host([vertical]) #slider {
+    width: 5px;
+    height: calc(100% - 14px);
+}
+
+:host([vertical]) #slider-bar {
+    top: 0px;
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 100%;
+}
+
+:host([vertical]) #slider-thumb {
+    top: 0px;/* Will be controlled in code */
+    left: calc(50% - 5px);
 }
