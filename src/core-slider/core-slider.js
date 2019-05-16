@@ -20,8 +20,13 @@ class CoreSliderElement extends HTMLElement {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
 
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
+
     this.sliderThumb = this.shadowRoot.querySelector('#slider-thumb');
     this.sliderThumb.addEventListener('mousedown', this.onMouseDown);
+    this.sliderThumb.addEventListener('touchstart', this.onTouchStart);
 
     this.slider = this.shadowRoot.querySelector('#slider');
   }
@@ -124,6 +129,40 @@ class CoreSliderElement extends HTMLElement {
   }
 
   /**
+   * Is called when a touch is on the thumb.
+   *
+   * @param {Event} e the input event
+   */
+  // eslint-disable-next-line no-unused-vars
+  onTouchStart(e) {
+    document.addEventListener('touchend', this.onTouchEnd);
+    document.addEventListener('touchmove', this.onTouchMove);
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  /**
+   * Is called when the touch moves. This is only registered when onTouchStart is called.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchMove(e) {
+    const touchEvent = e.changedTouches[0];
+    this.onMouseMove(touchEvent);
+  }
+
+  /**
+   * Is called when the touch is released anywhere.
+   *
+   * @param {Event} e the input event
+   */
+  // eslint-disable-next-line no-unused-vars
+  onTouchEnd(e) {
+    document.removeEventListener('touchend', this.onTouchEnd);
+    document.removeEventListener('touchmove', this.onTouchMove);
+  }
+
+  /**
    * The min value of the slider. This is the lower bound for this.value.
    *
    * @type {Number}
@@ -157,7 +196,7 @@ class CoreSliderElement extends HTMLElement {
     if (result > maxValue) result = maxValue;
     this.setAttribute('value', `${result}`);
   }
-  
+
   /**
    * Updates the thumb position to reflect the slider value.
    *
