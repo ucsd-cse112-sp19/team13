@@ -5,6 +5,12 @@ html, body {
 	height: 100%;
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 core-slider {
 	width: 200px;
 	height: auto;
