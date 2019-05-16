@@ -67,13 +67,13 @@ class CoreSliderElement extends HTMLElement {
       this.setAttribute('step', 1);
     }
     if (!this.hasAttribute('min')) {
-      this.setAttribute('min', 1);
+      this.setAttribute('min', 0);
     }
     if (!this.hasAttribute('max')) {
       this.setAttribute('max', 100);
     }
     if (!this.hasAttribute('value')) {
-      this.setAttribute('value', 1);
+      this.setAttribute('value', 0);
     }
   }
 
