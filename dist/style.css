@@ -13,6 +13,8 @@ core-slider {
 core-slider[vertical] {
 	width: auto;
 	height: 200px;
+
+	color: white;
 }
 
 #vert1 {
