@@ -60,6 +60,23 @@ class CoreSliderElement extends HTMLElement {
   /** @override */
   static get observedAttributes() { return ['value']; }
 
+  /** @override */
+  connectedCallback() {
+    // Sets the default value for attributes
+    if (!this.hasAttribute('step')) {
+      this.setAttribute('step', 1);
+    }
+    if (!this.hasAttribute('min')) {
+      this.setAttribute('min', 1);
+    }
+    if (!this.hasAttribute('max')) {
+      this.setAttribute('max', 100);
+    }
+    if (!this.hasAttribute('value')) {
+      this.setAttribute('value', 1);
+    }
+  }
+
   /**
    * Is called when the mouse is clicked on the thumb.
    *
@@ -102,14 +119,6 @@ class CoreSliderElement extends HTMLElement {
   onMouseUp(e) {
     document.removeEventListener('mouseup', this.onMouseUp);
     document.removeEventListener('mousemove', this.onMouseMove);
-  }
-
-  /** @override */
-  connectedCallback() {
-    // Sets the default value for this.step
-    if (!this.hasAttribute('step')) {
-      this.setAttribute('step', 1);
-    }
   }
 
   /**
