@@ -1,5 +1,6 @@
 /**
  * Creates the template element for the passed-in template and style content.
+ * @private
  * @param {String} templateString   The template html string representation
  * @param {String} styleString      The style css string representation
  * @returns {Node} the created template element
@@ -14,6 +15,7 @@ export function createTemplate(templateString = '', styleString = '') {
 
 /**
  * Register the passed-in element class with the passed-in tag name for the document.
+ * @private
  * @param {String} customTagName  The tag name that represents the class in HTML
  * @param {Class} elementClass    The class to represent
  */
@@ -24,7 +26,7 @@ export function registerCustomTag(customTagName, elementClass) {
 /**
  * Attach the shadow DOM root, with a childElement if specified, to the
  * element. This should be called in the constructor.
- *
+ * @private
  * @param {Node} element         The element to attach to
  * @param {Node?} childElement   The child element in the shadow DOM root
  * @return {Node}                The attached shadow root
@@ -39,6 +41,7 @@ export function attachShadowRoot(element, childElement = null) {
 
 /**
  * Creates an element of the passed-in tag name with the passed-in props and children.
+ * @private
  * @param {String} tagName        The element tag to create
  * @param {Object} [props = {}]   The props to assign to the created element
  * @param  {...Node} children     The children to append to the created element
