@@ -72,4 +72,17 @@ describe('core-slider', () => {
     const disabledAttr = await showroom.hasAttribute(testAttr);
     assert.equal(disabledAttr, true);
   });
+
+  /**
+   * Tests for step size
+   */
+  it('The step increment should be correctly assigned', async () => {
+    const testAttr = 'step';
+    const testValue = 15;
+
+    await showroom.setAttribute(testAttr, testValue);
+    const stepSize = await showroom.getAttribute(testAttr);
+
+    assert.equal(stepSize, testValue);
+  });
 });
