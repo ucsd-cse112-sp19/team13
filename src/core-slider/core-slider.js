@@ -113,45 +113,30 @@ class CoreSliderElement extends HTMLElement {
   }
 
   /**
-   * Gets the min value of the slider. This is the lower bound for this.value.
+   * The min value of the slider. This is the lower bound for this.value.
    *
    * @type {Number}
    */
   get min() { return this.getAttribute('min'); }
 
-  /**
-   * Sets the min value of the slider. This is the lower bound for this.value.
-   *
-   * @type {Number}
-   */
   set min(value) { this.setAttribute('min', value); }
 
   /**
-   * Gets the max value of the slider. This is the upper bound for this.value.
+   * The max value of the slider. This is the upper bound for this.value.
    *
    * @type {Number}
    */
   get max() { return this.getAttribute('max'); }
 
-  /**
-   * Sets the max value of the slider. This is the upper bound for this.value.
-   *
-   * @type {Number}
-   */
   set max(value) { this.setAttribute('max', value); }
 
   /**
-   * Gets the value of the slider. This will ALWAYS be within this.min and this.max.
+   * The current value of the slider. This will ALWAYS be within this.min and this.max.
    *
    * @type {Number}
    */
   get value() { return this.getAttribute('value'); }
 
-  /**
-   * Sets the value of the slider. This is bounded by this.min and this.max.
-   *
-   * @type {Number}
-   */
   set value(value) {
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
@@ -164,18 +149,13 @@ class CoreSliderElement extends HTMLElement {
 
 
   /**
-   * Gets whether the element is disabled. This will disable all user interactions with the element.
+   * Disables the elements from receiving inputs. In other words, this will disable all
+   * user interactions with the element.
    *
    * @type {Boolean}
    */
   get disabled() { return this.hasAttribute('value'); }
 
-
-  /**
-   * Disables the element from inputs.
-   *
-   * @type {Boolean}
-   */
   set disabled(value) {
     if (value) {
       this.setAttribute('disabled', '');
@@ -184,20 +164,14 @@ class CoreSliderElement extends HTMLElement {
     }
   }
 
-
   /**
-   * Gets the step value of the slider.
+   * The step value of the slider. The value will always be some multiple of this,
+   * starting from this.min.
    *
    * @type {Number}
    */
   get step() { return this.getAttribute('step'); }
 
-
-  /**
-   * Sets the step value of the slider.
-   *
-   * @type {Number}
-   */
   set step(value) { this.setAttribute('step'); }
 }
 
