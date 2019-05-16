@@ -8,9 +8,27 @@
         <script src="core-slider.js"></script>
     </head>
     <body>
-		<core-hello lang="en" rainbow>Team 13</core-hello>
-        <core-hello lang="jp">Japan</core-hello>
-        <core-slider min="0" max="100" value="50" step="10"></core-slider>
-        <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
+        <div>
+            <core-slider id="size-slider" min="10" max="100" value="50" step="5"></core-slider>
+            <label>Font Size</label>
+        </div>
+        <div>
+            <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
+            <label>Disabled Slider</label>
+        </div>
+        <h1>
+            <core-hello id="title-hello" lang="en" rainbow>Team 13</core-hello>
+            <label>(</label>
+                <core-hello lang="jp">Team 13</core-hello>
+            <label>)</label>
+        </h1>
+
+        <script>
+            const titleHello = document.getElementById('title-hello');
+            const sizeSlider = document.getElementById('size-slider');
+            sizeSlider.addEventListener('change', (e) => {
+                titleHello.style.fontSize = `${e.target.value}px`;
+            });
+        </script>
     </body>
 </html>

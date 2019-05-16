@@ -26,6 +26,40 @@ class CoreSliderElement extends HTMLElement {
     this.slider = this.shadowRoot.querySelector('#slider');
   }
 
+  /** @override */
+  attributeChangedCallback(attribute, oldValue, newValue) {
+    switch (attribute) {
+      case 'value':
+        {
+          // Calculates the value with respect to the defined range (from this.min and this.max)
+          const minValue = parseInt(this.min, 10);
+          const maxValue = parseInt(this.max, 10);
+          const valueRange = maxValue - minValue;
+          const prevValue = parseInt(oldValue, 10);
+          const nextValue = parseInt(newValue, 10);
+
+          // Calculates the pixel position of the thumb from this.value
+          let progress = (nextValue - minValue) / valueRange;
+          if (progress > 1) progress = 1;
+          if (progress < 0) progress = 0;
+          const thumbWidth = this.sliderThumb.clientWidth;
+          this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+
+          if (nextValue !== prevValue) {
+            this.dispatchEvent(new Event('change', {
+              bubbles: true,
+              composed: true,
+            }));
+          }
+        }
+        break;
+      default:
+    }
+  }
+
+  /** @override */
+  static get observedAttributes() { return ['value']; }
+
   /**
    * Is called when the mouse is clicked on the thumb.
    *
@@ -35,6 +69,8 @@ class CoreSliderElement extends HTMLElement {
   onMouseDown(e) {
     document.addEventListener('mouseup', this.onMouseUp);
     document.addEventListener('mousemove', this.onMouseMove);
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   /**
@@ -51,7 +87,10 @@ class CoreSliderElement extends HTMLElement {
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
     const lengthValue = maxValue - minValue;
-    this.value = lengthValue * sliderRatio;
+    const result = lengthValue * sliderRatio + minValue;
+    if (this.value !== result) {
+      this.value = result;
+    }
   }
 
   /**
@@ -116,7 +155,8 @@ class CoreSliderElement extends HTMLElement {
   set value(value) {
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
-    let result = parseInt(value, 10);
+    const stepSize = parseInt(this.step, 10);
+    let result = Math.floor(parseInt(value, 10) / stepSize) * stepSize;
     if (result < minValue) result = minValue;
     if (result > maxValue) result = maxValue;
     this.setAttribute('value', `${result}`);
@@ -159,33 +199,6 @@ class CoreSliderElement extends HTMLElement {
    * @type {Number}
    */
   set step(value) { this.setAttribute('step'); }
-
-  /** @override */
-  attributeChangedCallback(attribute, oldValue, newValue) {
-    switch (attribute) {
-      case 'value':
-        {
-          // Calculates the value with respect to the defined range (from this.min and this.max)
-          const minValue = parseInt(this.min, 10);
-          const maxValue = parseInt(this.max, 10);
-          const valueRange = maxValue - minValue;
-          const stepSize = parseInt(this.step, 10);
-          const value = Math.floor(parseInt(newValue, 10) / stepSize) * stepSize;
-
-          // Calculates the pixel position of the thumb from this.value
-          let progress = value / valueRange;
-          if (progress > 1) progress = 1;
-          if (progress < 0) progress = 0;
-          const thumbWidth = this.sliderThumb.clientWidth;
-          this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-        }
-        break;
-      default:
-    }
-  }
-
-  /** @override */
-  static get observedAttributes() { return ['value']; }
 }
 
 registerCustomTag('core-slider', CoreSliderElement);
