@@ -27,6 +27,17 @@ describe('core-slider', () => {
   });
 
   /**
+   * Tests for Rainbow Attribute of Core-Slider
+   */
+  it('The rainbow attribute of slider should be exist', async () => {
+    const testAttr = 'rainbow';
+
+    await showroom.setAttribute(testAttr);
+    const rainbowAttr = await showroom.hasAttribute(testAttr);
+    assert.equal(rainbowAttr, true);
+  });
+
+  /**
    * Tests for value Attribute of Core-Slider
    */
   it('The value attribute of slider should be set to 70', async () => {
