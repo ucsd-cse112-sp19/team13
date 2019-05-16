@@ -83,4 +83,16 @@ describe('core-slider', () => {
     const disabledAttr = await showroom.hasAttribute(testAttr);
     assert.equal(disabledAttr, true);
   });
+
+  /**
+   * Tests for input-size Attribute of Core-Slider
+   */
+  it('The input-size attribute of slider should be large', async () => {
+    const testAttr = 'input-size';
+    const testValue = 'large';
+
+    await showroom.setAttribute(testAttr, testValue);
+    const inputSizeAttr = await showroom.getAttribute(testAttr);
+    assert.equal(inputSizeAttr, testValue);
+  });
 });
