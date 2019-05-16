@@ -29,14 +29,14 @@ describe('core-slider', () => {
   /**
    * Tests for Default State property of Core-Slider
    */
-  it('The default slider should has min=1 max=100 value=1', async () => {
+  it('The default slider should has min=0 max=100 value=0', async () => {
     const minAttr = await showroom.getAttribute('min');
     const maxAttr = await showroom.getAttribute('max');
     const valueAttr = await showroom.getAttribute('value');
 
-    assert.equal(minAttr, '1');
+    assert.equal(minAttr, '0');
     assert.equal(maxAttr, '100');
-    assert.equal(valueAttr, '1');
+    assert.equal(valueAttr, '0');
   });
 
   /**
