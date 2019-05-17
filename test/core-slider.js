@@ -27,11 +27,40 @@ describe('core-slider', () => {
   });
 
   /**
+   * Tests for Default State property of Core-Slider
+   */
+  it('The default slider should has min=0 max=100 value=0', async () => {
+    const minAttr = await showroom.getAttribute('min');
+    const maxAttr = await showroom.getAttribute('max');
+    const valueAttr = await showroom.getAttribute('value');
+
+    assert.equal(minAttr, '0');
+    assert.equal(maxAttr, '100');
+    assert.equal(valueAttr, '0');
+  });
+
+  /**
+   * Tests for Initialized State property of Core-Slider
+   * TODO: what is difference with the value attribute
+   */
+
+  /**
+   * Tests for Rainbow Attribute of Core-Slider
+   */
+  it('The rainbow attribute of slider should be exist', async () => {
+    const testAttr = 'rainbow';
+
+    await showroom.setAttribute(testAttr);
+    const rainbowAttr = await showroom.hasAttribute(testAttr);
+    assert.equal(rainbowAttr, true);
+  });
+
+  /**
    * Tests for value Attribute of Core-Slider
    */
   it('The value attribute of slider should be set to 70', async () => {
     const testAttr = 'value';
-    const testValue = 70;
+    const testValue = '70';
 
     await showroom.setAttribute(testAttr, testValue);
     const valueAttr = await showroom.getAttribute(testAttr);
@@ -43,7 +72,7 @@ describe('core-slider', () => {
    */
   it('The min attribute of slider should be set to 10', async () => {
     const testAttr = 'min';
-    const testValue = 10;
+    const testValue = '10';
 
     await showroom.setAttribute(testAttr, testValue);
     const minAttr = await showroom.getAttribute(testAttr);
@@ -55,7 +84,7 @@ describe('core-slider', () => {
    */
   it('The max attribute of slider should be set to 120', async () => {
     const testAttr = 'max';
-    const testValue = 120;
+    const testValue = '120';
 
     await showroom.setAttribute(testAttr, testValue);
     const maxAttr = await showroom.getAttribute(testAttr);
@@ -74,6 +103,7 @@ describe('core-slider', () => {
   });
 
   /**
+<<<<<<< HEAD
    * Tests for step size
    */
   it('The step increment should be correctly assigned', async () => {
@@ -84,5 +114,42 @@ describe('core-slider', () => {
     const stepSize = await showroom.getAttribute(testAttr);
 
     assert.equal(stepSize, testValue);
+=======
+   * TODO
+   * Tests for range Attribute of Core-Slider
+   */
+
+  /**
+   * Tests for vertical attribute of Core-Slider
+   */
+  it('The vertical attribute of slider should be exist', async () => {
+    const testAttr = 'vertical';
+
+    await showroom.setAttribute(testAttr);
+    const verticalAttr = await showroom.hasAttribute(testAttr);
+    assert.equal(verticalAttr, true);
+  });
+
+  /**
+   * TODO
+   * Tests for height Attribute of Core-Slider
+   */
+
+  /**
+   * TODO
+   * Tests for change color Attribute of Core-Slider
+   */
+
+  /*
+   * Tests for input-size Attribute of Core-Slider
+   */
+  it('The input-size attribute of slider should be large', async () => {
+    const testAttr = 'input-size';
+    const testValue = 'large';
+
+    await showroom.setAttribute(testAttr, testValue);
+    const inputSizeAttr = await showroom.getAttribute(testAttr);
+    assert.equal(inputSizeAttr, testValue);
+>>>>>>> 91cd0325deff9897d14f6c737c70d034bd67040c
   });
 });
