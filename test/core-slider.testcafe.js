@@ -16,9 +16,13 @@ const targetThumbMax = Selector(() => document.querySelector('#target-slider-max
 
 const targetThumbMin = Selector(() => document.querySelector('#target-slider-min').shadowRoot.querySelector('#slider-thumb'));
 
+/* eslint-disable */
+
 // fixture, getting the page for testing
 fixture `Core Slider Test`
     .page `../dist/index.html`;
+
+/* eslint-enable */
 
 /**
  * Tests for default value of core-slider
