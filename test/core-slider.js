@@ -103,18 +103,6 @@ describe('core-slider', () => {
   });
 
   /**
-<<<<<<< HEAD
-   * Tests for step size
-   */
-  it('The step increment should be correctly assigned', async () => {
-    const testAttr = 'step';
-    const testValue = 15;
-
-    await showroom.setAttribute(testAttr, testValue);
-    const stepSize = await showroom.getAttribute(testAttr);
-
-    assert.equal(stepSize, testValue);
-=======
    * TODO
    * Tests for range Attribute of Core-Slider
    */
@@ -150,6 +138,5 @@ describe('core-slider', () => {
     await showroom.setAttribute(testAttr, testValue);
     const inputSizeAttr = await showroom.getAttribute(testAttr);
     assert.equal(inputSizeAttr, testValue);
->>>>>>> 91cd0325deff9897d14f6c737c70d034bd67040c
   });
 });

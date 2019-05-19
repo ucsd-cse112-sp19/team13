@@ -9,7 +9,7 @@
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/*",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
     "test": "npm run lint && mocha --exit --timeout 5000",
-    "e2e-test": "testcafe chrome:headless test/core-slider.testcafe.js"
+    "e2e-test": "testcafe chrome test/core-slider.testcafe.js"
   },
   "repository": {
     "type": "git",
