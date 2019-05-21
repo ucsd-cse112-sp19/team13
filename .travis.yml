@@ -12,7 +12,7 @@ addons:
         repo_token: 060d3f549ff61c04e238d60201ae8d770079b182df927a89c18095b9f318efe5
 
 before_script:
-  - npm install codeclimate-test-reporter nyc -g
+  - npm install -g codeclimate-test-reporter nyc
 
 script:
   - npm test
