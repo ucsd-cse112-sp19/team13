@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --mode development --config webpack.config.js",
     "build": "webpack --mode production --config webpack.config.js && jsdoc --destination ./docs --readme ./README.md --recurse ./src/*",
     "lint": "eslint \"./src/**/*.js\" \"./src/**/*.html\" --ext .html && stylelint \"./src/**/*.css/\" \"./src/**/*.html/\"",
-    "test": "nyc --all --include \"src/**/*.js\" --reporter=lcov --reporter=text mocha --exit --timeout 5000 && npm run lint"
+    "test": "nyc --all --include \"src/**/*.js\" --reporter=lcov --reporter=text mocha --exit --timeout 10000 && npm run lint"
   },
   "repository": {
     "type": "git",
