@@ -28,3 +28,15 @@ core-slider[vertical] {
 	--outline-color: darkgreen;
 	color: green;
 }
+
+.bootstrap-group {
+	margin: 1rem;
+	padding: 0.5rem;
+	outline: 1px solid black;
+}
+
+.bootstrap-group > * {
+	outline: 1px solid lightgray;
+	margin: 1rem;
+	padding: 1rem;
+}

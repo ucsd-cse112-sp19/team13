@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import TEMPLATE from './core-slider.html';
 import STYLE from './core-slider.css';
 import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
@@ -79,12 +81,13 @@ class CoreSliderElement extends HTMLElement {
    *
    * @param {Event} e the input event
    */
-  // eslint-disable-next-line no-unused-vars
   onMouseDown(e) {
     document.addEventListener('mouseup', this.onMouseUp);
     document.addEventListener('mousemove', this.onMouseMove);
     e.preventDefault();
     e.stopPropagation();
+
+    this.onThumbStart(e);
   }
 
   /**
@@ -93,6 +96,72 @@ class CoreSliderElement extends HTMLElement {
    * @param {Event} e the input event
    */
   onMouseMove(e) {
+    this.onThumbMove(e);
+  }
+
+  /**
+   * Is called when the mouse is released anywhere.
+   *
+   * @param {Event} e the input event
+   */
+  onMouseUp(e) {
+    document.removeEventListener('mouseup', this.onMouseUp);
+    document.removeEventListener('mousemove', this.onMouseMove);
+
+    this.onThumbStop(e);
+  }
+
+  /**
+   * Is called when a touch is on the thumb.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchStart(e) {
+    document.addEventListener('touchend', this.onTouchEnd);
+    document.addEventListener('touchmove', this.onTouchMove);
+    e.preventDefault();
+    e.stopPropagation();
+
+    this.onThumbStart(e);
+  }
+
+  /**
+   * Is called when the touch moves. This is only registered when onTouchStart is called.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchMove(e) {
+    const touchEvent = e.changedTouches[0];
+    this.onThumbMove(touchEvent);
+  }
+
+  /**
+   * Is called when the touch is released anywhere.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchEnd(e) {
+    document.removeEventListener('touchend', this.onTouchEnd);
+    document.removeEventListener('touchmove', this.onTouchMove);
+
+    this.onThumbStop(e);
+  }
+
+  /**
+   * Is called when the thumb should move (for both the mouse AND touch)
+   *
+   * @param {Event} e the input event that triggered the thumb
+   */
+  onThumbStart(e) {
+    this.sliderThumb.classList.add('focus');
+  }
+
+  /**
+   * Is called when the thumb is moving (for both the mouse AND touch)
+   *
+   * @param {Event} e the input event that moved the thumb
+   */
+  onThumbMove(e) {
     let sliderRatio;
 
     // Depending on whether it is vertical, calculate the proportional value from the slider
@@ -117,49 +186,14 @@ class CoreSliderElement extends HTMLElement {
     }
   }
 
-  /**
-   * Is called when the mouse is released anywhere.
-   *
-   * @param {Event} e the input event
-   */
-  // eslint-disable-next-line no-unused-vars
-  onMouseUp(e) {
-    document.removeEventListener('mouseup', this.onMouseUp);
-    document.removeEventListener('mousemove', this.onMouseMove);
-  }
 
   /**
-   * Is called when a touch is on the thumb.
+   * Is called when the thumb should stop moving (for both the mouse AND touch)
    *
-   * @param {Event} e the input event
+   * @param {Event} e the input event that stopped the thumb
    */
-  // eslint-disable-next-line no-unused-vars
-  onTouchStart(e) {
-    document.addEventListener('touchend', this.onTouchEnd);
-    document.addEventListener('touchmove', this.onTouchMove);
-    e.preventDefault();
-    e.stopPropagation();
-  }
-
-  /**
-   * Is called when the touch moves. This is only registered when onTouchStart is called.
-   *
-   * @param {Event} e the input event
-   */
-  onTouchMove(e) {
-    const touchEvent = e.changedTouches[0];
-    this.onMouseMove(touchEvent);
-  }
-
-  /**
-   * Is called when the touch is released anywhere.
-   *
-   * @param {Event} e the input event
-   */
-  // eslint-disable-next-line no-unused-vars
-  onTouchEnd(e) {
-    document.removeEventListener('touchend', this.onTouchEnd);
-    document.removeEventListener('touchmove', this.onTouchMove);
+  onThumbStop(e) {
+    this.sliderThumb.classList.remove('focus');
   }
 
   /**
