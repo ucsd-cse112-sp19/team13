@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import TEMPLATE from './core-slider.html';
 import STYLE from './core-slider.css';
 import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
@@ -20,8 +22,13 @@ class CoreSliderElement extends HTMLElement {
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
 
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
+
     this.sliderThumb = this.shadowRoot.querySelector('#slider-thumb');
     this.sliderThumb.addEventListener('mousedown', this.onMouseDown);
+    this.sliderThumb.addEventListener('touchstart', this.onTouchStart);
 
     this.slider = this.shadowRoot.querySelector('#slider');
   }
@@ -31,20 +38,10 @@ class CoreSliderElement extends HTMLElement {
     switch (attribute) {
       case 'value':
         {
-          // Calculates the value with respect to the defined range (from this.min and this.max)
-          const minValue = parseInt(this.min, 10);
-          const maxValue = parseInt(this.max, 10);
-          const valueRange = maxValue - minValue;
-          const prevValue = parseInt(oldValue, 10);
           const nextValue = parseInt(newValue, 10);
+          this.updateThumbPosition(nextValue);
 
-          // Calculates the pixel position of the thumb from this.value
-          let progress = (nextValue - minValue) / valueRange;
-          if (progress > 1) progress = 1;
-          if (progress < 0) progress = 0;
-          const thumbWidth = this.sliderThumb.clientWidth;
-          this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-
+          const prevValue = parseInt(oldValue, 10);
           if (nextValue !== prevValue) {
             this.dispatchEvent(new Event('change', {
               bubbles: true,
@@ -74,6 +71,8 @@ class CoreSliderElement extends HTMLElement {
     }
     if (!this.hasAttribute('value')) {
       this.setAttribute('value', 0);
+    } else {
+      this.updateThumbPosition(parseInt(this.value, 10));
     }
   }
 
@@ -82,12 +81,13 @@ class CoreSliderElement extends HTMLElement {
    *
    * @param {Event} e the input event
    */
-  // eslint-disable-next-line no-unused-vars
   onMouseDown(e) {
     document.addEventListener('mouseup', this.onMouseUp);
     document.addEventListener('mousemove', this.onMouseMove);
     e.preventDefault();
     e.stopPropagation();
+
+    this.onThumbStart(e);
   }
 
   /**
@@ -96,10 +96,86 @@ class CoreSliderElement extends HTMLElement {
    * @param {Event} e the input event
    */
   onMouseMove(e) {
-    const sliderX = this.slider.getBoundingClientRect().left;
-    const sliderWidth = parseInt(this.slider.clientWidth, 10);
-    const sliderPosition = e.clientX - sliderX;
-    const sliderRatio = sliderPosition / sliderWidth;
+    this.onThumbMove(e);
+  }
+
+  /**
+   * Is called when the mouse is released anywhere.
+   *
+   * @param {Event} e the input event
+   */
+  onMouseUp(e) {
+    document.removeEventListener('mouseup', this.onMouseUp);
+    document.removeEventListener('mousemove', this.onMouseMove);
+
+    this.onThumbStop(e);
+  }
+
+  /**
+   * Is called when a touch is on the thumb.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchStart(e) {
+    document.addEventListener('touchend', this.onTouchEnd);
+    document.addEventListener('touchmove', this.onTouchMove);
+    e.preventDefault();
+    e.stopPropagation();
+
+    this.onThumbStart(e);
+  }
+
+  /**
+   * Is called when the touch moves. This is only registered when onTouchStart is called.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchMove(e) {
+    const touchEvent = e.changedTouches[0];
+    this.onThumbMove(touchEvent);
+  }
+
+  /**
+   * Is called when the touch is released anywhere.
+   *
+   * @param {Event} e the input event
+   */
+  onTouchEnd(e) {
+    document.removeEventListener('touchend', this.onTouchEnd);
+    document.removeEventListener('touchmove', this.onTouchMove);
+
+    this.onThumbStop(e);
+  }
+
+  /**
+   * Is called when the thumb should move (for both the mouse AND touch)
+   *
+   * @param {Event} e the input event that triggered the thumb
+   */
+  onThumbStart(e) {
+    this.sliderThumb.classList.add('focus');
+  }
+
+  /**
+   * Is called when the thumb is moving (for both the mouse AND touch)
+   *
+   * @param {Event} e the input event that moved the thumb
+   */
+  onThumbMove(e) {
+    let sliderRatio;
+
+    // Depending on whether it is vertical, calculate the proportional value from the slider
+    if (!this.vertical) {
+      const sliderX = this.slider.getBoundingClientRect().left;
+      const sliderWidth = this.slider.clientWidth;
+      const sliderPosition = e.clientX - sliderX;
+      sliderRatio = sliderPosition / sliderWidth;
+    } else {
+      const sliderY = this.slider.getBoundingClientRect().top;
+      const sliderHeight = this.slider.clientHeight;
+      const sliderPosition = e.clientY - sliderY;
+      sliderRatio = sliderPosition / sliderHeight;
+    }
 
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
@@ -110,15 +186,14 @@ class CoreSliderElement extends HTMLElement {
     }
   }
 
+
   /**
-   * Is called when the mouse is released anywhere.
+   * Is called when the thumb should stop moving (for both the mouse AND touch)
    *
-   * @param {Event} e the input event
+   * @param {Event} e the input event that stopped the thumb
    */
-  // eslint-disable-next-line no-unused-vars
-  onMouseUp(e) {
-    document.removeEventListener('mouseup', this.onMouseUp);
-    document.removeEventListener('mousemove', this.onMouseMove);
+  onThumbStop(e) {
+    this.sliderThumb.classList.remove('focus');
   }
 
   /**
@@ -156,6 +231,30 @@ class CoreSliderElement extends HTMLElement {
     this.setAttribute('value', `${result}`);
   }
 
+  /**
+   * Updates the thumb position to reflect the slider value.
+   *
+   * @private
+   * @param {Number} value the current slider value
+   */
+  updateThumbPosition(value) {
+    // Calculates the value with respect to the defined range (from this.min and this.max)
+    const minValue = parseInt(this.min, 10);
+    const maxValue = parseInt(this.max, 10);
+    const valueRange = maxValue - minValue;
+
+    // Calculates the pixel position of the thumb from this.value
+    let progress = (value - minValue) / valueRange;
+    if (progress > 1) progress = 1;
+    if (progress < 0) progress = 0;
+    const thumbWidth = this.sliderThumb.clientWidth;
+
+    if (!this.vertical) {
+      this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+    } else {
+      this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+    }
+  }
 
   /**
    * Disables the elements from receiving inputs. In other words, this will disable all
@@ -182,6 +281,21 @@ class CoreSliderElement extends HTMLElement {
   get step() { return this.getAttribute('step'); }
 
   set step(value) { this.setAttribute('step'); }
+
+  /**
+   * Whether the slider is orientated vertically.
+   *
+   * @type {Boolean}
+   */
+  get vertical() { return this.hasAttribute('vertical'); }
+
+  set vertical(value) {
+    if (value) {
+      this.setAttribute('vertical', '');
+    } else {
+      this.removeAttribute('vertical');
+    }
+  }
 }
 
 registerCustomTag('core-slider', CoreSliderElement);
