@@ -7,6 +7,16 @@ node_js:
 # npm version 6 comes with version 10.
 before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
 
+addons:
+    code_climate:
+        repo_token: 060d3f549ff61c04e238d60201ae8d770079b182df927a89c18095b9f318efe5
+
+before_test:
+  - npm install codeclimate-test-reporter nyc -g
+
+after_test:
+  - codeclimate-test-reporter < ./coverage/lcov.info
+
 # Makes sure node_modules exists.
 cache:
   directories:
