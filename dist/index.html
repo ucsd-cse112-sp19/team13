@@ -8,6 +8,38 @@
         <script src="core-slider.js"></script>
     </head>
     <body>
+
+        <div>
+            <!-- Slider to be tested -->
+            <core-slider id="size-slider" min="10" max="100" value="60" step="5"></core-slider>
+            <label>Font Size</label>
+        </div>
+        <div>
+            <!-- Disabled slider -->
+            <core-slider id="disabled-slider" min="10" max="100" value="50" step="5" disabled></core-slider>
+            <label>Disabled Slider</label>
+        </div>
+        <div>
+            <!-- Target slider for arbitrary value -->
+            <core-slider id="target-slider-arbitrary" min="10" max="100" value="28" step="5" disabled></core-slider>
+            <label>Target Slider Arbitrary</label>
+        </div>
+        <div>
+            <!-- Target slider for max value -->
+            <core-slider id="target-slider-max" min="10" max="100" value="100" step="5" disabled></core-slider>
+            <label>Target Slider Max</label>
+        </div>
+        <div>
+            <!-- Target slider for min value -->
+            <core-slider id="target-slider-min" min="10" max="100" value="10" step="5" disabled></core-slider>
+            <label>Target Slider Min</label>
+        </div>
+        <div>
+            <!-- Target slider for rainbow -->
+            <core-slider id="target-slider-rainbow" min="10" max="100" value="10" step="5" rainbow></core-slider>
+            <label>Target Slider Rainbow</label>
+        </div>
+
         <h1>
             <core-hello id="title-hello" lang="en" rainbow>Team 13</core-hello>
             <label>(</label>
