@@ -29,14 +29,17 @@ core-slider[vertical] {
 	color: green;
 }
 
-.bootstrap-group {
+.display-group {
 	margin: 1rem;
 	padding: 0.5rem;
 	outline: 1px solid black;
 }
-
-.bootstrap-group > * {
+.display-group > * {
 	outline: 1px solid lightgray;
 	margin: 1rem;
 	padding: 1rem;
+}
+.display-group h2 {
+	text-align: center;
+	outline: none;
 }

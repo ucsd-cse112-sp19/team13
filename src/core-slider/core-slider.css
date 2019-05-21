@@ -8,11 +8,13 @@
     
     --thumb-color: white;
     --outline-color: gray;
+    --track-color: currentcolor;
 }
 
 :host([disabled]) {
     pointer-events: none;
-    opacity: 0.5;
+    --thumb-color: gray;
+    cursor: default;
 }
 
 /* Bootstrap support for form-control-range */
@@ -33,6 +35,14 @@
     --outline-color: transparent;
     color: #dee2e6;
 }
+:host(.custom-range[disabled]) #slider-thumb {
+    --thumb-color: #adb5bd;
+}
+@media (prefers-reduced-motion: reduce) {
+  :host(.custom-range) #slider-thumb {
+    transition: none;
+  }
+}
 
 #slider {
     position: relative;
@@ -46,15 +56,17 @@
     top: calc(50% - 0.25rem);
     width: 100%;
     height: 0.5rem;
-    background: currentColor;
+    background-color: var(--track-color);
     border: 1px solid var(--outline-color);
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #slider-thumb {
     position: absolute;
     top: calc(50% - 0.5rem);
     left: 0px;/* Will be controlled in code */
+    cursor: pointer;
 
     display: block;
     width: 1rem;
@@ -67,23 +79,23 @@
 }
 
 :host([vertical]) {
-    width: 1.4rem;
+    width: auto;
     height: 100%;
 }
 
 :host([vertical]) #slider {
-    width: 5px;
-    height: calc(100% - 14px);
+    width: 0.1rem;
+    height: calc(100% - 2rem);
 }
 
 :host([vertical]) #slider-bar {
-    top: 0px;
-    left: calc(50% - 2px);
-    width: 4px;
+    top: 0rem;
+    left: calc(50% - 0.25rem);
+    width: 0.5rem;
     height: 100%;
 }
 
 :host([vertical]) #slider-thumb {
     top: 0px;/* Will be controlled in code */
-    left: calc(50% - 5px);
+    left: calc(50% - 0.5rem);
 }
