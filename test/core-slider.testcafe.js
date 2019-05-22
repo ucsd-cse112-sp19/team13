@@ -1,26 +1,34 @@
 import { Selector } from 'testcafe';
 
 // Slider component
-const slider = Selector('#size-slider');
-const disabledSlider = Selector('#disabled-slider');
-const rainbowSlider = Selector('#target-slider-rainbow');
+const slider = Selector(() => document.querySelector('#size-slider'));
+
+const disabledSlider = Selector('.display-group').find('#disabled-slider');
+const rainbowSlider = Selector('.display-group').find('#target-slider-rainbow');
+
+const vertSlider = Selector('.display-group').find('#vert1');
 
 // Slider's thumb component
-const sliderThumb = Selector(() => document.querySelector('#size-slider').shadowRoot.querySelector('#slider-thumb'));
+const sliderThumb = Selector(() => document.querySelector('#default-group').querySelector('#size-slider').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
 
-const disabledThumb = Selector(() => document.querySelector('#disabled-slider').shadowRoot.querySelector('#slider-thumb'));
+const disabledThumb = Selector(() => document.querySelector('#default-group').querySelector('#disabled-slider').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
 
-const targetThumbArb = Selector(() => document.querySelector('#target-slider-arbitrary').shadowRoot.querySelector('#slider-thumb'));
+const targetThumbArb = Selector(() => document.querySelector('#default-group').querySelector('#target-slider-arbitrary').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
 
-const targetThumbMax = Selector(() => document.querySelector('#target-slider-max').shadowRoot.querySelector('#slider-thumb'));
+const targetThumbMax = Selector(() => document.querySelector('#default-group').querySelector('#target-slider-max').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
 
-const targetThumbMin = Selector(() => document.querySelector('#target-slider-min').shadowRoot.querySelector('#slider-thumb'));
+const targetThumbMin = Selector(() => document.querySelector('#default-group').querySelector('#target-slider-min').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
+
+const vertThumb = Selector(() => document.querySelector('#vertical-group').querySelector('#vert1').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
+
+const targetVertThumb = Selector(() => document.querySelector('#vertical-group').querySelector('#vert3').shadowRoot.querySelector('#slider').querySelector('#slider-thumb'));
 
 /* eslint-disable */
 
 // fixture, getting the page for testing
 fixture `Core Slider Test`
     .page `../dist/index.html`;
+
 
 /* eslint-enable */
 
@@ -29,7 +37,7 @@ fixture `Core Slider Test`
  */
 test('Default core-slider', async (t) => {
   await t
-    .expect(slider.value).eql('60');
+    .expect(slider.value).eql('0');
 });
 
 /**
@@ -39,7 +47,7 @@ test('Default core-slider', async (t) => {
  */
 test('Initialized core-slider', async (t) => {
   await t
-    .expect(slider.value).eql('60');
+    .expect(disabledSlider.value).eql('50');
 });
 
 /**
@@ -57,7 +65,7 @@ test('Dragging core-slider for value check', async (t) => {
 test('Dragging core-slider for steps check', async (t) => {
   await t
     .dragToElement(sliderThumb, targetThumbArb)
-    .expect(slider.value).eql('30');
+    .expect(slider.value).eql('25');
 });
 
 /**
@@ -85,6 +93,15 @@ test('Disabled attribute', async (t) => {
   await t
     .dragToElement(disabledThumb, targetThumbArb)
     .expect(disabledSlider.value).eql('50');
+});
+
+/**
+ * Tests for vertical slider
+ */
+test('Vertical slider functionality', async (t) => {
+  await t
+    .dragToElement(vertThumb, targetVertThumb)
+    .expect(vertSlider.value).eql('50');
 });
 
 /**
