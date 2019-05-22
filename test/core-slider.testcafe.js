@@ -27,7 +27,7 @@ const targetVertThumb = Selector(() => document.querySelector('#vertical-group')
 
 // fixture, getting the page for testing
 fixture `Core Slider Test`
-    .page `../dist/index.html`;
+    .page `./test.html`;
 
 
 /* eslint-enable */

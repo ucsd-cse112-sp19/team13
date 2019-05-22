@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing for core-slider</title>
+
+		<link rel="stylesheet" type="text/css" href="./style.css"/>
+        <script src="core-slider.js"></script>
+    </head>
+    <body>
+
+        <section id="default-group" class="display-group">
+            <h2> Horizontal test </h2>
+            <div>
+                <!-- Slider to be tested -->
+                <core-slider id="size-slider" min="10" max="100" step="5"></core-slider>
+                <label>Font Size</label>
+            </div>
+            <div>
+                <!-- Disabled slider -->
+                <core-slider id="disabled-slider" min="10" max="100" value="50" step="5" disabled></core-slider>
+                <label>Disabled Slider</label>
+            </div>
+            <div>
+                <!-- Target slider for arbitrary value -->
+                <core-slider id="target-slider-arbitrary" min="10" max="100" value="28" step="5" disabled></core-slider>
+                <label>Target Slider Arbitrary</label>
+            </div>
+            <div>
+                <!-- Target slider for max value -->
+                <core-slider id="target-slider-max" min="10" max="100" value="100" step="5" disabled></core-slider>
+                <label>Target Slider Max</label>
+            </div>
+            <div>
+                <!-- Target slider for min value -->
+                <core-slider id="target-slider-min" min="10" max="100" value="10" step="5" disabled></core-slider>
+                <label>Target Slider Min</label>
+            </div>
+            <div>
+                <!-- Target slider for rainbow -->
+                <core-slider id="target-slider-rainbow" min="10" max="100" value="10" step="5" rainbow></core-slider>
+                <label>Target Slider Rainbow</label>
+            </div>
+        </section>
+
+        <section id="vertical-group" class="display-group">
+            <h2> Vertical </h2>
+            <div>
+                <core-slider id="vert1" value="5" vertical></core-slider>
+                <core-slider id="vert2" value="10" vertical></core-slider>
+                <core-slider id="vert3" value="50" vertical></core-slider>
+                <core-slider id="vert4" value="100" vertical></core-slider>
+            </div>
+        </section>
+
+        <section id="bootstrap-group" class="display-group">
+            <h2>With Bootstrap Support!</h2>
+            <div>
+                <core-slider class="custom-range"></core-slider>
+                <label>Bootstrap with .custom-range</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" disabled></core-slider>
+                <label>Bootstrap with .custom-range and disabled</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" vertical></core-slider>
+                <label>Bootstrap with .custom-range and vertical</label>
+            </div>
+            <div>
+                <core-slider class="form-control-range"></core-slider>
+                <label>Bootstrap with .form-control-range</label>
+            </div>
+        </section>
+    </body>
+</html>
