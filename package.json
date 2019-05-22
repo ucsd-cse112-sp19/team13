@@ -8,7 +8,7 @@
     "build": "webpack --mode production --config webpack.config.js",
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/*",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
-    "test": "npm run lint && testcafe chrome:headless test/core-slider.testcafe.js",
+    "test": "npm run lint && testcafe chrome:headless test/core-slider.testcafe.js --skip-js-errors",
     "e2e-test": "testcafe chrome test/core-slider.testcafe.js"
   },
   "repository": {
