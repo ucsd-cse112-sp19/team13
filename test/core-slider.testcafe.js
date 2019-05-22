@@ -23,7 +23,7 @@ const targetThumbMin = Selector(() => document.querySelector('#target-slider-min
 
 // fixture, getting the page for testing
 fixture `Core Slider Test`
-    .page `./index.html`;
+    .page `./test.html`;
 
 /* eslint-enable */
 
