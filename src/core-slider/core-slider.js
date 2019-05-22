@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import TEMPLATE from './core-slider.html';
 import STYLE from './core-slider.css';
 import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
@@ -149,10 +147,8 @@ class CoreSliderElement extends HTMLElement {
 
   /**
    * Is called when the thumb should move (for both the mouse AND touch)
-   *
-   * @param {Event} e the input event that triggered the thumb
    */
-  onThumbStart(e) {
+  onThumbStart() {
     this.sliderThumb.classList.add('focus');
   }
 
@@ -189,10 +185,8 @@ class CoreSliderElement extends HTMLElement {
 
   /**
    * Is called when the thumb should stop moving (for both the mouse AND touch)
-   *
-   * @param {Event} e the input event that stopped the thumb
    */
-  onThumbStop(e) {
+  onThumbStop() {
     this.sliderThumb.classList.remove('focus');
   }
 

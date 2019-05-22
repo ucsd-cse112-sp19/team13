@@ -11,6 +11,12 @@
     --track-color: currentcolor;
 }
 
+:host([disabled]) {
+    --thumb-color: gray;
+    pointer-events: none;
+    cursor: default;
+}
+
 #slider {
     position: relative;
     margin: 1rem 1rem;
@@ -50,54 +56,45 @@
     height: 100%;
 }
 
-:host([vertical]) #slider {
+:host([vertical]) div#slider {
     width: 0.1rem;
     height: calc(100% - 2rem);
 }
 
-:host([vertical]) #slider-bar {
+:host([vertical]) span#slider-bar {
     top: 0rem;
     left: calc(50% - 0.25rem);
     width: 0.5rem;
     height: 100%;
 }
 
-:host([vertical]) #slider-thumb {
+:host([vertical]) span#slider-thumb {
     top: 0px;/* Will be controlled in code */
     left: calc(50% - 0.5rem);
 }
-
-:host([disabled]) {
-    pointer-events: none;
-    --thumb-color: gray;
-    cursor: default;
-}
-
 
 /* Bootstrap support for form-control-range */
 :host(.form-control-range) {
     display: block;
 }
-
 /* Bootstrap support for custom-range */
-:host(.custom-range) #slider-thumb {
+:host(.custom-range) span#slider-thumb {
     --thumb-color: #007bff;
     border-color: transparent;
 }
-:host(.custom-range) #slider-thumb.focus {
+:host(.custom-range) span#slider-thumb.focus {
     --thumb-color: #b3d7ff;
     box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
-:host(.custom-range) #slider-bar {
+:host(.custom-range) span#slider-bar {
     --outline-color: transparent;
     color: #dee2e6;
 }
-:host(.custom-range[disabled]) #slider-thumb {
+:host(.custom-range[disabled]) span#slider-thumb {
     --thumb-color: #adb5bd;
 }
 @media (prefers-reduced-motion: reduce) {
-  :host(.custom-range) #slider-thumb {
+  :host(.custom-range) span#slider-thumb {
     transition: none;
   }
 }
-
