@@ -290,6 +290,21 @@ class CoreSliderElement extends HTMLElement {
       this.removeAttribute('vertical');
     }
   }
+
+  /**
+   * The attribute that represents whether the bar should be colorfully animated.
+   *
+   * @type {String}
+   */
+  get rainbow() { return this.hasAttribute('rainbow'); }
+
+  set rainbow(opts) {
+    if (opts) {
+      this.setAttribute('rainbow', '');
+    } else {
+      this.removeAttribute('rainbow');
+    }
+  }
 }
 
 registerCustomTag('core-slider', CoreSliderElement);

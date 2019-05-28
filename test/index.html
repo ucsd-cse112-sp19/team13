@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>core-components</title>
+        <script src="../dist/core-hello.js"></script>
+        <script src="../dist/core-slider.js"></script>
+        <style>
+            .test-core-slider section {
+                width: 400px;
+                padding: 10px;
+                margin: 10px;
+                border: 1px solid lightgray;
+            }
+
+            core-slider {
+                z-index: 1000;
+            }
+        </style>
+    </head>
+    <body>
+        <core-slider id="test-slider"></core-slider>
+        <div class="test-core-slider">
+            <section id="test-core-slider-default">
+                <label>Default</label>
+                <core-slider></core-slider>
+            </section>
+            <section id="test-core-slider-init">
+                <label>Initialized</label>
+                <core-slider value="60"></core-slider>
+            </section>
+            <section id="test-core-slider-step">
+                <label>Step</label>
+                <core-slider step="10"></core-slider>
+            </section>
+            <section id="test-core-slider-min">
+                <label>Min</label>
+                <core-slider value="80" min="10"></core-slider>
+            </section>
+            <section id="test-core-slider-max">
+                <label>Max</label>
+                <core-slider value="10" max="20"></core-slider>
+            </section>
+            <section id="test-core-slider-disabled">
+                <label>Disabled</label>
+                <core-slider value="50" disabled></core-slider>
+            </section>
+        </div>
+    </body>
+</html>
