@@ -1,6 +1,11 @@
 import TEMPLATE from './core-hello.html';
 import STYLE from './core-hello.css';
-import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
+import {
+  createTemplate,
+  attachShadowRoot,
+  registerCustomTag,
+  setBooleanAttribute,
+} from '../wcutil';
 
 const template = createTemplate(TEMPLATE, STYLE);
 
@@ -54,13 +59,7 @@ class CoreHelloElement extends HTMLElement {
    */
   get rainbow() { return this.hasAttribute('rainbow'); }
 
-  set rainbow(opts) {
-    if (opts) {
-      this.setAttribute('rainbow', '');
-    } else {
-      this.removeAttribute('rainbow');
-    }
-  }
+  set rainbow(value) { setBooleanAttribute(this, 'rainbow', value); }
 
   /**
    * Get the attribute that represents the language to display in.
