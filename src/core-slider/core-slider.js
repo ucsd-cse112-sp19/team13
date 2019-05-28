@@ -88,8 +88,7 @@ class CoreSliderElement extends HTMLElement {
     e.preventDefault();
     e.stopPropagation();
 
-    this.onThumbMove(e); 
-
+    this.onThumbMove(e);
     this.onThumbStart(e);
   }
 
