@@ -1,9 +1,10 @@
 import { Selector } from 'testcafe';
 
 // Slider component
-const slider = Selector(() => document.querySelector('#size-slider'));
-
 const disabledSlider = Selector('.display-group').find('#disabled-slider');
+const labelSlider = Selector(() => document.querySelector('#label-slider'));
+const showStopsSlider = Selector(() => document.querySelector('#show-stops-slider'));
+const slider = Selector(() => document.querySelector('#size-slider'));
 const rainbowSlider = Selector('.display-group').find('#target-slider-rainbow');
 
 
@@ -41,22 +42,12 @@ test('Default core-slider', async (t) => {
 });
 
 /**
- * Tests for initialized value of core-slider
- *
- * NOTE: This needs to be fixed
+ * Tests for disabled attribute of core-slider
  */
-test('Initialized core-slider', async (t) => {
+test('Disabled attribute', async (t) => {
   await t
+    .dragToElement(disabledThumb, targetThumbArb)
     .expect(disabledSlider.value).eql('50');
-});
-
-/**
- * Tests for value Attribute of Core-Slider
- */
-test('Dragging core-slider for value check', async (t) => {
-  await t
-    .dragToElement(sliderThumb, disabledThumb)
-    .expect(slider.value).eql('50');
 });
 
 /**
@@ -69,12 +60,30 @@ test('Dragging core-slider for steps check', async (t) => {
 });
 
 /**
- * Tests for min attribute of core-slider
+ * Tests for value Attribute of Core-Slider
  */
-test('Min attribute', async (t) => {
+test('Dragging core-slider for value check', async (t) => {
   await t
-    .dragToElement(sliderThumb, targetThumbMin)
-    .expect(slider.value).eql('10');
+    .dragToElement(sliderThumb, disabledThumb)
+    .expect(slider.value).eql('50');
+});
+
+/**
+ * Tests for initialized value of core-slider
+ *
+ * NOTE: This needs to be fixed
+ */
+test('Initialized core-slider', async (t) => {
+  await t
+    .expect(disabledSlider.value).eql('50');
+});
+
+/**
+ * Tests for label attribute of core-slider
+ */
+test('Label attribute', async (t) => {
+  await t
+    .expect(labelSlider.getAttribute('label')).eql('labeled slider');
 });
 
 /**
@@ -87,12 +96,28 @@ test('Max attribute', async (t) => {
 });
 
 /**
- * Tests for disabled attribute of core-slider
+ * Tests for min attribute of core-slider
  */
-test('Disabled attribute', async (t) => {
+test('Min attribute', async (t) => {
   await t
-    .dragToElement(disabledThumb, targetThumbArb)
-    .expect(disabledSlider.value).eql('50');
+    .dragToElement(sliderThumb, targetThumbMin)
+    .expect(slider.value).eql('10');
+});
+
+/**
+ * Tests for rainbow attribute existence of core-slider
+ */
+test('Rainbow attribute', async (t) => {
+  await t
+    .expect(rainbowSlider.hasAttribute('rainbow')).ok();
+});
+
+/**
+ * Tests for show-stops attribute existence of core-slider
+ */
+test('Show-stops attribute', async (t) => {
+  await t
+    .expect(showStopsSlider.hasAttribute('show-stops')).ok();
 });
 
 /**
@@ -109,12 +134,4 @@ test('Vertical slider functionality', async (t) => {
     .dragToElement(vertThumb, targetVertThumb)
     .expect(vertSlider.value)
     .eql('10');
-});
-
-/**
- * Tests for rainbow attribute existence of core-slider
- */
-test('Rainbow attribute', async (t) => {
-  await t
-    .expect(rainbowSlider.hasAttribute('rainbow')).ok();
 });
