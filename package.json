@@ -8,7 +8,7 @@
     "build": "webpack --mode production --config webpack.config.js",
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/*",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
-    "test": "npm run lint && npm run e2e-test-headless && npm run coverage",
+    "test": "npm run lint && npm run coverage",
     "coverage": "nyc --all --include \"src/**/*.js\" --reporter=lcov --reporter=text npm run e2e-test-headless",
     "e2e-test": "testcafe chrome test/core-slider.testcafe.js",
     "e2e-test-headless": "testcafe chrome:headless test/core-slider.testcafe.js --skip-js-errors"
