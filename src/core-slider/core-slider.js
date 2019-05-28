@@ -5,6 +5,20 @@ import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
 const template = createTemplate(TEMPLATE, STYLE);
 
 /**
+ * Set attribute as a boolean.
+ * @param {HTMLElement} element the element to set attribute
+ * @param {String} attributeName the name of the attribtue
+ * @param {String} value the value of the attribute
+ */
+function setBooleanAttribute(element, attributeName, value) {
+  if (value) {
+    this.setAttribute(attributeName, '');
+  } else {
+    this.removeAttribute(attributeName);
+  }
+}
+
+/**
  * An element that selects a range of values by sliding... It's a slider.
  */
 class CoreSliderElement extends HTMLElement {
@@ -258,13 +272,7 @@ class CoreSliderElement extends HTMLElement {
    */
   get disabled() { return this.hasAttribute('value'); }
 
-  set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
-  }
+  set disabled(value) { setBooleanAttribute(this, 'disabled', value); }
 
   /**
    * The step value of the slider. The value will always be some multiple of this,
@@ -283,13 +291,7 @@ class CoreSliderElement extends HTMLElement {
    */
   get vertical() { return this.hasAttribute('vertical'); }
 
-  set vertical(value) {
-    if (value) {
-      this.setAttribute('vertical', '');
-    } else {
-      this.removeAttribute('vertical');
-    }
-  }
+  set vertical(value) { setBooleanAttribute(this, 'vertical', value); }
 }
 
 registerCustomTag('core-slider', CoreSliderElement);
