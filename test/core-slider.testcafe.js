@@ -1,9 +1,11 @@
 import { Selector } from 'testcafe';
 
 // Slider component
-const slider = Selector('#size-slider');
-const disabledSlider = Selector('#disabled-slider');
-const rainbowSlider = Selector('#target-slider-rainbow');
+const slider = Selector(() => document.querySelector('#size-slider'));
+
+const disabledSlider = Selector('.display-group').find('#disabled-slider');
+const rainbowSlider = Selector('.display-group').find('#target-slider-rainbow');
+
 
 // Slider's thumb component
 const sliderThumb = Selector(() => document.querySelector('#size-slider').shadowRoot.querySelector('#slider-thumb'));
@@ -16,20 +18,26 @@ const targetThumbMax = Selector(() => document.querySelector('#target-slider-max
 
 const targetThumbMin = Selector(() => document.querySelector('#target-slider-min').shadowRoot.querySelector('#slider-thumb'));
 
+
 /* eslint-disable */
 
 // fixture, getting the page for testing
 fixture `Core Slider Test`
-    .page `../dist/index.html`;
+    .page `./test.html`;
 
 /* eslint-enable */
+
+// const browserscroll = ClientFunction(() => {
+//   //  window.scrollBy(0, 100);
+//   window.scrollBy(0, 1000);
+// });
 
 /**
  * Tests for default value of core-slider
  */
 test('Default core-slider', async (t) => {
   await t
-    .expect(slider.value).eql('60');
+    .expect(slider.value).eql('0');
 });
 
 /**
@@ -39,7 +47,7 @@ test('Default core-slider', async (t) => {
  */
 test('Initialized core-slider', async (t) => {
   await t
-    .expect(slider.value).eql('60');
+    .expect(disabledSlider.value).eql('50');
 });
 
 /**
@@ -57,7 +65,7 @@ test('Dragging core-slider for value check', async (t) => {
 test('Dragging core-slider for steps check', async (t) => {
   await t
     .dragToElement(sliderThumb, targetThumbArb)
-    .expect(slider.value).eql('30');
+    .expect(slider.value).eql('25');
 });
 
 /**
@@ -85,6 +93,22 @@ test('Disabled attribute', async (t) => {
   await t
     .dragToElement(disabledThumb, targetThumbArb)
     .expect(disabledSlider.value).eql('50');
+});
+
+/**
+ * Tests for vertical slider
+ */
+test('Vertical slider functionality', async (t) => {
+  const vertSlider = await Selector(() => document.querySelector('#vertical-group').querySelector('#vert1'));
+  const vertThumb = await Selector(() => document.querySelector('#vert1').shadowRoot.querySelector('#slider-thumb'));
+  const targetVertThumb = await Selector(() => document.querySelector('#vert2').shadowRoot.querySelector('#slider-thumb'));
+
+  await t
+    .expect(vertThumb.visible).ok()
+    .expect(targetVertThumb.visible).ok()
+    .dragToElement(vertThumb, targetVertThumb)
+    .expect(vertSlider.value)
+    .eql('10');
 });
 
 /**
