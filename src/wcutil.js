@@ -59,3 +59,18 @@ export function createElement(tagName, props = {}, ...children) {
   });
   return element;
 }
+
+/**
+ * Set attribute as a boolean.
+ * @private
+ * @param {HTMLElement} element the element to set attribute
+ * @param {String} attributeName the name of the attribtue
+ * @param {String} value the value of the attribute
+ */
+export function setBooleanAttribute(element, attributeName, value) {
+  if (value) {
+    element.setAttribute(attributeName, '');
+  } else {
+    element.removeAttribute(attributeName);
+  }
+}

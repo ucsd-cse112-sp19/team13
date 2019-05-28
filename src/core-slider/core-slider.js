@@ -1,22 +1,13 @@
 import TEMPLATE from './core-slider.html';
 import STYLE from './core-slider.css';
-import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
+import {
+  createTemplate,
+  attachShadowRoot,
+  registerCustomTag,
+  setBooleanAttribute,
+} from '../wcutil';
 
 const template = createTemplate(TEMPLATE, STYLE);
-
-/**
- * Set attribute as a boolean.
- * @param {HTMLElement} element the element to set attribute
- * @param {String} attributeName the name of the attribtue
- * @param {String} value the value of the attribute
- */
-function setBooleanAttribute(element, attributeName, value) {
-  if (value) {
-    this.setAttribute(attributeName, '');
-  } else {
-    this.removeAttribute(attributeName);
-  }
-}
 
 /**
  * An element that selects a range of values by sliding... It's a slider.
