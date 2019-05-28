@@ -5,9 +5,69 @@
 
 		<link rel="stylesheet" type="text/css" href="./style.css"/>
         <script src="core-hello.js"></script>
+        <script src="core-slider.js"></script>
     </head>
     <body>
-		<core-hello lang="en" rainbow>Team 13</core-hello>
-		<core-hello lang="jp">Japan</core-hello>
+        <h1>
+            <core-hello id="title-hello" lang="en" rainbow>Team 13</core-hello>
+            <label>(</label>
+                <core-hello lang="jp">Team 13</core-hello>
+            <label>)</label>
+        </h1>
+        <section id="default-group" class="display-group">
+            <h2>Basics</h2>
+            <div>
+                <core-slider id="size-slider" min="10" max="100" value="20" step="5"></core-slider>
+                <label>Font Size</label>
+            </div>
+            <div>
+                <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
+                <label>Disabled Slider</label>
+            </div>
+        </section>
+        <section id="vertical-group" class="display-group">
+            <h2>Vertical</h2>
+            <div>
+                <core-slider id="vert1" value="5" vertical></core-slider>
+                <core-slider id="vert2" value="10" vertical></core-slider>
+                <core-slider id="vert3" value="50" vertical></core-slider>
+                <core-slider id="vert4" value="100" vertical></core-slider>
+            </div>
+        </section>
+        <section id="bootstrap-group" class="display-group">
+            <h2>With Bootstrap Support!</h2>
+            <div>
+                <core-slider class="custom-range"></core-slider>
+                <label>Bootstrap with .custom-range</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" disabled></core-slider>
+                <label>Bootstrap with .custom-range and disabled</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" vertical></core-slider>
+                <label>Bootstrap with .custom-range and vertical</label>
+            </div>
+            <div>
+                <core-slider class="form-control-range"></core-slider>
+                <label>Bootstrap with .form-control-range</label>
+            </div>
+        </section>
+
+        <script>
+            const titleHello = document.getElementById('title-hello');
+            const sizeSlider = document.getElementById('size-slider');
+            const vert1 = document.getElementById('vert1');
+            const vert2 = document.getElementById('vert2');
+            vert1.addEventListener('change', (e) => {
+                const value = parseInt(e.target.value, 10);
+                vert2.value = value * 2;
+                vert3.value = value / 2;
+                vert4.value = value + 10;
+            });
+            sizeSlider.addEventListener('change', (e) => {
+                titleHello.style.fontSize = `${e.target.value}px`;
+            });
+        </script>
     </body>
 </html>

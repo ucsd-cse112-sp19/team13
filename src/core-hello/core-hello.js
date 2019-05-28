@@ -17,7 +17,6 @@ const HELLO_STRING = {
 class CoreHelloElement extends HTMLElement {
   /**
    * Creates a CoreHello element and attaches the shadow root
-   * @constructor
    */
   constructor() {
     super();
@@ -26,9 +25,7 @@ class CoreHelloElement extends HTMLElement {
     this.helloElement = this.shadowRoot.querySelector('#hello');
   }
 
-  /**
-   * @override
-   */
+  /** @override */
   attributeChangedCallback(attribute, oldValue, newValue) {
     switch (attribute) {
       case 'lang':
@@ -38,37 +35,25 @@ class CoreHelloElement extends HTMLElement {
     }
   }
 
-  /**
-   * @override
-   */
+  /** @override */
   static get observedAttributes() { return ['lang']; }
 
   /**
-   * Get the attribute that represents the name that will be displayed.
+   * The attribute that represents the name that will be displayed.
    *
    * @type {String}
    */
   get name() { return this.getAttribute('name'); }
 
-  /**
-   * Set the attribute that represents the name that will be displayed.
-   *
-   * @type {String}
-   */
   set name(opts) { this.setAttribute('name', opts); }
 
   /**
-   * Get the attribute that represents whether the name should be colorfully animated.
+   * The attribute that represents whether the name should be colorfully animated.
    *
    * @type {String}
    */
   get rainbow() { return this.hasAttribute('rainbow'); }
 
-  /**
-   * Set the attribute that represents whether the name should be colorfully animated.
-   *
-   * @type {String}
-   */
   set rainbow(opts) {
     if (opts) {
       this.setAttribute('rainbow', '');
