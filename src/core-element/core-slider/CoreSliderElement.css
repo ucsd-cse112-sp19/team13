@@ -1,0 +1,111 @@
+:host {
+    display: inline-block;
+    contain: content;
+    
+    width: 100%;
+    height: auto;
+    color: lightgray;
+    
+    --thumb-color: white;
+    --outline-color: gray;
+    --track-color: currentColor;
+}
+
+:host([disabled]) {
+    --thumb-color: gray;
+    pointer-events: none;
+    cursor: default;
+}
+
+#slider {
+    position: relative;
+    margin: 1rem 1rem;
+    width: calc(100% - 2rem);
+    height: 0.1rem;
+}
+
+#slider-bar {
+    position: absolute;
+    top: calc(50% - 0.25rem);
+    width: 100%;
+    height: 0.5rem;
+    background-color: var(--track-color);
+    border: 1px solid var(--outline-color);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#slider-thumb {
+    position: absolute;
+    top: calc(50% - 0.5rem);
+    left: 0px;/* Will be controlled in code */
+    cursor: pointer;
+
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--thumb-color);
+    border: 1px solid var(--outline-color);
+    border-radius: 1rem;
+
+    transition: background-color 0.15s ease-in-out;
+}
+
+:host([vertical]) {
+    width: auto;
+    height: 100%;
+}
+
+:host([vertical]) div#slider {
+    width: 0.1rem;
+    height: calc(100% - 2rem);
+}
+
+:host([vertical]) span#slider-bar {
+    top: 0rem;
+    left: calc(50% - 0.25rem);
+    width: 0.5rem;
+    height: 100%;
+}
+
+:host([vertical]) span#slider-thumb {
+    top: 0px;/* Will be controlled in code */
+    left: calc(50% - 0.5rem);
+}
+
+/* Bootstrap support for form-control-range */
+:host(.form-control-range) {
+    display: block;
+}
+/* Bootstrap support for custom-range */
+:host(.custom-range) span#slider-thumb {
+    --thumb-color: #007bff;
+    border-color: transparent;
+}
+:host(.custom-range) span#slider-thumb.focus {
+    --thumb-color: #b3d7ff;
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+:host(.custom-range) span#slider-bar {
+    --outline-color: transparent;
+    color: #dee2e6;
+}
+:host(.custom-range[disabled]) span#slider-thumb {
+    --thumb-color: #adb5bd;
+}
+@media (prefers-reduced-motion: reduce) {
+  :host(.custom-range) span#slider-thumb {
+    transition: none;
+  }
+}
+
+@keyframes rainbow {
+    0%  { color: red }
+    15% { color: orange }
+    30% { color: yellow }
+    45% { color: green }
+    60% { color: blue }
+    75% { color: indigo }
+    90% { color: violet }
+    100%{ color: red }
+}
