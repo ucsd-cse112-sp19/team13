@@ -1,0 +1,23 @@
+:host {
+    display: inline;
+    contain: content;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: black;
+}
+
+:host([rainbow]) {
+    animation: rainbow 6s infinite; 
+}
+
+@keyframes rainbow {
+    0%  { color: red }
+    15% { color: orange }
+    30% { color: yellow }
+    45% { color: green }
+    60% { color: blue }
+    75% { color: indigo }
+    90% { color: violet }
+    100%{ color: red }
+}
