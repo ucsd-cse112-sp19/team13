@@ -14,6 +14,9 @@ const HELLO_STRING = {
 
 /**
  * An element that displays "Hello" with the passed-in name.
+ * @property {string} name the string that will be displayed.
+ * @property {boolean} rainbow whether the name should be colorfully animated.
+ * @property {String} lang the language to display in.
  */
 class CoreHelloElement extends CoreElement {
   /**
@@ -26,32 +29,19 @@ class CoreHelloElement extends CoreElement {
     this.nameElement = this.shadowRoot.querySelector('#name');
   }
 
+  /** @private */
   static get properties() {
     return {
-      /**
-       * The attribute that represents the name that will be displayed.
-       * @type {String}
-       */
       name: {
         type: String,
         value: 'World',
       },
-
-      /**
-       * The attribute that represents whether the name should be colorfully animated.
-       * @type {Boolean}
-       */
       rainbow: { type: Boolean },
-
-      /**
-       * The attribute that represents the language to display in.
-       * @type {String}
-       */
       lang: { type: String },
     };
   }
 
-  /** @override */
+  /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
       case 'name':
