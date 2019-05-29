@@ -101,12 +101,16 @@ function setPropertyAttribute(element, attributeName, propOpts, value) {
 }
 
 function updateProperty(element, attributeName, oldValue, newValue) {
-  const propOpts = element[attributeName];
-  const oldPropValue = getConvertedPropertyValue(oldValue, propOpts.type);
-  const newPropValue = getConvertedPropertyValue(newValue, propOpts.type);
-
-  if (typeof element.propertyChangedCallback === 'function') {
-    element.propertyChangedCallback(attributeName, oldPropValue, newPropValue);
+  // eslint-disable-next-line no-prototype-builtins
+  if (element.constructor.hasOwnProperty('properties')) {
+    const propOpts = element.constructor.properties[attributeName];
+    const oldPropValue = getConvertedPropertyValue(oldValue, propOpts.type);
+    const newPropValue = getConvertedPropertyValue(newValue, propOpts.type);
+    if (typeof element.propertyChangedCallback === 'function') {
+      element.propertyChangedCallback(attributeName, oldPropValue, newPropValue);
+    }
+  } else if (typeof element.propertyChangedCallback === 'function') {
+    element.propertyChangedCallback(attributeName, oldValue, newValue);
   }
 }
 
