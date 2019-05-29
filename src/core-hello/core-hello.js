@@ -5,10 +5,10 @@ import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
 const template = createTemplate(TEMPLATE, STYLE);
 
 const HELLO_STRING = {
-  en: 'Hello World',
-  es: 'Hola Mundo',
-  jp: 'こんにちは世界',
-  fr: 'Bonjour le monde',
+  en: 'Hello',
+  es: 'Hola',
+  jp: 'こんにちは',
+  fr: 'Bonjour',
 };
 
 /**
@@ -23,11 +23,15 @@ class CoreHelloElement extends HTMLElement {
     attachShadowRoot(this, template);
 
     this.helloElement = this.shadowRoot.querySelector('#hello');
+    this.nameElement = this.shadowRoot.querySelector('#name');
   }
 
   /** @override */
   attributeChangedCallback(attribute, oldValue, newValue) {
     switch (attribute) {
+      case 'name':
+        this.nameElement.textContent = newValue;
+        break;
       case 'lang':
         this.helloElement.textContent = HELLO_STRING[newValue] || HELLO_STRING.en;
         break;
@@ -36,7 +40,7 @@ class CoreHelloElement extends HTMLElement {
   }
 
   /** @override */
-  static get observedAttributes() { return ['lang']; }
+  static get observedAttributes() { return ['name', 'lang']; }
 
   /**
    * The attribute that represents the name that will be displayed.
