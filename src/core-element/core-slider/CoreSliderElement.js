@@ -56,19 +56,10 @@ class CoreSliderElement extends CoreElement {
     }
   }
 
-  /**
-   * Updates to a valid value.
-   * @private
-   * @param {Number} value the value to update to
-   */
-  updateValue(value) {
-    const minValue = this.min;
-    const maxValue = this.max;
-    const stepSize = this.step;
-    let result = Math.floor(value / stepSize) * stepSize;
-    if (result < minValue) result = minValue;
-    if (result > maxValue) result = maxValue;
-    this.value = result;
+  /** @override */
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateThumbPosition(this.value);
   }
 
   /**
@@ -97,6 +88,22 @@ class CoreSliderElement extends CoreElement {
     } else {
       this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
     }
+  }
+
+  /**
+   * Change current value of the slider. This will ALWAYS be within this.min and this.max.
+   * @private
+   * @override
+   */
+  set value(value) {
+    const minValue = parseInt(this.min, 10);
+    const maxValue = parseInt(this.max, 10);
+    const stepSize = parseInt(this.step, 10);
+    let result = Math.floor(parseInt(value, 10) / stepSize) * stepSize;
+    if (result < minValue) result = minValue;
+    if (result > maxValue) result = maxValue;
+
+    super.value = result;
   }
 
   /**
@@ -203,7 +210,7 @@ class CoreSliderElement extends CoreElement {
     const lengthValue = maxValue - minValue;
     const result = lengthValue * sliderRatio + minValue;
     if (this.value !== result) {
-      this.updateValue(result);
+      this.value = result;
     }
   }
 
