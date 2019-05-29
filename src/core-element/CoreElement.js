@@ -70,7 +70,9 @@ function getConvertedPropertyValue(value, type = null) {
       return JSON.parse(value);
     case Boolean:
     case String:
+      return value;
     default:
+      if (typeof type === 'function') return type(value);
       return value;
   }
 }
@@ -93,31 +95,33 @@ function setPropertyAttribute(element, attributeName, propOpts, value) {
     }
   } else if (type === Object) {
     element.setAttribute(attributeName, JSON.stringify(value));
-  } else if (type === String || type === Number) {
+  } else if (type === String || type === Number || typeof type === 'function') {
     element.setAttribute(attributeName, value);
   } else {
-    element.setAttribute(attributeName, value);
+    element.setAttribute(attributeName, `${value}`);
   }
 }
 
 function updateProperty(element, attributeName, oldValue, newValue) {
+  let oldPropValue = oldValue;
+  let newPropValue = newValue;
+
   // eslint-disable-next-line no-prototype-builtins
   if (element.constructor.hasOwnProperty('properties')) {
     const propOpts = element.constructor.properties[attributeName];
-    const oldPropValue = getConvertedPropertyValue(oldValue, propOpts.type);
-    const newPropValue = getConvertedPropertyValue(newValue, propOpts.type);
-    if (typeof element.propertyChangedCallback === 'function') {
-      element.propertyChangedCallback(attributeName, oldPropValue, newPropValue);
-    }
-  } else if (typeof element.propertyChangedCallback === 'function') {
-    element.propertyChangedCallback(attributeName, oldValue, newValue);
+    oldPropValue = getConvertedPropertyValue(oldValue, propOpts.type);
+    newPropValue = getConvertedPropertyValue(newValue, propOpts.type);
+  }
+
+  if (typeof element.propertyChangedCallback === 'function') {
+    element.propertyChangedCallback(attributeName, oldPropValue, newPropValue);
   }
 }
 
 function createProperty(elementClass, name, opts) {
   elementClass[classProperties].set(name, opts);
 
-  Object.defineProperty(elementClass.prototype, name, {
+  const result = {
     get() {
       return getPropertyAttribute(this, name, opts);
     },
@@ -126,7 +130,18 @@ function createProperty(elementClass, name, opts) {
     },
     configurable: true,
     enumerable: true,
-  });
+  };
+
+  const propDescriptor = Object.getOwnPropertyDescriptor(elementClass.prototype, name);
+  if (propDescriptor) {
+    if (typeof propDescriptor.get === 'function') {
+      delete result.get;
+    }
+    if (typeof propDescriptor.set === 'function') {
+      delete result.set;
+    }
+  }
+  Object.defineProperty(elementClass.prototype, name, result);
 }
 
 class CoreElement extends HTMLElement {
