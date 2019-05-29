@@ -36,7 +36,7 @@ fixture `Core Slider Test`
  */
 test('Default core-slider', async (t) => {
   await t
-    .expect(slider.value).eql('0');
+    .expect(slider.value).eql(0);
 });
 
 /**
@@ -46,7 +46,7 @@ test('Default core-slider', async (t) => {
  */
 test('Initialized core-slider', async (t) => {
   await t
-    .expect(disabledSlider.value).eql('50');
+    .expect(disabledSlider.value).eql(50);
 });
 
 /**
@@ -55,7 +55,7 @@ test('Initialized core-slider', async (t) => {
 test('Dragging core-slider for value check', async (t) => {
   await t
     .dragToElement(sliderThumb, disabledThumb)
-    .expect(slider.value).eql('50');
+    .expect(slider.value).eql(50);
 });
 
 /**
@@ -64,7 +64,7 @@ test('Dragging core-slider for value check', async (t) => {
 test('Dragging core-slider for steps check', async (t) => {
   await t
     .dragToElement(sliderThumb, targetThumbArb)
-    .expect(slider.value).eql('25');
+    .expect(slider.value).eql(25);
 });
 
 /**
@@ -73,7 +73,7 @@ test('Dragging core-slider for steps check', async (t) => {
 test('Min attribute', async (t) => {
   await t
     .dragToElement(sliderThumb, targetThumbMin)
-    .expect(slider.value).eql('10');
+    .expect(slider.value).eql(10);
 });
 
 /**
@@ -82,7 +82,7 @@ test('Min attribute', async (t) => {
 test('Max attribute', async (t) => {
   await t
     .dragToElement(sliderThumb, targetThumbMax)
-    .expect(slider.value).eql('100');
+    .expect(slider.value).eql(100);
 });
 
 /**
@@ -91,7 +91,7 @@ test('Max attribute', async (t) => {
 test('Disabled attribute', async (t) => {
   await t
     .dragToElement(disabledThumb, targetThumbArb)
-    .expect(disabledSlider.value).eql('50');
+    .expect(disabledSlider.value).eql(50);
 });
 
 /**
@@ -107,7 +107,7 @@ test('Vertical slider functionality', async (t) => {
     .expect(targetVertThumb.visible).ok()
     .dragToElement(vertThumb, targetVertThumb)
     .expect(vertSlider.value)
-    .eql('10');
+    .eql(10);
 });
 
 /**
