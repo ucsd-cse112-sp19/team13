@@ -6,6 +6,13 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
 /**
  * An element that selects a range of values by sliding... It's a slider.
+ * @property {number} step the size of the intervals for the value's valid range.
+ * @property {number} min the minimum value.
+ * @property {number} max the maximum value.
+ * @property {number} value the current value.
+ * @property {boolean} disabled whether this can be used.
+ * @property {boolean} vertical whether to display vertically.
+ * @property {boolean} rainbow whether to display in a bunch of colors.
  */
 class CoreSliderElement extends CoreElement {
   /**
@@ -29,7 +36,7 @@ class CoreSliderElement extends CoreElement {
     this.slider = this.shadowRoot.querySelector('#slider');
   }
 
-  /** @override */
+  /** @private */
   static get properties() {
     return {
       step: { type: Number, value: 1 },
@@ -42,7 +49,7 @@ class CoreSliderElement extends CoreElement {
     };
   }
 
-  /** @override */
+  /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
       case 'value':
