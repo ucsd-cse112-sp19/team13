@@ -62,9 +62,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Number} value the value to update to
    */
   updateValue(value) {
-    const minValue = parseInt(this.min, 10);
-    const maxValue = parseInt(this.max, 10);
-    const stepSize = parseInt(this.step, 10);
+    const minValue = this.min;
+    const maxValue = this.max;
+    const stepSize = this.step;
     let result = Math.floor(value / stepSize) * stepSize;
     if (result < minValue) result = minValue;
     if (result > maxValue) result = maxValue;
@@ -78,12 +78,16 @@ class CoreSliderElement extends CoreElement {
    */
   updateThumbPosition(value) {
     // Calculates the value with respect to the defined range (from this.min and this.max)
+    const stepSize = this.step;
     const minValue = this.min;
     const maxValue = this.max;
-    const valueRange = maxValue - minValue;
+    let result = Math.floor(value / stepSize) * stepSize;
+    if (result < minValue) result = minValue;
+    if (result > maxValue) result = maxValue;
 
     // Calculates the pixel position of the thumb from this.value
-    let progress = (Math.max(Math.min(value, maxValue), minValue) - minValue) / valueRange;
+    const valueRange = maxValue - minValue;
+    let progress = (result - minValue) / valueRange;
     if (progress > 1) progress = 1;
     if (progress < 0) progress = 0;
     const thumbWidth = this.sliderThumb.clientWidth;
