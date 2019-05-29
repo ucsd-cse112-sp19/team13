@@ -113,22 +113,6 @@ class CoreSliderElement extends CoreElement {
   }
 
   /**
-   * Change current value of the slider. This will ALWAYS be within this.min and this.max.
-   * @private
-   * @override
-   */
-  set value(value) {
-    const minValue = parseInt(this.min, 10);
-    const maxValue = parseInt(this.max, 10);
-    const stepSize = parseInt(this.step, 10);
-    let result = Math.floor(parseInt(value, 10) / stepSize) * stepSize;
-    if (result < minValue) result = minValue;
-    if (result > maxValue) result = maxValue;
-
-    super.value = result;
-  }
-
-  /**
    * Is called when the mouse is clicked on the thumb.
    *
    * @param {Event} e the input event
