@@ -49,6 +49,21 @@ class CoreSliderElement extends CoreElement {
     };
   }
 
+  /**
+   * Updates the value. Ensures that the value is always within bounds.
+   * @override
+   * @param {*} value the new value
+   */
+  set value(value) {
+    const minValue = this.min;
+    const maxValue = this.max;
+    const stepSize = this.step;
+    let result = Math.floor(value / stepSize) * stepSize;
+    if (result < minValue) result = minValue;
+    if (result > maxValue) result = maxValue;
+    this.setAttribute('value', `${result}`);
+  }
+
   /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
@@ -95,22 +110,6 @@ class CoreSliderElement extends CoreElement {
     } else {
       this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
     }
-  }
-
-  /**
-   * Change current value of the slider. This will ALWAYS be within this.min and this.max.
-   * @private
-   * @override
-   */
-  set value(value) {
-    const minValue = parseInt(this.min, 10);
-    const maxValue = parseInt(this.max, 10);
-    const stepSize = parseInt(this.step, 10);
-    let result = Math.floor(parseInt(value, 10) / stepSize) * stepSize;
-    if (result < minValue) result = minValue;
-    if (result > maxValue) result = maxValue;
-
-    super.value = result;
   }
 
   /**
@@ -220,7 +219,6 @@ class CoreSliderElement extends CoreElement {
       this.value = result;
     }
   }
-
 
   /**
    * Is called when the thumb should stop moving (for both the mouse AND touch)
