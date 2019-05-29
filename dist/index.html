@@ -6,12 +6,19 @@
 		<link rel="stylesheet" type="text/css" href="./style.css"/>
         <script src="core-hello.js"></script>
         <script src="core-slider.js"></script>
+        <script src="core-bye.js"></script>
     </head>
     <body>
         <h1>
             <core-hello id="title-hello" lang="en" rainbow>Team 13</core-hello>
             <label>(</label>
-                <core-hello lang="jp">Team 13</core-hello>
+                <core-hello name="Team 13" lang="jp"></core-hello>
+            <label>)</label>
+        </h1>
+        <h1>
+            <core-bye id="title-bye" lang="en" rainbow></core-bye>
+            <label>(</label>
+                <core-bye lang="jp">Team 13</core-bye>
             <label>)</label>
         </h1>
         <section id="default-group" class="display-group">
