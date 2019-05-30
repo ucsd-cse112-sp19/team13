@@ -33,6 +33,9 @@ class CoreSliderElement extends CoreElement {
     this.sliderThumb.addEventListener('mousedown', this.onMouseDown);
     this.sliderThumb.addEventListener('touchstart', this.onTouchStart);
 
+    this.sliderBar = this.shadowRoot.querySelector('#slider-bar');
+    this.sliderBar.addEventListener('mousedown', this.onMouseDown);
+
     this.slider = this.shadowRoot.querySelector('#slider');
   }
 
@@ -186,8 +189,10 @@ class CoreSliderElement extends CoreElement {
   /**
    * Is called when the thumb should move (for both the mouse AND touch)
    */
-  onThumbStart() {
+  onThumbStart(e) {
     this.sliderThumb.classList.add('focus');
+
+    this.onThumbMove(e);
   }
 
   /**

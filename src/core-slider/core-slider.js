@@ -88,7 +88,6 @@ class CoreSliderElement extends HTMLElement {
     e.preventDefault();
     e.stopPropagation();
 
-    this.onThumbMove(e);
     this.onThumbStart(e);
   }
 
@@ -152,8 +151,9 @@ class CoreSliderElement extends HTMLElement {
   /**
    * Is called when the thumb should move (for both the mouse AND touch)
    */
-  onThumbStart() {
+  onThumbStart(e) {
     this.sliderThumb.classList.add('focus');
+    this.onThumbMove(e);
   }
 
   /**
