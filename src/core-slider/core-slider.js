@@ -28,6 +28,9 @@ class CoreSliderElement extends HTMLElement {
     this.sliderThumb.addEventListener('mousedown', this.onMouseDown);
     this.sliderThumb.addEventListener('touchstart', this.onTouchStart);
 
+    this.sliderBar = this.shadowRoot.querySelector('#slider-bar');
+    this.sliderBar.addEventListener('mousedown', this.onMouseDown);
+
     this.slider = this.shadowRoot.querySelector('#slider');
   }
 
@@ -85,6 +88,7 @@ class CoreSliderElement extends HTMLElement {
     e.preventDefault();
     e.stopPropagation();
 
+    this.onThumbMove(e);
     this.onThumbStart(e);
   }
 
