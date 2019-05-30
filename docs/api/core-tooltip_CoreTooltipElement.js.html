@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: core-tooltip/CoreTooltipElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,46 +17,60 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: core-tooltip/CoreTooltipElement.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>Thank God It's Friday</h1>
-<p>Welcome To UCSD-CSE112's Public Repository for Team Friday!</p>
-<p><img src="https://github.com/ucsd-cse112/team13/blob/master/Team%20Pics/logo.png" alt="Logo"></p>
-<h2><a href="https://github.com/ucsd-cse112/team13/blob/master/helloWorld.html">Meet The Team</a></h2>
-<h2>Documentation</h2>
-<p><a href="https://drive.google.com/open?id=10RPfh2c-1xePoPe4ytpX2LaDlBoi1_Dy">See our docs</a></p>
-<h2>Contributing</h2>
-<p>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
-<p>Please make sure to update tests as appropriate.</p>
-<h2>License</h2>
-<p><a href="">UCSD</a></p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import CoreElement from '../core-element/CoreElement';
+
+import TEMPLATE from './CoreTooltipElement.html';
+import STYLE from './CoreTooltipElement.css';
+
+const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
+
+/**
+ * An element that shows a tooltip for another element... It's a tooltip.
+ */
+class CoreTooltipElement extends CoreElement {
+  /**
+   * Creates a CoreTooltip element and attaches the shadow root
+   */
+  constructor() {
+    super(STYLED_TEMPLATE);
+
+    this.target = null;
+  }
+
+  /** @private */
+  static get properties() {
+    return {
+      for: { type: String },
+      placement: { type: String },
+    };
+  }
+
+  /** @private */
+  propertyChangedCallback(property, oldValue, newValue) {
+    switch (property) {
+      case 'for':
+        this.target = document.querySelector(`#${newValue}`);
+        break;
+      default:
+    }
+  }
+}
+
+CoreElement.customTag('core-tooltip', CoreTooltipElement);
+
+export default CoreTooltipElement;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 
