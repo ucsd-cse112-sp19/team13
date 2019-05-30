@@ -172,6 +172,14 @@ function createProperty(elementClass, name, opts) {
   Object.defineProperty(elementClass.prototype, name, result);
 }
 
+/** Retrieves a list of all property keys, strings and symbols included. */
+function getPropertyKeys(object) {
+  return [
+    ...Object.getOwnPropertyNames(object),
+    ...Object.getOwnPropertySymbols(object),
+  ];
+}
+
 /** The base element for web components to handle as much boilerplate code as possible. */
 class CoreElement extends HTMLElement {
   /**
@@ -198,12 +206,10 @@ class CoreElement extends HTMLElement {
     // ... actually add it to the class ...
     this[classProperties] = result;
 
+    // Add new properties to the hierarchy (don't re-add old ones).
     if (this.hasOwnProperty('properties')) {
       const props = this.properties;
-      const propKeys = [
-        ...Object.getOwnPropertyNames(props),
-        ...Object.getOwnPropertySymbols(props),
-      ];
+      const propKeys = getPropertyKeys(props);
       for (const prop of propKeys) {
         createProperty(this, prop, props[prop]);
       }
@@ -240,16 +246,12 @@ class CoreElement extends HTMLElement {
     // Set default values from props for the element if no attribute values were specified
     if ('properties' in this.constructor) {
       const props = this.constructor.properties;
-      const propKeys = [
-        ...Object.getOwnPropertyNames(props),
-        ...Object.getOwnPropertySymbols(props),
-      ];
+      const propKeys = getPropertyKeys(props);
 
       for (const prop of propKeys) {
-        if (props[prop].hasOwnProperty('value')) {
-          if (!this.hasAttribute(prop)) {
-            this[prop] = props[prop].value;
-          }
+        const propOpt = props[prop];
+        if (propOpt.hasOwnProperty('value') && !this.hasAttribute(prop)) {
+          this[prop] = propOpt.value;
         }
       }
     }
