@@ -68,7 +68,3 @@ span#tooltip-back::after {
 
     background: var(--back-color);
 }
-
-#tooltip-content {
-
-}
