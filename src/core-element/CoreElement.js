@@ -260,10 +260,12 @@ class CoreElement extends HTMLElement {
   }
 
   /** @override */
-  // disconnectedCallback() { }
+  // eslint-disable-next-line class-methods-use-this
+  disconnectedCallback() {}
 
   /** @override */
-  // adoptedCallback() { }
+  // eslint-disable-next-line class-methods-use-this
+  adoptedCallback() {}
 
   /** @override */
   attributeChangedCallback(attribute, oldValue, newValue) {
