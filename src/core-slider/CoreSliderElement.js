@@ -1,4 +1,4 @@
-import CoreElement from '../CoreElement';
+import CoreElement from '../core-element/CoreElement';
 import TEMPLATE from './CoreSliderElement.html';
 import STYLE from './CoreSliderElement.css';
 
