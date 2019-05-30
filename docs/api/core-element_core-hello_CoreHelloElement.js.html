@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: core-hello/core-hello.js</title>
+    <title>JSDoc: Source: core-element/core-hello/CoreHelloElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: core-hello/core-hello.js</h1>
+    <h1 class="page-title">Source: core-element/core-hello/CoreHelloElement.js</h1>
 
     
 
@@ -26,86 +26,64 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import TEMPLATE from './core-hello.html';
-import STYLE from './core-hello.css';
-import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
+            <pre class="prettyprint source linenums"><code>import CoreElement from '../CoreElement';
 
-const template = createTemplate(TEMPLATE, STYLE);
+import TEMPLATE from './CoreHelloElement.html';
+import STYLE from './CoreHelloElement.css';
+
+const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
 const HELLO_STRING = {
-  en: 'Hello World',
-  es: 'Hola Mundo',
-  jp: 'こんにちは世界',
-  fr: 'Bonjour le monde',
+  en: 'Hello',
+  es: 'Hola',
+  jp: 'こんにちは',
+  fr: 'Bonjour',
 };
 
 /**
  * An element that displays "Hello" with the passed-in name.
+ * @property {string} name the string that will be displayed.
+ * @property {boolean} rainbow whether the name should be colorfully animated.
+ * @property {String} lang the language to display in.
  */
-class CoreHelloElement extends HTMLElement {
+class CoreHelloElement extends CoreElement {
   /**
    * Creates a CoreHello element and attaches the shadow root
    */
   constructor() {
-    super();
-    attachShadowRoot(this, template);
+    super(STYLED_TEMPLATE);
 
     this.helloElement = this.shadowRoot.querySelector('#hello');
+    this.nameElement = this.shadowRoot.querySelector('#name');
   }
 
-  /** @override */
-  attributeChangedCallback(attribute, oldValue, newValue) {
-    switch (attribute) {
+  /** @private */
+  static get properties() {
+    return {
+      name: {
+        type: String,
+        value: 'World',
+      },
+      rainbow: { type: Boolean },
+      lang: { type: String },
+    };
+  }
+
+  /** @private */
+  propertyChangedCallback(property, oldValue, newValue) {
+    switch (property) {
+      case 'name':
+        this.nameElement.textContent = newValue;
+        break;
       case 'lang':
         this.helloElement.textContent = HELLO_STRING[newValue] || HELLO_STRING.en;
         break;
       default:
     }
   }
-
-  /** @override */
-  static get observedAttributes() { return ['lang']; }
-
-  /**
-   * The attribute that represents the name that will be displayed.
-   *
-   * @type {String}
-   */
-  get name() { return this.getAttribute('name'); }
-
-  set name(opts) { this.setAttribute('name', opts); }
-
-  /**
-   * The attribute that represents whether the name should be colorfully animated.
-   *
-   * @type {String}
-   */
-  get rainbow() { return this.hasAttribute('rainbow'); }
-
-  set rainbow(opts) {
-    if (opts) {
-      this.setAttribute('rainbow', '');
-    } else {
-      this.removeAttribute('rainbow');
-    }
-  }
-
-  /**
-   * Get the attribute that represents the language to display in.
-   *
-   * @type {String}
-   */
-  get lang() { return this.getAttribute('lang'); }
-
-  /**
-   * Set the attribute that represents the language to display in.
-   *
-   * @type {String}
-   */
-  set lang(opts) { this.setAttribute('lang', opts); }
 }
 
-registerCustomTag('core-hello', CoreHelloElement);
+CoreElement.customTag('core-hello', CoreHelloElement);
 
 export default CoreHelloElement;
 </code></pre>

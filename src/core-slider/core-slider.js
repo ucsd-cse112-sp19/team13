@@ -41,7 +41,7 @@ class CoreSliderElement extends HTMLElement {
 
           const prevValue = parseInt(oldValue, 10);
           if (nextValue !== prevValue) {
-            this.dispatchEvent(new Event('change', {
+            this.dispatchEvent(new CustomEvent('input', {
               bubbles: true,
               composed: true,
             }));

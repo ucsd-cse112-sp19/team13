@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: core-slider/core-slider.js</title>
+    <title>JSDoc: Source: core-element/core-slider/CoreSliderElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: core-slider/core-slider.js</h1>
+    <h1 class="page-title">Source: core-element/core-slider/CoreSliderElement.js</h1>
 
     
 
@@ -26,23 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import TEMPLATE from './core-slider.html';
-import STYLE from './core-slider.css';
-import { createTemplate, attachShadowRoot, registerCustomTag } from '../wcutil';
+            <pre class="prettyprint source linenums"><code>import CoreElement from '../CoreElement';
+import TEMPLATE from './CoreSliderElement.html';
+import STYLE from './CoreSliderElement.css';
 
-const template = createTemplate(TEMPLATE, STYLE);
+const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
 /**
  * An element that selects a range of values by sliding... It's a slider.
+ * @property {number} step the size of the intervals for the value's valid range.
+ * @property {number} min the minimum value.
+ * @property {number} max the maximum value.
+ * @property {number} value the current value.
+ * @property {boolean} disabled whether this can be used.
+ * @property {boolean} vertical whether to display vertically.
+ * @property {boolean} rainbow whether to display in a bunch of colors.
  */
-class CoreSliderElement extends HTMLElement {
+class CoreSliderElement extends CoreElement {
   /**
    * Creates a CoreSlider element and attaches the shadow root
    */
   constructor() {
-    super();
-
-    attachShadowRoot(this, template);
+    super(STYLED_TEMPLATE);
 
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
@@ -59,46 +64,79 @@ class CoreSliderElement extends HTMLElement {
     this.slider = this.shadowRoot.querySelector('#slider');
   }
 
-  /** @override */
-  attributeChangedCallback(attribute, oldValue, newValue) {
-    switch (attribute) {
-      case 'value':
-        {
-          const nextValue = parseInt(newValue, 10);
-          this.updateThumbPosition(nextValue);
+  /** @private */
+  static get properties() {
+    return {
+      step: { type: Number, value: 1 },
+      min: { type: Number, value: 0 },
+      max: { type: Number, value: 100 },
+      value: { type: Number, value: 0 },
+      disabled: { type: Boolean },
+      vertical: { type: Boolean },
+      rainbow: { type: Boolean },
+    };
+  }
 
-          const prevValue = parseInt(oldValue, 10);
-          if (nextValue !== prevValue) {
-            this.dispatchEvent(new CustomEvent('input', {
-              bubbles: true,
-              composed: true,
-            }));
-          }
-        }
+  /**
+   * Updates the value. Ensures that the value is always within bounds.
+   * @override
+   * @param {*} value the new value
+   */
+  set value(value) {
+    const minValue = this.min;
+    const maxValue = this.max;
+    const stepSize = this.step;
+    let result = Math.floor(value / stepSize) * stepSize;
+    if (result &lt; minValue) result = minValue;
+    if (result > maxValue) result = maxValue;
+    this.setAttribute('value', `${result}`);
+  }
+
+  /** @private */
+  propertyChangedCallback(property, oldValue, newValue) {
+    switch (property) {
+      case 'value':
+        this.updateThumbPosition(newValue);
+        this.dispatchEvent(new CustomEvent('input', {
+          bubbles: true,
+          composed: true,
+        }));
         break;
       default:
     }
   }
 
   /** @override */
-  static get observedAttributes() { return ['value']; }
-
-  /** @override */
   connectedCallback() {
-    // Sets the default value for attributes
-    if (!this.hasAttribute('step')) {
-      this.setAttribute('step', 1);
-    }
-    if (!this.hasAttribute('min')) {
-      this.setAttribute('min', 0);
-    }
-    if (!this.hasAttribute('max')) {
-      this.setAttribute('max', 100);
-    }
-    if (!this.hasAttribute('value')) {
-      this.setAttribute('value', 0);
+    super.connectedCallback();
+    this.updateThumbPosition(this.value);
+  }
+
+  /**
+   * Updates the thumb position to reflect the slider value.
+   * @private
+   * @param {Number} value the current slider value
+   */
+  updateThumbPosition(value) {
+    // Calculates the value with respect to the defined range (from this.min and this.max)
+    const stepSize = this.step;
+    const minValue = this.min;
+    const maxValue = this.max;
+    let result = Math.floor(value / stepSize) * stepSize;
+    if (result &lt; minValue) result = minValue;
+    if (result > maxValue) result = maxValue;
+
+    // Calculates the pixel position of the thumb from this.value
+    const valueRange = maxValue - minValue;
+    let progress = (result - minValue) / valueRange;
+    if (progress > 1) progress = 1;
+    if (progress &lt; 0) progress = 0;
+    const thumbWidth = this.sliderThumb.clientWidth;
+
+    if (!this.vertical) {
+      this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
     } else {
-      this.updateThumbPosition(parseInt(this.value, 10));
+      this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
     }
   }
 
@@ -210,132 +248,15 @@ class CoreSliderElement extends HTMLElement {
     }
   }
 
-
   /**
    * Is called when the thumb should stop moving (for both the mouse AND touch)
    */
   onThumbStop() {
     this.sliderThumb.classList.remove('focus');
   }
-
-  /**
-   * The min value of the slider. This is the lower bound for this.value.
-   *
-   * @type {Number}
-   */
-  get min() { return this.getAttribute('min'); }
-
-  set min(value) { this.setAttribute('min', value); }
-
-  /**
-   * The max value of the slider. This is the upper bound for this.value.
-   *
-   * @type {Number}
-   */
-  get max() { return this.getAttribute('max'); }
-
-  set max(value) { this.setAttribute('max', value); }
-
-  /**
-   * The current value of the slider. This will ALWAYS be within this.min and this.max.
-   *
-   * @type {Number}
-   */
-  get value() { return this.getAttribute('value'); }
-
-  set value(value) {
-    const minValue = parseInt(this.min, 10);
-    const maxValue = parseInt(this.max, 10);
-    const stepSize = parseInt(this.step, 10);
-    let result = Math.floor(parseInt(value, 10) / stepSize) * stepSize;
-    if (result &lt; minValue) result = minValue;
-    if (result > maxValue) result = maxValue;
-    this.setAttribute('value', `${result}`);
-  }
-
-  /**
-   * Updates the thumb position to reflect the slider value.
-   *
-   * @private
-   * @param {Number} value the current slider value
-   */
-  updateThumbPosition(value) {
-    // Calculates the value with respect to the defined range (from this.min and this.max)
-    const minValue = parseInt(this.min, 10);
-    const maxValue = parseInt(this.max, 10);
-    const valueRange = maxValue - minValue;
-
-    // Calculates the pixel position of the thumb from this.value
-    let progress = (value - minValue) / valueRange;
-    if (progress > 1) progress = 1;
-    if (progress &lt; 0) progress = 0;
-    const thumbWidth = this.sliderThumb.clientWidth;
-
-    if (!this.vertical) {
-      this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-    } else {
-      this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-    }
-  }
-
-  /**
-   * Disables the elements from receiving inputs. In other words, this will disable all
-   * user interactions with the element.
-   *
-   * @type {Boolean}
-   */
-  get disabled() { return this.hasAttribute('value'); }
-
-  set disabled(value) {
-    if (value) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
-    }
-  }
-
-  /**
-   * The step value of the slider. The value will always be some multiple of this,
-   * starting from this.min.
-   *
-   * @type {Number}
-   */
-  get step() { return this.getAttribute('step'); }
-
-  set step(value) { this.setAttribute('step'); }
-
-  /**
-   * Whether the slider is orientated vertically.
-   *
-   * @type {Boolean}
-   */
-  get vertical() { return this.hasAttribute('vertical'); }
-
-  set vertical(value) {
-    if (value) {
-      this.setAttribute('vertical', '');
-    } else {
-      this.removeAttribute('vertical');
-    }
-  }
-
-  /**
-   * The attribute that represents whether the bar should be colorfully animated.
-   *
-   * @type {String}
-   */
-  get rainbow() { return this.hasAttribute('rainbow'); }
-
-  set rainbow(opts) {
-    if (opts) {
-      this.setAttribute('rainbow', '');
-    } else {
-      this.removeAttribute('rainbow');
-    }
-  }
 }
 
-registerCustomTag('core-slider', CoreSliderElement);
+CoreElement.customTag('core-slider', CoreSliderElement);
 
 export default CoreSliderElement;
 </code></pre>
