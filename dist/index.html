@@ -25,7 +25,17 @@
         <section id="default-group" class="display-group">
             <h2>Basics<core-tooltip>Yep, these are the basics.</core-tooltip></h2>
             <div>
-                Here is <span><a>some</a><core-tooltip> Hi! </core-tooltip></span> text.
+                <core-slider id="size-slider" min="10" max="100" value="20" step="5"></core-slider>
+                <label>Font Size</label>
+            </div>
+            <div>
+                <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
+                <label>Disabled Slider</label>
+            </div>
+        </section>
+        <section id="tooltip-group" class="display-group">
+            <div>
+                <h2>Here is <span><a>some</a><core-tooltip> Hi! </core-tooltip></span> text. Just for tooltips :D</h2>
                 <span>
                     <input type="text"/>
                     <core-tooltip placement="left" content="Hello All."></core-tooltip>
@@ -48,12 +58,8 @@
                 </span>
             </div>
             <div>
-                <core-slider id="size-slider" min="10" max="100" value="20" step="5"></core-slider>
-                <label>Font Size</label>
-            </div>
-            <div>
-                <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
-                <label>Disabled Slider</label>
+                <a>HOVER ME<core-tooltip openDelay="1000" closeDelay="0">TOOLTIPS!</core-tooltip></a>
+                <a>HOVER ME TOO<core-tooltip openDelay="5000">MAOR TOOLTUPS!</core-tooltip></a>
             </div>
         </section>
         <section id="vertical-group" class="display-group">

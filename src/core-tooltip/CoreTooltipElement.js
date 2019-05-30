@@ -7,6 +7,10 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
 /**
  * An element that shows a tooltip for another element... It's a tooltip.
+ * @property {number} openDelay the delay of appearance, in millisecond
+ * @property {number} closeDelay the delay of disappearance, in millisecond
+ * @property {number} openTimeout the timer created by the call to setTimeout() for openDelay, can be passed to clearTimeout() to cancel the timeout.
+ * @property {number} closeTimeout the timer created by the call to setTimeout() for closeDelay, can be passed to clearTimeout() to cancel the timeout.
  */
 class CoreTooltipElement extends CoreElement {
   /**
@@ -18,9 +22,14 @@ class CoreTooltipElement extends CoreElement {
     this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
     this.target = null;
+    this.openTimeout = null;
+    this.closeTimeout = null;
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+
+    this.onTooltipOpen = this.onTooltipOpen.bind(this);
+    this.onTooltipClose = this.onTooltipClose.bind(this);
   }
 
   /** @private */
@@ -28,6 +37,8 @@ class CoreTooltipElement extends CoreElement {
     return {
       placement: { type: String },
       content: { type: String },
+      openDelay: { type: Number, value: 0 },
+      closeDelay: { type: Number, value: 1000 },
     };
   }
 
@@ -52,6 +63,7 @@ class CoreTooltipElement extends CoreElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.clearTarget();
+    this.clearTimeout();
   }
 
   setTarget(target) {
@@ -72,15 +84,58 @@ class CoreTooltipElement extends CoreElement {
       this.target = null;
     }
   }
-
+  
+  /** To cancel the timeout */
+  clearTimeout() {
+    if (this.openTimeout) {
+      clearTimeout(this.openTimeout);
+      this.openTimeout = null;
+    }
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+  }
+  
+  /** Called when mouse enters the parent. */
   onMouseEnter() {
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+    this.openTimeout = setTimeout(this.onTooltipOpen, this.openDelay);
+  }
+
+  /** Called when mouse leaves the parent. */
+  onMouseLeave() {
+    if (this.openTimeout) {
+      clearTimeout(this.openTimeout);
+      this.openTimeout = null;
+    }
+    setTimeout(this.onTooltipClose, this.closeDelay);
+  }
+
+  /**
+   * Called when the tooltip should open (after a set delay). The
+   * timer is triggered by onMouseEnter().
+   */
+  onTooltipOpen() {
     this.shadowRoot.host.style.opacity = 1;
   }
 
-  onMouseLeave() {
+  /**
+   * Called when the tooltip should close (after a set delay). The
+   * timer is triggered by onMouseLeave().
+   */
+  onTooltipClose() {
     this.shadowRoot.host.style.opacity = 0;
   }
 }
+/*
+  // TODO: We'll worry about this later, this is for the "tooltip" mode that Shardul wanted.
+  CoreTooltipElement.timeout = null;
+  CoreTooltipElement.active = false;
+*/
 
 CoreElement.customTag('core-tooltip', CoreTooltipElement);
 
