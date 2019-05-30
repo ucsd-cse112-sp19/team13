@@ -9,6 +9,9 @@ def main():
             # Completely remove statements and branches.
             coverage[file_name]["s"].clear()
             coverage[file_name]["b"].clear()
+            # Create a line key if it doesn't exist.
+            if "l" not in coverage[file_name]:
+                coverage[file_name]["l"] = dict()
             # For functions, remove if we can find this function
             # being called from a test file.
             keys = list(coverage[file_name]["f"])
@@ -17,6 +20,11 @@ def main():
                 # If it is an anonymous function, we can't name it.
                 if search_in_test(fn_name) or 'anonymous' in fn_name:
                     coverage[file_name]["f"][fn_num] = 1
+                    start_line = coverage[file_name]["fnMap"][fn_num]["loc"]["start"]["line"]
+                    end_line = coverage[file_name]["fnMap"][fn_num]["loc"]["end"]["line"]
+                    # Add the line numbers to the line field.
+                    for line in range(start_line, end_line + 1):
+                        coverage[file_name]["l"][line] = 1
 
     # Stick the json back into the original file. 
     with open('coverage/coverage-final.json', 'w') as outfile:
