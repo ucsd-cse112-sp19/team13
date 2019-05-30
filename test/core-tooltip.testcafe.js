@@ -37,3 +37,13 @@ testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
     .expect(tooltipBox.getStyleProperty('_________'))
     .eql('_____');
 });
+
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getAttribute('opacity'))
+    .eql('1');
+});
