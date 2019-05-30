@@ -69,7 +69,7 @@ class CoreSliderElement extends CoreElement {
     switch (property) {
       case 'value':
         this.updateThumbPosition(newValue);
-        this.dispatchEvent(new Event('change', {
+        this.dispatchEvent(new CustomEvent('input', {
           bubbles: true,
           composed: true,
         }));
