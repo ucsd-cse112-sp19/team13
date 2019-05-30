@@ -14,19 +14,15 @@
         </style>
     </head>
     <body>
-        <core-slider id="test-slider"></core-slider>
+        <core-slider></core-slider>
         <div class="test-core-slider">
             <section id="test-core-slider-default">
                 <label>Default</label>
                 <core-slider></core-slider>
             </section>
-            <section id="test-core-slider-init">
-                <label>Initialized</label>
-                <core-slider value="60"></core-slider>
-            </section>
             <section id="test-core-slider-step">
                 <label>Step</label>
-                <core-slider step="10"></core-slider>
+                <core-slider step="30"></core-slider>
             </section>
             <section id="test-core-slider-min">
                 <label>Min</label>
@@ -38,7 +34,23 @@
             </section>
             <section id="test-core-slider-disabled">
                 <label>Disabled</label>
-                <core-slider value="50" disabled></core-slider>
+                <core-slider value="50" disabled="true"></core-slider>
+            </section>
+            <section id="test-core-slider-init">
+                <label>Initialized</label>
+                <core-slider value="50"></core-slider>
+                <br/>
+                <core-slider id="value0" value="0"></core-slider>
+                <core-slider id="value10" value="10"></core-slider>
+                <core-slider id="value20" value="20"></core-slider>
+                <core-slider id="value30" value="30"></core-slider>
+                <core-slider id="value40" value="40"></core-slider>
+                <core-slider id="value50" value="50"></core-slider>
+                <core-slider id="value60" value="60"></core-slider>
+                <core-slider id="value70" value="70"></core-slider>
+                <core-slider id="value80" value="80"></core-slider>
+                <core-slider id="value90" value="90"></core-slider>
+                <core-slider id="value100" value="100"></core-slider>
             </section>
         </div>
     </body>
