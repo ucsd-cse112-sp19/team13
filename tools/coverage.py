@@ -2,7 +2,7 @@ import json
 import os
 
 def main():
-    with open('../coverage/coverage-final.json') as infile:
+    with open('coverage/coverage-final.json') as infile:
         # Import coverage report as a dictionary.
         coverage = json.load(infile)
         for file_name in coverage:
@@ -14,19 +14,21 @@ def main():
             keys = list(coverage[file_name]["f"])
             for fn_num in keys:
                 fn_name = coverage[file_name]["fnMap"][fn_num]["name"]
-                if not search_in_test(fn_name):
-                    del coverage[file_name]["f"][fn_num] 
+                # If it is an anonymous function, we can't name it.
+                if search_in_test(fn_name) or 'anonymous' in fn_name:
+                    coverage[file_name]["f"][fn_num] = 1
+                    # del coverage[file_name]["f"][fn_num] 
 
     # Stick the json back into the original file. 
-    with open('../coverage/coverage-py.json', 'w') as outfile:
+    with open('coverage/coverage-final.json', 'w') as outfile:
         json.dump(coverage, outfile)
 
 # Used for finding a string (or in our case, a function name) in test dir.
 def search_in_test(fn_name):
-    # Get each file name in ../test
-    for file_name in os.listdir(path='../test'):
+    # Get each file name in test
+    for file_name in os.listdir(path='test'):
         # Open that file.
-        f = open('../test/' + file_name)
+        f = open('test/' + file_name)
         cur_line = f.readline()
 
         # See if we can find the string in the line.
