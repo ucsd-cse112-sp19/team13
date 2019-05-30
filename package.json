@@ -12,8 +12,8 @@
     "lcov-coverage": "istanbul report --root coverage --include=*.json --dir coverage lcov",
     "report-coverage": "istanbul report --root coverage --include=*.json --dir coverage/report html && npm run lcov-coverage",
     "coverage": "nyc --all --include \"src/**/*.js\" --reporter=json --reporter=text npm run e2e-test-headless && python3 tools/coverage.py && npm run report-coverage",
-    "e2e-test": "testcafe chrome test/core-slider.testcafe.js --speed 0.2",
-    "e2e-test-headless": "testcafe chrome:headless test/core-slider.testcafe.js",
+    "e2e-test": "testcafe chrome test/*.testcafe.js --speed 0.2",
+    "e2e-test-headless": "testcafe chrome:headless test/*.testcafe.js",
     "build-test": "npm run build && npm run e2e-test-headless"
   },
   "repository": {
