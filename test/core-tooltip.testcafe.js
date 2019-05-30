@@ -17,11 +17,10 @@ testCoreTooltip('content', '- Exists an attribute named content', async (t, ctx)
   const getExistence = ClientFunction(() => {
     const testElement = document.getElementById('content-exists');
     // if content is among tooltip's listed attributes, then return true
-    if((testElement.attributes).content){
+    if ((testElement.attributes).content) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   });
   const existsValue = await getExistence();
   await t
