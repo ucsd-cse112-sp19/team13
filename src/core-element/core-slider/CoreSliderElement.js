@@ -35,6 +35,7 @@ class CoreSliderElement extends CoreElement {
 
     this.sliderBar = this.shadowRoot.querySelector('#slider-bar');
     this.sliderBar.addEventListener('mousedown', this.onMouseDown);
+    this.sliderBar.addEventListener('touchstart', this.onTouchStart);
 
     this.slider = this.shadowRoot.querySelector('#slider');
   }
@@ -127,6 +128,7 @@ class CoreSliderElement extends CoreElement {
     e.stopPropagation();
 
     this.onThumbStart(e);
+    this.onThumbMove(e);
   }
 
   /**
@@ -162,6 +164,7 @@ class CoreSliderElement extends CoreElement {
     e.stopPropagation();
 
     this.onThumbStart(e);
+    this.onTouchMove(e);
   }
 
   /**
@@ -190,9 +193,7 @@ class CoreSliderElement extends CoreElement {
    * Is called when the thumb should move (for both the mouse AND touch)
    */
   onThumbStart(e) {
-    this.sliderThumb.classList.add('focus');
-
-    this.onThumbMove(e);
+    this.sliderThumb.classList.add('focus'); 
   }
 
   /**
