@@ -1,31 +1,31 @@
-import CoreElement from '../CoreElement';
+import CoreElement from '../core-element/CoreElement';
 
-import TEMPLATE from './CoreByeElement.html';
-import STYLE from './CoreByeElement.css';
+import TEMPLATE from './CoreHelloElement.html';
+import STYLE from './CoreHelloElement.css';
 
 const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
-const BYE_STRING = {
-  en: 'Bye',
-  es: 'Adios',
-  jp: 'さようなら',
-  fr: 'Au revoir',
+const HELLO_STRING = {
+  en: 'Hello',
+  es: 'Hola',
+  jp: 'こんにちは',
+  fr: 'Bonjour',
 };
 
 /**
- * An element that displays "Bye" with the passed-in name.
+ * An element that displays "Hello" with the passed-in name.
  * @property {string} name the string that will be displayed.
  * @property {boolean} rainbow whether the name should be colorfully animated.
  * @property {String} lang the language to display in.
  */
-class CoreByeElement extends CoreElement {
+class CoreHelloElement extends CoreElement {
   /**
-   * Creates a CoreBye element and attaches the shadow root
+   * Creates a CoreHello element and attaches the shadow root
    */
   constructor() {
     super(STYLED_TEMPLATE);
 
-    this.byeElement = this.shadowRoot.querySelector('#bye');
+    this.helloElement = this.shadowRoot.querySelector('#hello');
     this.nameElement = this.shadowRoot.querySelector('#name');
   }
 
@@ -48,13 +48,13 @@ class CoreByeElement extends CoreElement {
         this.nameElement.textContent = newValue;
         break;
       case 'lang':
-        this.byeElement.textContent = BYE_STRING[newValue] || BYE_STRING.en;
+        this.helloElement.textContent = HELLO_STRING[newValue] || HELLO_STRING.en;
         break;
       default:
     }
   }
 }
 
-CoreElement.customTag('core-bye', CoreByeElement);
+CoreElement.customTag('core-hello', CoreHelloElement);
 
-export default CoreByeElement;
+export default CoreHelloElement;
