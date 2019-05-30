@@ -2,10 +2,11 @@ const path = require('path');
 
 module.exports = {
 	entry: {
-		'core-hello': './src/core-hello/CoreHelloElement.js',
+		'core-hello': './src/core-greet/core-hello/CoreHelloElement.js',
+		'core-bye': './src/core-greet/core-bye/CoreByeElement.js',
+		'core-greet': './src/core-greet/CoreGreetElement.js',
 		'core-slider': './src/core-slider/CoreSliderElement.js',
-		'core-bye': './src/core-bye/CoreByeElement.js',
-		'core-tooltip': './src/core-tooltip/CoreTooltipElement.js',
+		'core-tooltip': './src/core-tooltip/CoreTooltipElement.js'
 	},
 	output: {
 		filename: '[name].js',
