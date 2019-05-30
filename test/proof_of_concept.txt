@@ -1,4 +1,0 @@
-createTemplate
-registerCustomTag
-attachShadowRoot
-createElement
