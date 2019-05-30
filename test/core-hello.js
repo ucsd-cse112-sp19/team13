@@ -8,6 +8,15 @@ const HELLO_STRING = {
   fr: 'Bonjour le monde',
 };
 
+// Helper function to get outer message
+async function getOuterMessage(langString) {
+  await showroom.setAttribute('lang', langString);
+  const outerHello = await showroom.find('// span');
+  const outerMessage = await showroom.getTextContent(outerHello);
+  return outerMessage;
+}
+
+
 /**
  * Main testing method using mocha
  */
@@ -41,10 +50,7 @@ describe('core-hello', () => {
    * This test check whether the message is in english
    */
   it(`Message should be ${HELLO_STRING.en}`, async () => {
-    await showroom.setAttribute('lang', 'en');
-    const outerHello = await showroom.find('// span');
-    const outerMessage = await showroom.getTextContent(outerHello);
-
+    const outerMessage = getOuterMessage('en');
     assert.equal(outerMessage, HELLO_STRING.en);
   });
 
@@ -52,10 +58,7 @@ describe('core-hello', () => {
    * This test check whether the message is in spanish
    */
   it(`Message should be ${HELLO_STRING.es}`, async () => {
-    await showroom.setAttribute('lang', 'es');
-    const outerHello = await showroom.find('// span');
-    const outerMessage = await showroom.getTextContent(outerHello);
-
+    const outerMessage = getOuterMessage('es');
     assert.equal(outerMessage, HELLO_STRING.es);
   });
 
@@ -63,10 +66,7 @@ describe('core-hello', () => {
    * This test check whether the message is in japanese
    */
   it(`Message should be ${HELLO_STRING.jp}`, async () => {
-    await showroom.setAttribute('lang', 'jp');
-    const outerHello = await showroom.find('// span');
-    const outerMessage = await showroom.getTextContent(outerHello);
-
+    const outerMessage = getOuterMessage('jp');
     assert.equal(outerMessage, HELLO_STRING.jp);
   });
 
@@ -74,10 +74,7 @@ describe('core-hello', () => {
    * This test check whether the message is in france
    */
   it(`Message should be ${HELLO_STRING.fr}`, async () => {
-    await showroom.setAttribute('lang', 'fr');
-    const outerHello = await showroom.find('// span');
-    const outerMessage = await showroom.getTextContent(outerHello);
-
+    const outerMessage = getOuterMessage('fr');
     assert.equal(outerMessage, HELLO_STRING.fr);
   });
 
