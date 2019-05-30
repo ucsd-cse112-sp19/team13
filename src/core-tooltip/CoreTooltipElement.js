@@ -15,6 +15,8 @@ class CoreTooltipElement extends CoreElement {
   constructor() {
     super(STYLED_TEMPLATE);
 
+    this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
+
     this.target = null;
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -25,14 +27,15 @@ class CoreTooltipElement extends CoreElement {
   static get properties() {
     return {
       placement: { type: String },
+      content: { type: String },
     };
   }
 
   /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
-      case 'for':
-        this.setTarget(document.querySelector(`#${newValue}`));
+      case 'content':
+        this.tooltipSlot.textContent = newValue;
         break;
       default:
     }
