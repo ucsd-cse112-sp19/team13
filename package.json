@@ -9,7 +9,8 @@
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/*",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
     "test": "npm run lint && npm run coverage",
-    "coverage": "nyc --all --include \"src/**/*.js\" --reporter=lcov --reporter=text npm run e2e-test-headless && python3 tools/coverage.py",
+    "report-coverage": "istanbul report --root coverage --include=*.json --dir coverage/report html lcov",
+    "coverage": "nyc --all --include \"src/**/*.js\" --reporter=json --reporter=text npm run e2e-test-headless && python3 tools/coverage.py && npm run report-coverage",
     "e2e-test": "testcafe chrome test/core-slider.testcafe.js",
     "e2e-test-headless": "testcafe chrome:headless test/core-slider.testcafe.js --skip-js-errors"
   },
