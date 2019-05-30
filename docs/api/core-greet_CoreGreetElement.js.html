@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: core-tooltip/CoreTooltipElement.js</title>
+    <title>JSDoc: Source: core-greet/CoreGreetElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: core-tooltip/CoreTooltipElement.js</h1>
+    <h1 class="page-title">Source: core-greet/CoreGreetElement.js</h1>
 
     
 
@@ -28,46 +28,56 @@
         <article>
             <pre class="prettyprint source linenums"><code>import CoreElement from '../core-element/CoreElement';
 
-import TEMPLATE from './CoreTooltipElement.html';
-import STYLE from './CoreTooltipElement.css';
+import TEMPLATE from './CoreGreetElement.html';
+import STYLE from './CoreGreetElement.css';
 
 const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
 /**
- * An element that shows a tooltip for another element... It's a tooltip.
+ * An element that displays some greeting from the language mapping with the passed-in name.
+ * @property {string} name the string that will be displayed.
+ * @property {boolean} rainbow whether the name should be colorfully animated.
+ * @property {String} lang the language to display in.
  */
-class CoreTooltipElement extends CoreElement {
+class CoreGreetElement extends CoreElement {
   /**
-   * Creates a CoreTooltip element and attaches the shadow root
+   * Creates a CoreGreet element and attaches the shadow root
    */
-  constructor() {
+  constructor(langMap = null) {
     super(STYLED_TEMPLATE);
 
-    this.target = null;
+    this.langMapping = langMap || { en: 'Greet' };
+
+    this.greetElement = this.shadowRoot.querySelector('#greet');
+    this.nameElement = this.shadowRoot.querySelector('#name');
   }
 
   /** @private */
   static get properties() {
     return {
-      for: { type: String },
-      placement: { type: String },
+      name: { type: String, value: 'World' },
+      rainbow: { type: Boolean },
+      lang: { type: String },
     };
   }
 
   /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
-      case 'for':
-        this.target = document.querySelector(`#${newValue}`);
+      case 'name':
+        this.nameElement.textContent = newValue;
+        break;
+      case 'lang':
+        this.greetElement.textContent = this.langMapping[newValue] || this.langMapping.en;
         break;
       default:
     }
   }
 }
 
-CoreElement.customTag('core-tooltip', CoreTooltipElement);
+CoreElement.customTag('core-greet', CoreGreetElement);
 
-export default CoreTooltipElement;
+export default CoreGreetElement;
 </code></pre>
         </article>
     </section>
