@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-restricted-syntax */
 /**
  * Useful utility functions for creating web components.
  * @module CoreElement
@@ -23,7 +25,9 @@ export function createTemplate(templateString = '', styleString = '') {
  * @param {Class} elementClass    The class to represent
  */
 export function registerCustomTag(customTagName, elementClass) {
-  window.customElements.define(customTagName, elementClass);
+  if (!window.customElements.get(customTagName)) {
+    window.customElements.define(customTagName, elementClass);
+  }
 }
 
 /**
@@ -127,7 +131,6 @@ function updateProperty(element, attributeName, oldValue, newValue) {
   let oldPropValue = oldValue;
   let newPropValue = newValue;
 
-  // eslint-disable-next-line no-prototype-builtins
   if (element.constructor.hasOwnProperty('properties')) {
     const propOpts = element.constructor.properties[attributeName];
     oldPropValue = getConvertedPropertyValue(oldValue, propOpts.type);
@@ -176,7 +179,6 @@ class CoreElement extends HTMLElement {
    * observedAttributes().
    */
   static buildProperties() {
-    // eslint-disable-next-line no-prototype-builtins
     if (this.hasOwnProperty(classProperties)) { return; }
 
     // Build properties for parents
@@ -188,7 +190,6 @@ class CoreElement extends HTMLElement {
     // Initialie current property map
     const result = new Map();
     // ... with parent's properties ...
-    // eslint-disable-next-line no-prototype-builtins
     if (superConstructor.hasOwnProperty(classProperties)) {
       superConstructor[classProperties].forEach((value, key) => {
         result.set(key, value);
@@ -197,14 +198,12 @@ class CoreElement extends HTMLElement {
     // ... actually add it to the class ...
     this[classProperties] = result;
 
-    // eslint-disable-next-line no-prototype-builtins
     if (this.hasOwnProperty('properties')) {
       const props = this.properties;
       const propKeys = [
         ...Object.getOwnPropertyNames(props),
         ...Object.getOwnPropertySymbols(props),
       ];
-      // eslint-disable-next-line no-restricted-syntax
       for (const prop of propKeys) {
         createProperty(this, prop, props[prop]);
       }
@@ -239,17 +238,14 @@ class CoreElement extends HTMLElement {
   /** @override */
   connectedCallback() {
     // Set default values from props for the element if no attribute values were specified
-
-    // eslint-disable-next-line no-prototype-builtins
-    if (this.constructor.hasOwnProperty('properties')) {
+    if ('properties' in this.constructor) {
       const props = this.constructor.properties;
       const propKeys = [
         ...Object.getOwnPropertyNames(props),
         ...Object.getOwnPropertySymbols(props),
       ];
-      // eslint-disable-next-line no-restricted-syntax
+
       for (const prop of propKeys) {
-        // eslint-disable-next-line no-prototype-builtins
         if (props[prop].hasOwnProperty('value')) {
           if (!this.hasAttribute(prop)) {
             this[prop] = props[prop].value;
