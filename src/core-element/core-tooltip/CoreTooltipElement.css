@@ -1,3 +1,74 @@
 :host {
-    display: block;
+    display: inline-block;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    transform: translate(-50%, -100%);
+
+    pointer-events: none;
+    z-index: 1000;
+
+    --back-color: darkgray;
+    --arrow-size: 0.5rem;
+    --arrow-color: var(--back-color);
+}
+span#tooltip-back::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    border-width: var(--arrow-size);
+    border-style: solid;
+    border-color: var(--arrow-color) transparent transparent transparent;
+    transform: translate(-50%, 0%);
+}
+
+:host([placement=left]) {
+    left: 100%;
+    transform: translate(0%, -50%);
+}
+:host([placement=left]) span#tooltip-back::after {
+    top: 50%;
+    left: 0%; /* At the left of the tooltip */
+    border-color: transparent var(--arrow-color) transparent transparent;
+    transform: translate(-100%, 0%);
+}
+
+:host([placement=right]) {
+    left: 0%;
+    transform: translate(-100%, -50%);
+}
+:host([placement=right]) span#tooltip-back::after {
+    top: 50%;
+    left: 100%; /* At the right of the tooltip */
+    border-color: transparent transparent transparent var(--arrow-color);
+    transform: translate(0%, 0%);
+}
+
+:host([placement=bottom]) {
+    top: 100%;
+    transform: translate(-50%, 0%);
+}
+:host([placement=bottom]) span#tooltip-back::after {
+    top: 0%;
+    left: 50%; /* At the right of the tooltip */
+    border-color: transparent transparent var(--arrow-color) transparent;
+    transform: translate(-50%, -100%);
+}
+
+#tooltip-back {
+    display: flex;
+    padding: 0.5rem;
+
+    border-radius: 0.5rem;
+
+    background: var(--back-color);
+}
+
+#tooltip-content {
+
 }
