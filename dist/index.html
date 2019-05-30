@@ -66,13 +66,13 @@
             const sizeSlider = document.getElementById('size-slider');
             const vert1 = document.getElementById('vert1');
             const vert2 = document.getElementById('vert2');
-            vert1.addEventListener('change', (e) => {
+            vert1.addEventListener('input', (e) => {
                 const value = parseInt(e.target.value, 10);
                 vert2.value = value * 2;
                 vert3.value = value / 2;
                 vert4.value = value + 10;
             });
-            sizeSlider.addEventListener('change', (e) => {
+            sizeSlider.addEventListener('input', (e) => {
                 titleHello.style.fontSize = `${e.target.value}px`;
             });
         </script>
