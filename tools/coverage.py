@@ -17,7 +17,6 @@ def main():
                 # If it is an anonymous function, we can't name it.
                 if search_in_test(fn_name) or 'anonymous' in fn_name:
                     coverage[file_name]["f"][fn_num] = 1
-                    # del coverage[file_name]["f"][fn_num] 
 
     # Stick the json back into the original file. 
     with open('coverage/coverage-final.json', 'w') as outfile:
@@ -34,7 +33,6 @@ def search_in_test(fn_name):
         # See if we can find the string in the line.
         while cur_line:
             if cur_line.find(fn_name) != -1:
-                print(f'found {fn_name} in {file_name}')
                 return True
             cur_line = f.readline()
 
