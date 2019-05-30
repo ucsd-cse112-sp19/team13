@@ -59,3 +59,19 @@ export function createElement(tagName, props = {}, ...children) {
   });
   return element;
 }
+
+/**
+ * Upgrades a property in the component so that it will lazy load
+ *
+ * @link https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
+ */
+export function upgradeProperty(component, prop) {
+  // eslint-disable-next-line no-prototype-builtins
+  if (component.hasOwnProperty(prop)) {
+    const value = component[prop];
+    // eslint-disable-next-line no-param-reassign
+    delete component[prop];
+    // eslint-disable-next-line no-param-reassign
+    component[prop] = value;
+  }
+}
