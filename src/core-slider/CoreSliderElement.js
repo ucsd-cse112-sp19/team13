@@ -43,6 +43,10 @@ class CoreSliderElement extends CoreElement {
     this.sliderThumb.addEventListener('mousedown', this.onMouseDown);
     this.sliderThumb.addEventListener('touchstart', this.onTouchStart);
 
+    this.sliderBar = this.shadowRoot.querySelector('#slider-bar');
+    this.sliderBar.addEventListener('mousedown', this.onMouseDown);
+    this.sliderBar.addEventListener('touchstart', this.onTouchStart);
+
     this.slider = this.shadowRoot.querySelector('#slider');
   }
 
@@ -132,7 +136,8 @@ class CoreSliderElement extends CoreElement {
       'mouseup', this.onMouseUp,
       'mousemove', this.onMouseMove);
 
-    this.onThumbStart(e);
+    this.onThumbStart();
+    this.onThumbMove(e);
   }
 
   /**
@@ -167,7 +172,8 @@ class CoreSliderElement extends CoreElement {
       'touchend', this.onTouchEnd,
       'touchmove', this.onTouchMove);
 
-    this.onThumbStart(e);
+    this.onThumbStart();
+    this.onTouchMove(e);
   }
 
   /**
