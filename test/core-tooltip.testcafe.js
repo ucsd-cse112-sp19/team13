@@ -21,19 +21,19 @@ testCoreTooltip('content', '- Content value', async (t, ctx) => {
 /** Tests for light theme of core-tooltip */
 testCoreTooltip('effect', '- light effect', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp')
+  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp');
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('_________'))
     .eql('_____');
-})
+});
 
 /** Tests for dark theme of core-tooltip */
-testCoreTooltip('effect', '- dark effect', async (t) => {
+testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp')
+  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp');
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('_________'))
     .eql('_____');
-})
+});
