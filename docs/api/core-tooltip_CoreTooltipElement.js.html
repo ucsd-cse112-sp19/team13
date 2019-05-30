@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: CoreByeElement</title>
+    <title>JSDoc: Source: core-tooltip/CoreTooltipElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,141 +17,60 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: CoreByeElement</h1>
+    <h1 class="page-title">Source: core-tooltip/CoreTooltipElement.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>CoreByeElement<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">An element that displays "Bye" with the passed-in name.</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="CoreByeElement"><span class="type-signature"></span>new CoreByeElement<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a CoreBye element.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-greet_core-bye_CoreByeElement.js.html">core-greet/core-bye/CoreByeElement.js</a>, <a href="core-greet_core-bye_CoreByeElement.js.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import CoreElement from '../core-element/CoreElement';
+
+import TEMPLATE from './CoreTooltipElement.html';
+import STYLE from './CoreTooltipElement.css';
+
+const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
+
+/**
+ * An element that shows a tooltip for another element... It's a tooltip.
+ */
+class CoreTooltipElement extends CoreElement {
+  /**
+   * Creates a CoreTooltip element and attaches the shadow root
+   */
+  constructor() {
+    super(STYLED_TEMPLATE);
+
+    this.target = null;
+  }
+
+  /** @private */
+  static get properties() {
+    return {
+      for: { type: String },
+      placement: { type: String },
+    };
+  }
+
+  /** @private */
+  propertyChangedCallback(property, oldValue, newValue) {
+    switch (property) {
+      case 'for':
+        this.target = document.querySelector(`#${newValue}`);
+        break;
+      default:
+    }
+  }
+}
+
+CoreElement.customTag('core-tooltip', CoreTooltipElement);
+
+export default CoreTooltipElement;
+</code></pre>
+        </article>
+    </section>
 
 
 

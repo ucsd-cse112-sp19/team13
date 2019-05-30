@@ -1,8 +1,20 @@
-import CoreElement from '../CoreElement';
+import CoreElement from '../core-element/CoreElement';
 import TEMPLATE from './CoreSliderElement.html';
 import STYLE from './CoreSliderElement.css';
 
 const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
+
+function setupInputEventListeners(e, upEvent, upListener, moveEvent, moveListener) {
+  document.addEventListener(upEvent, upListener);
+  document.addEventListener(moveEvent, moveListener);
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListener) {
+  document.removeEventListener(upEvent, upListener);
+  document.removeEventListener(moveEvent, moveListener);
+}
 
 /**
  * An element that selects a range of values by sliding... It's a slider.
@@ -15,9 +27,7 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
  * @property {boolean} rainbow whether to display in a bunch of colors.
  */
 class CoreSliderElement extends CoreElement {
-  /**
-   * Creates a CoreSlider element and attaches the shadow root
-   */
+  /** Creates a CoreSlider element. */
   constructor() {
     super(STYLED_TEMPLATE);
 
@@ -122,10 +132,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onMouseDown(e) {
-    document.addEventListener('mouseup', this.onMouseUp);
-    document.addEventListener('mousemove', this.onMouseMove);
-    e.preventDefault();
-    e.stopPropagation();
+    setupInputEventListeners(e,
+      'mouseup', this.onMouseUp,
+      'mousemove', this.onMouseMove);
 
     this.onThumbStart();
     this.onThumbMove(e);
@@ -146,8 +155,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onMouseUp(e) {
-    document.removeEventListener('mouseup', this.onMouseUp);
-    document.removeEventListener('mousemove', this.onMouseMove);
+    cleanupInputEventListeners(e,
+      'mouseup', this.onMouseUp,
+      'mousemove', this.onMouseMove);
 
     this.onThumbStop(e);
   }
@@ -158,10 +168,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onTouchStart(e) {
-    document.addEventListener('touchend', this.onTouchEnd);
-    document.addEventListener('touchmove', this.onTouchMove);
-    e.preventDefault();
-    e.stopPropagation();
+    setupInputEventListeners(e,
+      'touchend', this.onTouchEnd,
+      'touchmove', this.onTouchMove);
 
     this.onThumbStart();
     this.onTouchMove(e);
@@ -183,8 +192,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onTouchEnd(e) {
-    document.removeEventListener('touchend', this.onTouchEnd);
-    document.removeEventListener('touchmove', this.onTouchMove);
+    cleanupInputEventListeners(e,
+      'touchend', this.onTouchEnd,
+      'touchmove', this.onTouchMove);
 
     this.onThumbStop(e);
   }
@@ -197,26 +207,26 @@ class CoreSliderElement extends CoreElement {
   }
 
   /**
+   * Depending on whether it is vertical, calculates the proportional
+   * value from the slider to the moving thumb.
+   * @param {Event} e   the input event
+   * @returns {Number}  the progress along the bar for the thumb. The value ranges
+   *                    between [0, 1] and goes top-to-bottom and left-to-right.
+   */
+  getSliderProgressRatio(e) {
+    const sliderBoundingRect = this.slider.getBoundingClientRect();
+    return !this.vertical
+      ? (e.clientX - sliderBoundingRect.left) / this.slider.clientWidth
+      : (e.clientY - sliderBoundingRect.top) / this.slider.clientHeight;
+  }
+
+  /**
    * Is called when the thumb is moving (for both the mouse AND touch)
    *
    * @param {Event} e the input event that moved the thumb
    */
   onThumbMove(e) {
-    let sliderRatio;
-
-    // Depending on whether it is vertical, calculate the proportional value from the slider
-    if (!this.vertical) {
-      const sliderX = this.slider.getBoundingClientRect().left;
-      const sliderWidth = this.slider.clientWidth;
-      const sliderPosition = e.clientX - sliderX;
-      sliderRatio = sliderPosition / sliderWidth;
-    } else {
-      const sliderY = this.slider.getBoundingClientRect().top;
-      const sliderHeight = this.slider.clientHeight;
-      const sliderPosition = e.clientY - sliderY;
-      sliderRatio = sliderPosition / sliderHeight;
-    }
-
+    const sliderRatio = this.getSliderProgressRatio(e);
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
     const lengthValue = maxValue - minValue;
