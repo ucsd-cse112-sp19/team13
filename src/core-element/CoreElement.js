@@ -1,6 +1,10 @@
 /**
+ * Useful utility functions for creating web components.
+ * @module CoreElement
+ */
+
+/**
  * Creates the template element for the passed-in template and style content.
- * @private
  * @param {String} templateString   The template html string representation
  * @param {String} styleString      The style css string representation
  * @returns {Node} the created template element
@@ -15,7 +19,6 @@ export function createTemplate(templateString = '', styleString = '') {
 
 /**
  * Register the passed-in element class with the passed-in tag name for the document.
- * @private
  * @param {String} customTagName  The tag name that represents the class in HTML
  * @param {Class} elementClass    The class to represent
  */
@@ -26,7 +29,6 @@ export function registerCustomTag(customTagName, elementClass) {
 /**
  * Attach the shadow DOM root, with a childElement if specified, to the
  * element. This should be called in the constructor.
- * @private
  * @param {Node} element         The element to attach to
  * @param {Node?} childElement   The child element in the shadow DOM root
  * @return {Node}                The attached shadow root
@@ -41,7 +43,6 @@ export function attachShadowRoot(element, childElement = null) {
 
 /**
  * Creates an element of the passed-in tag name with the passed-in props and children.
- * @private
  * @param {String} tagName        The element tag to create
  * @param {Object} [props = {}]   The props to assign to the created element
  * @param  {...Node} children     The children to append to the created element
@@ -60,8 +61,16 @@ export function createElement(tagName, props = {}, ...children) {
   return element;
 }
 
+/**
+ * The key for the map of properties associated with the class.
+ * @private
+ */
 const classProperties = Symbol('classProperties');
 
+/**
+ * Gets the converted property value from string to its expected type.
+ * @private
+ */
 function getConvertedPropertyValue(value, type = null) {
   switch (type || String) {
     case Number:
@@ -77,6 +86,10 @@ function getConvertedPropertyValue(value, type = null) {
   }
 }
 
+/**
+ * Gets the property value from the current attribute value.
+ * @private
+ */
 function getPropertyAttribute(element, attributeName, propOpts) {
   if (propOpts.type === Boolean) {
     return element.hasAttribute(attributeName);
@@ -85,6 +98,10 @@ function getPropertyAttribute(element, attributeName, propOpts) {
   return getConvertedPropertyValue(attributeValue, propOpts.type);
 }
 
+/**
+ * Sets the current attribute value to the property value.
+ * @private
+ */
 function setPropertyAttribute(element, attributeName, propOpts, value) {
   const type = propOpts.type || String;
   if (type === Boolean) {
@@ -102,6 +119,10 @@ function setPropertyAttribute(element, attributeName, propOpts, value) {
   }
 }
 
+/**
+ * Updates the property once attribute has changed.
+ * @private
+ */
 function updateProperty(element, attributeName, oldValue, newValue) {
   let oldPropValue = oldValue;
   let newPropValue = newValue;
@@ -118,6 +139,10 @@ function updateProperty(element, attributeName, oldValue, newValue) {
   }
 }
 
+/**
+ * Create the property with its associated getters and setters.
+ * @private
+ */
 function createProperty(elementClass, name, opts) {
   elementClass[classProperties].set(name, opts);
 
@@ -144,7 +169,12 @@ function createProperty(elementClass, name, opts) {
   Object.defineProperty(elementClass.prototype, name, result);
 }
 
+/** The base element for web components to handle as much boilerplate code as possible. */
 class CoreElement extends HTMLElement {
+  /**
+   * Builds the property map and properly initializes the class. This is only done once by
+   * observedAttributes().
+   */
   static buildProperties() {
     // eslint-disable-next-line no-prototype-builtins
     if (this.hasOwnProperty(classProperties)) { return; }
@@ -193,6 +223,11 @@ class CoreElement extends HTMLElement {
     return attributes;
   }
 
+  /**
+   * Creates a core element.
+   * @param {String} templateString the html template string to attach to the
+   *                                DOM and create a shadow root from.
+   */
   constructor(templateString = null) {
     super();
 
@@ -238,12 +273,13 @@ class CoreElement extends HTMLElement {
   }
 
   /**
-   * Called by attributeChangedCallback with values conforming set prop type.
-   * @interface propertyChangedCallback
+   * Called by attributeChangedCallback with values conforming to set prop type.
    * @param {String|Symbol} property the property key
    * @param {*} oldValue the previous value for the property
    * @param {*} newValue the next value for the property
    */
+  // eslint-disable-next-line class-methods-use-this
+  propertyChangedCallback() {}
 }
 
 // Aliases for template and custom tag functions
