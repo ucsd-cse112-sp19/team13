@@ -5,6 +5,7 @@ module.exports = {
 		'core-hello': './src/core-element/core-hello/CoreHelloElement.js',
 		'core-slider': './src/core-element/core-slider/CoreSliderElement.js',
 		'core-bye': './src/core-element/core-bye/CoreByeElement.js',
+		'core-tooltip': './src/core-element/core-tooltip/CoreTooltipElement.js',
 	},
 	output: {
 		filename: '[name].js',
