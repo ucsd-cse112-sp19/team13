@@ -48,3 +48,38 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
   await t
     .expect(contentValue).eql(message);
 });
+
+/** Tests for light theme of core-tooltip */
+testCoreTooltip('effect', '- light effect', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-back');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getStyleProperty('background'))
+    .eql('lightgray');
+});
+
+/** Tests for dark theme of core-tooltip */
+testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-back');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getStyleProperty('background'))
+    .eql('darkgray');
+});
+
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getAttribute('opacity'))
+    .eql('1');
+});
+
+/** Test for placement */
+testCoreTooltip('placement', '- placement location', async (t, ctx) => {
+  const tooltip = ctx.target;
+});
