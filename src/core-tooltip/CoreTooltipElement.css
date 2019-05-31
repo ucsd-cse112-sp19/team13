@@ -12,10 +12,11 @@
     pointer-events: none;
     z-index: 1000;
 
-    --back-color: darkgray;
+    --back-color: white;
     --arrow-size: 0.5rem;
     --arrow-color: var(--back-color);
 }
+
 span#tooltip-back::after {
     content: " ";
     position: absolute;
@@ -23,9 +24,20 @@ span#tooltip-back::after {
     left: 50%;
     border-width: var(--arrow-size);
     border-style: solid;
-    border-color: var(--arrow-color) transparent transparent transparent;
+    border-color: var(--back-color) transparent transparent transparent;
     transform: translate(-50%, 0%);
 }
+
+:host([effect=light]) {
+    color: black;
+    --back-color: white;
+}
+
+:host([effect=dark]) {
+    color: white;
+    --back-color: black;
+}
+
 
 :host([placement=left]) {
     left: 100%;
