@@ -180,6 +180,27 @@ function getPropertyKeys(object) {
   ];
 }
 
+/** Prepares the default prop values for the element */
+function setupDefaultProps(element, props) {
+  for (const prop of getPropertyKeys(props)) {
+    const propOpt = props[prop];
+    if (propOpt.hasOwnProperty('value') && !element.hasAttribute(prop)) {
+      // eslint-disable-next-line no-param-reassign
+      element[prop] = propOpt.value;
+    }
+  }
+}
+
+/** Copies the class props from the passed-in srcClass to the dstClass. */
+function copyClassProperties(srcClass, dstClass) {
+  if (srcClass.hasOwnProperty(classProperties)) {
+    const dstProps = dstClass[classProperties];
+    srcClass[classProperties].forEach((value, key) => {
+      dstProps.set(key, value);
+    });
+  }
+}
+
 /** The base element for web components to handle as much boilerplate code as possible. */
 class CoreElement extends HTMLElement {
   /**
@@ -195,16 +216,10 @@ class CoreElement extends HTMLElement {
       superConstructor.buildProperties();
     }
 
-    // Initialie current property map
-    const result = new Map();
+    // Initialize current property map
+    this[classProperties] = new Map();
     // ... with parent's properties ...
-    if (superConstructor.hasOwnProperty(classProperties)) {
-      superConstructor[classProperties].forEach((value, key) => {
-        result.set(key, value);
-      });
-    }
-    // ... actually add it to the class ...
-    this[classProperties] = result;
+    copyClassProperties(superConstructor, this);
 
     // Add new properties to the hierarchy (don't re-add old ones).
     if (this.hasOwnProperty('properties')) {
@@ -218,14 +233,8 @@ class CoreElement extends HTMLElement {
 
   /** @override */
   static get observedAttributes() {
-    const attributes = [];
-
     this.buildProperties();
-    this[classProperties].forEach((value, key) => {
-      attributes.push(key);
-    });
-
-    return attributes;
+    return Array.from(this[classProperties].keys());
   }
 
   /**
@@ -235,7 +244,6 @@ class CoreElement extends HTMLElement {
    */
   constructor(templateString = null) {
     super();
-
     if (templateString) {
       attachShadowRoot(this, templateString);
     }
@@ -245,15 +253,7 @@ class CoreElement extends HTMLElement {
   connectedCallback() {
     // Set default values from props for the element if no attribute values were specified
     if ('properties' in this.constructor) {
-      const props = this.constructor.properties;
-      const propKeys = getPropertyKeys(props);
-
-      for (const prop of propKeys) {
-        const propOpt = props[prop];
-        if (propOpt.hasOwnProperty('value') && !this.hasAttribute(prop)) {
-          this[prop] = propOpt.value;
-        }
-      }
+      setupDefaultProps(this, this.constructor.properties);
     }
   }
 
