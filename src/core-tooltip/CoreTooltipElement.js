@@ -9,8 +9,12 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
  * An element that shows a tooltip for another element... It's a tooltip.
  * @property {number} openDelay the delay of appearance, in millisecond
  * @property {number} closeDelay the delay of disappearance, in millisecond
- * @property {number} openTimeout the timer created by the call to setTimeout() for openDelay, can be passed to clearTimeout() to cancel the timeout.
- * @property {number} closeTimeout the timer created by the call to setTimeout() for closeDelay, can be passed to clearTimeout() to cancel the timeout.
+ *
+ * @property {number} openTimeout the timer created by the call to setTimeout() for
+ * openDelay, can be passed to clearTimeout() to cancel the timeout.
+ *
+ * @property {number} closeTimeout the timer created by the call to setTimeout() for
+ * closeDelay, can be passed to clearTimeout() to cancel the timeout.
  */
 class CoreTooltipElement extends CoreElement {
   /**
@@ -84,7 +88,7 @@ class CoreTooltipElement extends CoreElement {
       this.target = null;
     }
   }
-  
+
   /** To cancel the timeout */
   clearTimeout() {
     if (this.openTimeout) {
@@ -96,7 +100,7 @@ class CoreTooltipElement extends CoreElement {
       this.closeTimeout = null;
     }
   }
-  
+
   /** Called when mouse enters the parent. */
   onMouseEnter() {
     if (this.closeTimeout) {
