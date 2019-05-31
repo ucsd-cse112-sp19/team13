@@ -4,21 +4,24 @@
     top: 0%;
     left: 50%;
 
-    border-style: solid;
-    border-color: black;
-    border-radius: 0.5rem;
-
     opacity: 0;
     transition: opacity 0.3s ease;
 
     transform: translate(-50%, -100%);
-
-    pointer-events: none;
     z-index: 1000;
 
+    pointer-events: none;
+
     --back-color: white;
+    --border-color: black;
     --arrow-size: 0.5rem;
-    --arrow-color: var(--back-color);
+}
+
+#tooltip-back {
+
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-color: var(--border-color);
 }
 
 span#tooltip-back::after {
@@ -28,20 +31,21 @@ span#tooltip-back::after {
     left: 50%;
     border-width: var(--arrow-size);
     border-style: solid;
-    border-color: var(--back-color) transparent transparent transparent;
+    border-color: var(--border-color) transparent transparent transparent;
     transform: translate(-50%, 0%);
 }
 
 :host([effect=light]) {
     color: black;
+    --border-color: black;
     --back-color: white;
 }
 
 :host([effect=dark]) {
     color: white;
+    --border-color: white;
     --back-color: black;
 }
-
 
 :host([placement=left]) {
     left: 100%;
@@ -50,7 +54,7 @@ span#tooltip-back::after {
 :host([placement=left]) span#tooltip-back::after {
     top: 50%;
     left: 0%; /* At the left of the tooltip */
-    border-color: transparent var(--arrow-color) transparent transparent;
+    border-color: transparent var(--border-color) transparent transparent;
     transform: translate(-100%, 0%);
 }
 
@@ -61,7 +65,7 @@ span#tooltip-back::after {
 :host([placement=right]) span#tooltip-back::after {
     top: 50%;
     left: 100%; /* At the right of the tooltip */
-    border-color: transparent transparent transparent var(--arrow-color);
+    border-color: transparent transparent transparent var(--border-color);
     transform: translate(0%, 0%);
 }
 
@@ -72,7 +76,7 @@ span#tooltip-back::after {
 :host([placement=bottom]) span#tooltip-back::after {
     top: 0%;
     left: 50%; /* At the right of the tooltip */
-    border-color: transparent transparent var(--arrow-color) transparent;
+    border-color: transparent transparent var(--border-color) transparent;
     transform: translate(-50%, -100%);
 }
 
