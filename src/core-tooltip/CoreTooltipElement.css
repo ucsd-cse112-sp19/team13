@@ -18,7 +18,6 @@
 }
 
 #tooltip-back {
-
     border-style: solid;
     border-radius: 0.5rem;
     border-color: var(--border-color);
@@ -43,7 +42,7 @@ span#tooltip-back::after {
 
 :host([effect=dark]) {
     color: white;
-    --border-color: white;
+    --border-color: black;
     --back-color: black;
 }
 
