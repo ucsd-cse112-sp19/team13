@@ -21,6 +21,10 @@
     border-style: solid;
     border-radius: 0.5rem;
     border-color: var(--border-color);
+
+    display: flex;
+    padding: 0.5rem;
+    background: var(--back-color);
 }
 
 span#tooltip-back::after {
@@ -77,13 +81,4 @@ span#tooltip-back::after {
     left: 50%; /* At the right of the tooltip */
     border-color: transparent transparent var(--border-color) transparent;
     transform: translate(-50%, -100%);
-}
-
-#tooltip-back {
-    display: flex;
-    padding: 0.5rem;
-
-    border-radius: 0.5rem;
-
-    background: var(--back-color);
 }
