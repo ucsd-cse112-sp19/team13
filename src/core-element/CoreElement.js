@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-restricted-syntax */
 /**
@@ -72,6 +73,22 @@ export function createElement(tagName, props = {}, ...children) {
 const classProperties = Symbol('classProperties');
 
 /**
+ * The key for the attribute-to-property name map for the class.
+ * @private
+ */
+const attributePropertyMap = Symbol('attributePropertyMap');
+
+/**
+ * Gets the lowercase, dash-separated attribute name from the property name.
+ * Any uppercase characters are prepended with a dash. In other words, it
+ * transforms the property name, which is in camelCase, to valid attribute
+ * name, in dash-case.
+ */
+function getAttributeNameFromProperty(property) {
+  return property.replace(/([A-Z])/g, '-$1').toLowerCase();
+}
+
+/**
  * Gets the converted property value from string to its expected type.
  * @private
  */
@@ -127,18 +144,18 @@ function setPropertyAttribute(element, attributeName, propOpts, value) {
  * Updates the property once attribute has changed.
  * @private
  */
-function updateProperty(element, attributeName, oldValue, newValue) {
+function updateProperty(element, propertyName, oldValue, newValue) {
   let oldPropValue = oldValue;
   let newPropValue = newValue;
 
   if (element.constructor.hasOwnProperty('properties')) {
-    const propOpts = element.constructor.properties[attributeName];
+    const propOpts = element.constructor.properties[propertyName];
     oldPropValue = getConvertedPropertyValue(oldValue, propOpts.type);
     newPropValue = getConvertedPropertyValue(newValue, propOpts.type);
   }
 
   if (typeof element.propertyChangedCallback === 'function') {
-    element.propertyChangedCallback(attributeName, oldPropValue, newPropValue);
+    element.propertyChangedCallback(propertyName, oldPropValue, newPropValue);
   }
 }
 
@@ -147,14 +164,19 @@ function updateProperty(element, attributeName, oldValue, newValue) {
  * @private
  */
 function createProperty(elementClass, name, opts) {
+  if (typeof opts.attribute === 'undefined') {
+    opts.attribute = getAttributeNameFromProperty(name);
+  }
+  const attributeName = opts.attribute;
   elementClass[classProperties].set(name, opts);
+  elementClass[attributePropertyMap].set(attributeName, name);
 
   const result = {
     get() {
-      return getPropertyAttribute(this, name, opts);
+      return getPropertyAttribute(this, attributeName, opts);
     },
     set(value) {
-      setPropertyAttribute(this, name, opts, value);
+      setPropertyAttribute(this, attributeName, opts, value);
     },
     configurable: true,
     enumerable: true,
@@ -184,8 +206,7 @@ function getPropertyKeys(object) {
 function setupDefaultProps(element, props) {
   for (const prop of getPropertyKeys(props)) {
     const propOpt = props[prop];
-    if (propOpt.hasOwnProperty('value') && !element.hasAttribute(prop)) {
-      // eslint-disable-next-line no-param-reassign
+    if (propOpt.hasOwnProperty('value') && !element.hasAttribute(propOpt.attribute)) {
       element[prop] = propOpt.value;
     }
   }
@@ -195,8 +216,12 @@ function setupDefaultProps(element, props) {
 function copyClassProperties(srcClass, dstClass) {
   if (srcClass.hasOwnProperty(classProperties)) {
     const dstProps = dstClass[classProperties];
+    const dstAttribs = dstClass[attributePropertyMap];
     srcClass[classProperties].forEach((value, key) => {
       dstProps.set(key, value);
+    });
+    srcClass[attributePropertyMap].forEach((value, key) => {
+      dstAttribs.set(key, value);
     });
   }
 }
@@ -218,6 +243,7 @@ class CoreElement extends HTMLElement {
 
     // Initialize current property map
     this[classProperties] = new Map();
+    this[attributePropertyMap] = new Map();
     // ... with parent's properties ...
     copyClassProperties(superConstructor, this);
 
