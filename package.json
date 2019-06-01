@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
     "build": "webpack --mode production --config webpack.config.js",
-    "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/*",
+    "docs": "jsdoc --destination ./docs --readme ./README.md --recurse ./src/*",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
     "test": "npm run lint && npm run coverage",
     "lcov-coverage": "istanbul report --root coverage --include=*.json --dir coverage lcov",
