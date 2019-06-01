@@ -52,7 +52,7 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
 /** Tests for hoverable property of Core-tooltip */
 testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip' }, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip-box' }, '#tooltip-back');
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('opacity'))
@@ -60,13 +60,31 @@ testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx
 });
 
 /** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
-testCoreTooltip('enterable', '- check the component is enterable', async (t, ctx) => {
+testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#enterable-tooltip' }, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#enterable-tooltip-box' }, '#tooltip-back');
   await t
     .hover(tooltip)
+    /* TODO: moving mouse up a liitle to enter the tooltip.... not sure how to do it */
     .expect(tooltipBox.getStyleProperty('opacity'))
     .eql('1');
+});
+
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hideafter', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
+  const tooltip1 = document.getElementById('#hideafter-tooltip1');
+  const tooltip2 = document.getElementById('#hideafter-tooltip2');
+  const tooltipBox1 = document.getElementById('#hideafter-tooltip1-box');
+  const tooltipBox2 = document.getElementById('#hideafter-tooltip2-box');
+  await t
+    .hover(tooltip1)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('1');
+  
+  await t
+    .hover(tooltip2)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('0');
 });
 
 /** Tests for light theme of core-tooltip */
