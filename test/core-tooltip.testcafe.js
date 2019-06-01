@@ -52,10 +52,10 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
 /** Tests for hoverable property of Core-tooltip */
 testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-onhover' }, '#tooltip-back');
   await t
     .hover(tooltip)
-    .expect(tooltipBox.getAttribute('opacity'))
+    .expect(tooltipBox.getStyleProperty('opacity'))
     .eql('1');
 });
 
