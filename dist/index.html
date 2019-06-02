@@ -24,7 +24,7 @@
             <label>)</label>
         </h1>
         <section id="default-group" class="display-group">
-            <h2>Basics<core-tooltip>Yep, these are the basics.</core-tooltip></h2>
+            <h2>Basics<core-tooltip effect="dark">Yep, these are the basics.</core-tooltip></h2>
             <div>
                 <core-slider id="size-slider" min="10" max="100" value="20" step="5"></core-slider>
                 <label>Font Size</label>
@@ -39,7 +39,7 @@
                 <h2>Here is <span class="tooltip"><a>some</a><core-tooltip> Hi! </core-tooltip></span> text. Just for tooltips :D</h2>
                 <span class="tooltip">
                     <input type="text" id="hello-input"/>
-                    <core-tooltip placement="left" content="Hello All." for="hello-input"></core-tooltip>
+                    <core-tooltip placement="right" content="Hello All." for="hello-input"></core-tooltip>
                 </span>
                 <span class="tooltip">
                     <label>Top</label>
@@ -66,7 +66,17 @@
         <section id="vertical-group" class="display-group">
             <h2>Vertical</h2>
             <div>
-                <core-slider id="vert1" value="5" vertical></core-slider>
+                <span style="display: inline-block;">
+                    <core-slider id="vert1" value="5" vertical></core-slider>
+                    <core-tooltip id="vert1-tooltip" placement="left"></core-tooltip>
+                    <script>
+                        const tooltip = document.querySelector("#vert1-tooltip");
+                        const slider = document.querySelector("#vert1");
+                        slider.addEventListener('input', (e) => {
+                            tooltip.content = `Value: ${slider.value}`;
+                        });
+                    </script>
+                </span>
                 <core-slider id="vert2" value="10" vertical></core-slider>
                 <core-slider id="vert3" value="50" vertical></core-slider>
                 <core-slider id="vert4" value="100" vertical></core-slider>
