@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable no-restricted-syntax */
+
 /**
  * Useful utility functions for creating web components.
  * @module CoreElement
@@ -72,8 +73,31 @@ class CoreElement extends HTMLElement {
 }
 
 // Aliases for template and custom tag functions
+
+/**
+ * Creates a template DOM node that contains the parsed HTML and style string.
+ * @function
+ * @name templateNode
+ * @param {String} templateString the html content
+ * @param {String} styleString the style content
+ */
 CoreElement.templateNode = WebComponent.createTemplate;
+/**
+ * Registers the class to the specified custom tag name. The tag name must contain a dash.
+ * @function
+ * @name customTag
+ * @param {String} tag the custom tag
+ * @param {HTMLElement} elementClass the class to register the tag with
+ */
 CoreElement.customTag = WebComponent.registerCustomTag;
+/**
+ * Attaches the shadow DOM to the passed-in element. If using CoreElement, this is already
+ * handled by the constructor if passed-in the tempate DOM node.
+ * @function
+ * @name shadowRoot
+ * @param {HTMLElement} element the element root to attach the shadow DOM to
+ * @param {Node} childNode the child of the shadow root to append
+ */
 CoreElement.shadowRoot = WebComponent.attachShadowRoot;
 
 export default CoreElement;
