@@ -6,12 +6,12 @@
 	cd $HOME
 	git config --global user.email "travis@travis-ci.org"
 	git config --global user.name "travis-ci"
-	git clone --quiet --branch=docs https://${GH_TOKEN}@github.com/ucsd-cse112/team13 docs > /dev/null
+	git clone --quiet https://${GH_TOKEN}@github.com/ucsd-cse112/team13
 
 	npm run docs
 
 	# Commit and Push the Changes
-	cd docs
+	cd ./docs
 	# git rm -rf ./javadoc
 	# cp -Rf $HOME/javadoc-latest ./javadoc
 	git add -f .
