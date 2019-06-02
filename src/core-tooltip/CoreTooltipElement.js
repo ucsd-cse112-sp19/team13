@@ -3,7 +3,7 @@ import CoreElement from '../core-element/CoreElement';
 import TEMPLATE from './CoreTooltipElement.html';
 import STYLE from './CoreTooltipElement.css';
 
-const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
+const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
  * An element that shows a tooltip for another element... It's a tooltip.
@@ -11,9 +11,19 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
  * @property {number} closeDelay the delay of disappearance, in millisecond
  */
 class CoreTooltipElement extends CoreElement {
+  /** @private */
+  static get properties() {
+    return {
+      placement: { type: String },
+      content: { type: String },
+      openDelay: { type: Number },
+      closeDelay: { type: Number },
+    };
+  }
+
   /** Creates a CoreTooltip element and attaches the shadow root. */
   constructor() {
-    super(STYLED_TEMPLATE);
+    super(CoreTooltipTemplate);
 
     this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
@@ -31,16 +41,9 @@ class CoreTooltipElement extends CoreElement {
 
     this.onTooltipOpen = this.onTooltipOpen.bind(this);
     this.onTooltipClose = this.onTooltipClose.bind(this);
-  }
 
-  /** @private */
-  static get properties() {
-    return {
-      placement: { type: String },
-      content: { type: String },
-      openDelay: { type: Number, value: 0 },
-      closeDelay: { type: Number, value: 1000 },
-    };
+    this.openDelay = 0;
+    this.closeDelay = 1000;
   }
 
   /** @private */

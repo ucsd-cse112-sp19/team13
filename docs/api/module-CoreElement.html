@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line4">line 4</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -151,7 +151,7 @@
     
 
     
-    <h4 class="name" id=".attachShadowRoot"><span class="type-signature">(static) </span>attachShadowRoot<span class="signature">(element, childElement<span class="signature-attributes">nullable</span>)</span><span class="type-signature"> &rarr; {Node}</span></h4>
+    <h4 class="name" id="~customTag"><span class="type-signature">(inner) </span>customTag<span class="signature">(tag, elementClass)</span><span class="type-signature"></span></h4>
     
 
     
@@ -159,8 +159,7 @@
 
 
 <div class="description">
-    Attach the shadow DOM root, with a childElement if specified, to the
-element. This should be called in the constructor.
+    Registers the class to the specified custom tag name. The tag name must contain a dash.
 </div>
 
 
@@ -184,7 +183,166 @@ element. This should be called in the constructor.
         <th>Type</th>
 
         
-        <th>Attributes</th>
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tag</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the custom tag</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>elementClass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the class to register the tag with</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line211">line 211</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~shadowRoot"><span class="type-signature">(inner) </span>shadowRoot<span class="signature">(element, childNode)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Attaches the shadow DOM to the passed-in element. If using CoreElement, this is already
+handled by the constructor if passed-in the tempate DOM node.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
         
 
         
@@ -204,32 +362,24 @@ element. This should be called in the constructor.
             <td class="type">
             
                 
-<span class="param-type">Node</span>
+<span class="param-type">HTMLElement</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last">The element to attach to</td>
+            <td class="description last">the element root to attach the shadow DOM to</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>childElement</code></td>
+                <td class="name"><code>childNode</code></td>
             
 
             <td class="type">
@@ -242,20 +392,10 @@ element. This should be called in the constructor.
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                    &lt;nullable><br>
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last">The child element in the shadow DOM root</td>
+            <td class="description last">the child of the shadow root to append</td>
         </tr>
 
     
@@ -296,7 +436,7 @@ element. This should be called in the constructor.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line41">line 41</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line219">line 219</a>
     </li></ul></dd>
     
 
@@ -321,28 +461,6 @@ element. This should be called in the constructor.
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The attached shadow root
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Node</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -354,7 +472,7 @@ element. This should be called in the constructor.
     
 
     
-    <h4 class="name" id=".createElement"><span class="type-signature">(static) </span>createElement<span class="signature">(tagName, props<span class="signature-attributes">opt</span>, &hellip;children)</span><span class="type-signature"> &rarr; {Node}</span></h4>
+    <h4 class="name" id="~templateNode"><span class="type-signature">(inner) </span>templateNode<span class="signature">(templateString, styleString)</span><span class="type-signature"></span></h4>
     
 
     
@@ -362,258 +480,7 @@ element. This should be called in the constructor.
 
 
 <div class="description">
-    Creates an element of the passed-in tag name with the passed-in props and children.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>tagName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">The element tag to create</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    {}
-                
-                </td>
-            
-
-            <td class="description last">The props to assign to the created element</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>children</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Node</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">The children to append to the created element</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line56">line 56</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    the created element
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Node</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".createTemplate"><span class="type-signature">(static) </span>createTemplate<span class="signature">(templateString, styleString)</span><span class="type-signature"> &rarr; {Node}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates the template element for the passed-in template and style content.
+    Creates a template DOM node that contains the parsed HTML and style string.
 </div>
 
 
@@ -665,7 +532,7 @@ element. This should be called in the constructor.
 
             
 
-            <td class="description last">The template html string representation</td>
+            <td class="description last">the html content</td>
         </tr>
 
     
@@ -688,7 +555,7 @@ element. This should be called in the constructor.
 
             
 
-            <td class="description last">The style css string representation</td>
+            <td class="description last">the style content</td>
         </tr>
 
     
@@ -729,544 +596,7 @@ element. This should be called in the constructor.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    the created template element
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Node</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".registerCustomTag"><span class="type-signature">(static) </span>registerCustomTag<span class="signature">(customTagName, elementClass)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Register the passed-in element class with the passed-in tag name for the document.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>customTagName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The tag name that represents the class in HTML</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>elementClass</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Class</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The class to represent</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line28">line 28</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~copyClassProperties"><span class="type-signature">(inner) </span>copyClassProperties<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Copies the class props from the passed-in srcClass to the dstClass.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line216">line 216</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~getAttributeNameFromProperty"><span class="type-signature">(inner) </span>getAttributeNameFromProperty<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Gets the lowercase, dash-separated attribute name from the property name.
-Any uppercase characters are prepended with a dash. In other words, it
-transforms the property name, which is in camelCase, to valid attribute
-name, in dash-case.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line87">line 87</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~getPropertyKeys"><span class="type-signature">(inner) </span>getPropertyKeys<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Retrieves a list of all property keys, strings and symbols included.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line198">line 198</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~setupDefaultProps"><span class="type-signature">(inner) </span>setupDefaultProps<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Prepares the default prop values for the element
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line206">line 206</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line203">line 203</a>
     </li></ul></dd>
     
 
@@ -1318,7 +648,7 @@ name, in dash-case.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Sat Jun 01 2019 17:48:58 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Sat Jun 01 2019 17:57:27 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
