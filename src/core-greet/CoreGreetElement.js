@@ -7,6 +7,7 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
 
 /**
  * An element that displays some greeting from the language mapping with the passed-in name,
+ * Currently supports 4 languages - Japanese, English, Spanish and French
  * @property {string} name the string that will be displayed.
  * @property {boolean} rainbow whether the name should be colorfully animated.
  * @property {String} lang the language to display in.
