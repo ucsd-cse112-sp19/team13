@@ -9,24 +9,21 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
  * An element that shows a tooltip for another element... It's a tooltip.
  * @property {number} openDelay the delay of appearance, in millisecond
  * @property {number} closeDelay the delay of disappearance, in millisecond
- *
- * @property {number} openTimeout the timer created by the call to setTimeout() for
- * openDelay, can be passed to clearTimeout() to cancel the timeout.
- *
- * @property {number} closeTimeout the timer created by the call to setTimeout() for
- * closeDelay, can be passed to clearTimeout() to cancel the timeout.
  */
 class CoreTooltipElement extends CoreElement {
-  /**
-   * Creates a CoreTooltip element and attaches the shadow root
-   */
+  /** Creates a CoreTooltip element and attaches the shadow root. */
   constructor() {
     super(STYLED_TEMPLATE);
 
     this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
     this.target = null;
+
+    // The timer created by the call to setTimeout() for openDelay, can be passed
+    // to clearTimeout() to cancel the timeout.
     this.openTimeout = null;
+    // The timer created by the call to setTimeout() for closeDelay, can be passed
+    // to clearTimeout() to cancel the timeout.
     this.closeTimeout = null;
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
