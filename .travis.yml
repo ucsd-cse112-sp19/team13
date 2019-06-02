@@ -20,6 +20,9 @@ script:
 after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
 
+after_success: 
+  - npm run docs
+
 # Makes sure node_modules exists.
 cache:
   directories:
