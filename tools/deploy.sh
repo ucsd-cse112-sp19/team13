@@ -17,3 +17,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; th
 	git add -f .
 	git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to docs"
 	git push -fq origin docs > /dev/null
+	echo -e "Published Javadoc to /docs.\n"
+  
+fi
