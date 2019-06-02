@@ -7,6 +7,8 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
  * An element that shows a tooltip for another element... It's a tooltip.
+ * @property {String} placement the side of the parent which the tooltip is shown
+ * @property {String} content the content of the tooltip
  * @property {number} openDelay the delay of appearance, in millisecond
  * @property {number} closeDelay the delay of disappearance, in millisecond
  */
@@ -18,6 +20,7 @@ class CoreTooltipElement extends CoreElement {
       content: { type: String },
       openDelay: { type: Number },
       closeDelay: { type: Number },
+      for: { type: String },
     };
   }
 
@@ -42,6 +45,9 @@ class CoreTooltipElement extends CoreElement {
     this.onTooltipOpen = this.onTooltipOpen.bind(this);
     this.onTooltipClose = this.onTooltipClose.bind(this);
 
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+
     this.openDelay = 0;
     this.closeDelay = 1000;
   }
@@ -52,6 +58,16 @@ class CoreTooltipElement extends CoreElement {
       case 'content':
         this.tooltipSlot.textContent = newValue;
         break;
+      case 'for':
+        {
+          const target = document.querySelector(`#${newValue}`);
+          if (target) {
+            this.setTarget(target);
+          } else {
+            this.setTarget(this.shadowRoot.host.parentElement);
+          }
+        }
+        break;
       default:
     }
   }
@@ -59,8 +75,13 @@ class CoreTooltipElement extends CoreElement {
   /** @override */
   connectedCallback() {
     super.connectedCallback();
-    const target = this.shadowRoot.host.parentElement;
-    this.setTarget(target);
+
+    const parent = this.shadowRoot.host.parentElement;
+    parent.style.position = 'relative';
+
+    if (!this.for) {
+      this.setTarget(parent);
+    }
   }
 
   /** @override */
@@ -74,17 +95,24 @@ class CoreTooltipElement extends CoreElement {
     if (this.target) this.clearTarget();
 
     if (target) {
+      // mouse listeners
       target.addEventListener('mouseenter', this.onMouseEnter);
       target.addEventListener('mouseleave', this.onMouseLeave);
+      // focus listeners
+      target.addEventListener('focus', this.onFocus);
+      target.addEventListener('blur', this.onBlur);
       this.target = target;
-      this.target.style.position = 'relative';
     }
   }
 
   clearTarget() {
     if (this.target) {
+      // mouse listeners
       this.target.removeEventListener('mouseenter', this.onMouseEnter);
       this.target.removeEventListener('mouseleave', this.onMouseLeave);
+      // focus listeners
+      this.target.removeEventListener('focus', this.onFocus);
+      this.target.removeEventListener('blur', this.onBlur);
       this.target = null;
     }
   }
@@ -117,6 +145,16 @@ class CoreTooltipElement extends CoreElement {
       this.openTimeout = null;
     }
     setTimeout(this.onTooltipClose, this.closeDelay);
+  }
+
+  /** Called when target is in focus. */
+  onFocus() {
+    this.onTooltipOpen();
+  }
+
+  /** Called when target is out of focus. */
+  onBlur() {
+    this.onTooltipClose();
   }
 
   /**
