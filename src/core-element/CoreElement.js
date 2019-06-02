@@ -7,8 +7,134 @@
  * @module CoreElement
  */
 
-import * as WebComponent from './WebComponent';
-import * as ClassProperty from './ClassProperty';
+import * as WebComponentUtil from './WebComponentUtil';
+import * as WebElementUtil from './WebElementUtil';
+
+/**
+ * The key for the map of properties associated with the class.
+ * @private
+ */
+const classProperties = Symbol('classProperties');
+
+/**
+ * Checks whether the class has initialized class properties.
+ * @private
+ */
+function hasClassProperties(elementClass) {
+  return elementClass.hasOwnProperty(classProperties);
+}
+
+/**
+ * Adds a property to the class properties. These are used to define the properties
+ * of its children and instances.
+ * @private
+ */
+function addClassProperty(elementClass, property, opts) {
+  // Define attribute name for property...
+  if (typeof opts.attribute === 'undefined') {
+    opts.attribute = WebElementUtil.getAttributeNameFromProperty(property);
+  }
+
+  // Add the property to the class.
+  const elementClassProperties = elementClass[classProperties];
+  elementClassProperties.options.set(property, opts);
+  if (opts.attribute) {
+    elementClassProperties.attributes.set(opts.attribute, property);
+  }
+}
+
+/**
+ * Creates a new class properties for the class.
+ * @private
+ */
+function defineClassProperties(elementClass) {
+  let optionMap;
+  let attributeMap;
+
+  // Build properties for parents too...
+  const superClass = Object.getPrototypeOf(elementClass);
+  if (typeof superClass.buildProperties === 'function') {
+    superClass.buildProperties();
+  }
+
+  if (superClass && hasClassProperties(superClass)) {
+    // Derive class properties from parent...
+    const superClassProperties = superClass[classProperties];
+    optionMap = new Map(superClassProperties.options);
+    attributeMap = new Map(superClassProperties.attributes);
+  } else {
+    // Standalone class properties...
+    optionMap = new Map();
+    attributeMap = new Map();
+  }
+
+  // Actually assign class properties to result.
+  elementClass[classProperties] = {
+    options: optionMap,
+    attributes: attributeMap,
+  };
+}
+
+/**
+ * Builds the property map and properly initializes the class. This is only done once by
+ * observedAttributes().
+ * @private
+ */
+function buildClassProperties(elementClass) {
+  if (hasClassProperties(elementClass)) return;
+
+  // Initialize current property map (with parent's properties).
+  defineClassProperties(elementClass);
+
+  // Add new properties to the hierarchy (don't re-add old ones).
+  if (elementClass.hasOwnProperty('properties')) {
+    for (const property of Object.getOwnPropertyNames(elementClass.properties)) {
+      addClassProperty(elementClass, property, elementClass.properties[property]);
+    }
+  }
+}
+
+/**
+ * Load and initialize the properties for the element. This should be called
+ * in the constructor. Otherwise, some browsers may auto-insert their own
+ * property-attribute entries, which will incur infinite loops.
+ *
+ * This does the same thing as calling addProperty() for every property.
+ * @private
+ */
+function constructProperties(element) {
+  const elementClass = element.constructor;
+  const elementClassProperties = elementClass[classProperties];
+  for (const [property, opts] of elementClassProperties.options.entries()) {
+    WebElementUtil.addProperty(element, property, opts);
+  }
+}
+
+function handleAttributeChange(element, attribute, oldValue, newValue) {
+  // Don't bother parsing if the attribute data string is the same.
+  if (oldValue === newValue) return;
+
+  const elementClass = element.constructor;
+  // Not all attributes are added/handled in class properties...
+  const elementClassProperties = elementClass[classProperties];
+  if (elementClassProperties.attributes.has(attribute)) {
+    // Gets the property linked to the attribute.
+    const property = elementClassProperties.attributes.get(attribute);
+    const opts = elementClassProperties.options.get(property);
+
+    // Parse the attribute data strings to property values of valid type.
+    const oldPropertyValue = opts.attributeOnly
+      ? WebElementUtil.attributeToPropertyData(opts.type, oldValue)
+      : element[property];
+    const newPropertyValue = WebElementUtil.attributeToPropertyData(opts.type, newValue);
+
+    // Will cause the element to update data. Since this is called
+    // whenever a change occurs on the tag, even at the beginning,
+    // the data will always be synchronized when attribute is set.
+    WebElementUtil.requestPropertyUpdate(element, property, opts,
+      oldPropertyValue, newPropertyValue, WebElementUtil.ATTRIBUTE_SIDE);
+  }
+}
 
 /** The base element for web components to handle as much boilerplate code as possible. */
 class CoreElement extends HTMLElement {
@@ -17,13 +143,13 @@ class CoreElement extends HTMLElement {
    * observedAttributes().
    */
   static buildProperties() {
-    ClassProperty.buildClassProperties(this);
+    buildClassProperties(this);
   }
 
   /** @override */
   static get observedAttributes() {
     this.buildProperties();
-    return Array.from(this[ClassProperty.classProperties].attributes.keys());
+    return Array.from(this[classProperties].attributes.keys());
   }
 
   /**
@@ -37,15 +163,15 @@ class CoreElement extends HTMLElement {
     // Why initialize here? Cause no one can mess with this.
 
     // Attach the shadow root to this element and appends the templateNode as a child, if it exists.
-    WebComponent.attachShadowRoot(this, templateNode);
+    WebComponentUtil.attachShadowRoot(this, templateNode);
 
     // Create all properties for this instance.
-    ClassProperty.constructProperties(this);
+    constructProperties(this);
   }
 
   /** @override */
   attributeChangedCallback(attribute, oldValue, newValue) {
-    ClassProperty.handleAttributeChange(this, attribute, oldValue, newValue);
+    handleAttributeChange(this, attribute, oldValue, newValue);
   }
 
   /** @override */
@@ -81,7 +207,7 @@ class CoreElement extends HTMLElement {
  * @param {String} templateString the html content
  * @param {String} styleString the style content
  */
-CoreElement.templateNode = WebComponent.createTemplate;
+CoreElement.templateNode = WebComponentUtil.createTemplate;
 /**
  * Registers the class to the specified custom tag name. The tag name must contain a dash.
  * @function
@@ -89,7 +215,7 @@ CoreElement.templateNode = WebComponent.createTemplate;
  * @param {String} tag the custom tag
  * @param {HTMLElement} elementClass the class to register the tag with
  */
-CoreElement.customTag = WebComponent.registerCustomTag;
+CoreElement.customTag = WebComponentUtil.registerCustomTag;
 /**
  * Attaches the shadow DOM to the passed-in element. If using CoreElement, this is already
  * handled by the constructor if passed-in the tempate DOM node.
@@ -98,6 +224,6 @@ CoreElement.customTag = WebComponent.registerCustomTag;
  * @param {HTMLElement} element the element root to attach the shadow DOM to
  * @param {Node} childNode the child of the shadow root to append
  */
-CoreElement.shadowRoot = WebComponent.attachShadowRoot;
+CoreElement.shadowRoot = WebComponentUtil.attachShadowRoot;
 
 export default CoreElement;
