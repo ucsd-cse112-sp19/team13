@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { ClientFunction } from 'testcafe';
-import { TestCoreElement, ShadowChildSelector } from './testcore';
+import { TestCoreElement, ShadowChildSelector, ShadowRootSelector } from './testcore';
 
 /* eslint-disable */
 fixture `core-tooltip tests`
@@ -71,10 +71,48 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
     .expect(setValue).eql(isDisabled);
 });
 
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip-box' }, '#tooltip-back');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('1');
+});
+
+/** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
+testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#enterable-tooltip-box' }, '#tooltip-back');
+  await t
+    .hover(tooltip)
+    /* TODO: moving mouse up a liitle to enter the tooltip.... not sure how to do it */
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('1');
+});
+
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hideafter', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
+  const tooltip1 = document.getElementById('#hideafter-tooltip1');
+  const tooltip2 = document.getElementById('#hideafter-tooltip2');
+  const tooltipBox1 = document.getElementById('#hideafter-tooltip1-box');
+  const tooltipBox2 = document.getElementById('#hideafter-tooltip2-box');
+  await t
+    .hover(tooltip1)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('1');
+  
+  await t
+    .hover(tooltip2)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('0');
+});
+
 /** Tests for light theme of core-tooltip */
 testCoreTooltip('effect', '- light effect', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('background'))
@@ -84,24 +122,28 @@ testCoreTooltip('effect', '- light effect', async (t, ctx) => {
 /** Tests for dark theme of core-tooltip */
 testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('background'))
     .eql('darkgray');
 });
 
-/** Tests for hoverable property of Core-tooltip */
-testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
-  const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, ctx, '#tooltip-child-name-temp');
+/** Test for placement: left */
+testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
+  const tooltipHost = ShadowRootSelector(t, ctx);
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#left' }, '#tooltip-back');
+
+  const hostCoordinate = tooltipHost.getBoundingClientRectProperty('left');
+  const tooltipCoordinate = tooltipBox.getBoundingClientRectProperty('left');
+
   await t
-    .hover(tooltip)
-    .expect(tooltipBox.getAttribute('opacity'))
-    .eql('1');
+    .expect(hostCoordinate)
+    .eql(tooltipCoordinate);
 });
 
-/** Test for placement */
-testCoreTooltip('placement', '- placement location', async (t, ctx) => {
-  const tooltip = ctx.target;
-});
+/** Test for placement: right */
+
+/** Test for placement: up */
+
+/** Test for placement: down */
