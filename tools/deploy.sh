@@ -11,6 +11,7 @@
   git config --global user.name "travis-ci"
   git clone --quiet --branch=jsdocs https://${GH_TOKEN}@github.com/ucsd-cse112/team13 jsdocs > /dev/null
 
+  ls
   cd docs
 
   git rm -rf ./javadoc
