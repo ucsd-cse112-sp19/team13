@@ -44,7 +44,7 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-enable */
 /* eslint-disable no-unused-vars */
 
-/** Tests for content attribute of core-tooltip */
+/** Unit Tests for content attribute of core-tooltip */
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('content', 'content-default');
   await t
@@ -60,7 +60,7 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
     .expect(setValue).eql(evalMessage);
 });
 
-/** Tests for disable attribute of core-tooltip */
+/** Unit Tests for disable attribute of core-tooltip */
 testCoreTooltip('disabled', '- Default disabled value should be false', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
   await t
@@ -133,6 +133,21 @@ testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx
     .eql('1');
 });
 
+/** Unit Tests for offset attribute of core-tooltip */
+testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) => {
+  const defaultValue = await getCoreAttribute('offset', 'offset-default');
+  await t
+    .expect(defaultValue).eql(0);
+});
+
+testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
+  const index = 1;
+  await setCoreAttribute('offset', 'offset-set', index);
+  const setValue = await getCoreAttribute('offset', 'offset-set');
+  await t
+    .expect(setValue).eql(index);
+});
+
 /** Test for placement: left */
 testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
   const tooltipHost = ShadowRootSelector(t, ctx);
@@ -152,7 +167,7 @@ testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
 
 /** Test for placement: down */
 
-/** Tests for tabindex attribute of core-tooltip */
+/** Unit Tests for tabindex attribute of core-tooltip */
 testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('tabindex', 'tabindex-default');
   await t
