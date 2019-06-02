@@ -21,7 +21,7 @@ after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
 
 after_success: 
-  - .tools/deploy.sh
+  - bash tools/deploy.sh
 
 # Makes sure node_modules exists.
 cache:
