@@ -1,6 +1,6 @@
 # Get to the Travis build directory, configure git and clone the repo
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+# if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
 
 	echo -e "Publishing javadoc...\n"
 	cd $HOME
@@ -19,4 +19,4 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; th
 	git push -fq origin docs > /dev/null
 	echo -e "Published Javadoc to /docs.\n"
   
-fi
+# fi
