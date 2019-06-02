@@ -12,6 +12,7 @@ function testCoreTooltip(sectionName, testDesc, testFunc) {
   TestCoreElement('core-tooltip', sectionName, testDesc, testFunc);
 }
 
+/* eslint-disable no-eval */
 /**
  * Purpose: calls and returns the value of get strAttrName of the tooltip with id strElemId
  *
@@ -20,7 +21,7 @@ function testCoreTooltip(sectionName, testDesc, testFunc) {
  */
 const getCoreAttribute = ClientFunction((strAttrName, strElemId) => {
   const testElement = document.getElementById(strElemId);
-  const getExpression = 'testElement.' + strAttrName;
+  const getExpression = `testElement.${strAttrName}`;
   return eval(getExpression);
 });
 
@@ -30,15 +31,18 @@ const getCoreAttribute = ClientFunction((strAttrName, strElemId) => {
  *
  * @param {String} strAttrName the name of the attribute to get
  * @param {String} strElemId the id of the tested element.
- * @param value the value strAttrName should be set to. For strings,they need to be in format '"example string"'
+ * @param value the value strAttrName should be set to. For strings,they need to
+ * be in format '"example string"'
  */
 const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
   const testElement = document.getElementById(strElemId);
   // set the strAttrName to value
-  const setExpression = 'testElement.' + strAttrName + ' = ' + value;
+  const setExpression = `testElement.${strAttrName} = ${value}`;
   eval(setExpression);
   return '';
 });
+/* eslint-enable */
+/* eslint-disable no-unused-vars */
 
 /** Tests for content attribute of core-tooltip */
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
@@ -71,14 +75,24 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
     .expect(setValue).eql(isDisabled);
 });
 
-/** Tests for hoverable property of Core-tooltip */
-testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
+/** Tests for dark theme of core-tooltip */
+testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip-box' }, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
   await t
     .hover(tooltip)
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('1');
+    .expect(tooltipBox.getStyleProperty('background'))
+    .eql('darkgray');
+});
+
+/** Tests for light theme of core-tooltip */
+testCoreTooltip('effect', '- light effect', async (t, ctx) => {
+  const tooltip = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getStyleProperty('background'))
+    .eql('lightgray');
 });
 
 /** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
@@ -102,31 +116,21 @@ testCoreTooltip('hideafter', '- check the previous tooltip hide after hover for 
     .hover(tooltip1)
     .expect(tooltipBox1.getStyleProperty('opacity'))
     .eql('1');
-  
+
   await t
     .hover(tooltip2)
     .expect(tooltipBox1.getStyleProperty('opacity'))
     .eql('0');
 });
 
-/** Tests for light theme of core-tooltip */
-testCoreTooltip('effect', '- light effect', async (t, ctx) => {
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
   const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip-box' }, '#tooltip-back');
   await t
     .hover(tooltip)
-    .expect(tooltipBox.getStyleProperty('background'))
-    .eql('lightgray');
-});
-
-/** Tests for dark theme of core-tooltip */
-testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
-  const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
-  await t
-    .hover(tooltip)
-    .expect(tooltipBox.getStyleProperty('background'))
-    .eql('darkgray');
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('1');
 });
 
 /** Test for placement: left */
@@ -147,3 +151,18 @@ testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
 /** Test for placement: up */
 
 /** Test for placement: down */
+
+/** Tests for tabindex attribute of core-tooltip */
+testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
+  const defaultValue = await getCoreAttribute('tabindex', 'tabindex-default');
+  await t
+    .expect(defaultValue).eql(0);
+});
+
+testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) => {
+  const index = 1;
+  await setCoreAttribute('tabindex', 'tabindex-set', index);
+  const setValue = await getCoreAttribute('tabindex', 'tabindex-set');
+  await t
+    .expect(setValue).eql(index);
+});
