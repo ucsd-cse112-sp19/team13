@@ -9,8 +9,10 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  * An element that shows a tooltip for another element... It's a tooltip.
  * @property {String} placement the side of the parent which the tooltip is shown
  * @property {String} content the content of the tooltip
- * @property {number} openDelay the delay of appearance, in millisecond
- * @property {number} closeDelay the delay of disappearance, in millisecond
+ * @property {Number} openDelay the delay of appearance, in millisecond
+ * @property {Number} closeDelay the delay of disappearance, in millisecond
+ * @property {String} for the id of the target. If none specified, then it defaults to the parent
+ * @property {Boolean} focusable whether to allow focus to show tooltip
  */
 class CoreTooltipElement extends CoreElement {
   /** @private */
@@ -21,6 +23,7 @@ class CoreTooltipElement extends CoreElement {
       openDelay: { type: Number },
       closeDelay: { type: Number },
       for: { type: String },
+      focusable: { type: Boolean },
     };
   }
 
@@ -149,12 +152,12 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when target is in focus. */
   onFocus() {
-    this.onTooltipOpen();
+    if (this.focusable) this.onTooltipOpen();
   }
 
   /** Called when target is out of focus. */
   onBlur() {
-    this.onTooltipClose();
+    if (this.focusable) this.onTooltipClose();
   }
 
   /**
