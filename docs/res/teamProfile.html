@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<HEAD>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS FOR CONTACT BOXES -->
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    .row {
+      height: 50%;
+    }
+
+    .column {
+      float: left;
+      width: 20%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+      }
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      padding: 0 16px;
+    }
+
+    .container::after,
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .title {
+      color: grey;
+    }
+
+    .button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .button:hover {
+      background-color: #555;
+    }
+
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 25%;
+    }
+
+    img {
+      object-fit: cover;
+      height: 350px;
+    }
+
+    .h1 {
+      align-self: center;
+    }
+
+    img:hover {
+      /* Start the shake animation and make the animation last for 0.5 seconds */
+      animation: shake 0.5s;
+
+      /* When the animation is finished, start again */
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translate(1px, 1px) rotate(0deg);
+      }
+
+      10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+      }
+
+      20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+      }
+
+      30% {
+        transform: translate(3px, 2px) rotate(0deg);
+      }
+
+      40% {
+        transform: translate(1px, -1px) rotate(1deg);
+      }
+
+      50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+      }
+
+      60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+      }
+
+      70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+      }
+
+      80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+      }
+
+      90% {
+        transform: translate(1px, 2px) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+      }
+    }
+  </style>
+</HEAD>
+
+<BODY>
+  <img src="./logo.png" alt="logo" class="center">
+  <br>
+  <h1>Meet The Team On Friday</h1>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Shardul.jpg" alt="Shardul" style="width:100%">
+        <div class="container">
+          <h2>Shardul Saiya</h2>
+          <p class="title">Lead/Comms</p>
+          <p>3rd year Computer Science Major with interest in mobile development. Likes Long walks on the beach and
+            short sprints in the iteration. </p>
+          <p>sssaiya@ucsd.edu</p>
+          <p><button class="button"
+              onclick="window.location.href='https://www.linkedin.com/in/shardul-saiya-521571129/'" ;>Contact</button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Yosuke.png" alt="Yosuke" style="width:100%">
+        <div class="container">
+          <h2>Yosuke Koike</h2>
+          <p class="title">Co-Lead/Comms</p>
+          <p>4th year Computer Science Major and love baseball :)</p>
+          <p>yokoike@ucsd.edu</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Keven.png" alt="Keven" style="width:100%">
+        <div class="container">
+          <h2>Keven Wilbert Saputra</h2>
+          <p class="title">Quality Assurance</p>
+          <p>I am a senior in computer science with a growing interest in machine learning and data science.</p>
+          <p>ksaputra@ucsd.edu</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Madeline.jpg" alt="Madeline" style="width:100%">
+        <div class="container">
+          <h2>Madeline Grubbs</h2>
+          <p class="title">Quality Assurance</p>
+          <p>Hello, I'm a 4th year Computer Science Major who loves sci-fi novels.</p>
+          <p>mgrubbs@ucsd.edu</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Duy.jpg" alt="Duy" style="width:100%">
+        <div class="container">
+          <h2>Duy Ngo</h2>
+          <p class="title">DevOps</p>
+          <p>Hi, I'm a 4th year Computer Science Major who loves hiking and snow-boarding. </p>
+          <p>dkn019@ucsd.edu</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Zifeng.jpg" alt="Zifeng" style="width:100%">
+        <div class="container">
+          <h2>Zifeng Chen</h2>
+          <p class="title">DevOps</p>
+          <p>I am a senior year computer engineering major, and interest in software development and machine learning. I
+            am excited to build software project with my CSE 112 team this quarter.</p>
+          <p>zic079@ucsd.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Calvin.jpg" alt="Calvin" style="width:100%">
+        <div class="container">
+          <h2>Calvin Ho</h2>
+          <p class="title">Tool &amp; Utility</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>example@example.com</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Will.jpg" alt="Will" style="width:100%">
+        <div class="container">
+          <h2>Will Xu</h2>
+          <p class="title">Tool &amp; Utility</p>
+          <p>I'm a third year, computer science major with an interest in developing autonomous vehicles. I am taking
+            CSE 112 to work in a simulated corporate setting before my internship this summer. Come learn more about me
+            <a href="https://will-xu.com/">here</a>.</p>
+          <p>wlxu@ucsd.edu</p>
+          <p><button class="button" onclick="window.location.href='https://will-xu.com/contact';">Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Sharad.jpg" alt="Sharad" style="width:100%">
+        <div class="container">
+          <h2>Sharad Venkateswaran</h2>
+          <p class="title">Coder</p>
+          <p>4th year Computer Science student with an interest in machine learning and data science. And dogs. Dogs are
+            cool.</p>
+          <p>shvenkat@ucsd.edu</p>
+          <p><button class="button">Contact</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <img src="./profile/Andrew.jpg" alt="Andrew" style="width:100%">
+        <div class="container">
+          <h2>Andrew Kuo</h2>
+          <p class="title">Coder</p>
+          <p>
+            There once was a dude who was a third year Computer Science transfer
+            student. He spent most of his time working on projects, alone and with
+            anyone who wants to. He loved designing software, making games,
+            writing fiction, shooting films, composing music, and just building
+            things. And now... he very much still does. ;)</p>
+          <p>ank060@ucsd.edu</p>
+          <p><button class="button"
+              onclick="window.location.href='https://www.linkedin.com/in/andrew-kuo-790243132';">Contact</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BODY>
+
+</html>
