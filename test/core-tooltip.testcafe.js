@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { ClientFunction } from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 import { TestCoreElement, ShadowChildSelector, ShadowRootSelector } from './testcore';
 
 /* eslint-disable */
@@ -77,22 +77,24 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
 
 /** Tests for dark theme of core-tooltip */
 testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
-  const tooltip = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
+  const tooltip = Selector('#label-dark');
+  //const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
+  const tooltipBox = Selector(() => document.querySelector('#effect-dark').shadowRoot.querySelector('#tooltip-back'))
+  console.log(tooltipBox.getStyleProperty('display'));
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('background'))
-    .eql('darkgray');
+    .eql('var(--back-color)');
 });
 
 /** Tests for light theme of core-tooltip */
 testCoreTooltip('effect', '- light effect', async (t, ctx) => {
-  const tooltip = ctx.target;
+  const tooltip = Selector('#label-light');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
   await t
     .hover(tooltip)
     .expect(tooltipBox.getStyleProperty('background'))
-    .eql('lightgray');
+    .eql('white');
 });
 
 /** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
@@ -180,4 +182,12 @@ testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) =
   const setValue = await getCoreAttribute('tabindex', 'tabindex-set');
   await t
     .expect(setValue).eql(index);
+});
+
+/** Test for focusable property */
+testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) => {
+  const isFocusable = ShadowRootSelector(t, ctx).hasAttribute('focusable');
+  await t
+    .expect(isFocusable)
+    .eql(true);
 });
