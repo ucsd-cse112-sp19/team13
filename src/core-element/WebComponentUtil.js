@@ -20,7 +20,9 @@ export function createTemplate(templateString = '', styleString = '') {
  * @param {Class} elementClass    The class to represent
  */
 export function registerCustomTag(customTagName, elementClass) {
-  window.customElements.define(customTagName, elementClass);
+  if (!window.customElements.get(customTagName)) {
+    window.customElements.define(customTagName, elementClass);
+  }
 }
 
 /**
@@ -29,10 +31,13 @@ export function registerCustomTag(customTagName, elementClass) {
  * @private
  * @param {Node} element         The element to attach to
  * @param {Node?} childElement   The child element in the shadow DOM root
+ * @param {Object?} opts         The options passed to attachShadow()
  * @return {Node}                The attached shadow root
  */
-export function attachShadowRoot(element, childElement = null) {
-  const shadowRoot = element.attachShadow({ mode: 'open' });
+export function attachShadowRoot(element, childElement = null, opts = { mode: 'open' }) {
+  // Attach the shadow root to this element.
+  const shadowRoot = element.attachShadow(opts);
+  // Attach the template node to the shadow root, if it exists.
   if (childElement) {
     shadowRoot.appendChild(childElement.content.cloneNode(true));
   }
@@ -58,20 +63,4 @@ export function createElement(tagName, props = {}, ...children) {
     }
   });
   return element;
-}
-
-/**
- * Upgrades a property in the component so that it will lazy load
- *
- * @link https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
- */
-export function upgradeProperty(component, prop) {
-  // eslint-disable-next-line no-prototype-builtins
-  if (component.hasOwnProperty(prop)) {
-    const value = component[prop];
-    // eslint-disable-next-line no-param-reassign
-    delete component[prop];
-    // eslint-disable-next-line no-param-reassign
-    component[prop] = value;
-  }
 }
