@@ -73,14 +73,10 @@ Join us in the [contributors' chat](https://gitter.im/mochajs/contributors)!
 
 *Excellent.*  Here's how:
 
-- **Handy with JavaScript?**  Please check out the issues labeled [`help wanted`](https://github.com/mochajs/mocha/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) or [`good-first-issue`](https://github.com/mochajs/mocha/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Agood-first-issue).  Try `npx good-first-issue mocha`!
-- **Can you write ~~good~~ well?**  The [documentation](https://mochajs.org) almost always needs some love.  See the [doc-related issues](https://github.com/mochajs/mocha/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation).
+- **Can you write ~~good~~ well?**  The [documentation](https://ucsd-cse112.github.io/team13/index.html) almost always needs some love.  
 - **Design your thing?**  [Our site](https://mochajs.org) needs your magic touch.
-- **Familiar with Mocha's codebase?**  We could use your help triaging issues and/or reviewing pull requests.  Please contact an [org member](https://github.com/orgs/mochajs/people), and we'll chat.
-- **Want to build our community?**  Mocha has a *lot* of users.  We could use your help bringing everyone together in peace and harmony.  Please contact an [org member](https://github.com/mochajs/people).
-- **You can sell dirt to worms?**  Let's raise Mocha's profile in the JavaScript and OSS communities.  Please contact an [org member](https://github.com/orgs/mochajs/people)!
-- **Wait--you write unit tests for *fun*?**  A PR which increases coverage is unlikely to be turned down.
-- **Are you experienced?** :guitar:  If you're a seasoned Mocha user, why not help answer some questions in the [main chat room](https://gitter.im/mochajs/mocha)?
+- **Familiar with Friday's codebase?**  We could use your help reviewing pull requests.  Please view a [pull request](https://github.com/ucsd-cse112/team13/pulls) for review.
+- **Wait--you write unit tests for *fun*?**  A PR which increases coverage is more than welcome.
 
 
- > [Template and structure of Friday's CONTRIBUTING.md courtesy of Mochajs CONTRIBUTING.md](https://github.com/mochajs/mocha/blob/master/.github/CONTRIBUTING.md)
+ > *[Template and structure of Friday's CONTRIBUTING.md courtesy of Mochajs CONTRIBUTING.md](https://github.com/mochajs/mocha/blob/master/.github/CONTRIBUTING.md)*
