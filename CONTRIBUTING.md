@@ -6,35 +6,21 @@
 
 If you have a question about using Friday Native Web Components library, please use [StackOverflow](https://stackoverflow.com)
 
-## :bug: I Found a Bug
-
-Sorry!  It happens to the best of us.  If you've found a bug in Mocha, **please [search](https://github.com/mochajs/mocha/issues/) to see if it's already been reported**.  Otherwise, create a [new issue](https://github.com/mochajs/mocha/issues/new).  If you can fix the bug yourself, feel free to create a [pull request](#propose-a-change) thereafter.
-
-Please include *as much detail as possible* to help us reproduce and diagnose the bug.  Most importantly:
-
-- Let us know *how* you're running Mocha (options, flags, environment, browser or Node.js, etc.)
-- Include your test code or file(s).  If large, please provide a link to a repository or [gist](https://gist.github.com).
-- Please show code in JavaScript only (any version)
-
-If we need more information from you, we'll let you know.  If you don't within a reasonable time frame (TBD), your issue will be automatically closed for inactivity.
-
 ## :exclamation: Propose a Change
 
-Before you get your hands dirty, please [search](https://github.com/mochajs/mocha/issues/) for a related issue, or [create a new one](https://github.com/mochajs/mocha/issues/new).  If you wish to contribute a new feature, this is doubly important!  Let's discuss your proposed changes first; we don't want you to waste time implementing a change that is at odds with the project's direction.  That said, we'll happily consider any contribution, no matter how great or small.
-
-*This paragraph would contain information about Mocha's roadmap, but it doesn't yet exist.* :poop:
-
-It's also important to understand some overarching goals of Mocha, detailed below.
+Before writing any code, please [search](https://ucsd-cse112.github.io/team13/index.html) for similar existing functionality.
+When proposing a change or new feature, take some time to review our core principles and overarching goals outlined below to
+ensure the change or feature aligns with the core principles of Friday Native Web Components. We want to make sure all the time
+and care you spend on helping make this library more awesome pays off. We're always happy and excited to see any new changes or
+features that build up this library's awesomeness, no matter how small.
 
 ### :soccer: About Project Goals
 
-Mocha is a test framework.  Developers use it against anything from legacy spaghetti in IE11 to stage-0 TC39 features in Electron.  Mocha is committed to providing support for maintained (LTS) versions of Node.js and popular browsers (of which IE11 is still one, as of December 2018).
+Friday Native Web Components is designed to be a native web component library that strives for interoperability with other web
+component libraries and inclusivity of styles and themes.  Developers use it across all devices (desktop, mobile, and tablet) and
+in many modern browsers. Friday Native Web Components is committed to providing support for popular and more updated browsers.
 
-Mocha adheres strictly to [semantic versioning](https://semver.org).  We are *extremely cautious* with changes that have the potential to break; given the size of Mocha's user base, it's *highly unlikely* a breaking change will slide by.
-
-Mocha's usage far outweighs its resources.  If a proposed feature would incur a maintenance penalty, it could be a hard sell.
-
-We ask you please keep these goals in mind when making or proposing changes.
+Please keep these goals in mind when making or proposing changes.
 
 ### :shoe: Contributing Code: Step-by-Step
 
