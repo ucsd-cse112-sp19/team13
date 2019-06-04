@@ -78,8 +78,9 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
 /** Tests for dark theme of core-tooltip */
 testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
   const tooltip = Selector('#label-dark');
-  //const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
-  const tooltipBox = Selector(() => document.querySelector('#effect-dark').shadowRoot.querySelector('#tooltip-back'))
+  // const tooltipBox =
+  //    ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
+  const tooltipBox = Selector(() => document.querySelector('#effect-dark').shadowRoot.querySelector('#tooltip-back'));
   console.log(tooltipBox.getStyleProperty('display'));
   await t
     .hover(tooltip)
@@ -97,10 +98,20 @@ testCoreTooltip('effect', '- light effect', async (t, ctx) => {
     .eql('white');
 });
 
+/** Tests for hoverable property of Core-tooltip */
+testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
+  const tooltip = Selector('#hoverable-tooltip');
+  const tooltipBox = Selector('#hoverable-tooltip-box');
+  await t
+    .hover(tooltip)
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('1');
+});
+
 /** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
 testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) => {
   const tooltip = Selector('#enterable-tooltip');
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#enterable-tooltip-box' }, '#tooltip-back');
+  const tooltipBox = Selector('#enterable-tooltip-box');
   await t
     .hover(tooltip)
     /* TODO: moving mouse up a liitle to enter the tooltip.... not sure how to do it */
@@ -114,30 +125,27 @@ testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) =
 });
 
 /** Tests for hide after property of Core-tooltip */
-testCoreTooltip('hideafter', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
-  const tooltip1 = Selector('#hideafter-tooltip1');
-  const tooltip2 = Selector('#hideafter-tooltip2');
-  const tooltipBox1 = ShadowChildSelector(t, { targetQuerySelector: '#hideafter-tooltip1-box' }, '#tooltip-back');
-  const tooltipBox2 = ShadowChildSelector(t, { targetQuerySelector: '#hideafter-tooltip2-box' }, '#tooltip-back');
+testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
+  const tooltip1 = Selector('#closedelay-tooltip1');
+  const tooltip2 = Selector('#closedelay-tooltip2');
+  const tooltipBox1 = Selector('#closedelay-tooltip1-box');
+  // const tooltipBox2 = Selector('#closedelay-tooltip2-box');
   await t
     .hover(tooltip1)
     .expect(tooltipBox1.getStyleProperty('opacity'))
     .eql('1');
 
+  // move to tooltip 2, tooltip 1 should stil appear
   await t
     .hover(tooltip2)
     .expect(tooltipBox1.getStyleProperty('opacity'))
-    .eql('0');
-});
-
-/** Tests for hoverable property of Core-tooltip */
-testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
-  const tooltip = Selector('#hoverable-tooltip');
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip-box' }, '#tooltip-back');
-  await t
-    .hover(tooltip)
-    .expect(tooltipBox.getStyleProperty('opacity'))
     .eql('1');
+
+  // after 2 sec, tooltip 1 should be hide
+  await t
+    .wait(2000)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('0');
 });
 
 /** Unit Tests for offset attribute of core-tooltip */
