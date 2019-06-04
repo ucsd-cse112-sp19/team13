@@ -14,6 +14,7 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  * @property {String} for the id of the target. If none specified, then it defaults to the parent
  * @property {Boolean} focusable whether to allow focus to show tooltip
  * @property {Boolean} manual whether mouseenter and mouseleave change the tooltip
+ * @property {Boolean} noVisibleArrow whether to remove the arrow
  */
 class CoreTooltipElement extends CoreElement {
   /** @private */
