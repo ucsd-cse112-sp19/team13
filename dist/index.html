@@ -62,6 +62,14 @@
                 <a>HOVER ME<core-tooltip openDelay="1000" closeDelay="0">TOOLTIPS!</core-tooltip></a>
                 <a>HOVER ME TOO<core-tooltip openDelay="5000">MAOR TOOLTUPS!</core-tooltip></a>
             </div>
+            <div>
+                <span class="tooltip">
+                    <label>Manual (mouseenter and mouseleave have no effect)</label>
+                    <core-tooltip id="manual-tooltip" manual>Shouldn't show up on hover!</core-tooltip>
+                </span>
+                <button onclick="document.querySelector('#manual-tooltip').onTooltipOpen()">Click me to open tooltip!</button>
+                <button onclick="document.querySelector('#manual-tooltip').onTooltipClose()">Click me to close tooltip!</button>
+            </div>
         </section>
         <section id="vertical-group" class="display-group">
             <h2>Vertical</h2>
