@@ -89,3 +89,7 @@
     border-color: transparent transparent var(--border-color) transparent;
     transform: translate(-50%, -100%);
 }
+
+:host([no-visible-arrow]) {
+    --arrow-size : 0rem;
+}
