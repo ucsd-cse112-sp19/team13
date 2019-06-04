@@ -1,6 +1,6 @@
 # Contributing to Friday Native Web Components
 
-> Please read these guidelines before submitting an issue, filing a feature request, or contributing code.
+> Please read these guidelines before proposing a feature request or contributing code.
 
 ## :question: Got a Question?
 
@@ -81,3 +81,6 @@ Join us in the [contributors' chat](https://gitter.im/mochajs/contributors)!
 - **You can sell dirt to worms?**  Let's raise Mocha's profile in the JavaScript and OSS communities.  Please contact an [org member](https://github.com/orgs/mochajs/people)!
 - **Wait--you write unit tests for *fun*?**  A PR which increases coverage is unlikely to be turned down.
 - **Are you experienced?** :guitar:  If you're a seasoned Mocha user, why not help answer some questions in the [main chat room](https://gitter.im/mochajs/mocha)?
+
+
+ > [Template and structure of Friday's CONTRIBUTING.md courtesy of Mochajs CONTRIBUTING.md](https://github.com/mochajs/mocha/blob/master/.github/CONTRIBUTING.md)
