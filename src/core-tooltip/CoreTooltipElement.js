@@ -162,11 +162,19 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when target is in focus. */
   onFocus() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.focusable) this.onTooltipOpen();
   }
 
   /** Called when target is out of focus. */
   onBlur() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.focusable) this.onTooltipClose();
   }
 
