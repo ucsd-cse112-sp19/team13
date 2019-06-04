@@ -90,6 +90,6 @@
     transform: translate(-50%, -100%);
 }
 
-:host([no-visible-arrow]) {
+:host([noVisibleArrow]) {
     --arrow-size : 0rem;
 }
