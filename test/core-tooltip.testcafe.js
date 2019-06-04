@@ -99,21 +99,26 @@ testCoreTooltip('effect', '- light effect', async (t, ctx) => {
 
 /** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
 testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) => {
-  const tooltip = ctx.target;
+  const tooltip = Selector('#enterable-tooltip');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#enterable-tooltip-box' }, '#tooltip-back');
   await t
     .hover(tooltip)
     /* TODO: moving mouse up a liitle to enter the tooltip.... not sure how to do it */
     .expect(tooltipBox.getStyleProperty('opacity'))
     .eql('1');
+
+  await t
+    .hover(tooltipBox)
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('1');
 });
 
-/** Tests for hoverable property of Core-tooltip */
+/** Tests for hide after property of Core-tooltip */
 testCoreTooltip('hideafter', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
-  const tooltip1 = document.getElementById('#hideafter-tooltip1');
-  const tooltip2 = document.getElementById('#hideafter-tooltip2');
-  const tooltipBox1 = document.getElementById('#hideafter-tooltip1-box');
-  const tooltipBox2 = document.getElementById('#hideafter-tooltip2-box');
+  const tooltip1 = Selector('#hideafter-tooltip1');
+  const tooltip2 = Selector('#hideafter-tooltip2');
+  const tooltipBox1 = ShadowChildSelector(t, { targetQuerySelector: '#hideafter-tooltip1-box' }, '#tooltip-back');
+  const tooltipBox2 = ShadowChildSelector(t, { targetQuerySelector: '#hideafter-tooltip2-box' }, '#tooltip-back');
   await t
     .hover(tooltip1)
     .expect(tooltipBox1.getStyleProperty('opacity'))
@@ -127,7 +132,7 @@ testCoreTooltip('hideafter', '- check the previous tooltip hide after hover for 
 
 /** Tests for hoverable property of Core-tooltip */
 testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
-  const tooltip = ctx.target;
+  const tooltip = Selector('#hoverable-tooltip');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#hoverable-tooltip-box' }, '#tooltip-back');
   await t
     .hover(tooltip)
