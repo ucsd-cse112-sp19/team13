@@ -148,6 +148,24 @@ testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for
     .eql('0');
 });
 
+/** Tests for popup after property of Core-tooltip */
+testCoreTooltip('opendelay', '- check if the tooltip pops up after a few seconds', async (t, ctx) => {
+  const tooltip1 = Selector('#opendelay-tooltip1');
+  const tooltipBox1 = Selector('#opendelay-tooltip1-box');
+
+  // should not pop up yet
+  await t
+    .hover(tooltip1)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('0');
+
+  // after 3 sec, tooltip 1 should  pop up
+  await t
+    .wait(1000)
+    .expect(tooltipBox1.getStyleProperty('opacity'))
+    .eql('1');
+});
+
 /** Unit Tests for offset attribute of core-tooltip */
 testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('offset', 'offset-default');
