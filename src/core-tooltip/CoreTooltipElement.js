@@ -27,6 +27,7 @@ class CoreTooltipElement extends CoreElement {
       for: { type: String },
       focusable: { type: Boolean },
       manual: { type: Boolean },
+      noVisibleArrow: { type: Boolean },
     };
   }
 
