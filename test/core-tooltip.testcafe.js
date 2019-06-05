@@ -161,7 +161,7 @@ testCoreTooltip('opendelay', '- check if the tooltip pops up after a few seconds
 
   // after 3 sec, tooltip 1 should  pop up
   await t
-    .wait(1000)
+    .wait(3000)
     .expect(tooltipBox1.getStyleProperty('opacity'))
     .eql('1');
 });
