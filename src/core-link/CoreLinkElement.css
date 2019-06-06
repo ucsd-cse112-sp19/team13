@@ -1,0 +1,7 @@
+:host a {
+  text-decoration: none;
+}
+
+:host([underline]) a {
+  text-decoration: underline;
+}
