@@ -13,6 +13,8 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  * @property {Number} closeDelay the delay of disappearance, in millisecond
  * @property {String} for the id of the target. If none specified, then it defaults to the parent
  * @property {Boolean} focusable whether to allow focus to show tooltip
+ * @property {Boolean} manual whether mouseenter and mouseleave change the tooltip
+ * @property {Boolean} noVisibleArrow whether to remove the arrow
  */
 class CoreTooltipElement extends CoreElement {
   /** @private */
@@ -24,6 +26,8 @@ class CoreTooltipElement extends CoreElement {
       closeDelay: { type: Number },
       for: { type: String },
       focusable: { type: Boolean },
+      manual: { type: Boolean },
+      noVisibleArrow: { type: Boolean },
     };
   }
 
@@ -134,6 +138,10 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when mouse enters the parent. */
   onMouseEnter() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.closeTimeout) {
       clearTimeout(this.closeTimeout);
       this.closeTimeout = null;
@@ -143,6 +151,10 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when mouse leaves the parent. */
   onMouseLeave() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.openTimeout) {
       clearTimeout(this.openTimeout);
       this.openTimeout = null;
@@ -152,11 +164,19 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when target is in focus. */
   onFocus() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.focusable) this.onTooltipOpen();
   }
 
   /** Called when target is out of focus. */
   onBlur() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.focusable) this.onTooltipClose();
   }
 
