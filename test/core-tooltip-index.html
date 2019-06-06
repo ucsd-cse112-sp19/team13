@@ -118,26 +118,32 @@
             </section>
 
             <section id="test-core-tooltip-placement">
-                <label>
-                    Placement left
-                    <core-tooltip id="left"></core-tooltip>
-                </label>
-                
-                <label>
+                <label id="label-right">
                     Placement right
-                    <core-tooltip id="right"></core-tooltip>
+                    <core-tooltip id="right" placement='right'></core-tooltip>
+                </label>
+
+                <label id="label-left">
+                    Placement left
+                    <core-tooltip id="left" placement='left'></core-tooltip>
                 </label>
                 
-                <label>
+                <label id="label-up">
                     Placement up
                     <core-tooltip id="up"></core-tooltip>
                 </label>
                 
-                <label>
+                <label id="label-bottom">
                     Placement down
-                    <core-tooltip id="down"></core-tooltip>
+                    <core-tooltip id="bottom" placement='bottom'></core-tooltip>
                 </label>
-                
+            </section>
+
+            <section id="test-core-tooltip-manual">
+                <label id="label-manual">
+                    Manual Property
+                    <core-tooltip id="manual"></core-tooltip>
+                </label>
             </section>
         </div>
     </body>

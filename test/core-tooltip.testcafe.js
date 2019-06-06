@@ -77,25 +77,18 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
 
 /** Tests for dark theme of core-tooltip */
 testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
-  const tooltip = Selector('#label-dark');
-  // const tooltipBox =
-  //    ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
-  const tooltipBox = Selector(() => document.querySelector('#effect-dark').shadowRoot.querySelector('#tooltip-back'));
-  console.log(tooltipBox.getStyleProperty('display'));
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
   await t
-    .hover(tooltip)
-    .expect(tooltipBox.getStyleProperty('background'))
-    .eql('var(--back-color)');
+    .expect(tooltipBox.getStyleProperty('background-color'))
+    .eql('rgb(0, 0, 0)')
 });
 
 /** Tests for light theme of core-tooltip */
 testCoreTooltip('effect', '- light effect', async (t, ctx) => {
-  const tooltip = Selector('#label-light');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
   await t
-    .hover(tooltip)
-    .expect(tooltipBox.getStyleProperty('background'))
-    .eql('white');
+    .expect(tooltipBox.getStyleProperty('background-color'))
+    .eql('rgb(255, 255, 255)')
 });
 
 /** Tests for hoverable property of Core-tooltip */
@@ -181,24 +174,94 @@ testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
     .expect(setValue).eql(index);
 });
 
-/** Test for placement: left */
-testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
-  const tooltipHost = ShadowRootSelector(t, ctx);
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#left' }, '#tooltip-back');
+/** Test for placement: right */
+testCoreTooltip('placement', '- placement location: right', async (t, ctx) => {
+  const tooltipHost = Selector('#label-right');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#right' }, '#tooltip-back');
 
-  const hostCoordinate = tooltipHost.getBoundingClientRectProperty('left');
-  const tooltipCoordinate = tooltipBox.getBoundingClientRectProperty('left');
+  const hostCoordinateLeft = await tooltipHost.getBoundingClientRectProperty('left');
+  const tooltipCoordinateLeft = await tooltipBox.getBoundingClientRectProperty('left');
+
+  const hostCoordinateRight = await tooltipHost.getBoundingClientRectProperty('right');
+  const tooltipCoordinateRight = await tooltipBox.getBoundingClientRectProperty('right');
 
   await t
-    .expect(hostCoordinate)
-    .eql(tooltipCoordinate);
+    .expect(tooltipCoordinateLeft)
+    .gt(hostCoordinateLeft)
+    .expect(tooltipCoordinateRight)
+    .gt(hostCoordinateRight)
 });
 
-/** Test for placement: right */
+/** Test for placement: left */
+testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
+  const tooltipHost = Selector('#label-left');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#left' }, '#tooltip-back');
+
+  const hostCoordinateLeft = await tooltipHost.getBoundingClientRectProperty('left');
+  const tooltipCoordinateLeft = await tooltipBox.getBoundingClientRectProperty('left');
+
+  const hostCoordinateRight = await tooltipHost.getBoundingClientRectProperty('right');
+  const tooltipCoordinateRight = await tooltipBox.getBoundingClientRectProperty('right');
+
+  await t
+    .expect(tooltipCoordinateLeft)
+    .lt(hostCoordinateLeft)
+    .expect(tooltipCoordinateRight)
+    .lt(hostCoordinateRight)
+});
 
 /** Test for placement: up */
+testCoreTooltip('placement', '- placement location: up', async (t, ctx) => {
+  const tooltipHost = Selector('#label-up');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#up' }, '#tooltip-back');
 
-/** Test for placement: down */
+  const hostCoordinateTop = await tooltipHost.getBoundingClientRectProperty('top');
+  const tooltipCoordinateTop = await tooltipBox.getBoundingClientRectProperty('top');
+
+  const hostCoordinateBottom = await tooltipHost.getBoundingClientRectProperty('bottom');
+  const tooltipCoordinateBottom = await tooltipBox.getBoundingClientRectProperty('bottom');
+
+  await t
+    .expect(tooltipCoordinateTop)
+    .lt(hostCoordinateTop)
+    .expect(tooltipCoordinateBottom)
+    .lt(hostCoordinateBottom)
+});
+
+/** Test for placement: bottom */
+testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
+  const tooltipHost = Selector('#label-bottom');
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#bottom' }, '#tooltip-back');
+
+  const hostCoordinateTop = await tooltipHost.getBoundingClientRectProperty('top');
+  const tooltipCoordinateTop = await tooltipBox.getBoundingClientRectProperty('top');
+
+  const hostCoordinateBottom = await tooltipHost.getBoundingClientRectProperty('bottom');
+  const tooltipCoordinateBottom = await tooltipBox.getBoundingClientRectProperty('bottom');
+
+  await t
+    .expect(tooltipCoordinateTop)
+    .gt(hostCoordinateTop)
+    .expect(tooltipCoordinateBottom)
+    .gt(hostCoordinateBottom)
+});
+
+/** Test for manual exit tooltip */
+testCoreTooltip('manual', '- manual property', async (t, ctx) => {
+  const tooltipHost = ctx.target;
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
+
+  await t
+    .wait(2000)
+    .expect(tooltipHost.getStyleProperty('opacity'))
+    .eql('0')
+    .hover(tooltipHost)
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('0')
+    .click(tooltipHost)
+    .expect(tooltipBox.getStyleProperty('opacity'))
+    .eql('0')
+});
 
 /** Unit Tests for tabindex attribute of core-tooltip */
 testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
@@ -217,8 +280,5 @@ testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) =
 
 /** Test for focusable property */
 testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) => {
-  const isFocusable = ShadowRootSelector(t, ctx).hasAttribute('focusable');
-  await t
-    .expect(isFocusable)
-    .eql(true);
+  // In dev
 });
