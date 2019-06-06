@@ -249,7 +249,6 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
 /** Test for manual exit tooltip */
 testCoreTooltip('manual', '- manual property', async (t, ctx) => {
   const tooltipHost = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
 
   await t
     .wait(2000)
@@ -280,5 +279,12 @@ testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) =
 
 /** Test for focusable property */
 testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) => {
-  // In dev
+  const tooltipHost = ctx.target;  
+  await t
+    .wait(2000)
+    .expect(tooltipHost.getStyleProperty('opacity'))
+    .eql('0')
+    .pressKey('tab')
+    .expect(tooltipHost.getStyleProperty('opacity'))
+    .eql('1')
 });
