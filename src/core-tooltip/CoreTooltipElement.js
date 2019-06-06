@@ -19,6 +19,9 @@ class CoreTooltipElement extends CoreElement {
 
     this.target = null;
 
+    this.disabled = false;
+    this.enterable = true;
+
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
   }
@@ -28,6 +31,7 @@ class CoreTooltipElement extends CoreElement {
     return {
       placement: { type: String },
       content: { type: String },
+      disabled: { type: Boolean },
     };
   }
 
@@ -36,6 +40,10 @@ class CoreTooltipElement extends CoreElement {
     switch (property) {
       case 'content':
         this.tooltipSlot.textContent = newValue;
+        break;
+      case 'disabled':
+        this.disabled = true;
+        this.clearTarget();
         break;
       default:
     }
@@ -58,8 +66,10 @@ class CoreTooltipElement extends CoreElement {
     if (this.target) this.clearTarget();
 
     if (target) {
-      target.addEventListener('mouseenter', this.onMouseEnter);
-      target.addEventListener('mouseleave', this.onMouseLeave);
+      if (!this.disabled) {
+        target.addEventListener('mouseenter', this.onMouseEnter);
+        target.addEventListener('mouseleave', this.onMouseLeave);
+      }
       this.target = target;
       this.target.style.position = 'relative';
     }
