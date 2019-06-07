@@ -322,6 +322,7 @@ testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) =
 /** Test for focusable property */
 testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) => {
   const tooltipHost = ctx.target;
+
   await t
     .wait(2000)
     .expect(tooltipHost.getStyleProperty('opacity'))
@@ -329,4 +330,19 @@ testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) =>
     .pressKey('tab')
     .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('1');
+});
+
+/** Test for no-visible-arrow property */
+testCoreTooltip('noArrow', '- check for no-visible-arrow property', async (t, ctx) => {
+  const tooltipHost = Selector('#no-arrow')
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#no-arrow' }, '#tooltip-back');
+
+  await t
+    .hover(tooltipHost)
+    .expect(tooltipHost.hasAttribute('no-visible-arrow')).ok()
+    // min-height and min-width depends on --arrow-size which affects border-width, no other way to get around this
+    .expect(tooltipBox.getStyleProperty('min-height'))
+    .eql('0px')
+    .expect(tooltipBox.getStyleProperty('min-width'))
+    .eql('0px')
 });
