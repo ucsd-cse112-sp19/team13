@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js && npm run docs",
+    "build": "webpack --mode production --config webpack.config.js & npm run docs",
+    "percy": "npx percy exec -- node ./tools/snapshots.js --enable_javascript",
     "docs": "jsdoc --destination ./docs --readme ./README.md --recurse ./src/* && npm run add",
-    "add" : "git add docs/ && git commit -m 'Auto update JSDocs'",
+    "add": "git add docs/ && git commit -m 'Auto update JSDocs'",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
     "test": "npm run lint && npm run coverage",
     "lcov-coverage": "istanbul report --root coverage --include=*.json --dir coverage lcov",
