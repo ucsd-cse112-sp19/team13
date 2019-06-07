@@ -3,21 +3,34 @@ import CoreElement from '../core-element/CoreElement';
 import TEMPLATE from './CoreTooltipElement.html';
 import STYLE from './CoreTooltipElement.css';
 
+// Create the template node specified by the imported html file, embedded with the imported style.
 const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
  * An element that shows a tooltip for another element... It's a tooltip.
- * @property {String} placement the side of the parent which the tooltip is shown
- * @property {String} content the content of the tooltip
- * @property {Number} openDelay the delay of appearance, in millisecond
- * @property {Number} closeDelay the delay of disappearance, in millisecond
- * @property {String} for the id of the target. If none specified, then it defaults to the parent
- * @property {Boolean} focusable whether to allow focus to show tooltip
- * @property {Boolean} manual whether mouseenter and mouseleave change the tooltip
- * @property {Boolean} noVisibleArrow whether to remove the arrow
+ * @property {String} placement       the side of the parent which the tooltip is shown.
+ *                                    The attribute name is 'placement'.
+ * @property {String} content         the content of the tooltip.
+ *                                    The attribute name is 'content'.
+ * @property {Number} openDelay       the delay of appearance, in millisecond.
+ *                                    The attribute name is 'open-delay'.
+ * @property {Number} closeDelay      the delay of disappearance, in millisecond.
+ *                                    The attribute name is 'close-delay'.
+ * @property {String} for             the id of the target. If none specified, then it
+ *                                    defaults to the parent. The attribute name is 'for'.
+ * @property {Boolean} focusable      whether to allow focus to show tooltip.
+ *                                    The attribute name is 'focusable'.
+ * @property {Boolean} manual         whether mouseenter and mouseleave change the tooltip.
+ *                                    The attribute name is 'manual'.
+ * @property {Boolean} noVisibleArrow whether to remove the arrow.
+ *                                    The attribute name is 'no-visible-arrow'.
  */
 class CoreTooltipElement extends CoreElement {
-  /** @private */
+  /**
+   * Registers the properties and their type. An equivalent attribute will be generated
+   * for use in CSS and HTML. It will however, be in dash-case, NOT camelCase.
+   * @private
+   */
   static get properties() {
     return {
       placement: { type: String },
@@ -34,8 +47,6 @@ class CoreTooltipElement extends CoreElement {
   /** Creates a CoreTooltip element and attaches the shadow root. */
   constructor() {
     super(CoreTooltipTemplate);
-
-    this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
     this.target = null;
 
@@ -55,7 +66,11 @@ class CoreTooltipElement extends CoreElement {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
+    this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
+
+    // Sets the default open delay to 0
     this.openDelay = 0;
+    // Sets the default close delay to 1000
     this.closeDelay = 1000;
   }
 
