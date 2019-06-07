@@ -57,15 +57,20 @@ class CoreTooltipElement extends CoreElement {
     // to clearTimeout() to cancel the timeout.
     this.closeTimeout = null;
 
+    // The listeners to handle tooltip showing/hiding on input hover
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
 
+    // The listeners to directly handle showing/hiding the tooltip element from anywhere
     this.onTooltipOpen = this.onTooltipOpen.bind(this);
     this.onTooltipClose = this.onTooltipClose.bind(this);
 
+    // The listeners to handle tooltip show/hide on input focus
+    // (only if focusable AND if the 'for' attribute is valid)
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
+    // Retreives the slot for the tooltip content in the shadow root by id.
     this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
     // Sets the default open delay to 0
@@ -74,14 +79,20 @@ class CoreTooltipElement extends CoreElement {
     this.closeDelay = 1000;
   }
 
-  /** @private */
+  /**
+   * @override
+   * @private
+   */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
       case 'content':
+        // Update the slot content if using the 'content' attribute to set text content.
         this.tooltipSlot.textContent = newValue;
         break;
       case 'for':
         {
+          // Update the focusable target with the new 'for' value (which should be the id)
+          // If none is specified or valid, it'll just use the parent.
           const target = document.querySelector(`#${newValue}`);
           if (target) {
             this.setTarget(target);
