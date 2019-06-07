@@ -285,7 +285,7 @@ class CoreSliderElement extends CoreElement {
     const maxValue = this.max;
     const lengthValue = maxValue - minValue;
     const result = lengthValue * sliderRatio + minValue;
-    
+
     // Only update the value if it is not the same...
     if (this.value !== result) {
       this.value = result;
