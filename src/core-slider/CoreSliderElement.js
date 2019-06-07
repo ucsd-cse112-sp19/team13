@@ -3,7 +3,7 @@ import TEMPLATE from './CoreSliderElement.html';
 import STYLE from './CoreSliderElement.css';
 
 // Create the template node specified by the imported html file, embedded with the imported style.
-const CoreSliderTemplate = CoreElement.template(TEMPLATE, STYLE);
+const CoreSliderTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
  * Sets up the event listeners to handle touch and mouse release/move events.
@@ -55,6 +55,19 @@ function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListe
  *                              The attribute name is 'rainbow'.
  */
 class CoreSliderElement extends CoreElement {
+  /** @private */
+  static get properties() {
+    return {
+      step: { type: Number },
+      min: { type: Number },
+      max: { type: Number },
+      value: { type: Number },
+      disabled: { type: Boolean },
+      vertical: { type: Boolean },
+      rainbow: { type: Boolean },
+    };
+  }
+
   /** Creates a CoreSlider element. */
   constructor() {
     super(CoreSliderTemplate);
@@ -86,59 +99,34 @@ class CoreSliderElement extends CoreElement {
 
     // Gets the parent slider container from the shadow root by id.
     this.slider = this.shadowRoot.querySelector('#slider');
-  }
 
-  /** @private */
-  static get properties() {
-    return {
-      // Default value is 1
-      step: { type: Number, value: 1 },
-      // Default value is 0
-      min: { type: Number, value: 0 },
-      // Default value is 100
-      max: { type: Number, value: 100 },
-      // Default value is 0
-      value: { type: Number, value: 0 },
-      disabled: { type: Boolean },
-      vertical: { type: Boolean },
-      rainbow: { type: Boolean },
-    };
-  }
-
-  /**
-   * Updates the value. Ensures that the value is always within bounds.
-   * @override
-   * @param {*} value the new value
-   */
-  set value(value) {
-    const minValue = this.min;
-    const maxValue = this.max;
-    const stepSize = this.step;
-
-    // Makes sure that value is a multiple of stepSize.
-    let result = Math.floor(value / stepSize) * stepSize;
-    // Makes sure that value is within bounds at ALL times.
-    if (result < minValue) result = minValue;
-    if (result > maxValue) result = maxValue;
-
-    // Update value for the attribute manually since we've overriden default handling of the data
-    this.setAttribute('value', `${result}`);
+    // Sets the default values for properties...
+    this.step = 1;
+    this.min = 0;
+    this.max = 100;
+    this.value = 0;
   }
 
   /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
       case 'value':
-        // Anytime value changes, update the thumb display position.
-        this.updateThumbPosition(newValue);
+        {
+          // Updates the value. Ensures that the value is always within bounds.
+          const minValue = this.min;
+          const maxValue = this.max;
+          const stepSize = this.step;
+          // Makes sure value is a multiple of stepSize.
+          let result = Math.floor(newValue / stepSize) * stepSize;
+          if (result < minValue) result = minValue;
+          if (result > maxValue) result = maxValue;
 
-        // ... also let anyone else listening for the 'input' event,
-        // with addEventListener('event', () => {...}), to have a crack
-        // at handling this event ...
-        this.dispatchEvent(new CustomEvent('input', {
-          bubbles: true, // Makes sure this event can bubble up to the parents...
-          composed: true, // Makes sure that this event can be handled outside the shadow DOM...
-        }));
+          // Update the new value.
+          this.value = result;
+
+          // Update the thumb position to the new value.
+          this.updateThumbPosition(result);
+        }
         break;
       default:
         // Everything is should be handled by CoreElement automatically.
@@ -181,7 +169,9 @@ class CoreSliderElement extends CoreElement {
     // Depending on whether it is vertical, the position may be left->right or top->bottom.
     if (!this.vertical) {
       this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+      this.sliderThumb.style.top = 'calc(50% - 0.5rem)';
     } else {
+      this.sliderThumb.style.left = 'calc(50% - 0.5rem)';
       this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
     }
   }
@@ -202,7 +192,6 @@ class CoreSliderElement extends CoreElement {
 
   /**
    * Is called when the mouse moves. This is only registered when onMouseDown is called.
-   *
    * @param {Event} e the input event
    */
   onMouseMove(e) {
@@ -212,7 +201,6 @@ class CoreSliderElement extends CoreElement {
 
   /**
    * Is called when the mouse is released anywhere.
-   *
    * @param {Event} e the input event
    */
   onMouseUp(e) {
@@ -226,7 +214,6 @@ class CoreSliderElement extends CoreElement {
 
   /**
    * Is called when a touch is on the thumb.
-   *
    * @param {Event} e the input event
    */
   onTouchStart(e) {
@@ -298,8 +285,18 @@ class CoreSliderElement extends CoreElement {
     const maxValue = this.max;
     const lengthValue = maxValue - minValue;
     const result = lengthValue * sliderRatio + minValue;
+    
+    // Only update the value if it is not the same...
     if (this.value !== result) {
       this.value = result;
+
+      // ... also let anyone else listening for the 'input' event,
+      // with addEventListener('event', () => {...}), to have a crack
+      // at handling this event ...
+      this.dispatchEvent(new CustomEvent('input', {
+        bubbles: true, // Makes sure this event can bubble up to the parents...
+        composed: true, // Makes sure that this event can be handled outside the shadow DOM...
+      }));
     }
   }
 
