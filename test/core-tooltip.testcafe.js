@@ -45,12 +45,26 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-disable no-unused-vars */
 
 /** Unit Tests for content attribute of core-tooltip */
+/**
+ * Purpose: checks that the default value of content is the empty string
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('content', 'content-default');
   await t
     .expect(defaultValue).eql('');
 });
 
+/**
+ * Purpose: checks that the set value of content is 'Team Friday Tooltip'
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
 testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', async (t, ctx) => {
   const setMessage = '"Team Friday Tooltip"'; // message to set content
   const evalMessage = 'Team Friday Tooltip'; // message the set content should evaluate to
@@ -61,12 +75,26 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
 });
 
 /** Unit Tests for disable attribute of core-tooltip */
+/**
+ * Purpose: checks that the default value of disable is false
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
 testCoreTooltip('disabled', '- Default disabled value should be false', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
   await t
     .expect(defaultValue).eql(false);
 });
 
+/**
+ * Purpose: checks that the set value of disabled true
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
 testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx) => {
   const isDisabled = true;
   await setCoreAttribute('disabled', 'disabled-set', isDisabled);
@@ -80,7 +108,7 @@ testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
   await t
     .expect(tooltipBox.getStyleProperty('background-color'))
-    .eql('rgb(0, 0, 0)')
+    .eql('rgb(0, 0, 0)');
 });
 
 /** Tests for light theme of core-tooltip */
@@ -88,7 +116,7 @@ testCoreTooltip('effect', '- light effect', async (t, ctx) => {
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
   await t
     .expect(tooltipBox.getStyleProperty('background-color'))
-    .eql('rgb(255, 255, 255)')
+    .eql('rgb(255, 255, 255)');
 });
 
 /** Tests for hoverable property of Core-tooltip */
@@ -189,7 +217,7 @@ testCoreTooltip('placement', '- placement location: right', async (t, ctx) => {
     .expect(tooltipCoordinateLeft)
     .gt(hostCoordinateLeft)
     .expect(tooltipCoordinateRight)
-    .gt(hostCoordinateRight)
+    .gt(hostCoordinateRight);
 });
 
 /** Test for placement: left */
@@ -207,7 +235,7 @@ testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
     .expect(tooltipCoordinateLeft)
     .lt(hostCoordinateLeft)
     .expect(tooltipCoordinateRight)
-    .lt(hostCoordinateRight)
+    .lt(hostCoordinateRight);
 });
 
 /** Test for placement: up */
@@ -225,7 +253,7 @@ testCoreTooltip('placement', '- placement location: up', async (t, ctx) => {
     .expect(tooltipCoordinateTop)
     .lt(hostCoordinateTop)
     .expect(tooltipCoordinateBottom)
-    .lt(hostCoordinateBottom)
+    .lt(hostCoordinateBottom);
 });
 
 /** Test for placement: bottom */
@@ -243,7 +271,7 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
     .expect(tooltipCoordinateTop)
     .gt(hostCoordinateTop)
     .expect(tooltipCoordinateBottom)
-    .gt(hostCoordinateBottom)
+    .gt(hostCoordinateBottom);
 });
 
 /** Test for manual exit tooltip */
@@ -259,16 +287,30 @@ testCoreTooltip('manual', '- manual property', async (t, ctx) => {
     .eql('0')
     .click(tooltipHost)
     .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('0')
+    .eql('0');
 });
 
 /** Unit Tests for tabindex attribute of core-tooltip */
+/**
+ * Purpose: checks that the default value of tabindex is 0
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
 testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('tabindex', 'tabindex-default');
   await t
     .expect(defaultValue).eql(0);
 });
 
+/**
+ * Purpose: checks that the set value of tabindex is 1
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
 testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) => {
   const index = 1;
   await setCoreAttribute('tabindex', 'tabindex-set', index);
@@ -279,12 +321,12 @@ testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) =
 
 /** Test for focusable property */
 testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) => {
-  const tooltipHost = ctx.target;  
+  const tooltipHost = ctx.target;
   await t
     .wait(2000)
     .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('0')
     .pressKey('tab')
     .expect(tooltipHost.getStyleProperty('opacity'))
-    .eql('1')
+    .eql('1');
 });
