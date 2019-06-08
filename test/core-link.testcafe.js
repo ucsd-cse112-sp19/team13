@@ -43,3 +43,39 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 });
 /* eslint-enable */
 /* eslint-disable no-unused-vars */
+
+/**
+ * Purpose: checks that the core-link has an underline for the text-decoration
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('underline', '- underline test', async (t, ctx) => {
+    const link = Selector(() => document.querySelector('#underline-link'))
+    const linkComp = ShadowChildSelector(t, ctx, '#link')
+
+    await t
+        .expect(link.hasAttribute('underline'))
+        .ok()
+        .expect(linkComp.getStyleProperty('text-decoration-line'))
+        .eql('underline')
+});
+
+/**
+ * Purpose: checks that the core-link href is working as intended
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('href', '- underline test', async (t, ctx) => {
+    const link = Selector(() => document.querySelector('#underline-link'))
+    const linkComp = ShadowChildSelector(t, ctx, '#link')
+
+    await t
+        .expect(link.hasAttribute('href'))
+        .ok()
+        .expect(linkComp.getAttribute('href'))
+        .contains('www.google.com');
+});
