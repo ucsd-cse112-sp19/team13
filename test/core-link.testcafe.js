@@ -44,6 +44,35 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-enable */
 /* eslint-disable no-unused-vars */
 
+/** Unit Tests for disable attribute of core-link */
+/**
+ * Purpose: checks that the default value of disable is false
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('disabled', '- Default disabled value should be false', async (t, ctx) => {
+  const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
+  await t
+    .expect(defaultValue).eql(false);
+});
+
+/**
+ * Purpose: checks that the set value of disabled true
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('disabled', '- Set disabled value should be true', async (t, ctx) => {
+  const isDisabled = true;
+  await setCoreAttribute('disabled', 'disabled-set', isDisabled);
+  const setValue = await getCoreAttribute('disabled', 'disabled-set');
+  await t
+    .expect(setValue).eql(isDisabled);
+});
+
 /**
  * Purpose: checks that the core-link has an underline for the text-decoration
  *
@@ -52,14 +81,14 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
  * @param {function} testFunc the function to test the attribute
  */
 testCoreLink('underline', '- underline test', async (t, ctx) => {
-    const link = Selector(() => document.querySelector('#underline-link'))
-    const linkComp = ShadowChildSelector(t, ctx, '#link')
+  const link = Selector(() => document.querySelector('#underline-link'));
+  const linkComp = ShadowChildSelector(t, ctx, '#link');
 
-    await t
-        .expect(link.hasAttribute('underline'))
-        .ok()
-        .expect(linkComp.getStyleProperty('text-decoration-line'))
-        .eql('underline')
+  await t
+    .expect(link.hasAttribute('underline'))
+    .ok()
+    .expect(linkComp.getStyleProperty('text-decoration-line'))
+    .eql('underline');
 });
 
 /**
@@ -70,12 +99,12 @@ testCoreLink('underline', '- underline test', async (t, ctx) => {
  * @param {function} testFunc the function to test the attribute
  */
 testCoreLink('href', '- underline test', async (t, ctx) => {
-    const link = Selector(() => document.querySelector('#underline-link'))
-    const linkComp = ShadowChildSelector(t, ctx, '#link')
+    const link = Selector(() => document.querySelector('#underline-link'));
+    const linkComp = ShadowChildSelector(t, ctx, '#link');
 
     await t
-        .expect(link.hasAttribute('href'))
-        .ok()
-        .expect(linkComp.getAttribute('href'))
-        .contains('www.google.com');
+      .expect(link.hasAttribute('href'))
+      .ok()
+      .expect(linkComp.getAttribute('href'))
+      .contains('www.google.com');
 });
