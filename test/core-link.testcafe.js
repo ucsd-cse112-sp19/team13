@@ -131,10 +131,40 @@ testCoreLink('icon', '- Default icon value should be empty string', async (t, ct
  * @param {function} testFunc the function to test the attribute
  */
 testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx) => {
-  const setIcon = '"el-icon-edit"'; // message to set content
-  const evalIcon= 'el-icon-edit'; // message the set content should evaluate to
+  const setIcon = '"el-icon-edit"'; // string to set icon
+  const evalIcon= 'el-icon-edit'; // string the set icon should evaluate to
   await setCoreAttribute('icon', 'icon-set', setIcon);
   const setValue = await getCoreAttribute('icon', 'icon-set');
   await t
     .expect(setValue).eql(evalIcon);
+});
+
+/** Unit Tests for type attribute of core-link */
+/**
+ * Purpose: checks that the default value of type is empty string
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('type', '- Default type value should be empty string', async (t, ctx) => {
+  const defaultValue = await getCoreAttribute('type', 'type-default');
+  await t
+    .expect(defaultValue).eql('');
+});
+
+/**
+ * Purpose: checks that the set value of type is "primary"
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('type', '- Set type value should be "primary"', async (t, ctx) => {
+  const setType = '"primary"'; // string to set type
+  const evalType = 'primary'; // string the set type should evaluate to
+  await setCoreAttribute('type', 'type-set', setType);
+  const setValue = await getCoreAttribute('type', 'type-set');
+  await t
+    .expect(setValue).eql(evalType);
 });
