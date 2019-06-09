@@ -44,7 +44,7 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-enable */
 /* eslint-disable no-unused-vars */
 
-/** Unit Tests for disable attribute of core-link */
+/** Unit Tests for disabled attribute of core-link */
 /**
  * Purpose: checks that the default value of disable is false
  *
@@ -107,4 +107,34 @@ testCoreLink('href', '- underline test', async (t, ctx) => {
       .ok()
       .expect(linkComp.getAttribute('href'))
       .contains('www.google.com');
+});
+
+/** Unit Tests for icon attribute of core-link */
+/**
+ * Purpose: checks that the default value of icon is empty string
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('icon', '- Default icon value should be empty string', async (t, ctx) => {
+  const defaultValue = await getCoreAttribute('icon', 'icon-default');
+  await t
+    .expect(defaultValue).eql('');
+});
+
+/**
+ * Purpose: checks that the set value of icon is "el-icon-edit"
+ *
+ * @param {String} sectionName the name of the attribute being tested
+ * @param {String} testDesc further description of the test
+ * @param {function} testFunc the function to test the attribute
+ */
+testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx) => {
+  const setIcon = '"el-icon-edit"'; // message to set content
+  const evalIcon= 'el-icon-edit'; // message the set content should evaluate to
+  await setCoreAttribute('icon', 'icon-set', setIcon);
+  const setValue = await getCoreAttribute('icon', 'icon-set');
+  await t
+    .expect(setValue).eql(evalIcon);
 });
