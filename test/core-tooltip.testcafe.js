@@ -44,13 +44,10 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-enable */
 /* eslint-disable no-unused-vars */
 
-/** Unit Tests for content attribute of core-tooltip */
 /**
  * Purpose: checks that the default value of content is the empty string
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: content
+ * Test Description: Default content value should be empty string
  */
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('content', 'content-default');
@@ -60,10 +57,8 @@ testCoreTooltip('content', '- Default content value should be empty string', asy
 
 /**
  * Purpose: checks that the set value of content is 'Team Friday Tooltip'
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: content
+ * Test Description: Set content value should be Team Friday Tooltip
  */
 testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', async (t, ctx) => {
   const setMessage = '"Team Friday Tooltip"'; // message to set content
@@ -76,11 +71,9 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
 
 /** Unit Tests for disable attribute of core-tooltip */
 /**
- * Purpose: checks that the default value of disable is false
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Purpose: checks that the default value of disabled is false
+ * Test Attribute: disabled
+ * Test Description: Default disabled value should be false
  */
 testCoreTooltip('disabled', '- Default disabled value should be false', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
@@ -90,10 +83,8 @@ testCoreTooltip('disabled', '- Default disabled value should be false', async (t
 
 /**
  * Purpose: checks that the set value of disabled true
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: disabled
+ * Test Description: Set disabled value should be true
  */
 testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx) => {
   const isDisabled = true;
@@ -103,7 +94,11 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
     .expect(setValue).eql(isDisabled);
 });
 
-/** Tests for dark theme of core-tooltip */
+/**
+ * Purpose: checks that the set value of disabled true
+ * Test Attribute: effect
+ * Test Description: dark effect
+ */
 testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-dark' }, '#tooltip-back');
   await t
@@ -277,10 +272,10 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
 /** Test for manual exit tooltip */
 testCoreTooltip('manual', '- manual property', async (t, ctx) => {
   const tooltipHost = ctx.target;
-
+  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
   await t
     .wait(2000)
-    .expect(tooltipHost.getStyleProperty('opacity'))
+    .expect(tooltipBox.getStyleProperty('opacity'))
     .eql('0')
     .hover(tooltipHost)
     .expect(tooltipBox.getStyleProperty('opacity'))
@@ -290,13 +285,10 @@ testCoreTooltip('manual', '- manual property', async (t, ctx) => {
     .eql('0');
 });
 
-/** Unit Tests for tabindex attribute of core-tooltip */
 /**
  * Purpose: checks that the default value of tabindex is 0
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: tabindex
+ * Test Description: Default tabindex value should be 0
  */
 testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('tabindex', 'tabindex-default');
@@ -306,10 +298,8 @@ testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ct
 
 /**
  * Purpose: checks that the set value of tabindex is 1
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: tabindex
+ * Test Description: Set tabindex value should be 1
  */
 testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) => {
   const index = 1;
