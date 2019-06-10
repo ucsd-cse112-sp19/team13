@@ -95,7 +95,7 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
 });
 
 /**
- * Purpose: checks that the set value of disabled true
+ * Purpose: checks that the set value of effect is dark
  * Test Attribute: effect
  * Test Description: dark effect
  */
