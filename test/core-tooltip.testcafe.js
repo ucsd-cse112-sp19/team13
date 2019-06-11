@@ -21,7 +21,7 @@ function testCoreTooltip(sectionName, testDesc, testFunc) {
  */
 const getCoreAttribute = ClientFunction((strAttrName, strElemId) => {
   const testElement = document.getElementById(strElemId);
-  const getExpression = `testElement.${strAttrName}`;
+  const getExpression = `testElement.getAttribute('${strAttrName}')`;
   return eval(getExpression);
 });
 
@@ -37,7 +37,7 @@ const getCoreAttribute = ClientFunction((strAttrName, strElemId) => {
 const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
   const testElement = document.getElementById(strElemId);
   // set the strAttrName to value
-  const setExpression = `testElement.${strAttrName} = ${value}`;
+  const setExpression = `testElement.setAttribute('${strAttrName}', '${value}')`;
   eval(setExpression);
   return '';
 });
@@ -61,12 +61,11 @@ testCoreTooltip('content', '- Default content value should be empty string', asy
  * Test Description: Set content value should be Team Friday Tooltip
  */
 testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', async (t, ctx) => {
-  const setMessage = '"Team Friday Tooltip"'; // message to set content
-  const evalMessage = 'Team Friday Tooltip'; // message the set content should evaluate to
-  await setCoreAttribute('content', 'content-set', setMessage);
+  const message = 'Team Friday Tooltip'; // message the set content should evaluate to
+  await setCoreAttribute('content', 'content-set', message);
   const setValue = await getCoreAttribute('content', 'content-set');
   await t
-    .expect(setValue).eql(evalMessage);
+    .expect(setValue).eql(message);
 });
 
 /** Unit Tests for disable attribute of core-tooltip */
