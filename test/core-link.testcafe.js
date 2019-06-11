@@ -14,30 +14,29 @@ function testCoreLink(sectionName, testDesc, testFunc) {
 
 /* eslint-disable no-eval */
 /**
- * Purpose: calls and returns the value of get strAttrName of the link with id strElemId
+ * Purpose: calls and returns the value of get strAttrName of the tooltip with id strElemId
  *
  * @param {String} strAttrName the name of the attribute to get
  * @param {String} strElemId the id of the tested element.
  */
 const getCoreAttribute = ClientFunction((strAttrName, strElemId) => {
   const testElement = document.getElementById(strElemId);
-  const getExpression = `testElement.${strAttrName}`;
+  const getExpression = `testElement.getAttribute('${strAttrName}')`;
   return eval(getExpression);
 });
 
 /**
- * Purpose: calls set strAttrName of the link with id strElemId
+ * Purpose: calls set strAttrName of the tooltip with id strElemId
  * Note: the return value is an empty string and has no meaning
  *
  * @param {String} strAttrName the name of the attribute to get
  * @param {String} strElemId the id of the tested element.
- * @param value the value strAttrName should be set to. For strings,they need to
- * be in format '"example string"'
+ * @param value the value strAttrName should be set to.
  */
 const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
   const testElement = document.getElementById(strElemId);
   // set the strAttrName to value
-  const setExpression = `testElement.${strAttrName} = ${value}`;
+  const setExpression = `testElement.setAttribute('${strAttrName}', '${value}')`;
   eval(setExpression);
   return '';
 });
@@ -66,7 +65,7 @@ testCoreLink('disabled', '- Default disabled value should be false', async (t, c
  * @param {function} testFunc the function to test the attribute
  */
 testCoreLink('disabled', '- Set disabled value should be true', async (t, ctx) => {
-  const isDisabled = true;
+  const isDisabled = 'true';
   await setCoreAttribute('disabled', 'disabled-set', isDisabled);
   const setValue = await getCoreAttribute('disabled', 'disabled-set');
   await t
@@ -131,12 +130,11 @@ testCoreLink('icon', '- Default icon value should be empty string', async (t, ct
  * @param {function} testFunc the function to test the attribute
  */
 testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx) => {
-  const setIcon = '"el-icon-edit"'; // string to set icon
-  const evalIcon= 'el-icon-edit'; // string the set icon should evaluate to
-  await setCoreAttribute('icon', 'icon-set', setIcon);
+  const icon = "el-icon-edit"; // string to set icon
+  await setCoreAttribute('icon', 'icon-set', icon);
   const setValue = await getCoreAttribute('icon', 'icon-set');
   await t
-    .expect(setValue).eql(evalIcon);
+    .expect(setValue).eql(icon);
 });
 
 /** Unit Tests for type attribute of core-link */
@@ -161,10 +159,9 @@ testCoreLink('type', '- Default type value should be empty string', async (t, ct
  * @param {function} testFunc the function to test the attribute
  */
 testCoreLink('type', '- Set type value should be "primary"', async (t, ctx) => {
-  const setType = '"primary"'; // string to set type
-  const evalType = 'primary'; // string the set type should evaluate to
-  await setCoreAttribute('type', 'type-set', setType);
+  const type = 'primary'; // string to set type
+  await setCoreAttribute('type', 'type-set', type);
   const setValue = await getCoreAttribute('type', 'type-set');
   await t
-    .expect(setValue).eql(evalType);
+    .expect(setValue).eql(type);
 });
