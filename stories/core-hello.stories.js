@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/html';
 import { boolean } from '@storybook/addon-knobs/polymer';
 import '../src/core-greet/core-hello/CoreHelloElement';
-import '../src/core-greet/CoreGreetElement';
 
 storiesOf('Core Hello', module)
   .add('English', () => '<core-hello lang="en">Peter</core-hello>')
@@ -9,7 +8,7 @@ storiesOf('Core Hello', module)
     const coreHello0 = document.createElement('core-hello');
     coreHello0.innerText = 'Peter';
     coreHello0.lang = 'en';
-    coreHello0.rainbow = boolean('Rainbow', false);
+    coreHello0.rainbow = boolean('rainbow', true);
     return coreHello0;
   })
   .add('Spanish', () => {
