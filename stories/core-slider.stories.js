@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/html';
 // import { withKnobs } from '@storybook/addon-knobs/polymer';
 // import { action } from '@storybook/addon-actions';
-import coreslider from '../src/core-slider/CoreSliderElement';
+import coreslider from '../src/core-slider/CoreSliderElement.js';
 // import '../src/core-slider/CoreSliderElement.html';
 // import '../src/core-slider/CoreSliderElement.css';
 
@@ -10,7 +10,6 @@ storiesOf('Core Slider', module)
   // .addDecorator(withKnobs)
   .add('Default', () => {
     const slider = document.createElement('core-slider');
-    slider.type = 'core-slider';
     slider.innerText = 'demo';
     return slider;
   })
