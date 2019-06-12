@@ -136,6 +136,8 @@ class CoreSliderElement extends CoreElement {
           this.value = result;
 
           // Update ARIA value
+          // NOTE: these values are based off of the ARIA standard
+          // https://www.w3.org/TR/wai-aria-practices/examples/slider/slider-1.html
           this.slider.setAttribute('aria-valuenow', `${this.value}`);
 
           // Update the thumb position to the new value.
