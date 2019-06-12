@@ -44,6 +44,18 @@ function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListe
   document.removeEventListener(moveEvent, moveListener);
 }
 
+function setupInputEventListeners(e, upEvent, upListener, moveEvent, moveListener) {
+  document.addEventListener(upEvent, upListener);
+  document.addEventListener(moveEvent, moveListener);
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListener) {
+  document.removeEventListener(upEvent, upListener);
+  document.removeEventListener(moveEvent, moveListener);
+}
+
 /**
  * An element that selects a range of values by sliding... It's a slider.
  * @property {number} step the size of the intervals for the value's valid range.
