@@ -164,14 +164,6 @@ function handleAttributeChange(element, attribute, oldValue, newValue) {
   }
 }
 
-/** Retrieves a list of all property keys, strings and symbols included. */
-function getPropertyKeys(object) {
-  return [
-    ...Object.getOwnPropertyNames(object),
-    ...Object.getOwnPropertySymbols(object),
-  ];
-}
-
 /** Prepares the default prop values for the element */
 function setupDefaultProps(element, props) {
   for (const prop of getPropertyKeys(props)) {
