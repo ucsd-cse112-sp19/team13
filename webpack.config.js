@@ -1,5 +1,8 @@
 const path = require('path');
 
+// For bundling web component polyfills
+const WebComponentsPolyfill = require('@purtuga/web-components-polyfill-webpack-plugin');
+
 module.exports = {
 	entry: {
 		'core-hello': './src/core-greet/core-hello/CoreHelloElement.js',
@@ -12,8 +15,16 @@ module.exports = {
 		filename: '[name].js',
 		path: path.resolve(__dirname, 'dist')
 	},
+	plugins: [
+		new WebComponentsPolyfill()
+	],
 	module: {
 		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader'
+			},
 			{
 				test: /\.html$/,
 				use: [
