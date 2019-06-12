@@ -43,13 +43,10 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-enable */
 /* eslint-disable no-unused-vars */
 
-/** Unit Tests for disabled attribute of core-link */
 /**
- * Purpose: checks that the default value of disable is false
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Purpose: checks that the default value of disabled is false
+ * Test Attribute: disabled
+ * Test Description: Default disabled value should be false
  */
 testCoreLink('disabled', '- Default disabled value should be false', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
@@ -59,10 +56,8 @@ testCoreLink('disabled', '- Default disabled value should be false', async (t, c
 
 /**
  * Purpose: checks that the set value of disabled true
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: disabled
+ * Test Description: Set disabled value should be true
  */
 testCoreLink('disabled', '- Set disabled value should be true', async (t, ctx) => {
   const isDisabled = 'true';
@@ -74,10 +69,8 @@ testCoreLink('disabled', '- Set disabled value should be true', async (t, ctx) =
 
 /**
  * Purpose: checks that the core-link has an underline for the text-decoration
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: underline
+ * Test Description: underline test
  */
 testCoreLink('underline', '- underline test', async (t, ctx) => {
   const link = Selector(() => document.querySelector('#underline-link'));
@@ -92,10 +85,8 @@ testCoreLink('underline', '- underline test', async (t, ctx) => {
 
 /**
  * Purpose: checks that the core-link href is working as intended
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: underline
+ * Test Description: underline test
  */
 testCoreLink('href', '- underline test', async (t, ctx) => {
     const link = Selector(() => document.querySelector('#underline-link'));
@@ -108,13 +99,10 @@ testCoreLink('href', '- underline test', async (t, ctx) => {
       .contains('www.google.com');
 });
 
-/** Unit Tests for icon attribute of core-link */
 /**
  * Purpose: checks that the default value of icon is empty string
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: icon
+ * Test Description: Default icon value should be empty string
  */
 testCoreLink('icon', '- Default icon value should be empty string', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('icon', 'icon-default');
@@ -124,10 +112,8 @@ testCoreLink('icon', '- Default icon value should be empty string', async (t, ct
 
 /**
  * Purpose: checks that the set value of icon is "el-icon-edit"
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: icon
+ * Test Description: Set icon value should be "el-icon-edit"
  */
 testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx) => {
   const icon = "el-icon-edit"; // string to set icon
@@ -137,13 +123,10 @@ testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx)
     .expect(setValue).eql(icon);
 });
 
-/** Unit Tests for type attribute of core-link */
 /**
  * Purpose: checks that the default value of type is empty string
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: type
+ * Test Description: Default type value should be empty string
  */
 testCoreLink('type', '- Default type value should be empty string', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('type', 'type-default');
@@ -153,10 +136,8 @@ testCoreLink('type', '- Default type value should be empty string', async (t, ct
 
 /**
  * Purpose: checks that the set value of type is "primary"
- *
- * @param {String} sectionName the name of the attribute being tested
- * @param {String} testDesc further description of the test
- * @param {function} testFunc the function to test the attribute
+ * Test Attribute: type
+ * Test Description: Set type value should be "primary"
  */
 testCoreLink('type', '- Set type value should be "primary"', async (t, ctx) => {
   const type = 'primary'; // string to set type
