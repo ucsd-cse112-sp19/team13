@@ -49,9 +49,11 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
  * Test Description: Default content value should be empty string
  */
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('content', 'content-default');
+  const contentAttr = await Selector('#content-default').hasAttribute('content');
+  const tooltipText = Selector('#content-default').textContent;
   await t
-    .expect(defaultValue).eql('');
+    .expect(contentAttr).eql(false)
+    .expect(tooltipText).eql('');
 });
 
 /**
@@ -72,8 +74,8 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
  * Test Attribute: disabled
  * Test Description: Default disabled value should be false
  */
-testCoreTooltip('disabled', '- Default disabled value should be false', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
+testCoreTooltip('disabled', '- Default disabled should not exist', async (t, ctx) => {
+  const disabledAttr = await Selector('#disabled-default').hasAttribute('disabled');
   await t
     .expect(defaultValue).eql(false);
 });
@@ -378,15 +380,16 @@ testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) =>
  * Test Description: check for no-visible-arrow property
  */
 testCoreTooltip('noArrow', '- check for no-visible-arrow property', async (t, ctx) => {
-  const tooltipHost = Selector('#no-arrow')
+  const tooltipHost = Selector('#no-arrow');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#no-arrow' }, '#tooltip-back');
 
   await t
     .hover(tooltipHost)
     .expect(tooltipHost.hasAttribute('no-visible-arrow')).ok()
-    // min-height and min-width depends on --arrow-size which affects border-width, no other way to get around this
+    // min-height and min-width depends on --arrow-size which affects border-width,
+    // no other way to get around this
     .expect(tooltipBox.getStyleProperty('min-height'))
     .eql('0px')
     .expect(tooltipBox.getStyleProperty('min-width'))
-    .eql('0px')
+    .eql('0px');
 });
