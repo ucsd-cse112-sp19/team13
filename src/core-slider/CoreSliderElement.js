@@ -44,15 +44,22 @@ function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListe
 
 /**
  * An element that selects a range of values by sliding... it's a slider.
- * @property {number} step      the size of the intervals for the value's valid range.
+ * @property {Number} step      the size of the intervals for the value's valid range.
  *                              The attribute name is 'step'.
- * @property {number} min       the minimum value. The attribute name is 'min'.
- * @property {number} max       the maximum value. The attribute name is 'max'.
- * @property {number} value     the current value. The attribute name is 'value'.
- * @property {boolean} disabled whether this can be used. The attribute name is 'disabled'.
- * @property {boolean} vertical whether to display vertically. The attribute name is 'vertical'.
- * @property {boolean} rainbow  whether to display in a bunch of colors.
+ * @property {Number} min       the minimum value.
+ *                              The attribute name is 'min'.
+ * @property {Number} max       the maximum value.
+ *                              The attribute name is 'max'.
+ * @property {Number} value     the current value.
+ *                              The attribute name is 'value'.
+ * @property {Boolean} disabled whether this can be used.
+ *                              The attribute name is 'disabled'.
+ * @property {Boolean} vertical whether to display vertically.
+ *                              The attribute name is 'vertical'.
+ * @property {Boolean} rainbow  whether to display in a bunch of colors.
  *                              The attribute name is 'rainbow'.
+ * @property {String} color     the color of the slider.
+ *                              The attribute name is 'color'.
  */
 class CoreSliderElement extends CoreElement {
   /** @private */
@@ -65,6 +72,7 @@ class CoreSliderElement extends CoreElement {
       disabled: { type: Boolean },
       vertical: { type: Boolean },
       rainbow: { type: Boolean },
+      color: { type: String },
     };
   }
 
@@ -127,6 +135,9 @@ class CoreSliderElement extends CoreElement {
           // Update the thumb position to the new value.
           this.updateThumbPosition(result);
         }
+        break;
+      case 'color':
+        this.slider.style.color = this.color;
         break;
       default:
         // Everything is should be handled by CoreElement automatically.
