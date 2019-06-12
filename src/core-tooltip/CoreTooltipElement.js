@@ -27,7 +27,7 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  * @property {Boolean} disabled       whether it is disabled.
  *                                    The attribute name is 'disabled'.
  * @property {Boolean} offset         The tooltip offset from the target, which is also dependent
- *                                    on placement position.
+ *                                    on placement position. It is in pixels.
  *                                    The attribute name is 'offset'.
  */
 class CoreTooltipElement extends CoreElement {
