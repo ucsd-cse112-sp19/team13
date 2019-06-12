@@ -44,15 +44,22 @@ function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListe
 
 /**
  * An element that selects a range of values by sliding... it's a slider.
- * @property {number} step      the size of the intervals for the value's valid range.
+ * @property {Number} step      the size of the intervals for the value's valid range.
  *                              The attribute name is 'step'.
- * @property {number} min       the minimum value. The attribute name is 'min'.
- * @property {number} max       the maximum value. The attribute name is 'max'.
- * @property {number} value     the current value. The attribute name is 'value'.
- * @property {boolean} disabled whether this can be used. The attribute name is 'disabled'.
- * @property {boolean} vertical whether to display vertically. The attribute name is 'vertical'.
- * @property {boolean} rainbow  whether to display in a bunch of colors.
+ * @property {Number} min       the minimum value.
+ *                              The attribute name is 'min'.
+ * @property {Number} max       the maximum value.
+ *                              The attribute name is 'max'.
+ * @property {Number} value     the current value.
+ *                              The attribute name is 'value'.
+ * @property {Boolean} disabled whether this can be used.
+ *                              The attribute name is 'disabled'.
+ * @property {Boolean} vertical whether to display vertically.
+ *                              The attribute name is 'vertical'.
+ * @property {Boolean} rainbow  whether to display in a bunch of colors.
  *                              The attribute name is 'rainbow'.
+ * @property {String} color     the color of the slider.
+ *                              The attribute name is 'color'.
  */
 class CoreSliderElement extends CoreElement {
   /** @private */
@@ -65,6 +72,7 @@ class CoreSliderElement extends CoreElement {
       disabled: { type: Boolean },
       vertical: { type: Boolean },
       rainbow: { type: Boolean },
+      color: { type: String },
     };
   }
 
@@ -97,6 +105,9 @@ class CoreSliderElement extends CoreElement {
     this.sliderBar.addEventListener('mousedown', this.onMouseDown);
     this.sliderBar.addEventListener('touchstart', this.onTouchStart);
 
+    // Gets the slider progress element from the shadow root by id.
+    this.sliderProgress = this.shadowRoot.querySelector('#slider-progress');
+
     // Gets the parent slider container from the shadow root by id.
     this.slider = this.shadowRoot.querySelector('#slider');
 
@@ -127,6 +138,9 @@ class CoreSliderElement extends CoreElement {
           // Update the thumb position to the new value.
           this.updateThumbPosition(result);
         }
+        break;
+      case 'color':
+        this.slider.style.color = this.color;
         break;
       default:
         // Everything is should be handled by CoreElement automatically.
@@ -164,15 +178,18 @@ class CoreSliderElement extends CoreElement {
     // The thumb position should not be allowed to leave the "bar".
     if (progress > 1) progress = 1;
     if (progress < 0) progress = 0;
-    const thumbWidth = this.sliderThumb.clientWidth;
 
     // Depending on whether it is vertical, the position may be left->right or top->bottom.
     if (!this.vertical) {
-      this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-      this.sliderThumb.style.top = 'calc(50% - 0.5rem)';
+      this.sliderThumb.style.left = `calc(${progress * 100}%)`;
+      this.sliderThumb.style.top = '0px';
+      this.sliderProgress.style.width = `${progress * 100}%`;
+      this.sliderProgress.style.height = '100%';
     } else {
-      this.sliderThumb.style.left = 'calc(50% - 0.5rem)';
-      this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+      this.sliderThumb.style.left = '0px';
+      this.sliderThumb.style.top = `calc(${(1 - progress) * 100}%)`;
+      this.sliderProgress.style.width = '100%';
+      this.sliderProgress.style.height = `${progress * 100}%`;
     }
   }
 
@@ -272,7 +289,7 @@ class CoreSliderElement extends CoreElement {
     const sliderBoundingRect = this.slider.getBoundingClientRect();
     return !this.vertical
       ? (e.clientX - sliderBoundingRect.left) / this.slider.clientWidth
-      : (e.clientY - sliderBoundingRect.top) / this.slider.clientHeight;
+      : 1 - ((e.clientY - sliderBoundingRect.top) / this.slider.clientHeight);
   }
 
   /**
