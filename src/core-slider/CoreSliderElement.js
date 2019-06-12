@@ -135,12 +135,25 @@ class CoreSliderElement extends CoreElement {
           // Update the new value.
           this.value = result;
 
+          // Update ARIA value
+          // NOTE: these values are based off of the ARIA standard
+          // https://www.w3.org/TR/wai-aria-practices/examples/slider/slider-1.html
+          this.slider.setAttribute('aria-valuenow', `${this.value}`);
+
           // Update the thumb position to the new value.
           this.updateThumbPosition(result);
         }
         break;
       case 'color':
         this.slider.style.color = this.color;
+        break;
+      case 'min':
+        // Update ARIA value
+        this.slider.setAttribute('aria-valuemin', `${this.min}`);
+        break;
+      case 'max':
+        // Update ARIA value
+        this.slider.setAttribute('aria-valuemax', `${this.max}`);
         break;
       default:
         // Everything is should be handled by CoreElement automatically.
