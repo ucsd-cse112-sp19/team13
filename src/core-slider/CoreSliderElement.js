@@ -105,6 +105,9 @@ class CoreSliderElement extends CoreElement {
     this.sliderBar.addEventListener('mousedown', this.onMouseDown);
     this.sliderBar.addEventListener('touchstart', this.onTouchStart);
 
+    // Gets the slider progress element from the shadow root by id.
+    this.sliderProgress = this.shadowRoot.querySelector('#slider-progress');
+
     // Gets the parent slider container from the shadow root by id.
     this.slider = this.shadowRoot.querySelector('#slider');
 
@@ -137,7 +140,7 @@ class CoreSliderElement extends CoreElement {
         }
         break;
       case 'color':
-        this.slider.style.setProperty('--track-color', this.color);
+        this.slider.style.color = this.color;
         break;
       default:
         // Everything is should be handled by CoreElement automatically.
@@ -175,15 +178,18 @@ class CoreSliderElement extends CoreElement {
     // The thumb position should not be allowed to leave the "bar".
     if (progress > 1) progress = 1;
     if (progress < 0) progress = 0;
-    const thumbWidth = this.sliderThumb.clientWidth;
 
     // Depending on whether it is vertical, the position may be left->right or top->bottom.
     if (!this.vertical) {
-      this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
-      this.sliderThumb.style.top = 'calc(50% - 0.5rem)';
+      this.sliderThumb.style.left = `calc(${progress * 100}%)`;
+      this.sliderThumb.style.top = '0px';
+      this.sliderProgress.style.width = `${progress * 100}%`;
+      this.sliderProgress.style.height = '100%';
     } else {
-      this.sliderThumb.style.left = 'calc(50% - 0.5rem)';
-      this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+      this.sliderThumb.style.left = '0px';
+      this.sliderThumb.style.top = `calc(${(1 - progress) * 100}%)`;
+      this.sliderProgress.style.width = '100%';
+      this.sliderProgress.style.height = `${progress * 100}%`;
     }
   }
 
@@ -283,7 +289,7 @@ class CoreSliderElement extends CoreElement {
     const sliderBoundingRect = this.slider.getBoundingClientRect();
     return !this.vertical
       ? (e.clientX - sliderBoundingRect.left) / this.slider.clientWidth
-      : (e.clientY - sliderBoundingRect.top) / this.slider.clientHeight;
+      : 1 - ((e.clientY - sliderBoundingRect.top) / this.slider.clientHeight);
   }
 
   /**
