@@ -84,7 +84,7 @@ testCoreTooltip('disabled', '- Default disabled value should be false', async (t
  * Test Description: Set disabled value should be true
  */
 testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx) => {
-  const isDisabled = true;
+  const isDisabled = 'true';
   await setCoreAttribute('disabled', 'disabled-set', isDisabled);
   const setValue = await getCoreAttribute('disabled', 'disabled-set');
   await t
@@ -216,7 +216,7 @@ testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) =
  * Test Description: Set offset value should be 1
  */
 testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
-  const index = 1;
+  const index = '1';
   await setCoreAttribute('offset', 'offset-set', index);
   const setValue = await getCoreAttribute('offset', 'offset-set');
   await t
@@ -348,7 +348,7 @@ testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ct
  * Test Description: Set tabindex value should be 1
  */
 testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) => {
-  const index = 1;
+  const index = '1';
   await setCoreAttribute('tabindex', 'tabindex-set', index);
   const setValue = await getCoreAttribute('tabindex', 'tabindex-set');
   await t
