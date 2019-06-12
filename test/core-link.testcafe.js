@@ -89,14 +89,14 @@ testCoreLink('underline', '- underline test', async (t, ctx) => {
  * Test Description: underline test
  */
 testCoreLink('href', '- underline test', async (t, ctx) => {
-    const link = Selector(() => document.querySelector('#underline-link'));
-    const linkComp = ShadowChildSelector(t, ctx, '#link');
+  const link = Selector(() => document.querySelector('#underline-link'));
+  const linkComp = ShadowChildSelector(t, ctx, '#link');
 
-    await t
-      .expect(link.hasAttribute('href'))
-      .ok()
-      .expect(linkComp.getAttribute('href'))
-      .contains('www.google.com');
+  await t
+    .expect(link.hasAttribute('href'))
+    .ok()
+    .expect(linkComp.getAttribute('href'))
+    .contains('www.google.com');
 });
 
 /**
@@ -116,7 +116,7 @@ testCoreLink('icon', '- Default icon value should be empty string', async (t, ct
  * Test Description: Set icon value should be "el-icon-edit"
  */
 testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx) => {
-  const icon = "el-icon-edit"; // string to set icon
+  const icon = 'el-icon-edit'; // string to set icon
   await setCoreAttribute('icon', 'icon-set', icon);
   const setValue = await getCoreAttribute('icon', 'icon-set');
   await t
