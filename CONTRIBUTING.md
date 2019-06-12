@@ -86,160 +86,183 @@ Join us in the [contributors' chat](https://gitter.im/mochajs/contributors)!
 So you want to contribute to core components? Here's what you need to know.
 
 ### The Basics
-What do we need to make a website?
-    A website is mostly comprised of 3 things: the style, the structure, and the logic. For most of the web today, this would mean CSS, HTML, and JavaScript respectively. In HTML, you would write some tags such as:
-    ```html
-        <button>Click Me</button>
-    ```
-    And then you'd add some logic to do something on a click:
-    ```
-        const button = document.querySelector('button');
-        button.addEventListener('click', (e) => {
-            console.log("I. Got. Clicked.");
-        });
-    ```
-    And then you'd like it to be blue:
-    ```css
-        button {
-            color: blue;
-            background: dodgerblue;
-        }
-    ```
-    Of course, this is a simple example, but there a tons more to look into, such as animations, asynchronous procedures, and data-* attributes. I would suggest you look around.
 
-    NOTE: If you ever want to know about what some tag or style does, I would recommend you checkout this: https://developer.mozilla.org
+**What do we need to make a website?**
 
-What is a web component?
-    They are basically components we build so you can easily build a web page out of it, such as `<video>` or `<img>`. It simplifies the process and reduces the workload of having to implement your own slider or date picker. Frameworks such as React.js or Angular.js try to achieve the same thing. But because web components use native features of the web, it is universally accessible without extra files and other burdens. Because of modularity, web components can be used anywhere, with anything (even with other frameworks).
-    To achieve this, a component uses 3 technologies:
-        The Shadow DOM to ensure encapsulation of the component.
-        The template tag to lazily load the html.
-        The custom tag to name it something useful.
+A website is mostly comprised of 3 things: the style, the structure, and the logic. For most of the web today, this would mean CSS, HTML, and JavaScript respectively. In HTML, you would write some tags such as:
 
-What is the Shadow DOM?
-    A website is essentially one large tree of tags, known as the DOM. The tags you write are appended to parent nodes, and any additional nodes you add are its children.
-    Now the Shadow DOM is a part of the tree, a subtree, that is treated differently than the other parts. You can think of this as a separate DOM tree that is completely isolated from the main browser. Any style and logic cannot enter or exit this boundary.
-    This allows the web component to style freely without worry of conflict with the outside world.
+```html
+<button>Click Me</button>
+```
 
-What is a template tag?
-    It's a tag that doesn't execute its contents. So any style or script tags that are embedded as a child of this tag will not be executed until we actively (in JavaScript) load it. This allows our code to setup any web component initialization, such as the Shadow DOM, without it interferring with everything else before we have a chance to work with it.
+And then you'd add some logic to do something on a click:
 
-How do you get a custom tag?
-    A custom tag is a tag with a custom name. As long as it has a dash in it, it is a valid custom tag name. We can use this to name our web components with a unique tag name. So we can use:
-    ```html
-    <core-element>...</core-element>
-    ```
-    This is usually done by registering it with the browser.
+```javascript
+const button = document.querySelector('button');
+button.addEventListener('click', (e) => {
+    console.log("I. Got. Clicked.");
+});
+```
+
+And then you'd like it to be blue:
+
+```css
+button {
+    color: blue;
+    background: dodgerblue;
+}
+```
+
+Of course, this is a simple example, but there a tons more to look into, such as animations, asynchronous procedures, and data-* attributes. I would suggest you look around.
+
+NOTE: If you ever want to know about what some tag or style does, I would recommend you checkout this: https://developer.mozilla.org
+
+**What is a web component?**
+
+They are basically components we build so you can easily build a web page out of it, such as `<video>` or `<img>`. It simplifies the process and reduces the workload of having to implement your own slider or date picker. Frameworks such as React.js or Angular.js try to achieve the same thing. But because web components use native features of the web, it is universally accessible without extra files and other burdens. Because of modularity, web components can be used anywhere, with anything (even with other frameworks).
+
+To achieve this, a component uses 3 technologies:
+- The Shadow DOM to ensure encapsulation of the component.
+- The template tag to lazily load the html.
+- The custom tag to name it something useful.
+
+**What is the Shadow DOM?**
+
+A website is essentially one large tree of tags, known as the DOM. The tags you write are appended to parent nodes, and any additional nodes you add are its children.
+Now the Shadow DOM is a part of the tree, a subtree, that is treated differently than the other parts. You can think of this as a separate DOM tree that is completely isolated from the main browser. Any style and logic cannot enter or exit this boundary.
+
+This allows the web component to style freely without worry of conflict with the outside world.
+
+**What is a template tag?**
+
+It's a tag that doesn't execute its contents. So any style or script tags that are embedded as a child of this tag will not be executed until we actively (in JavaScript) load it. This allows our code to setup any web component initialization, such as the Shadow DOM, without it interferring with everything else before we have a chance to work with it.
+
+**How do you get a custom tag?**
+
+A custom tag is a tag with a custom name. As long as it has a dash in it, it is a valid custom tag name. We can use this to name our web components with a unique tag name. So we can use:
+
+```html
+<core-element>...</core-element>
+```
+
+This is usually done by registering it with the browser.
 
 ### The Good Stuff
 Now, to add new features to a core-element, you can either extend or modify the existing classes.
 
 #### Extending Core Element
-    You can simply extend the desired component class. All properties and functionality will be inherited. Because of this, any functions you override must call its super equivalent. For example, if you want to override attributeChangedCallback(...), be sure to call super.attributeChangedCallback(...) with all the passed-in parameters. If you are planning to create a whole new tag with similar features, you would do this. Here's an example of a SuperButton.
+You can simply extend the desired component class. All properties and functionality will be inherited. Because of this, any functions you override must call its super equivalent. For example, if you want to override `attributeChangedCallback(...)`, be sure to call `super.attributeChangedCallback(...)` with all the passed-in parameters. If you are planning to create a whole new tag with similar features, you would do this. Here's an example of a `SuperButton`.
 
-    ```
-    import CoreElement from './core-element/CoreElement';
-    import CoreButtonElement from './core-button/CoreButtonElement';
+```javascript
+import CoreElement from './core-element/CoreElement';
+import CoreButtonElement from './core-button/CoreButtonElement';
 
-    // These are files you create.
-    import TEMPLATE from './CoreSuperButtonElement.html';
-    import STYLE from './CoreSuperButtonElement.css';
+// These are files you create.
+import TEMPLATE from './CoreSuperButtonElement.html';
+import STYLE from './CoreSuperButtonElement.css';
 
-    const templateNode = CoreElement.templateNode(TEMPLATE, STYLE);
+const templateNode = CoreElement.templateNode(TEMPLATE, STYLE);
 
-    class CoreSuperButtonElement extends CoreButtonElement {
-        constructor() {
-            super(templateNode);
-        }
-
-        // ... your other logic / code ...
+class CoreSuperButtonElement extends CoreButtonElement {
+    constructor() {
+        super(templateNode);
     }
-    CoreElement.customTag('core-super-button', CoreSuperButtonElement);
-    
-    export default CoreSuperButtonElement;
-    ```
+
+    // ... your other logic / code ...
+}
+CoreElement.customTag('core-super-button', CoreSuperButtonElement);
+
+export default CoreSuperButtonElement;
+```
 
 #### Modifying Core Element
-    Most of the time, you would want to do this to modify features to existing tags. You can edit any of the 3 files that are associated with a component class. The JavaScript handles the logic, the HTML handles the semantic structure, and the CSS handles the style. They will all be loaded together, so you can reference your class names and ids in both JavaScript and CSS, and vice versa.
+Most of the time, you would want to do this to modify features to existing tags. You can edit any of the 3 files that are associated with a component class. The JavaScript handles the logic, the HTML handles the semantic structure, and the CSS handles the style. They will all be loaded together, so you can reference your class names and ids in both JavaScript and CSS, and vice versa.
 
 ##### Implementing your own attribute.
-    Attributes are things that allow a website builder to specify options. Things such as title or disabled on a button.
-    ```html
-        <button title="I cannot be clicked" disabled></button>
-    ```
-    NOTE: There are 2 types of attributes, the value and the flag. The value, as demonstrated by title, is an attribute with an associated string as its value. You can pass numbers and other content, but it must always be in the form of a string. The flag, as demonstrated by disabled, is an attribute that does not have a value, but rather is evaluated on whether it exists or not.
+Attributes are things that allow a website builder to specify options. Things such as title or disabled on a button.
 
-    In most web components, you would specify attributes with setAttribute(), getAttribute(), and similar function calls. In CoreElement, most of this is abstracted away to allow cleaner and easier code.
+```html
+<button title="I cannot be clicked" disabled>
+    Even though I am a button.
+</button>
+```
 
-    This time, we define properties (props for short) that represent attributes. These properties will be evaluated at runtime on load and then it will handle all the necessary code to properly setup the web component. To define a property, we add an entry to the static getter 'properties' of the class. Here is an example for a 'happyTime' property.
-    ```html
-        class CoreButtonElement extends CoreElement {
-            static get properties() {
-                return {
-                    happyTime: { type: Number }
-                };
-            }
+NOTE: There are 2 types of attributes, the value and the flag. The value, as demonstrated by title, is an attribute with an associated string as its value. You can pass numbers and other content, but it must always be in the form of a string. The flag, as demonstrated by disabled, is an attribute that does not have a value, but rather is evaluated on whether it exists or not.
 
-            constructor()
-            {
-                super();
-            }
+In most web components, you would specify attributes with `setAttribute()`, `getAttribute()`, and similar function calls. In `CoreElement`, most of this is abstracted away to allow cleaner and easier code.
 
-            // ... the rest of the code...
-        }
-    ```
-    The name of the attribute would be 'happy-time'. It will automatically convert the camelCase property name to the dash-case attribute name. Also, it would expect the value to be of type Number. Other types such as String, Object, or Boolean (for flag attributes) are also supported. You can even define your own type by passing in type your own function. This function would take a string and parse it to the data type you want.
+This time, we define properties (props for short) that represent attributes. These properties will be evaluated at runtime on load and then it will handle all the necessary code to properly setup the web component. To define a property, we add an entry to the static getter `properties` of the class. Here is an example for a `happyTime` property.
 
-    However, you may be wondering why there is a type. "I thought you said tags have attributes that only take strings?" you might say. Well you are right. CoreElement actually handles the conversion for you. Otherwise, everytime you access one of the attributes to compute some data, you will need to pass it through a parser before you can use it (it's a pain).
+```javascript
+class CoreButtonElement extends CoreElement {
+    static get properties() {
+        return {
+            happyTime: { type: Number }
+        };
+    }
 
-    This also means you can use data like this.happyTime or through html or even getAttribute('happy-time'). All the ways you'd expect a normal tag would behave will continue as expected.
-
-    NOTE: If you want to specify a default value, you can set it in the constructor. For example:
-
-    ```
-    // ... other code ...
     constructor()
     {
         super();
-        this.happyTime = 10000;
     }
-    // ... other code ...
-    ```
-    Now that we have an attribute (and its corresponding property), let's make it do something with it.
+
+    // ... the rest of the code...
+}
+```
+
+The name of the attribute would be `happy-time`. It will automatically convert the `camelCase` property name to the `dash-case` attribute name. Also, it would expect the value to be of type Number. Other types such as `String`, `Object`, or `Boolean` (for flag attributes) are also supported. You can even define your own type by passing in type your own function. This function would take a string and parse it to the data type you want.
+
+However, you may be wondering why there is a type. "I thought you said tags have attributes that only take strings?" you might say. Well you are right. `CoreElement` actually handles the conversion for you. Otherwise, everytime you access one of the attributes to compute some data, you will need to pass it through a parser before you can use it (it's a pain).
+
+This also means you can use data like `this.happyTime` or through html or even `getAttribute('happy-time')`. All the ways you'd expect a normal tag would behave will continue as expected.
+
+NOTE: If you want to specify a default value, you can set it in the constructor. For example:
+
+```javascript
+// ... other code ...
+constructor() {
+    super();
+    this.happyTime = 10000;
+}
+// ... other code ...
+```
+
+Now that we have an attribute (and its corresponding property), let's make it do something with it.
 
 ##### Implementing a change/effect for an attribute
-    For any changes to the value, you can override propertyChangedCallback() to catch your property change. This is similar to attributeChangedCallback(), but it transforms its parameters to the appropriate type before letting you handle them (otherwise, they would all be strings). This function is triggered by external changes to the attribute but also with your own calls to change 'happyTime' (it does prevent infinite loops if you try to update the value within the callback). This means you can perform additional logic when any attribute/property you define changes, including the setup when the value is first created. Here's a little example:
+For any changes to the value, you can override `propertyChangedCallback()` to catch your property change. This is similar to `attributeChangedCallback()`, but it transforms its parameters to the appropriate type before letting you handle them (otherwise, they would all be strings). This function is triggered by external changes to the attribute but also with your own calls to change `happyTime` (it does prevent infinite loops if you try to update the value within the callback). This means you can perform additional logic when any attribute/property you define changes, including the setup when the value is first created. Here's a little example:
 
-    ```
-    propertyChangedCallback(property, oldValue, newValue) {
-        switch (property) {
-            case 'happyTime':
-                if (newValue < oldValue)
-                {
-                    console.log("We are now sadder.");
-                }
-                else
-                {
-                    console.log("We are now happier!");
-                }
-                break;
-            default:
-        }
+```javascript
+/** @override */
+propertyChangedCallback(property, oldValue, newValue) {
+    switch (property) {
+        case 'happyTime':
+            if (newValue < oldValue)
+            {
+                console.log("We are now sadder.");
+            }
+            else
+            {
+                console.log("We are now happier!");
+            }
+            break;
+        default:
     }
-    ```
+}
+```
 
 ##### Adding your own functions
-    Don't repeat yourself. If you find yourself writing the same code in multiple places, try putting them in a function. Even locally scope the function by declaring a function outside the class. These will be inaccessible to anyone else but this class. Here's an example:
+Don't repeat yourself. If you find yourself writing the same code in multiple places, try putting them in a function. Even locally scope the function by declaring a function outside the class. These will be inaccessible to anyone else but this class. Here's an example:
 
-    ```
-    function doSomeRepeatedCode() {
-        // ... some repeated code ...
-    }
+```javascript
+function doSomeRepeatedCode() {
+    // ... some repeated code ...
+}
 
-    class CoreButtonElement extends CoreElement {
-        // ... other code ...
-        // you can now call it in any function in here!
-        // ... other code ...
-    }
-    ```
+class CoreButtonElement extends CoreElement {
+    // ... other code ...
+    // you can now call it in any function in here!
+    // ... other code ...
+}
+```
 
