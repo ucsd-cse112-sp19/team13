@@ -8,7 +8,12 @@ const HELLO_STRING = {
   fr: 'Bonjour',
 };
 
-/** An element that displays "Hello" with the passed-in name. */
+/**
+ * An element that displays "Hello" with the passed-in name.
+ * @property {string} name the string that will be displayed.
+ * @property {boolean} rainbow whether the name should be colorfully animated.
+ * @property {String} lang the language to display in.
+ */
 class CoreHelloElement extends CoreGreetElement {
   /** Creates a CoreHello element. */
   constructor() {
