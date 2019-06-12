@@ -178,11 +178,15 @@ class CoreTooltipElement extends CoreElement {
       // Exit if manual is true.
       return;
     }
-    if (this.closeTimeout) {
-      clearTimeout(this.closeTimeout);
-      this.closeTimeout = null;
+    // Remove any existing timeouts, so we don't trigger it again.
+    this.clearTimeouts();
+
+    // Only delay if moving from NOT a tooltip...
+    if (!CoreTooltipElement.activeElement) {
+      this.openTimeout = setTimeout(this.onTooltipOpen, this.openDelay);
+    } else {
+      this.onTooltipOpen();
     }
-    this.openTimeout = setTimeout(this.onTooltipOpen, this.openDelay);
   }
 
   /** Called when mouse leaves the parent. */
@@ -191,11 +195,15 @@ class CoreTooltipElement extends CoreElement {
       // Exit if manual is true.
       return;
     }
-    if (this.openTimeout) {
-      clearTimeout(this.openTimeout);
-      this.openTimeout = null;
+    // Remove any existing timeouts, so we don't trigger it again.
+    this.clearTimeouts();
+
+    // Only delay if moving out of ALL tooltips...
+    if (CoreTooltipElement.activeElement === this) {
+      this.closeTimeout = setTimeout(this.onTooltipClose, this.closeDelay);
+    } else {
+      this.onTooltipClose();
     }
-    setTimeout(this.onTooltipClose, this.closeDelay);
   }
 
   /** Called when target is in focus. */
@@ -216,12 +224,40 @@ class CoreTooltipElement extends CoreElement {
     if (this.focusable) this.onTooltipClose();
   }
 
+  /** Remove any existing close timeouts, so we don't trigger it again. */
+  clearTimeouts() {
+    if (this.openTimeout) {
+      clearTimeout(this.openTimeout);
+      this.openTimeout = null;
+    }
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+  }
+
   /**
    * Called when the tooltip should open (after a set delay). The
    * timer is triggered by onMouseEnter().
    */
   onTooltipOpen() {
+    // Only manage tooltip show/hide if NOT manually controlled...
+    if (!this.manual) {
+      // Force open now.
+      if (CoreTooltipElement.activeElement
+        && CoreTooltipElement.activeElement !== this) {
+        // Close previous active element.
+        const element = CoreTooltipElement.activeElement;
+        element.onTooltipClose();
+      }
+      // Make this the active element.
+      CoreTooltipElement.activeElement = this;
+    }
+
+    // Actually open the tooltip...
     this.shadowRoot.host.style.opacity = 1;
+    // Remove any existing timeouts, so we don't trigger it again.
+    this.clearTimeouts();
   }
 
   /**
@@ -229,14 +265,21 @@ class CoreTooltipElement extends CoreElement {
    * timer is triggered by onMouseLeave().
    */
   onTooltipClose() {
+    // Actually close the tooltip...
     this.shadowRoot.host.style.opacity = 0;
+    // Remove any existing timeouts, so we don't trigger it again.
+    this.clearTimeouts();
+
+    // Only manage tooltip show/hide if NOT manually controlled...
+    if (!this.manual) {
+      if (CoreTooltipElement.activeElement === this) {
+        CoreTooltipElement.activeElement = null;
+      }
+    }
   }
 }
-/*
-  // TODO: We'll worry about this later, this is for the "tooltip" mode that Shardul wanted.
-  CoreTooltipElement.timeout = null;
-  CoreTooltipElement.active = false;
-*/
+// The currently open tooltip element such that only 1 is every "active" at one time.
+CoreTooltipElement.activeElement = null;
 
 CoreElement.customTag('core-tooltip', CoreTooltipElement);
 
