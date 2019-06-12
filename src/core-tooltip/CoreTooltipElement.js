@@ -26,9 +26,9 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  *                                    The attribute name is 'no-visible-arrow'.
  * @property {Boolean} disabled       whether it is disabled.
  *                                    The attribute name is 'disabled'.
- * @property {Boolean} enterable      whether the tooltip will remain opened if the tooltip
- *                                    becomes the hover target, leaving the parent target.
- *                                    The attribute name is 'disabled'.
+ * @property {Boolean} offset         The tooltip offset from the target, which is also dependent
+ *                                    on placement position.
+ *                                    The attribute name is 'offset'.
  */
 class CoreTooltipElement extends CoreElement {
   /**
@@ -47,7 +47,7 @@ class CoreTooltipElement extends CoreElement {
       manual: { type: Boolean },
       noVisibleArrow: { type: Boolean },
       disabled: { type: Boolean },
-      enterable: { type: Boolean },
+      offset: { type: Number },
     };
   }
 
@@ -110,6 +110,9 @@ class CoreTooltipElement extends CoreElement {
         break;
       case 'disabled':
         this.clearTarget();
+        break;
+      case 'offset':
+        this.shadowRoot.host.style.setProperty('--offset', `${this.offset}px`);
         break;
       default:
     }
