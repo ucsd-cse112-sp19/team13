@@ -164,6 +164,14 @@ function handleAttributeChange(element, attribute, oldValue, newValue) {
   }
 }
 
+/** Retrieves a list of all property keys, strings and symbols included. */
+function getPropertyKeys(object) {
+  return [
+    ...Object.getOwnPropertyNames(object),
+    ...Object.getOwnPropertySymbols(object),
+  ];
+}
+
 /** The base element for web components to handle as much boilerplate code as possible. */
 class CoreElement extends HTMLElement {
   /**

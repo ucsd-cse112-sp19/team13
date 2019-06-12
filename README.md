@@ -9,7 +9,9 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
 [See our docs](https://drive.google.com/open?id=10RPfh2c-1xePoPe4ytpX2LaDlBoi1_Dy)
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+If youre as passionate as we are, Thats all you need. 
+See our [How To Contribute](./CONTRIBUTING.md) docs for simple steps!
+
 
 Please make sure to update tests as appropriate.
 
