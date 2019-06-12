@@ -31,8 +31,7 @@ const getCoreAttribute = ClientFunction((strAttrName, strElemId) => {
  *
  * @param {String} strAttrName the name of the attribute to get
  * @param {String} strElemId the id of the tested element.
- * @param value the value strAttrName should be set to. For strings,they need to
- * be in format '"example string"'
+ * @param value the value strAttrName should be set to.
  */
 const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
   const testElement = document.getElementById(strElemId);
@@ -68,7 +67,6 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
     .expect(setValue).eql(message);
 });
 
-/** Unit Tests for disable attribute of core-tooltip */
 /**
  * Purpose: checks that the default value of disabled is false
  * Test Attribute: disabled
@@ -94,7 +92,7 @@ testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx
 });
 
 /**
- * Purpose: checks that the set value of effect is dark
+ * Purpose: checks that the background color of the tooltip is dark when effect=dark
  * Test Attribute: effect
  * Test Description: dark effect
  */
@@ -105,7 +103,11 @@ testCoreTooltip('effect', '- dark effect', async (t, ctx) => {
     .eql('rgb(0, 0, 0)');
 });
 
-/** Tests for light theme of core-tooltip */
+/**
+ * Purpose: checks that the background color of the tooltip is light when effect=light
+ * Test Attribute: effect
+ * Test Description: light effect
+ */
 testCoreTooltip('effect', '- light effect', async (t, ctx) => {
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#effect-light' }, '#tooltip-back');
   await t
@@ -113,7 +115,11 @@ testCoreTooltip('effect', '- light effect', async (t, ctx) => {
     .eql('rgb(255, 255, 255)');
 });
 
-/** Tests for hoverable property of Core-tooltip */
+/**
+ * Purpose: checks that the tooltip can be displayed by hovering over parent
+ * Test Attribute: hoverable
+ * Test Description: check the component is hoverable
+ */
 testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx) => {
   const tooltip = Selector('#hoverable-tooltip');
   const tooltipBox = Selector('#hoverable-tooltip-box');
@@ -123,8 +129,12 @@ testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx
     .eql('1');
 });
 
-/** Tests for enterable property of Core-tooltip (keep visiable when mouse enter tooltip */
-testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) => {
+/**
+ * Purpose: checks that the tooltip can be entered by moving mouse onto the tooltip
+ * Test Attribute: enterable
+ * Test Description: check the tooltip is enterable
+ */
+testCoreTooltip('enterable', '- check the tooltip is enterable', async (t, ctx) => {
   const tooltip = Selector('#enterable-tooltip');
   const tooltipBox = Selector('#enterable-tooltip-box');
   await t
@@ -139,7 +149,11 @@ testCoreTooltip('enterable', '- check the tootip is enterable', async (t, ctx) =
     .eql('1');
 });
 
-/** Tests for hide after property of Core-tooltip */
+/**
+ * Purpose: checks that the tooltip disappears after hovering over a different tooltip
+ * Test Attribute: closedelay
+ * Test Description: check the previous tooltip hide after hover for new tooltip
+ */
 testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
   const tooltip1 = Selector('#closedelay-tooltip1');
   const tooltip2 = Selector('#closedelay-tooltip2');
@@ -163,7 +177,11 @@ testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for
     .eql('0');
 });
 
-/** Tests for popup after property of Core-tooltip */
+/**
+ * Purpose: checks that the tooltip only appears after a certain amount of time has passed
+ * Test Attribute: opendelay
+ * Test Description: check if the tooltip pops up after a few seconds
+ */
 testCoreTooltip('opendelay', '- check if the tooltip pops up after a few seconds', async (t, ctx) => {
   const tooltip1 = Selector('#opendelay-tooltip1');
   const tooltipBox1 = Selector('#opendelay-tooltip1-box');
@@ -181,13 +199,22 @@ testCoreTooltip('opendelay', '- check if the tooltip pops up after a few seconds
     .eql('1');
 });
 
-/** Unit Tests for offset attribute of core-tooltip */
+/**
+ * Purpose: checks that the default value of offset attribute is 0
+ * Test Attribute: offset
+ * Test Description: Default offset value should be 0
+ */
 testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) => {
   const defaultValue = await getCoreAttribute('offset', 'offset-default');
   await t
     .expect(defaultValue).eql(0);
 });
 
+/**
+ * Purpose: checks that the set value of offset attribute is 1
+ * Test Attribute: offset
+ * Test Description: Set offset value should be 1
+ */
 testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
   const index = 1;
   await setCoreAttribute('offset', 'offset-set', index);
@@ -196,7 +223,11 @@ testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
     .expect(setValue).eql(index);
 });
 
-/** Test for placement: right */
+/**
+ * Purpose: checks that the tooltip appears to the right of the parent
+ * Test Attribute: placement
+ * Test Description: placement location: right
+ */
 testCoreTooltip('placement', '- placement location: right', async (t, ctx) => {
   const tooltipHost = Selector('#label-right');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#right' }, '#tooltip-back');
@@ -214,7 +245,11 @@ testCoreTooltip('placement', '- placement location: right', async (t, ctx) => {
     .gt(hostCoordinateRight);
 });
 
-/** Test for placement: left */
+/**
+ * Purpose: checks that the tooltip appears to the left of the parent
+ * Test Attribute: placement
+ * Test Description: placement location: left
+ */
 testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
   const tooltipHost = Selector('#label-left');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#left' }, '#tooltip-back');
@@ -232,7 +267,11 @@ testCoreTooltip('placement', '- placement location: left', async (t, ctx) => {
     .lt(hostCoordinateRight);
 });
 
-/** Test for placement: up */
+/**
+ * Purpose: checks that the tooltip appears above the parent
+ * Test Attribute: placement
+ * Test Description: placement location: up
+ */
 testCoreTooltip('placement', '- placement location: up', async (t, ctx) => {
   const tooltipHost = Selector('#label-up');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#up' }, '#tooltip-back');
@@ -250,7 +289,11 @@ testCoreTooltip('placement', '- placement location: up', async (t, ctx) => {
     .lt(hostCoordinateBottom);
 });
 
-/** Test for placement: bottom */
+/**
+ * Purpose: checks that the tooltip appears below the parent
+ * Test Attribute: placement
+ * Test Description: placement location: bottom
+ */
 testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
   const tooltipHost = Selector('#label-bottom');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#bottom' }, '#tooltip-back');
@@ -268,7 +311,11 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
     .gt(hostCoordinateBottom);
 });
 
-/** Test for manual exit tooltip */
+/**
+ * Purpose: checks that the tooltip can only be controlled manually and not by mouse
+ * Test Attribute: manual
+ * Test Description: manual property
+ */
 testCoreTooltip('manual', '- manual property', async (t, ctx) => {
   const tooltipHost = ctx.target;
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
@@ -308,7 +355,11 @@ testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) =
     .expect(setValue).eql(index);
 });
 
-/** Test for focusable property */
+/**
+ * Purpose: checks that tooltip can be controlled by using tab key
+ * Test Attribute: focusable
+ * Test Description: check for focusable property
+ */
 testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) => {
   const tooltipHost = ctx.target;
 
@@ -321,7 +372,11 @@ testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) =>
     .eql('1');
 });
 
-/** Test for no-visible-arrow property */
+/**
+ * Purpose: checks that there is no arrow at the bottom of the tooltip
+ * Test Attribute: noArrow
+ * Test Description: check for no-visible-arrow property
+ */
 testCoreTooltip('noArrow', '- check for no-visible-arrow property', async (t, ctx) => {
   const tooltipHost = Selector('#no-arrow')
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#no-arrow' }, '#tooltip-back');
