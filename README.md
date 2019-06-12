@@ -2,10 +2,9 @@
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
 
 [![Build Status](https://travis-ci.com/ucsd-cse112/team13.svg?branch=master)](https://travis-ci.com/ucsd-cse112/team13)
-<!-- [![Maintainability](https://api.codeclimate.com/v1/badges/c46bd5e7fe5cc18e9541/maintainability)](https://codeclimate.com/repos/5cbebc0cfbadb16720001ec7/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/c46bd5e7fe5cc18e9541/test_coverage)](https://codeclimate.com/repos/5cbebc0cfbadb16720001ec7/test_coverage)
-[![Sauce Test Status](https://saucelabs.com/buildstatus/team5thanos)](https://saucelabs.com/u/team5thanos)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg) -->
+[![Maintainability](https://api.codeclimate.com/v1/badges/c46bd5e7fe5cc18e9541/maintainability)](https://codeclimate.com/github/ucsd-cse112/team13/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c46bd5e7fe5cc18e9541/test_coverage)](https://codeclimate.com/github/ucsd-cse112/team13/test_coverage)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/res/logo.png)
 
