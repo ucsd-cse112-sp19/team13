@@ -137,7 +137,7 @@ class CoreSliderElement extends CoreElement {
         }
         break;
       case 'color':
-        this.slider.style.color = this.color;
+        this.slider.style.setProperty('--track-color', this.color);
         break;
       default:
         // Everything is should be handled by CoreElement automatically.
