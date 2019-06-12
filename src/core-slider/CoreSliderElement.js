@@ -2,7 +2,19 @@ import CoreElement from '../core-element/CoreElement';
 import TEMPLATE from './CoreSliderElement.html';
 import STYLE from './CoreSliderElement.css';
 
-const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
+const CoreSliderTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
+
+function setupInputEventListeners(e, upEvent, upListener, moveEvent, moveListener) {
+  document.addEventListener(upEvent, upListener);
+  document.addEventListener(moveEvent, moveListener);
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function cleanupInputEventListeners(e, upEvent, upListener, moveEvent, moveListener) {
+  document.removeEventListener(upEvent, upListener);
+  document.removeEventListener(moveEvent, moveListener);
+}
 
 /**
  * An element that selects a range of values by sliding... It's a slider.
@@ -15,11 +27,22 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
  * @property {boolean} rainbow whether to display in a bunch of colors.
  */
 class CoreSliderElement extends CoreElement {
-  /**
-   * Creates a CoreSlider element and attaches the shadow root
-   */
+  /** @private */
+  static get properties() {
+    return {
+      step: { type: Number },
+      min: { type: Number },
+      max: { type: Number },
+      value: { type: Number, reflect: true },
+      disabled: { type: Boolean },
+      vertical: { type: Boolean },
+      rainbow: { type: Boolean },
+    };
+  }
+
+  /** Creates a CoreSlider element. */
   constructor() {
-    super(STYLED_TEMPLATE);
+    super(CoreSliderTemplate);
 
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
@@ -33,46 +56,34 @@ class CoreSliderElement extends CoreElement {
     this.sliderThumb.addEventListener('mousedown', this.onMouseDown);
     this.sliderThumb.addEventListener('touchstart', this.onTouchStart);
 
+    this.sliderBar = this.shadowRoot.querySelector('#slider-bar');
+    this.sliderBar.addEventListener('mousedown', this.onMouseDown);
+    this.sliderBar.addEventListener('touchstart', this.onTouchStart);
+
     this.slider = this.shadowRoot.querySelector('#slider');
-  }
 
-  /** @private */
-  static get properties() {
-    return {
-      step: { type: Number, value: 1 },
-      min: { type: Number, value: 0 },
-      max: { type: Number, value: 100 },
-      value: { type: Number, value: 0 },
-      disabled: { type: Boolean },
-      vertical: { type: Boolean },
-      rainbow: { type: Boolean },
-    };
-  }
-
-  /**
-   * Updates the value. Ensures that the value is always within bounds.
-   * @override
-   * @param {*} value the new value
-   */
-  set value(value) {
-    const minValue = this.min;
-    const maxValue = this.max;
-    const stepSize = this.step;
-    let result = Math.floor(value / stepSize) * stepSize;
-    if (result < minValue) result = minValue;
-    if (result > maxValue) result = maxValue;
-    this.setAttribute('value', `${result}`);
+    this.step = 1;
+    this.min = 0;
+    this.max = 100;
+    this.value = 0;
   }
 
   /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
       case 'value':
-        this.updateThumbPosition(newValue);
-        this.dispatchEvent(new CustomEvent('input', {
-          bubbles: true,
-          composed: true,
-        }));
+        {
+          // Updates the value. Ensures that the value is always within bounds.
+          const minValue = this.min;
+          const maxValue = this.max;
+          const stepSize = this.step;
+          let result = Math.floor(newValue / stepSize) * stepSize;
+          if (result < minValue) result = minValue;
+          if (result > maxValue) result = maxValue;
+          this.value = result;
+
+          this.updateThumbPosition(result);
+        }
         break;
       default:
     }
@@ -107,7 +118,9 @@ class CoreSliderElement extends CoreElement {
 
     if (!this.vertical) {
       this.sliderThumb.style.left = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
+      this.sliderThumb.style.top = 'calc(50% - 0.5rem)';
     } else {
+      this.sliderThumb.style.left = 'calc(50% - 0.5rem)';
       this.sliderThumb.style.top = `calc(${(progress) * 100}% - ${thumbWidth / 2}px)`;
     }
   }
@@ -118,12 +131,12 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onMouseDown(e) {
-    document.addEventListener('mouseup', this.onMouseUp);
-    document.addEventListener('mousemove', this.onMouseMove);
-    e.preventDefault();
-    e.stopPropagation();
+    setupInputEventListeners(e,
+      'mouseup', this.onMouseUp,
+      'mousemove', this.onMouseMove);
 
-    this.onThumbStart(e);
+    this.onThumbStart();
+    this.onThumbMove(e);
   }
 
   /**
@@ -141,8 +154,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onMouseUp(e) {
-    document.removeEventListener('mouseup', this.onMouseUp);
-    document.removeEventListener('mousemove', this.onMouseMove);
+    cleanupInputEventListeners(e,
+      'mouseup', this.onMouseUp,
+      'mousemove', this.onMouseMove);
 
     this.onThumbStop(e);
   }
@@ -153,12 +167,12 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onTouchStart(e) {
-    document.addEventListener('touchend', this.onTouchEnd);
-    document.addEventListener('touchmove', this.onTouchMove);
-    e.preventDefault();
-    e.stopPropagation();
+    setupInputEventListeners(e,
+      'touchend', this.onTouchEnd,
+      'touchmove', this.onTouchMove);
 
-    this.onThumbStart(e);
+    this.onThumbStart();
+    this.onTouchMove(e);
   }
 
   /**
@@ -177,8 +191,9 @@ class CoreSliderElement extends CoreElement {
    * @param {Event} e the input event
    */
   onTouchEnd(e) {
-    document.removeEventListener('touchend', this.onTouchEnd);
-    document.removeEventListener('touchmove', this.onTouchMove);
+    cleanupInputEventListeners(e,
+      'touchend', this.onTouchEnd,
+      'touchmove', this.onTouchMove);
 
     this.onThumbStop(e);
   }
@@ -191,32 +206,37 @@ class CoreSliderElement extends CoreElement {
   }
 
   /**
+   * Depending on whether it is vertical, calculates the proportional
+   * value from the slider to the moving thumb.
+   * @param {Event} e   the input event
+   * @returns {Number}  the progress along the bar for the thumb. The value ranges
+   *                    between [0, 1] and goes top-to-bottom and left-to-right.
+   */
+  getSliderProgressRatio(e) {
+    const sliderBoundingRect = this.slider.getBoundingClientRect();
+    return !this.vertical
+      ? (e.clientX - sliderBoundingRect.left) / this.slider.clientWidth
+      : (e.clientY - sliderBoundingRect.top) / this.slider.clientHeight;
+  }
+
+  /**
    * Is called when the thumb is moving (for both the mouse AND touch)
    *
    * @param {Event} e the input event that moved the thumb
    */
   onThumbMove(e) {
-    let sliderRatio;
-
-    // Depending on whether it is vertical, calculate the proportional value from the slider
-    if (!this.vertical) {
-      const sliderX = this.slider.getBoundingClientRect().left;
-      const sliderWidth = this.slider.clientWidth;
-      const sliderPosition = e.clientX - sliderX;
-      sliderRatio = sliderPosition / sliderWidth;
-    } else {
-      const sliderY = this.slider.getBoundingClientRect().top;
-      const sliderHeight = this.slider.clientHeight;
-      const sliderPosition = e.clientY - sliderY;
-      sliderRatio = sliderPosition / sliderHeight;
-    }
-
+    const sliderRatio = this.getSliderProgressRatio(e);
     const minValue = parseInt(this.min, 10);
     const maxValue = parseInt(this.max, 10);
     const lengthValue = maxValue - minValue;
     const result = lengthValue * sliderRatio + minValue;
     if (this.value !== result) {
       this.value = result;
+
+      this.dispatchEvent(new CustomEvent('input', {
+        bubbles: true,
+        composed: true,
+      }));
     }
   }
 
