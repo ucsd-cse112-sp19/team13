@@ -2,7 +2,6 @@
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
 
 [![Build Status](https://travis-ci.com/ucsd-cse112/team13.svg?branch=master)](https://travis-ci.com/ucsd-cse112/team13)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://https://codeclimate.com/github/ucsd-cse112/team13/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/c46bd5e7fe5cc18e9541/test_coverage)](https://codeclimate.com/github/ucsd-cse112/team13/test_coverage)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/res/logo.png)
