@@ -24,6 +24,11 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  *                                    The attribute name is 'manual'.
  * @property {Boolean} noVisibleArrow whether to remove the arrow.
  *                                    The attribute name is 'no-visible-arrow'.
+ * @property {Boolean} disabled       whether it is disabled.
+ *                                    The attribute name is 'disabled'.
+ * @property {Boolean} enterable      whether the tooltip will remain opened if the tooltip
+ *                                    becomes the hover target, leaving the parent target.
+ *                                    The attribute name is 'disabled'.
  */
 class CoreTooltipElement extends CoreElement {
   /**
@@ -41,6 +46,8 @@ class CoreTooltipElement extends CoreElement {
       focusable: { type: Boolean },
       manual: { type: Boolean },
       noVisibleArrow: { type: Boolean },
+      disabled: { type: Boolean },
+      enterable: { type: Boolean },
     };
   }
 
@@ -101,6 +108,9 @@ class CoreTooltipElement extends CoreElement {
           }
         }
         break;
+      case 'disabled':
+        this.clearTarget();
+        break;
       default:
     }
   }
@@ -127,7 +137,7 @@ class CoreTooltipElement extends CoreElement {
   setTarget(target) {
     if (this.target) this.clearTarget();
 
-    if (target) {
+    if (target && !this.disabled) {
       // mouse listeners
       target.addEventListener('mouseenter', this.onMouseEnter);
       target.addEventListener('mouseleave', this.onMouseLeave);
