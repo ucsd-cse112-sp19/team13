@@ -4,15 +4,15 @@
     
     width: 100%;
     height: auto;
-    color: lightgray;
+    color: var(--light, lightgray);
     
-    --thumb-color: white;
-    --outline-color: gray;
+    --thumb-color: var(--primary, white);
+    --outline-color: var(--secondary, gray);
     --track-color: currentColor;
 }
 
 :host([disabled]) {
-    --thumb-color: gray;
+    --thumb-color: var(--secondary, gray);
     pointer-events: none;
     cursor: default;
 }
