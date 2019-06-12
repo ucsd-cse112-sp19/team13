@@ -80,8 +80,6 @@
         
 
         
-        <th>Default</th>
-        
 
         <th class="last">Description</th>
     </tr>
@@ -98,7 +96,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Node</span>
 
 
             
@@ -107,15 +105,8 @@
             
 
             
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
 
-            <td class="description last">the html template string to attach to the
-                               DOM and create a shadow root from.</td>
+            <td class="description last">the html template node to attach to the shadow root.</td>
         </tr>
 
     
@@ -411,7 +402,7 @@ observedAttributes().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line266">line 266</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line187">line 187</a>
     </li></ul></dd>
     
 
@@ -495,7 +486,7 @@ observedAttributes().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line269">line 269</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line173">line 173</a>
     </li></ul></dd>
     
 
@@ -663,7 +654,7 @@ observedAttributes().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line262">line 262</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line183">line 183</a>
     </li></ul></dd>
     
 
@@ -707,7 +698,9 @@ observedAttributes().
 
 
 <div class="description">
-    Called by attributeChangedCallback with values conforming to set prop type.
+    Called by property setters (and attributeChangedCallback) with new values of property type.
+Any further changes to properties will not re-call propertyChangedCallback(), therefore any
+transformations to data should be handled here.
 </div>
 
 
@@ -849,7 +842,7 @@ observedAttributes().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line282">line 282</a>
+        <a href="core-element_CoreElement.js.html">core-element/CoreElement.js</a>, <a href="core-element_CoreElement.js.html#line198">line 198</a>
     </li></ul></dd>
     
 
