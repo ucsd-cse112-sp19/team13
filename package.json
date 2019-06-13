@@ -4,7 +4,7 @@
   "description": "Team Fridays Free Open Source Web Components",
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js & npm run docs",
+    "build": "webpack --mode production --config webpack.config.js && npm run docs",
     "percy": "npx percy exec -- node ./tools/snapshots.js --enable_javascript",
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/* && npm run add",
     "add": "git add docs/ && git commit -m 'Auto update JSDocs'",
