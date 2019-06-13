@@ -35,14 +35,14 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
  * An element that shows a tooltip for another element... It's a tooltip.
- * @property {number} openDelay the delay of appearance, in millisecond
- * @property {number} closeDelay the delay of disappearance, in millisecond
- *
- * @property {number} openTimeout the timer created by the call to setTimeout() for
- * openDelay, can be passed to clearTimeout() to cancel the timeout.
- *
- * @property {number} closeTimeout the timer created by the call to setTimeout() for
- * closeDelay, can be passed to clearTimeout() to cancel the timeout.
+ * @property {String} placement the side of the parent which the tooltip is shown
+ * @property {String} content the content of the tooltip
+ * @property {Number} openDelay the delay of appearance, in millisecond
+ * @property {Number} closeDelay the delay of disappearance, in millisecond
+ * @property {String} for the id of the target. If none specified, then it defaults to the parent
+ * @property {Boolean} focusable whether to allow focus to show tooltip
+ * @property {Boolean} manual whether mouseenter and mouseleave change the tooltip
+ * @property {Boolean} noVisibleArrow whether to remove the arrow
  */
 class CoreTooltipElement extends CoreElement {
   /** @private */
@@ -52,6 +52,9 @@ class CoreTooltipElement extends CoreElement {
       content: { type: String },
       openDelay: { type: Number },
       closeDelay: { type: Number },
+      for: { type: String },
+      focusable: { type: Boolean },
+      manual: { type: Boolean },
     };
   }
 
@@ -62,7 +65,12 @@ class CoreTooltipElement extends CoreElement {
     this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
     this.target = null;
+
+    // The timer created by the call to setTimeout() for openDelay, can be passed
+    // to clearTimeout() to cancel the timeout.
     this.openTimeout = null;
+    // The timer created by the call to setTimeout() for closeDelay, can be passed
+    // to clearTimeout() to cancel the timeout.
     this.closeTimeout = null;
 
     this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -70,6 +78,9 @@ class CoreTooltipElement extends CoreElement {
 
     this.onTooltipOpen = this.onTooltipOpen.bind(this);
     this.onTooltipClose = this.onTooltipClose.bind(this);
+
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
 
     this.openDelay = 0;
     this.closeDelay = 1000;
@@ -81,6 +92,16 @@ class CoreTooltipElement extends CoreElement {
       case 'content':
         this.tooltipSlot.textContent = newValue;
         break;
+      case 'for':
+        {
+          const target = document.querySelector(`#${newValue}`);
+          if (target) {
+            this.setTarget(target);
+          } else {
+            this.setTarget(this.shadowRoot.host.parentElement);
+          }
+        }
+        break;
       default:
     }
   }
@@ -88,8 +109,13 @@ class CoreTooltipElement extends CoreElement {
   /** @override */
   connectedCallback() {
     super.connectedCallback();
-    const target = this.shadowRoot.host.parentElement;
-    this.setTarget(target);
+
+    const parent = this.shadowRoot.host.parentElement;
+    parent.style.position = 'relative';
+
+    if (!this.for) {
+      this.setTarget(parent);
+    }
   }
 
   /** @override */
@@ -103,17 +129,24 @@ class CoreTooltipElement extends CoreElement {
     if (this.target) this.clearTarget();
 
     if (target) {
+      // mouse listeners
       target.addEventListener('mouseenter', this.onMouseEnter);
       target.addEventListener('mouseleave', this.onMouseLeave);
+      // focus listeners
+      target.addEventListener('focus', this.onFocus);
+      target.addEventListener('blur', this.onBlur);
       this.target = target;
-      this.target.style.position = 'relative';
     }
   }
 
   clearTarget() {
     if (this.target) {
+      // mouse listeners
       this.target.removeEventListener('mouseenter', this.onMouseEnter);
       this.target.removeEventListener('mouseleave', this.onMouseLeave);
+      // focus listeners
+      this.target.removeEventListener('focus', this.onFocus);
+      this.target.removeEventListener('blur', this.onBlur);
       this.target = null;
     }
   }
@@ -132,6 +165,10 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when mouse enters the parent. */
   onMouseEnter() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.closeTimeout) {
       clearTimeout(this.closeTimeout);
       this.closeTimeout = null;
@@ -141,11 +178,33 @@ class CoreTooltipElement extends CoreElement {
 
   /** Called when mouse leaves the parent. */
   onMouseLeave() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
     if (this.openTimeout) {
       clearTimeout(this.openTimeout);
       this.openTimeout = null;
     }
     setTimeout(this.onTooltipClose, this.closeDelay);
+  }
+
+  /** Called when target is in focus. */
+  onFocus() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
+    if (this.focusable) this.onTooltipOpen();
+  }
+
+  /** Called when target is out of focus. */
+  onBlur() {
+    if (this.manual) {
+      // Exit if manual is true.
+      return;
+    }
+    if (this.focusable) this.onTooltipClose();
   }
 
   /**
