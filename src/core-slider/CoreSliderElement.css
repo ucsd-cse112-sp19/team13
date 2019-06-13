@@ -120,7 +120,7 @@
     --track-color: #dee2e6;
 }
 :host(.custom-range[disabled]) {
-    --thumb-color: #adb5bd;
+    --thumb-color: #adb5bd!important;
 }
 :host(.custom-range:not([color])) {
     --thumb-color:#007bff;
