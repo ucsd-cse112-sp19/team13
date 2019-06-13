@@ -68,7 +68,7 @@ class CoreSliderElement extends CoreElement {
       step: { type: Number },
       min: { type: Number },
       max: { type: Number },
-      value: { type: Number },
+      value: { type: Number, reflect: true },
       disabled: { type: Boolean },
       vertical: { type: Boolean },
       rainbow: { type: Boolean },
