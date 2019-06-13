@@ -9,10 +9,37 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
 ## Use our components
 1. Make sure you have [Node Package Manager](https://nodejs.org/en/download/) (npm) installed.
 2. Clone the repo/pull from the branch *master*
-3. Download all necessary dependencies locally
-	- `npm install`
-4. After downloading all the dependencies, package everything with
-    - `npm run build`
+
+2. To download our components, simply run:
+
+`npm i friday-webcomponents`
+
+3. Then, in your HTML page, include the components you want to use in the `<head>...</head>` tags. For example:
+
+### <core-hello>
+
+```html
+	<script src="./node_modules/friday-webcomponents/dist/core-hello.js"></script>
+```
+
+### <core-slider>
+
+```html
+	<script src="./node_modules/friday-webcomponents/dist/core-slider.js"></script>
+```
+
+### <core-tooltip>
+
+```html
+	<script src="./node_modules/friday-webcomponents/dist/core-tooltip.js"></script>
+```
+
+### <core-link>
+
+```html
+	<script src="./node_modules/friday-webcomponents/dist/core-link.js"></script>
+```
+
 
 ## Meet The Team
 This project could only be finished with the contribution of our members, [meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
