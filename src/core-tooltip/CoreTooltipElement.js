@@ -179,6 +179,7 @@ class CoreTooltipElement extends CoreElement {
     }
   }
 
+  /** Sets the target that is being listened to for mouse events. */
   setTarget(target) {
     if (this.target) this.clearTarget();
 
@@ -193,6 +194,7 @@ class CoreTooltipElement extends CoreElement {
     }
   }
 
+  /** Clears the target that is being listened to. */
   clearTarget() {
     if (this.target) {
       // mouse listeners
