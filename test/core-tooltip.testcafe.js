@@ -237,8 +237,16 @@ testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
   await setCoreAttribute('offset', 'offset-set', index);
   const setValue = await getCoreAttribute('offset', 'offset-set');
 
+  const tooltipBox = await ShadowChildSelector(t, { targetQuerySelector: '#offset-set' }, '#tooltip-back');
+  const tooltipBoxSrc = await ShadowChildSelector(t, { targetQuerySelector: '#offset-correct' }, '#tooltip-back');
+
+
+  const tooltipCoordinateTop = await tooltipBox.getBoundingClientRectProperty('top');
+  const tooltipCoordinateTopCorrect = await tooltipBoxSrc.getBoundingClientRectProperty('top');
+
   await t
-    .expect(setValue).eql(index);
+    .expect(setValue).eql(index)
+    .expect(tooltipCoordinateTopCorrect - tooltipCoordinateTop).eql(1);
 });
 
 /**
