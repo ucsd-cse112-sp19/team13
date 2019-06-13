@@ -7,7 +7,6 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/res/logo.png)
 
 ## Use our components
----
 1. Make sure you have [Node Package Manager](https://nodejs.org/en/download/) (npm) installed.
 2. Clone the repo/pull from the branch *master*
 3. Download all necessary dependencies locally
@@ -16,7 +15,6 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
     - `npm run build`
 
 ## Meet The Team
----
 This project could only be finished with the contribution of our members, [meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
 
 ## Documentation
@@ -24,7 +22,6 @@ This project could only be finished with the contribution of our members, [meet 
 [See our docs](https://drive.google.com/open?id=10RPfh2c-1xePoPe4ytpX2LaDlBoi1_Dy)
 
 ## Contributing
----
 If youre as passionate as we are, Thats all you need. 
 See our [How To Contribute](./CONTRIBUTING.md) docs for simple steps!
 
@@ -32,5 +29,4 @@ See our [How To Contribute](./CONTRIBUTING.md) docs for simple steps!
 Please make sure to update tests as appropriate.
 
 ## License
----
 [UCSD]()
