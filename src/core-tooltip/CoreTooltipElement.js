@@ -29,6 +29,9 @@ const CoreTooltipTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
  * @property {Boolean} offset         The tooltip offset from the target, which is also dependent
  *                                    on placement position. It is in pixels.
  *                                    The attribute name is 'offset'.
+ * @property {String} effect          Sets the color theme, or effect, of the tooltip.
+ *                                    This is either "light" or "dark".
+ *                                    The attribute name is 'effect'.
  */
 class CoreTooltipElement extends CoreElement {
   /**
@@ -48,6 +51,7 @@ class CoreTooltipElement extends CoreElement {
       noVisibleArrow: { type: Boolean },
       disabled: { type: Boolean },
       offset: { type: Number },
+      effect: { type: String },
     };
   }
 
