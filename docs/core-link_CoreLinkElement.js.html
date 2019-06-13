@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: core-greet/CoreGreetElement.js</title>
+    <title>JSDoc: Source: core-link/CoreLinkElement.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: core-greet/CoreGreetElement.js</h1>
+    <h1 class="page-title">Source: core-link/CoreLinkElement.js</h1>
 
     
 
@@ -27,57 +27,55 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import CoreElement from '../core-element/CoreElement';
-import TEMPLATE from './CoreGreetElement.html';
-import STYLE from './CoreGreetElement.css';
 
-const CoreGreetTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
+import TEMPLATE from './CoreLinkElement.html';
+import STYLE from './CoreLinkElement.css';
+
+const CoreLinkTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
- * An element that displays some greeting from the language mapping with the passed-in name,
- * Currently supports 4 languages - Japanese, English, Spanish and French
- * @property {string} name the string that will be displayed.
- * @property {boolean} rainbow whether the name should be colorfully animated.
- * @property {String} lang the language to display in.
+ * An element that allows the user to go to a link, with style.
+ * @property {String} href          the link to go to
+ * @property {String} type          the type of link; these include primary, success, warning,
+ *                                  danger, or info
+ * @property {Boolean} disabled     whether the link is disabled
+ * @property {Boolean} underline    whether the link has an underline
  */
-class CoreGreetElement extends CoreElement {
+class CoreLinkElement extends CoreElement {
   /** @private */
   static get properties() {
     return {
-      name: { type: String },
-      rainbow: { type: Boolean },
-      lang: { type: String },
+      href: { type: String },
+      type: { type: String },
+      disabled: { type: Boolean },
+      underline: { type: Boolean },
     };
   }
 
-  /** Creates a CoreGreet element and attaches the shadow root. */
-  constructor(langMap = null) {
-    super(CoreGreetTemplate);
+  /** Constructs the core-link element with the template and style */
+  constructor() {
+    super(CoreLinkTemplate);
 
-    this.langMapping = langMap || { en: 'Greet' };
-
-    this.greetElement = this.shadowRoot.querySelector('#greet');
-    this.nameElement = this.shadowRoot.querySelector('#name');
-
-    this.name = 'World';
+    this.linkElement = this.shadowRoot.querySelector('#link');
+    this.linkSlot = this.shadowRoot.querySelector('#link-content');
   }
 
   /** @private */
   propertyChangedCallback(property, oldValue, newValue) {
     switch (property) {
-      case 'name':
-        this.nameElement.textContent = newValue;
+      case 'href':
+        this.linkElement.href = newValue;
         break;
-      case 'lang':
-        this.greetElement.textContent = this.langMapping[newValue] || this.langMapping.en;
+      case 'disabled':
+        this.linkElement.disabled = newValue;
         break;
       default:
     }
   }
 }
+CoreElement.customTag('core-link', CoreLinkElement);
 
-CoreElement.customTag('core-greet', CoreGreetElement);
-
-export default CoreGreetElement;
+export default CoreLinkElement;
 </code></pre>
         </article>
     </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: CoreGreetElement</title>
+    <title>JSDoc: Class: CoreLinkElement</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: CoreGreetElement</h1>
+    <h1 class="page-title">Class: CoreLinkElement</h1>
 
     
 
@@ -28,10 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>CoreGreetElement<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>CoreLinkElement<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">An element that displays some greeting from the language mapping with the passed-in name,
-Currently supports 4 languages - Japanese, English, Spanish and French</div>
+            <div class="class-description">An element that allows the user to go to a link, with style.</div>
         
     
 </header>
@@ -46,7 +45,7 @@ Currently supports 4 languages - Japanese, English, Spanish and French</div>
     
 
     
-    <h4 class="name" id="CoreGreetElement"><span class="type-signature"></span>new CoreGreetElement<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CoreLinkElement"><span class="type-signature"></span>new CoreLinkElement<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -54,7 +53,7 @@ Currently supports 4 languages - Japanese, English, Spanish and French</div>
 
 
 <div class="description">
-    Creates a CoreGreet element and attaches the shadow root.
+    Constructs the core-link element with the template and style
 </div>
 
 
@@ -95,53 +94,7 @@ Currently supports 4 languages - Japanese, English, Spanish and French</div>
 
         <tr>
             
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the string that will be displayed.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rainbow</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">whether the name should be colorfully animated.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lang</code></td>
+                <td class="name"><code>href</code></td>
             
 
             <td class="type">
@@ -157,7 +110,77 @@ Currently supports 4 languages - Japanese, English, Spanish and French</div>
 
             
 
-            <td class="description last">the language to display in.</td>
+            <td class="description last">the link to go to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the type of link; these include primary, success, warning,
+                                 danger, or info</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>disabled</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">whether the link is disabled</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>underline</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">whether the link has an underline</td>
         </tr>
 
     
@@ -196,7 +219,7 @@ Currently supports 4 languages - Japanese, English, Spanish and French</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core-greet_CoreGreetElement.js.html">core-greet/CoreGreetElement.js</a>, <a href="core-greet_CoreGreetElement.js.html#line25">line 25</a>
+        <a href="core-link_CoreLinkElement.js.html">core-link/CoreLinkElement.js</a>, <a href="core-link_CoreLinkElement.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
