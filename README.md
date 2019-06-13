@@ -7,7 +7,7 @@
 
 # Thank God It's Friday
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
-![Logo](https://ibb.co/LQzzd9L.png)
+[![Logo](https://ibb.co/LQzzd9L.png)]
 
 ## Use our components
 To download our components, simply run:
