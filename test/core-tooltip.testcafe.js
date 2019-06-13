@@ -44,54 +44,6 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-disable no-unused-vars */
 
 /**
- * Purpose: checks that the default value of content is the empty string
- * Test Attribute: content
- * Test Description: Default content value should be empty string
- */
-testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('content', 'content-default');
-  await t
-    .expect(defaultValue).eql('');
-});
-
-/**
- * Purpose: checks that the set value of content is 'Team Friday Tooltip'
- * Test Attribute: content
- * Test Description: Set content value should be Team Friday Tooltip
- */
-testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', async (t, ctx) => {
-  const message = 'Team Friday Tooltip'; // message the set content should evaluate to
-  await setCoreAttribute('content', 'content-set', message);
-  const setValue = await getCoreAttribute('content', 'content-set');
-  await t
-    .expect(setValue).eql(message);
-});
-
-/**
- * Purpose: checks that the default value of disabled is false
- * Test Attribute: disabled
- * Test Description: Default disabled value should be false
- */
-testCoreTooltip('disabled', '- Default disabled value should be false', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
-  await t
-    .expect(defaultValue).eql(false);
-});
-
-/**
- * Purpose: checks that the set value of disabled true
- * Test Attribute: disabled
- * Test Description: Set disabled value should be true
- */
-testCoreTooltip('disabled', '- Set disabled value should be true', async (t, ctx) => {
-  const isDisabled = 'true';
-  await setCoreAttribute('disabled', 'disabled-set', isDisabled);
-  const setValue = await getCoreAttribute('disabled', 'disabled-set');
-  await t
-    .expect(setValue).eql(isDisabled);
-});
-
-/**
  * Purpose: checks that the background color of the tooltip is dark when effect=dark
  * Test Attribute: effect
  * Test Description: dark effect
@@ -130,26 +82,6 @@ testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx
 });
 
 /**
- * Purpose: checks that the tooltip can be entered by moving mouse onto the tooltip
- * Test Attribute: enterable
- * Test Description: check the tooltip is enterable
- */
-testCoreTooltip('enterable', '- check the tooltip is enterable', async (t, ctx) => {
-  const tooltip = Selector('#enterable-tooltip');
-  const tooltipBox = Selector('#enterable-tooltip-box');
-  await t
-    .hover(tooltip)
-    /* TODO: moving mouse up a liitle to enter the tooltip.... not sure how to do it */
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('1');
-
-  await t
-    .hover(tooltipBox)
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('1');
-});
-
-/**
  * Purpose: checks that the tooltip disappears after hovering over a different tooltip
  * Test Attribute: closedelay
  * Test Description: check the previous tooltip hide after hover for new tooltip
@@ -175,52 +107,6 @@ testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for
     .wait(2000)
     .expect(tooltipBox1.getStyleProperty('opacity'))
     .eql('0');
-});
-
-/**
- * Purpose: checks that the tooltip only appears after a certain amount of time has passed
- * Test Attribute: opendelay
- * Test Description: check if the tooltip pops up after a few seconds
- */
-testCoreTooltip('opendelay', '- check if the tooltip pops up after a few seconds', async (t, ctx) => {
-  const tooltip1 = Selector('#opendelay-tooltip1');
-  const tooltipBox1 = Selector('#opendelay-tooltip1-box');
-
-  // should not pop up yet
-  await t
-    .hover(tooltip1)
-    .expect(tooltipBox1.getStyleProperty('opacity'))
-    .eql('0');
-
-  // after 3 sec, tooltip 1 should  pop up
-  await t
-    .wait(3000)
-    .expect(tooltipBox1.getStyleProperty('opacity'))
-    .eql('1');
-});
-
-/**
- * Purpose: checks that the default value of offset attribute is 0
- * Test Attribute: offset
- * Test Description: Default offset value should be 0
- */
-testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('offset', 'offset-default');
-  await t
-    .expect(defaultValue).eql(0);
-});
-
-/**
- * Purpose: checks that the set value of offset attribute is 1
- * Test Attribute: offset
- * Test Description: Set offset value should be 1
- */
-testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
-  const index = '1';
-  await setCoreAttribute('offset', 'offset-set', index);
-  const setValue = await getCoreAttribute('offset', 'offset-set');
-  await t
-    .expect(setValue).eql(index);
 });
 
 /**
@@ -312,50 +198,6 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
 });
 
 /**
- * Purpose: checks that the tooltip can only be controlled manually and not by mouse
- * Test Attribute: manual
- * Test Description: manual property
- */
-testCoreTooltip('manual', '- manual property', async (t, ctx) => {
-  const tooltipHost = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
-  await t
-    .wait(2000)
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('0')
-    .hover(tooltipHost)
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('0')
-    .click(tooltipHost)
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('0');
-});
-
-/**
- * Purpose: checks that the default value of tabindex is 0
- * Test Attribute: tabindex
- * Test Description: Default tabindex value should be 0
- */
-testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('tabindex', 'tabindex-default');
-  await t
-    .expect(defaultValue).eql(0);
-});
-
-/**
- * Purpose: checks that the set value of tabindex is 1
- * Test Attribute: tabindex
- * Test Description: Set tabindex value should be 1
- */
-testCoreTooltip('tabindex', '- Set tabindex value should be 1', async (t, ctx) => {
-  const index = '1';
-  await setCoreAttribute('tabindex', 'tabindex-set', index);
-  const setValue = await getCoreAttribute('tabindex', 'tabindex-set');
-  await t
-    .expect(setValue).eql(index);
-});
-
-/**
  * Purpose: checks that tooltip can be controlled by using tab key
  * Test Attribute: focusable
  * Test Description: check for focusable property
@@ -378,15 +220,16 @@ testCoreTooltip('focusable', '- check for focusable property', async (t, ctx) =>
  * Test Description: check for no-visible-arrow property
  */
 testCoreTooltip('noArrow', '- check for no-visible-arrow property', async (t, ctx) => {
-  const tooltipHost = Selector('#no-arrow')
+  const tooltipHost = Selector('#no-arrow');
   const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#no-arrow' }, '#tooltip-back');
 
   await t
     .hover(tooltipHost)
     .expect(tooltipHost.hasAttribute('no-visible-arrow')).ok()
-    // min-height and min-width depends on --arrow-size which affects border-width, no other way to get around this
+    // min-height and min-width depends on --arrow-size which affects border-width,
+    // no other way to get around this
     .expect(tooltipBox.getStyleProperty('min-height'))
     .eql('0px')
     .expect(tooltipBox.getStyleProperty('min-width'))
-    .eql('0px')
+    .eql('0px');
 });
