@@ -1,8 +1,7 @@
 {
-  "name": "team13intros",
+  "name": "friday-webcomponents",
   "version": "1.0.0",
-  "description": "an intro of team 13",
-  "main": "index.js",
+  "description": "Team Fridays Free Open Source Web Components",
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
     "build": "webpack --mode production --config webpack.config.js",
