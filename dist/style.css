@@ -12,7 +12,9 @@ body {
 }
 
 .tooltip {
+	display: block;
 	border: 1px dashed black;
+	margin: 1rem;
 }
 
 core-slider {

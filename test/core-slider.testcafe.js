@@ -2,7 +2,7 @@ import { TestCoreElement, ShadowChildSelector } from './testcore';
 
 /* eslint-disable */
 fixture `core-slider tests`
-    .page `./index.html`;
+    .page `./core-slider-index.html`;
 /* eslint-enable */
 
 function testCoreSlider(sectionName, testDesc, testFunc) {
