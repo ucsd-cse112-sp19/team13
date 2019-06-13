@@ -8,7 +8,12 @@ const BYE_STRING = {
   fr: 'Au revoir',
 };
 
-/** An element that displays "Bye" with the passed-in name. */
+/**
+ * An element that displays "Bye" with the passed-in name.
+ * @property {string} name the string that will be displayed.
+ * @property {boolean} rainbow whether the name should be colorfully animated.
+ * @property {String} lang the language to display in.
+ */
 class CoreByeElement extends CoreGreetElement {
   /** Creates a CoreBye element. */
   constructor() {
