@@ -2,6 +2,7 @@
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
 
 [![Build Status](https://travis-ci.com/ucsd-cse112/team13.svg?branch=master)](https://travis-ci.com/ucsd-cse112/team13)
+
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/res/logo.png)
@@ -11,6 +12,8 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
 2. Clone the repo/pull from the branch *master*
 3. Download all necessary dependencies locally
 	- `npm install`
+4. After downloading all the dependencies, package everything with
+    - `npm run build`
 
 ## [Meet The Team](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)
 
