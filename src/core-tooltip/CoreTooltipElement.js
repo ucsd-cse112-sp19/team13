@@ -176,7 +176,7 @@ class CoreTooltipElement extends CoreElement {
    * such as "onclick", call this to toggle between the states.
    */
   toggle() {
-    if (this.open) {
+    if (!this.open) {
       this.onTooltipOpen();
     } else {
       this.onTooltipClose();
