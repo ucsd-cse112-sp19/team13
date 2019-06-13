@@ -14,8 +14,8 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Table Of Contents](#Table-of-contents)
-   * [How To Use](#Use-our-components)
+   * [Table of Contents](#Table-of-contents)
+   * [How to Use](#Use-our-components)
    * [Usage](#usage)
    * [Documentation](#Documentation)
    * [Meet The Team](#Meet-The-Team)
