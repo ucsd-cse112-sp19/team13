@@ -19,7 +19,7 @@ This project could only be finished with the contribution of our members, [meet 
 
 ## Documentation
 Make sure to read our documentation by running the following command
-`npm run storybook`
+`npm run storybook`.
 You can see the demo of our component, complete with a beginner's hand guide
 
 ## Contributing
