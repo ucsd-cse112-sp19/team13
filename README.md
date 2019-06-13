@@ -18,8 +18,9 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
 This project could only be finished with the contribution of our members, [meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
 
 ## Documentation
----
-[See our docs](https://drive.google.com/open?id=10RPfh2c-1xePoPe4ytpX2LaDlBoi1_Dy)
+Make sure to read our documentation by running the following command
+`npm run storybook`
+You can see the demo of our component, complete with a beginner's hand guide
 
 ## Contributing
 If youre as passionate as we are, Thats all you need. 
