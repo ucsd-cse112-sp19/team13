@@ -80,6 +80,9 @@ class CoreTooltipElement extends CoreElement {
     // Retreives the slot for the tooltip content in the shadow root by id.
     this.tooltipSlot = this.shadowRoot.querySelector('#tooltip-content');
 
+    // Whether the tooltip is open. This is managed by this instance, and is NOT an attribute.
+    this.open = false;
+
     // Sets the default open delay to 0
     this.openDelay = 0;
     // Sets the default close delay to 1000
@@ -135,6 +138,45 @@ class CoreTooltipElement extends CoreElement {
     super.disconnectedCallback();
     this.clearTarget();
     this.clearTimeout();
+  }
+
+  /**
+   * Opens the tooltip if closed.
+   * This can usually be used in tandem with the "manual"
+   * attribute. From where you want to trigger the tooltip,
+   * such as "onclick", call this to open it.
+   */
+  open() {
+    if (!this.open) {
+      this.onTooltipOpen();
+    }
+  }
+
+
+  /**
+   * Closes the tooltip if opened.
+   * This can usually be used in tandem with the "manual"
+   * attribute. From where you want to trigger the tooltip,
+   * such as "onclick", call this to close it.
+   */
+  close() {
+    if (this.open) {
+      this.onTooltipClose();
+    }
+  }
+
+  /**
+   * Toggles the tooltip to be opened or closed.
+   * This can usually be used in tandem with the "manual"
+   * attribute. From where you want to trigger the tooltip,
+   * such as "onclick", call this to toggle between the states.
+   */
+  toggle() {
+    if (this.open) {
+      this.onTooltipOpen();
+    } else {
+      this.onTooltipClose();
+    }
   }
 
   setTarget(target) {
@@ -261,6 +303,8 @@ class CoreTooltipElement extends CoreElement {
     this.shadowRoot.host.style.opacity = 1;
     // Remove any existing timeouts, so we don't trigger it again.
     this.clearTimeouts();
+
+    this.open = true;
   }
 
   /**
@@ -279,6 +323,8 @@ class CoreTooltipElement extends CoreElement {
         CoreTooltipElement.activeElement = null;
       }
     }
+
+    this.open = false;
   }
 }
 // The currently open tooltip element such that only 1 is every "active" at one time.
