@@ -1,9 +1,12 @@
-# Thank God It's Friday
-Welcome To UCSD-CSE112's Public Repository for Team Friday!
-
 [![Build Status](https://travis-ci.com/ucsd-cse112/team13.svg?branch=master)](https://travis-ci.com/ucsd-cse112/team13)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d1fbf57bc7a51fcfdf09/maintainability)](https://codeclimate.com/github/ucsd-cse112/team-12-components/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d1fbf57bc7a51fcfdf09/test_coverage)](https://codeclimate.com/github/ucsd-cse112/team-12-components/test_coverage)
+[![Visual Regression Testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/ucsd-cse112/ucsd-cse112)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+# Thank God It's Friday
+Welcome To UCSD-CSE112's Public Repository for Team Friday!
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/res/logo.png)
 
 ## Use our components
