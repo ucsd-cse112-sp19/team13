@@ -51,12 +51,13 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
   const contentAttr = await Selector('#content-default').hasAttribute('content');
   const tooltipHostText = Selector('#content-default').textContent;
-  const tooltipText = await ShadowChildSelector(t, { targetQuerySelector: "#content-default" }, '#tooltip-content').textContent;
+  const tooltipText = await ShadowChildSelector(t, { targetQuerySelector: '#content-default' }, '#tooltip-content').textContent;
 
   await t
     .expect(contentAttr).eql(false)
     .expect(tooltipHostText).eql('')
-    .expect(tooltipText).eql('');
+    .expect(tooltipText)
+    .eql('');
 });
 
 /**
@@ -141,9 +142,9 @@ testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx
  */
 testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
   const tooltip1 = Selector('#closedelay-tooltip1');
-  const target1 = Selector('#closedelay-target1')
+  const target1 = Selector('#closedelay-target1');
   const tooltip2 = Selector('#closedelay-tooltip2');
-  const target2 = Selector('#closedelay-target2')
+  const target2 = Selector('#closedelay-target2');
   const tooltipBox1 = Selector('#closedelay-tooltip1-box');
 
   await t
@@ -204,7 +205,7 @@ testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) =
   const tooltipCoordinateTopCorrect = await tooltipBoxSrc.getBoundingClientRectProperty('top');
 
   await t
-    .expect(tooltipCoordinateTop).eql(tooltipCoordinateTopCorrect)
+    .expect(tooltipCoordinateTop).eql(tooltipCoordinateTopCorrect);
 });
 
 /**
