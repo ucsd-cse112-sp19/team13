@@ -56,7 +56,7 @@ Then, in your HTML page, include the components you want to use in the `<head>..
 ### Confused about how to use our components ?
 See simple examples of our components [here](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!<!-- todo -->
 ### Read our API docs here
-[Friday Web Components JSDocs](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)! 
+See in-depth documentation [here](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)! 
 
 # Meet The Team
 This project could only be finished with the contribution of our members
