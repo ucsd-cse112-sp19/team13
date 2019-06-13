@@ -62,20 +62,20 @@ testCoreSlider('init', '- Set value attribute', async (t, ctx) => {
 });
 
 /**
-* Purpose: checks that dragging core-slider updates the value to 10
+* Purpose: checks that dragging core-slider updates the value to 20
 * Test Attribute: value
 * Test Description: Dragging and updating to value
 */
 testCoreSlider('default', '- Dragging and updating to value', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
-  const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value10' }, '#slider-thumb');
+  const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value20' }, '#slider-thumb');
   await t
     .dragToElement(sliderThumb, dstSliderThumb)
     .dragToElement(sliderThumb, dstSliderThumb)
     .dragToElement(sliderThumb, dstSliderThumb)
     .expect(slider.value)
-    .eql(10);
+    .eql(20);
 });
 
 /**
