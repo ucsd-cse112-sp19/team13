@@ -10,11 +10,10 @@ Welcome To UCSD-CSE112's Public Repository for Team Friday!
 ![Logo](https://github.com/ucsd-cse112/team13/blob/master/res/logo.png)
 
 ## Use our components
-1. To download our components, simply run:
-
+To download our components, simply run:
 `npm i friday-webcomponents`
 
-2. Then, in your HTML page, include the components you want to use in the `<head>...</head>` tags. For example:
+Then, in your HTML page, include the components you want to use in the `<head>...</head>` tags. For example:
 
 ### <core-hello>
 
