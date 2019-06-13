@@ -35,7 +35,6 @@
     <div id="content_header"></div>
     <div id="site_content">
       <h1>Demonstration on how to style components by css variables and bootstrap</h1>
-      <h2>Basics<core-tooltip effect="dark">Yep, these are the basics.</core-tooltip></h2>
       <div class="container">
         <div class="row">
           <div class="col-sm">
@@ -74,12 +73,15 @@
           <div class="col-sm">
             <h2>Links</h2>
             <p style="font-size: 12pt;">Styled by CSS Variables</p>
-            <core-link style="--primary: #D19C4C;">Earth tones</span></core-link>
-            <p>Rainy <span><a>season</a><core-tooltip style="--back-color: #B2DDFF;--border-color: #3BABFD;"> Tooltip </core-tooltip></span></p>
-            <p>Fire <span><a>ant</a><core-tooltip style="--back-color:  #A62908;--border-color: #560807;"> Tooltip </core-tooltip></span></p>
-            <p style="font-size: 12pt;">Themes</p>
-            <p>Dark <span><a>theme</a><core-tooltip effect="dark"> Tooltip </core-tooltip></span></p>
-            <p>Light <span><a>theme</a><core-tooltip > Tooltip </core-tooltip></span></p>
+            <core-link type="primary" href="#">Primary</core-link>
+            <br>
+            <core-link type="success" href="#">Success</core-link>
+            <br>
+            <core-link type="warning" href="#">Warning</core-link>
+            <br>
+            <core-link type="danger" href="#">Danger</core-link>
+            <br>
+            <core-link type="info" href="#">Info</core-link>
           </div>
         </div>
       </div>

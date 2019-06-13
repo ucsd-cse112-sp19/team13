@@ -27,12 +27,12 @@ h1, h3
   padding: 5px 20px 5px 0px;
   border-bottom: 1px solid #CCC6B4;}
 
-a, a:hover
+a, core-link, a:hover, core-link:hover
 { border-bottom: 1px dotted;
   color: #635B53;
   text-decoration: none;}
 
-a:hover
+a:hover, core-link:hover
 { border-bottom: 1px solid;
   color: #00C5EE;}
 
@@ -172,7 +172,7 @@ ul#menu li a
   text-transform: uppercase;
   border: none;}
 
-ul#menu li.selected a
+ul#menu li.selected core-link
 { height: 20px;
   padding: 7px 22px 4px 16px;}
 
@@ -180,7 +180,7 @@ ul#menu li.selected
 { margin: 7px 0 0 0;
   background: #635B53 url(tabs.png) no-repeat 0 0px;}
 
-ul#menu li.selected a, ul#menu li.selected a:hover
+ul#menu li.selected core-link, ul#menu li.selected core-link:hover
 { background: #635B53 url(tabs.png) no-repeat 100% 0px;
   color: #FFF;}
 
