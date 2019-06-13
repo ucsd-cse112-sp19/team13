@@ -42,18 +42,16 @@
 
             <section id="test-core-tooltip-tabindex">
                 <label>
-                    Default Tabindex
-                    <core-tooltip id="tabindex-default"></core-tooltip>
-                </label>
-                
-                <label>
                     Set Tabindex
                     <core-tooltip id="tabindex-set"></core-tooltip>
                 </label>
-                
             </section>
 
             <section id="test-core-tooltip-offset">
+                <label>
+                    Correct Offset
+                    <core-tooltip id="offset-correct" offset="0"></core-tooltip>
+                </label>
                 <label>
                     Default Offset
                     <core-tooltip id="offset-default"></core-tooltip>
@@ -83,23 +81,23 @@
             </section>
 
             <section id="test-core-tooltip-closedelay">
+                <label id="closedelay-target1">Target1</label>
                 <label id="closedelay-tooltip1">
                     Hide after tooltip 1
-                    <core-tooltip id="closedelay-tooltip1-box"></core-tooltip>
+                    <core-tooltip id="closedelay-tooltip1-box" close-delay="2000"></core-tooltip>
                 </label>
 
-                
                 <label id="closedelay-tooltip2">
                     Hide after tooltip 2
                     <core-tooltip id="closedelay-tooltip2-box"></core-tooltip>
                 </label>
-                
+                <label id="closedelay-target2">Target2</label>
             </section>
 
             <section id="test-core-tooltip-opendelay">
                 <label id="opendelay-tooltip1">
                     open delay tooltip
-                    <core-tooltip id="opendelay-tooltip1-box" openDelay="2000"></core-tooltip>
+                    <core-tooltip id="opendelay-tooltip1-box" open-delay="2000"></core-tooltip>
                 </label>                
             </section>
 

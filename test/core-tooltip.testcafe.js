@@ -50,9 +50,12 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
  */
 testCoreTooltip('content', '- Default content value should be empty string', async (t, ctx) => {
   const contentAttr = await Selector('#content-default').hasAttribute('content');
-  const tooltipText = Selector('#content-default').textContent;
+  const tooltipHostText = Selector('#content-default').textContent;
+  const tooltipText = await ShadowChildSelector(t, { targetQuerySelector: "#content-default" }, '#tooltip-content').textContent;
+
   await t
     .expect(contentAttr).eql(false)
+    .expect(tooltipHostText).eql('')
     .expect(tooltipText).eql('');
 });
 
@@ -77,7 +80,7 @@ testCoreTooltip('content', '- Set content value should be Team Friday Tooltip', 
 testCoreTooltip('disabled', '- Default disabled should not exist', async (t, ctx) => {
   const disabledAttr = await Selector('#disabled-default').hasAttribute('disabled');
   await t
-    .expect(defaultValue).eql(false);
+    .expect(disabledAttr).eql(false);
 });
 
 /**
@@ -158,9 +161,11 @@ testCoreTooltip('enterable', '- check the tooltip is enterable', async (t, ctx) 
  */
 testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for new tooltip', async (t, ctx) => {
   const tooltip1 = Selector('#closedelay-tooltip1');
+  const target1 = Selector('#closedelay-target1')
   const tooltip2 = Selector('#closedelay-tooltip2');
+  const target2 = Selector('#closedelay-target2')
   const tooltipBox1 = Selector('#closedelay-tooltip1-box');
-  // const tooltipBox2 = Selector('#closedelay-tooltip2-box');
+
   await t
     .hover(tooltip1)
     .expect(tooltipBox1.getStyleProperty('opacity'))
@@ -168,7 +173,7 @@ testCoreTooltip('closedelay', '- check the previous tooltip hide after hover for
 
   // move to tooltip 2, tooltip 1 should stil appear
   await t
-    .hover(tooltip2)
+    .hover(target1)
     .expect(tooltipBox1.getStyleProperty('opacity'))
     .eql('1');
 
@@ -207,9 +212,19 @@ testCoreTooltip('opendelay', '- check if the tooltip pops up after a few seconds
  * Test Description: Default offset value should be 0
  */
 testCoreTooltip('offset', '- Default offset value should be 0', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('offset', 'offset-default');
+  // const defaultValue = await getCoreAttribute('offset', 'offset-default');
+  // await t
+  //   .expect(defaultValue).eql(0);
+
+  const tooltipBox = await ShadowChildSelector(t, { targetQuerySelector: '#offset-default' }, '#tooltip-back');
+  const tooltipBoxSrc = await ShadowChildSelector(t, { targetQuerySelector: '#offset-correct' }, '#tooltip-back');
+
+
+  const tooltipCoordinateTop = await tooltipBox.getBoundingClientRectProperty('top');
+  const tooltipCoordinateTopCorrect = await tooltipBoxSrc.getBoundingClientRectProperty('top');
+
   await t
-    .expect(defaultValue).eql(0);
+    .expect(tooltipCoordinateTop).eql(tooltipCoordinateTopCorrect)
 });
 
 /**
@@ -221,6 +236,7 @@ testCoreTooltip('offset', '- Set offset value should be 1', async (t, ctx) => {
   const index = '1';
   await setCoreAttribute('offset', 'offset-set', index);
   const setValue = await getCoreAttribute('offset', 'offset-set');
+
   await t
     .expect(setValue).eql(index);
 });
@@ -320,28 +336,17 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
  */
 testCoreTooltip('manual', '- manual property', async (t, ctx) => {
   const tooltipHost = ctx.target;
-  const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
+  // const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
   await t
     .wait(2000)
-    .expect(tooltipBox.getStyleProperty('opacity'))
+    .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('0')
     .hover(tooltipHost)
-    .expect(tooltipBox.getStyleProperty('opacity'))
+    .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('0')
     .click(tooltipHost)
-    .expect(tooltipBox.getStyleProperty('opacity'))
+    .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('0');
-});
-
-/**
- * Purpose: checks that the default value of tabindex is 0
- * Test Attribute: tabindex
- * Test Description: Default tabindex value should be 0
- */
-testCoreTooltip('tabindex', '- Default tabindex value should be 0', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('tabindex', 'tabindex-default');
-  await t
-    .expect(defaultValue).eql(0);
 });
 
 /**
