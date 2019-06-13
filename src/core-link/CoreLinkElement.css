@@ -1,0 +1,27 @@
+:host a {
+  text-decoration: none;
+}
+
+:host([underline]) a {
+  text-decoration: underline;
+}
+
+:host([type=primary]) {
+    color: var(--primary, blue);
+}
+
+:host([type=success]) {
+    color: var(--success, lime);
+}
+
+:host([type=warning]) {
+    color: var(--warning, orange);
+}
+
+:host([type=danger]) {
+    color: var(--danger, tomato);
+}
+
+:host([type=info]) {
+    color: var(--info, slategray);
+}

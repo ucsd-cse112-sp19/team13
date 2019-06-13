@@ -9,6 +9,7 @@
         <script src="core-bye.js"></script>
         <script src="core-tooltip.js"></script>
         <script src="core-greet.js"></script>
+        <script src="core-link.js"></script>
     </head>
     <body>
         <h1>
@@ -23,6 +24,18 @@
                 <core-bye lang="jp">Team 13</core-bye>
             <label>)</label>
         </h1>
+        <div>
+            <core-link href="index.html">Looking for Team13 Demo?</core-link>
+            <core-link href="index.html" underline>Or Not?</core-link>
+        </div>
+
+        <section id="core-link-group" class="display-group">
+            <h2>This is core-link</h2>
+            <div>
+                <core-link href="https://www.google.com/">Simple google link</core-link>
+            </div>
+        </section>
+
         <section id="default-group" class="display-group">
             <h2>Basics<core-tooltip effect="dark">Yep, these are the basics.</core-tooltip></h2>
             <div>
@@ -117,6 +130,9 @@
                 <label>Bootstrap with .form-control-range</label>
             </div>
         </section>
+
+
+
 
         <script>
             const titleHello = document.getElementById('title-hello');
