@@ -52,12 +52,14 @@ Then, in your HTML page, include the components you want to use in the `<head>..
 	<script src="./node_modules/friday-webcomponents/dist/core-link.js"></script>
 ```
 # Documentation
-Make sure to read our documentation by running the following command
-`npm run storybook`.
-You can see the demo of our component, complete with a beginner's hand guide
+### Confused about how to use our components ?
+See simple examples of our components [here](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!<!-- todo -->
+### Read our API docs here
+[Friday Web Components JSDocs](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)! 
 
 # Meet The Team
-This project could only be finished with the contribution of our members, [meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
+This project could only be finished with the contribution of our members
+[meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
 
 # Contributing
 If youre as passionate as we are, Thats all you need. 
