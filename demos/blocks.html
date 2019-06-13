@@ -10,6 +10,7 @@
   <script src="../dist/core-bye.js"></script>
   <script src="../dist/core-tooltip.js"></script>
   <script src="../dist/core-greet.js"></script>
+  <script src="../dist/core-link.js"></script>
   <style>
       core-slider[vertical] {
       	width: auto;
@@ -56,9 +57,10 @@
       <div id="menubar">
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="fashion.html">Fashionable Legos</a></li>
-          <li class="selected"><a href="blocks.html">Lego Blocks</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><core-link href="slider.html" style="font-size: 14pt; margin-right: 10px;">Slider</core-link></li>
+          <li><core-link href="tooltip.html" style="font-size: 14pt; margin-right: 10px;">Tooltip</core-link></li>
+          <li><core-link href="link.html" style="font-size: 14pt; margin-right: 10px;">Link</core-link></li>
+          <li><core-link href="blocks.html" style="font-size: 14pt; margin-right: 10px;" type="success">Component Interactions</core-link></li>
         </ul>
       </div>
     </div>
@@ -82,6 +84,14 @@
               <core-slider id="vert2" value="10" vertical style="--thumb-color: #B2DDFF;--outline-color: #3BABFD;"></core-slider>
               <core-slider id="vert3" value="50" vertical style="--thumb-color: #A62908;--outline-color: #560807;"></core-slider>
               <core-slider id="vert4" value="100" vertical style="--thumb-color: #D19C4C;--outline-color: #10C135;"></core-slider>
+          </div>
+      </section>
+      <section id="vertical-group" class="display-group">
+          <h2>Link and Tooltip Interaction</h2>
+          <div>
+              <span style="display: inline-block;">
+                <p style="font-size: 10pt;"><span>How to <core-link href="https://github.com/ucsd-cse112/team13">contribute</core-link><core-tooltip> Team Friday Github Repo </core-tooltip></span></p>
+              </span>
           </div>
       </section>
     </div>
