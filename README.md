@@ -4,7 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/326f35bc460bb3deb322/test_coverage)](https://codeclimate.com/github/ucsd-cse112/team13/test_coverage)
 [![Visual Regression Testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/ucsd-cse112/ucsd-cse112)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-=============================================================================================================================
+=======================================
 
 # Thank God It's Friday
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
@@ -14,18 +14,12 @@ Table of contents
 =================
 
 <!--ts-->
-   * [Table of contents](#Table-of-contents)
-   * [Usage](#Use-our-components)
+   * [Table Of Contents](#Table-of-contents)
+   * [How To Use](#Use-our-components)
    * [Usage](#usage)
-      * [STDIN](#stdin)
-      * [Local files](#local-files)
-      * [Remote files](#remote-files)
-      * [Multiple files](#multiple-files)
-      * [Combo](#combo)
-      * [Auto insert and update TOC](#auto-insert-and-update-toc)
-      * [GitHub token](#github-token)
-   * [Tests](#tests)
-   * [Dependency](#dependency)
+   * [Documentation](#Documentation)
+   * [Meet The Team](#Meet-The-Team)
+   * [How to Contribute](#Contributing)
 <!--te-->
 
 # Use our components
@@ -57,22 +51,19 @@ Then, in your HTML page, include the components you want to use in the `<head>..
 ```html
 	<script src="./node_modules/friday-webcomponents/dist/core-link.js"></script>
 ```
-
-
-## Meet The Team
-This project could only be finished with the contribution of our members, [meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
-
-## Documentation
+# Documentation
 Make sure to read our documentation by running the following command
 `npm run storybook`.
 You can see the demo of our component, complete with a beginner's hand guide
 
-## Contributing
+# Meet The Team
+This project could only be finished with the contribution of our members, [meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)!
+
+# Contributing
 If youre as passionate as we are, Thats all you need. 
 See our [How To Contribute](./CONTRIBUTING.md) docs for simple steps!
 
-
 Please make sure to update tests as appropriate.
 
-## License
+#License
 [MIT](https://opensource.org/licenses/MIT)
