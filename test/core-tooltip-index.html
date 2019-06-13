@@ -138,9 +138,9 @@
             </section>
 
             <section id="test-core-tooltip-manual">
-                <label id="label-manual">
+                <label id="label-manual" onclick="manualClick()">
                     Manual Property
-                    <core-tooltip id="manual" manual=true></core-tooltip>
+                    <core-tooltip id="manual" manual></core-tooltip>
                 </label>
             </section>
 
@@ -158,5 +158,12 @@
                 </label>
             </section>
         </div>
+
+        <script>
+            function manualClick () {
+                document.querySelector('#manual').toggle();
+                console.log(document.querySelector('#manual'));
+            }
+        </script>
     </body>
 </html>

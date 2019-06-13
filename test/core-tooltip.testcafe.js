@@ -325,17 +325,16 @@ testCoreTooltip('placement', '- placement location: bottom', async (t, ctx) => {
  */
 testCoreTooltip('manual', '- manual property', async (t, ctx) => {
   const tooltipHost = ctx.target;
-  // const tooltipBox = ShadowChildSelector(t, { targetQuerySelector: '#manual' }, '#tooltip-back');
+  const target = Selector('#label-manual');
   await t
-    .wait(2000)
     .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('0')
-    .hover(tooltipHost)
+    .hover(target)
     .expect(tooltipHost.getStyleProperty('opacity'))
     .eql('0')
-    .click(tooltipHost)
+    .click(target)
     .expect(tooltipHost.getStyleProperty('opacity'))
-    .eql('0');
+    .eql('1');
 });
 
 /**

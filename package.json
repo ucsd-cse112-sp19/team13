@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js && npm run docs",
+    "build": "webpack --mode production --config webpack.config.js",
     "docs": "jsdoc --destination ./docs --readme ./README.md --recurse ./src/* && npm run add",
     "add": "git add docs/ && git commit -m 'Auto update JSDocs'",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
