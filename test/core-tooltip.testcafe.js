@@ -135,26 +135,6 @@ testCoreTooltip('hoverable', '- check the component is hoverable', async (t, ctx
 });
 
 /**
- * Purpose: checks that the tooltip can be entered by moving mouse onto the tooltip
- * Test Attribute: enterable
- * Test Description: check the tooltip is enterable
- */
-testCoreTooltip('enterable', '- check the tooltip is enterable', async (t, ctx) => {
-  const tooltip = Selector('#enterable-tooltip');
-  const tooltipBox = Selector('#enterable-tooltip-box');
-  await t
-    .hover(tooltip)
-    /* TODO: moving mouse up a liitle to enter the tooltip.... not sure how to do it */
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('1');
-
-  await t
-    .hover(tooltipBox)
-    .expect(tooltipBox.getStyleProperty('opacity'))
-    .eql('1');
-});
-
-/**
  * Purpose: checks that the tooltip disappears after hovering over a different tooltip
  * Test Attribute: closedelay
  * Test Description: check the previous tooltip hide after hover for new tooltip
