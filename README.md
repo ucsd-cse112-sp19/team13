@@ -8,6 +8,9 @@
 
 # Thank God It's Friday
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
+<h4 align="center">
+  <img alt="Logo" src="https://imgur.com/e9SoakZ.png">
+</h4>
 ![Logo](https://imgur.com/e9SoakZ.png)
 
 Table of contents
@@ -15,7 +18,7 @@ Table of contents
 
 <!--ts-->
    * [Table of Contents](#Table-of-contents)
-   * [How to Use](#Use-our-components)
+   * [Use-out-components](#Use-our-components)
    * [Usage](#usage)
    * [Documentation](#Documentation)
    * [Meet The Team](#Meet-The-Team)
