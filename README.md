@@ -3,7 +3,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/326f35bc460bb3deb322/maintainability)](https://codeclimate.com/github/ucsd-cse112/team13/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/326f35bc460bb3deb322/test_coverage)](https://codeclimate.com/github/ucsd-cse112/team13/test_coverage)
 [![Visual Regression Testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/ucsd-cse112/ucsd-cse112)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Thank God It's Friday
 Welcome To UCSD-CSE112's Public Repository for Team Friday!
