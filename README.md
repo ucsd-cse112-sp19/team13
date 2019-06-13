@@ -7,7 +7,7 @@
 =======================================
 
 <h1 align="center"> Thank God It's Friday</h1>
-<h2 align="center"> Welcome To UCSD-CSE112's Public Repository for Team Friday!</h2>
+<p align="center"> Welcome To UCSD-CSE112's Public Repository for Team Friday!</p>
 <h4 align="center"> <img alt="Logo" src="https://imgur.com/e9SoakZ.png"></h4>
 ![Logo](https://imgur.com/e9SoakZ.png)
 
