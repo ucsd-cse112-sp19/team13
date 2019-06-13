@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Video Demo</title>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <script src="../dist/core-hello.js"></script>
+  <script src="../dist/core-slider.js"></script>
+  <script src="../dist/core-bye.js"></script>
+  <script src="../dist/core-tooltip.js"></script>
+  <script src="../dist/core-greet.js"></script>
+  <script src="../dist/core-link.js"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Team<span class="logo_colour">Friday</span></a></h1>
+          <h2>Designing Simple, Easy to Use, Native Web Components</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><core-link href="slider.html" style="font-size: 14pt; margin-right: 10px;" type="success">Slider</core-link></li>
+          <li><core-link href="tooltip.html" style="font-size: 14pt; margin-right: 10px;">Tooltip</core-link></li>
+          <li><core-link href="tooltip.html" style="font-size: 14pt; margin-right: 10px;">Link</core-link></li>
+          <li><core-link href="blocks.html" style="font-size: 14pt; margin-right: 10px;">Component Interactions</core-link></li>
+        </ul>
+      </div>
+    </div>
+    <div id="content_header"></div>
+    <div id="site_content">
+      <h1>Demonstration on how to style components by css variables and bootstrap</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <h2>Sliders</h2>
+            <p style="font-size: 12pt;">Styled by CSS Variables</p>
+            <div style="display: flex; flex-direction: column; width: 100%;">
+              <core-slider style="--thumb-color: red;--outline-color: red;"></core-slider>
+              <core-slider style="--thumb-color: orange;--outline-color: orange;"></core-slider>
+              <core-slider style="--thumb-color: yellow;--outline-color: yellow;"></core-slider>
+              <core-slider style="--thumb-color: green;--outline-color: green;"></core-slider>
+              <core-slider style="--thumb-color: blue;--outline-color: blue;"></core-slider>
+              <core-slider style="--thumb-color: purple;--outline-color: purple;"></core-slider>
+              <core-slider style="--thumb-color: black;--outline-color: black;"></core-slider>
+            </div>
+            <p style="font-size: 12pt;">Styled with Bootstrap</p>
+            <div>
+              <core-slider class="custom-range"></core-slider>
+              <core-slider class="custom-range" disabled></core-slider>
+              <core-slider class="form-control-range"></core-slider>
+            </div>
+            <p style="font-size: 12pt;">Attributes</p>
+            <div>
+              <div>
+                <p style="font-size: 10pt;">Default Settings</p>
+                <code>&ltcore-slider&gt&lt/core-slider&gt</code>
+                <core-slider></core-slider>
+              </div>
+              <div>
+                <p style="font-size: 10pt;">Disabled</p>
+                <code>&ltcore-slider disabled&gt&lt/core-slider&gt</code>
+                <core-slider disabled></core-slider>
+              </div>
+              <div>
+                <p style="font-size: 10pt;">Min and Max</p>
+                <code>&ltcore-slider min="1" max="5"&gt&lt/core-slider&gt</code>
+                <core-slider min="1" max="5"></core-slider>
+              </div>
+              <div>
+                <p style="font-size: 10pt;">Color</p>
+                <code>&ltcore-slider color="#A62908"&gt&lt/core-slider&gt</code>
+                <core-slider color="#A62908"></core-slider>
+              </div>
+              <div>
+                <p style="font-size: 10pt;">Step</p>
+                <code>&ltcore-slider step="10"&gt&lt/core-slider&gt</code>
+                <core-slider step="10"></core-slider>
+              </div>
+              <div>
+                <p style="font-size: 10pt;">Vertical</p>
+                <code>&ltcore-slider&gt&lt/core-slider&gt</code>
+                <br>
+                <core-slider vertical style="height: 200px"></core-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      <p><a href="legos.html">Slider</a> | <a href="fashion.html">Tooltip</a> |
+         <a href="blocks.html">Link</a> | <a href="application.html">Component Interactions</a> </p>
+      <p>Copyright &copy; shadowplay_2 | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
+    </div>
+  </div>
+</body>
+</html>
