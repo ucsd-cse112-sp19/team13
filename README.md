@@ -22,7 +22,12 @@ Table of contents
 <!--te-->
 
 # Use our components
+Make sure that your project has npm initialized. If not, run the following command. It will ask you questions pertaining to your project. Don't worry, these can be changed in the future in 'package.json'.
+
+`npm init`
+
 To download our components, simply run:
+
 `npm i friday-webcomponents`
 
 Then, in your HTML page, include the components you want to use in the `<head>...</head>` tags. For example:
