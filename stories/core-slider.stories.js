@@ -1,13 +1,39 @@
 import { storiesOf } from '@storybook/html';
+import {
+  withKnobs,
+  text,
+  boolean,
+  number,
+} from '@storybook/addon-knobs';
 import '../dist/core-slider';
 
-storiesOf('Core Slider', module)
-  .add('default', () => '<core-slider></core-slider>')
-  .add('value', () => '<core-slider value="50"></core-slider>')
-  .add('disabled', () => '<core-slider disabled></core-slider>')
-  .add('min', () => '<core-slider min="10"></core-slider>')
-  .add('max', () => '<core-slider max="20"></core-slider>')
-  .add('step', () => '<core-slider step="10" value="50"></core-slider>')
-  .add('vertical', () => '<div style="height: 10rem;"><core-slider vertical></core-slider></div>')
-  .add('rainbow', () => '<core-slider rainbow></core-slider>')
-  .add('color', () => '<core-slider color="var(--primary, blue)"></core-slider>');
+function createCoreSlider(value, min, max, step, color, vertical, rainbow, disabled) {
+  const element = document.createElement('core-slider');
+  element.value = number('value', value);
+  element.min = number('min', min);
+  element.max = number('max', max);
+  element.step = number('step', step);
+  element.color = text('color', color);
+  element.vertical = boolean('vertical', vertical);
+  element.rainbow = boolean('rainbow', rainbow);
+  element.disabled = boolean('disabled', disabled);
+  return element;
+}
+
+storiesOf('CoreSlider', module)
+  .addDecorator(withKnobs)
+  .add('default', () => createCoreSlider(0, 0, 100, 1, '', false, false, false))
+  .add('value', () => createCoreSlider(50, 0, 100, 1, '', false, false, false))
+  .add('min', () => createCoreSlider(0, 50, 100, 1, '', false, false, false))
+  .add('max', () => createCoreSlider(0, 0, 20, 1, '', false, false, false))
+  .add('step', () => createCoreSlider(0, 0, 100, 10, '', false, false, false))
+  .add('color', () => createCoreSlider(0, 0, 100, 1, 'var(--primary, blue)', false, false, false))
+  .add('vertical', () => {
+    const element = createCoreSlider(0, 0, 100, 1, '', true, false, false);
+    const parentElement = document.createElement('div');
+    parentElement.style.height = '10rem';
+    parentElement.appendChild(element);
+    return parentElement;
+  })
+  .add('rainbow', () => createCoreSlider(0, 0, 100, 1, '', false, true, false))
+  .add('disabled', () => createCoreSlider(0, 0, 100, 1, '', false, false, true));

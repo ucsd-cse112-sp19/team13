@@ -1,5 +1,4 @@
 import { configure } from '@storybook/html';
-import 'core-js';
 
 // automatically import all files ending in *.stories.js
 require('../stories/welcome');
