@@ -44,17 +44,6 @@ const setCoreAttribute = ClientFunction((strAttrName, strElemId, value) => {
 /* eslint-disable no-unused-vars */
 
 /**
- * Purpose: checks that the default value of disabled is false
- * Test Attribute: disabled
- * Test Description: Default disabled value should be false
- */
-testCoreLink('disabled', '- Default disabled value should be false', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('disabled', 'disabled-default');
-  await t
-    .expect(defaultValue).eql(false);
-});
-
-/**
  * Purpose: checks that the set value of disabled true
  * Test Attribute: disabled
  * Test Description: Set disabled value should be true
@@ -100,49 +89,40 @@ testCoreLink('href', '- underline test', async (t, ctx) => {
 });
 
 /**
- * Purpose: checks that the default value of icon is empty string
- * Test Attribute: icon
- * Test Description: Default icon value should be empty string
- */
-testCoreLink('icon', '- Default icon value should be empty string', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('icon', 'icon-default');
-  await t
-    .expect(defaultValue).eql('');
-});
-
-/**
- * Purpose: checks that the set value of icon is "el-icon-edit"
- * Test Attribute: icon
- * Test Description: Set icon value should be "el-icon-edit"
- */
-testCoreLink('icon', '- Set icon value should be "el-icon-edit"', async (t, ctx) => {
-  const icon = 'el-icon-edit'; // string to set icon
-  await setCoreAttribute('icon', 'icon-set', icon);
-  const setValue = await getCoreAttribute('icon', 'icon-set');
-  await t
-    .expect(setValue).eql(icon);
-});
-
-/**
- * Purpose: checks that the default value of type is empty string
- * Test Attribute: type
- * Test Description: Default type value should be empty string
- */
-testCoreLink('type', '- Default type value should be empty string', async (t, ctx) => {
-  const defaultValue = await getCoreAttribute('type', 'type-default');
-  await t
-    .expect(defaultValue).eql('');
-});
-
-/**
  * Purpose: checks that the set value of type is "primary"
  * Test Attribute: type
  * Test Description: Set type value should be "primary"
  */
 testCoreLink('type', '- Set type value should be "primary"', async (t, ctx) => {
   const type = 'primary'; // string to set type
-  await setCoreAttribute('type', 'type-set', type);
-  const setValue = await getCoreAttribute('type', 'type-set');
+  await setCoreAttribute('type', 'type-primary', type);
+  const setValue = await getCoreAttribute('type', 'type-primary');
+  await t
+    .expect(setValue).eql(type);
+});
+
+/**
+ * Purpose: checks that the set value of type is "success"
+ * Test Attribute: type
+ * Test Description: Set type value should be "success"
+ */
+testCoreLink('type', '- Set type value should be "success"', async (t, ctx) => {
+  const type = 'success'; // string to set type
+  await setCoreAttribute('type', 'type-success', type);
+  const setValue = await getCoreAttribute('type', 'type-success');
+  await t
+    .expect(setValue).eql(type);
+});
+
+/**
+ * Purpose: checks that the set value of type is "info"
+ * Test Attribute: type
+ * Test Description: Set type value should be "info"
+ */
+testCoreLink('type', '- Set type value should be "info"', async (t, ctx) => {
+  const type = 'info'; // string to set type
+  await setCoreAttribute('type', 'type-info', type);
+  const setValue = await getCoreAttribute('type', 'type-info');
   await t
     .expect(setValue).eql(type);
 });
