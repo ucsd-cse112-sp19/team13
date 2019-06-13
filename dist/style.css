@@ -11,6 +11,10 @@ body {
 	align-items: center;
 }
 
+.tooltip {
+	border: 1px dashed black;
+}
+
 core-slider {
 	width: 200px;
 	height: auto;

@@ -1,0 +1,6 @@
+/test/
+/tools/
+/coverage/
+/.nyc_output/
+/.showroom/
+/.vscode/

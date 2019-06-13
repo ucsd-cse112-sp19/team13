@@ -9,6 +9,7 @@
         <script src="core-bye.js"></script>
         <script src="core-tooltip.js"></script>
         <script src="core-greet.js"></script>
+        <script src="core-link.js"></script>
     </head>
     <body>
         <h1>
@@ -23,31 +24,20 @@
                 <core-bye lang="jp">Team 13</core-bye>
             <label>)</label>
         </h1>
+        <div>
+            <core-link href="index.html" type="warning">Looking for Team13 Demo?</core-link>
+            <core-link href="index.html" underline>Or Not?</core-link>
+        </div>
+
+        <section id="core-link-group" class="display-group">
+            <h2>This is core-link</h2>
+            <div>
+                <core-link href="https://www.google.com/">Simple google link</core-link>
+            </div>
+        </section>
+
         <section id="default-group" class="display-group">
             <h2>Basics<core-tooltip>Yep, these are the basics.</core-tooltip></h2>
-            <div>
-                Here is <span><a>some</a><core-tooltip> Hi! </core-tooltip></span> text.
-                <span>
-                    <input type="text"/>
-                    <core-tooltip placement="left"> This is an input box! </core-tooltip>
-                </span>
-                <span>
-                    <label>Top</label>
-                    <core-tooltip placement="top"> This is an input box! </core-tooltip>
-                </span>
-                <span>
-                    <label>Left</label>
-                    <core-tooltip placement="left"> This is an input box! </core-tooltip>
-                </span>
-                <span>
-                    <label>Right</label>
-                    <core-tooltip placement="right"> This is an input box! </core-tooltip>
-                </span>
-                <span>
-                    <label>Bottom</label>
-                    <core-tooltip placement="bottom"> This is an input box! </core-tooltip>
-                </span>
-            </div>
             <div>
                 <core-slider id="size-slider" min="10" max="100" value="20" step="5"></core-slider>
                 <label>Font Size</label>
@@ -55,6 +45,35 @@
             <div>
                 <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
                 <label>Disabled Slider</label>
+            </div>
+        </section>
+        <section id="tooltip-group" class="display-group">
+            <div>
+                <h2>Here is <span class="tooltip"><a>some</a><core-tooltip> Hi! </core-tooltip></span> text. Just for tooltips :D</h2>
+                <span class="tooltip">
+                    <input type="text"/>
+                    <core-tooltip placement="left" content="Hello All."></core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Top</label>
+                    <core-tooltip placement="top" effect="light"> This is an input box! </core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Left</label>
+                    <core-tooltip placement="left" effect="dark"> This is an input box! </core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Right</label>
+                    <core-tooltip placement="right"> This is an input box! </core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Bottom</label>
+                    <core-tooltip placement="bottom"> This is an input box! </core-tooltip>
+                </span>
+            </div>
+            <div>
+                <a>HOVER ME<core-tooltip openDelay="1000" closeDelay="0">TOOLTIPS!</core-tooltip></a>
+                <a>HOVER ME TOO<core-tooltip openDelay="5000">MAOR TOOLTUPS!</core-tooltip></a>
             </div>
         </section>
         <section id="vertical-group" class="display-group">
@@ -85,6 +104,9 @@
                 <label>Bootstrap with .form-control-range</label>
             </div>
         </section>
+
+
+
 
         <script>
             const titleHello = document.getElementById('title-hello');
