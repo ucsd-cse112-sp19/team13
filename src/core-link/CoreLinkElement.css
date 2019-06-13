@@ -1,0 +1,35 @@
+a {
+  text-decoration: none;
+}
+
+a:hover {
+    filter: brightness(1.2);
+}
+
+a:visited {
+    filter: brightness(0.5);
+}
+
+:host([underline]) a {
+  text-decoration: underline;
+}
+
+:host([type=primary]) a {
+    color: var(--primary, blue);
+}
+
+:host([type=success]) a {
+    color: var(--success, lime);
+}
+
+:host([type=warning]) a {
+    color: var(--warning, orange);
+}
+
+:host([type=danger]) a {
+    color: var(--danger, tomato);
+}
+
+:host([type=info]) a {
+    color: var(--info, slategray);
+}

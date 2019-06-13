@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>core-components</title>
+        <script src="../dist/core-link.js"></script>
+        <style>
+            section {
+                width: 400px;
+                padding: 10px;
+                margin: 10px;
+                border: 1px solid lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test-core-link">
+          <section id="test-core-link-default">
+              <core-link id ="disabled-set" href="#">disabled-set</core-link>
+          </section>
+          <section id="test-core-link-href">
+              <core-link id ="href-link" href="https://www.google.com">This is a link to google</core-link>
+          </section>
+          <section id="test-core-link-type">
+              <core-link id ="type-primary" href="#" type="primary">type-default</core-link>
+              <hr />
+              <core-link id ="type-success" href="#" type="success">type-set</core-link>
+              <hr />
+              <core-link id ="type-info" href="#" type="info">type-set</core-link>
+          </section>
+            <section id="test-core-link-underline">
+                <core-link id ="underline-link" href="#" underline>This is underlined link</core-link>
+            </section>
+        </div>
+    </body>
+</html>
