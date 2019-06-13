@@ -20,7 +20,12 @@ script:
 after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
 
+after_success: 
+  - bash tools/deploy.sh
+
 # Makes sure node_modules exists.
 cache:
   directories:
     - node_modules
+
+secure: "zyYyHVk2KArSzpC1gNCbcg2xa8OBYVwBGZMfRPo9uxb2VjxC6raDylsdfLz648I1NDNJ55bp6Aj3ewkAPuFoznuJYNyHz+hHM+Hq7QWHx8ACUtX+8D1s50gJ58/pT913+JtwtooIMovSxDHIVlJykkYvErk2RX/ZilKAHpBH5j28Y/xNh3HaWjv7tiiihkjXiymDoIb+1Wyu7HP9JWWJh9bOiqbUBP01PHilz0rtAdQfLpc0quJdud42NHq9wdCHjUZGJAmnXtGK7NJH0NJuebKopJfA6UnQolxbHUJA6Q7arj1f9KUVzNySuNyUZVf0Z9XOtURgn2Po9rkOHdq97bOtYwXWmEWmKvnswtVaugWYmleG5EEphDTbTfzuGN6aBn5LcV3lvoZcailndnmuVn2EhxCqbF4Eh7hhj8/l05iespJHG6a0lYJSW2vw3BVi+f/Txulc3hMYyENsDy7v8HQeszqYISL6sJ9yx1pZxfcypSVD7PGsOZDLzja7jbUJN9glAiLUYQcgu4fbR1Um6DTJ+WP+EohAw8yOsbWwOHQKf+CKEInGdlAN+R2Lyk4A4eBTVfbhOOUuzXia8WkJL0etfhDPjouNLXYObnJVeLSYYSsM6AnR+FSaR6Dxg6cT7uA2Zk5sBdrIm7wuOqiXKJLV05+9vtSb/7nqIpUBqtg="
