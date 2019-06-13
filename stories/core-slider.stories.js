@@ -1,19 +1,13 @@
 import { storiesOf } from '@storybook/html';
-// import { withKnobs } from '@storybook/addon-knobs/polymer';
-// import { action } from '@storybook/addon-actions';
-import coreslider from '../src/core-slider/CoreSliderElement.js';
-// import '../src/core-slider/CoreSliderElement.html';
-// import '../src/core-slider/CoreSliderElement.css';
+import '../dist/core-slider';
 
 storiesOf('Core Slider', module)
-  .add('English', () => '<core-slider>Peter</core-slider>')
-  // .addDecorator(withKnobs)
-  .add('Default', () => {
-    const slider = document.createElement('core-slider');
-    slider.innerText = 'demo';
-    return slider;
-  })
-  .add('as a component', () => ({
-    components: { coreslider },
-    template: '<core-slider></core-slider>',
-  }));
+  .add('default', () => '<core-slider></core-slider>')
+  .add('value', () => '<core-slider value="50"></core-slider>')
+  .add('disabled', () => '<core-slider disabled></core-slider>')
+  .add('min', () => '<core-slider min="10"></core-slider>')
+  .add('max', () => '<core-slider max="20"></core-slider>')
+  .add('step', () => '<core-slider step="10" value="50"></core-slider>')
+  .add('vertical', () => '<div style="height: 10rem;"><core-slider vertical></core-slider></div>')
+  .add('rainbow', () => '<core-slider rainbow></core-slider>')
+  .add('color', () => '<core-slider color="var(--primary, blue)"></core-slider>');
