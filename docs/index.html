@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>Friday's Web Components</title>
+
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+        <script src="../dist/core-hello.js"></script>
+        <script src="../dist/core-slider.js"></script>
+        <script src="../dist/core-bye.js"></script>
+        <script src="../dist/core-tooltip.js"></script>
+        <script src="../dist/core-greet.js"></script>
+    </head>
+
+    <body>
+        <nav class="site-header sticky-top py-1">
+            <section class="container d-flex flex-column flex-md-row justify-content-between">
+                <a class="py-2" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+                        viewBox="0 0 24 24" focusable="false">
+                        <title>Product</title>
+                        <circle cx="12" cy="12" r="10" />
+                        <path
+                            d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
+                    </svg>
+                </a>
+                <a class="py-2 d-none d-md-inline-block" href="#">About</a>
+                <a class="py-2 d-none d-md-inline-block" href="#install">Install</a>
+                <a class="py-2 d-none d-md-inline-block" href="#slider">Core-slider</a>
+                <a class="py-2 d-none d-md-inline-block" href="#tooltip">Core-tooltip</a>
+                <a class="py-2 d-none d-md-inline-block" href="#core-hello">Core-hello</a>
+                <a class="py-2 d-none d-md-inline-block" href="#core-bye">Core-bye</a>
+            </section>
+        </nav>
+
+        <section class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+            <section class="col-md-5 p-lg-5 mx-auto my-5">
+                <h1 class="display-4 font-weight-normal">Team Friday's</h1>
+                <h2 class="display-3">Web Components</h2>
+                <p class="lead font-weight-normal">Bringing native web components that are both beautiful and easy-to-use
+                    to a website near you.</p>
+                <!-- <a class="btn btn-outline-secondary" href="#">Coming soon</a> -->
+            </section>
+            <section class="product-device shadow-sm d-none d-md-block"></section>
+            <section class="product-device product-device-2 shadow-sm d-none d-md-block"></section>
+        </section>
+        
+        <section class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" id="install">
+            <section class="col-sm-5 p-sm-3 mx-auto my-1">
+                <h2 class="display-4 font-weight-normal text-center">Installation</h2>
+                <p class="lead">It's as easy as:</p>
+                <ul class="lead">
+                    <li>Download our dist folder from our <a href="https://github.com/ucsd-cse112/team13">Github repository</a>.</li>
+                    <li>Include the line: <code>&lt;script src="core-hello.js"&gt;&lt;/script&gt;</code>.</li>
+                    <li>Use the elements with <code>&lt;core-hello&gt;&lt;/core-hello&gt;</code>.</li>
+                    <li>That's it.</li>
+                </ul>
+            </section>
+            <section class="d-flex mb-2 justify-content-center flex-row">
+            </section>
+        </section>
+
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" id="slider">
+            <div class="col-sm-5 p-sm-3 mx-auto my-1 text-center">
+                <h2 class="display-4 font-weight-normal">Core-slider</h2>
+            </div>
+            <div class="d-flex mb-2 justify-content-center flex-row">
+                <core-slider value="10"></core-slider>
+            </div>
+            <!-- <div class="product-device shadow-sm d-none d-md-block"></div>
+            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> -->
+        </div>
+
+
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+            <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-white overflow-hidden">
+                <div class="my-3 py-3 text-center">
+                    <h2 class="display-5">Comes in many varieties</h2>
+                </div>
+                <div class="text-dark bg-light d-flex flex-column shadow-sm mx-auto"
+                    style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                    <p class="lead text-center mt-3 mb-2"> Step</p>
+                    <core-slider class="mx-auto" step="10"></core-slider>
+                    <p class="lead text-center mt-3 mb-2"> Disabled</p>
+                    <core-slider class="mx-auto" disabled></core-slider>
+                    <p class="lead text-center mt-3 mb-2"> Min, Max, and Step</p>
+                    <core-slider class="mx-auto" min="-100" max="100" step="50"></core-slider>
+                    </div> </div> <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 overflow-hidden">
+                        <div class="my-3 py-3 text-center">
+                            <h2 class="display-5">As well as in vertical</h2>
+                        </div>
+                        <div class="text-white bg-dark d-flex flex-row justify-content-around shadow-sm mx-auto"
+                            style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="lead text-center mx-auto mt-4 mb-2"> Step</p>
+                                <core-slider vertical class="mx-auto" step="10"></core-slider>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="lead text-center mx-auto mt-4 mb-2"> Disabled</p>
+                                <core-slider vertical class="mx-auto" disabled></core-slider>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="lead text-center mx-auto mt-4 mb-2"> Min, Max, and Step</p>
+                                <core-slider vertical class="mx-auto" min="-100" max="100" step="50"></core-slider>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" id="tooltip">
+                <div class="col-sm-5 p-sm-3 mx-auto my-1 text-center">
+                    <h2 class="display-4 font-weight-normal">Core-tooltip<core-tooltip placement="bottom">Hello!</core-tooltip></h2>
+                    <h3 class="display-5">Hover me ^</h3>
+                </div>
+            </div>
+            
+            
+            <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+                <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 overflow-hidden">
+                    <div class="my-3 py-3 text-center">
+                        <h2 class="display-5">Pick the side of the tooltip!</h2>
+                    </div>
+                    <div class="bg-dark shadow-sm mx-auto text-white d-flex flex-column justify-content-center" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                        <p class="lead text-center p-1 mx-auto">Top<core-tooltip class="text-dark" placement="top">Hello!</core-tooltip></p>
+                        <p class="lead text-center p-1 mx-auto">Left<core-tooltip class="text-dark" placement="left">Hello!</core-tooltip></p>
+                        <p class="lead text-center p-1 mx-auto">Right<core-tooltip class="text-dark" placement="right">Hello!</core-tooltip></p>
+                        <p class="lead text-center p-1 mx-auto">Bottom<core-tooltip class="text-dark" placement="bottom">Hello!</core-tooltip></p>
+                    </div>
+                </div>
+                <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+                    <div class="my-3 py-3">
+                        <h2 class="display-5">Along with customizable features</h2>
+                    </div>
+                    <div class="text-dark d-flex flex-column justify-content-center bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+                        <div></div>
+                        <p class="lead text-center p-1 mx-auto">Dark<core-tooltip effect="dark" placement="top">Hello!</core-tooltip></p>
+                        <p class="lead text-center mx-auto">Manual<core-tooltip id="manual-tooltip" manual placement="left">Hello!</core-tooltip></p>
+                        <button class="text-center mx-auto mb-2 p-1" onclick="document.querySelector('#manual-tooltip').onTooltipOpen()">Open tooltip</button>
+                        <button class="text-center mx-auto mb-3 p-1" onclick="document.querySelector('#manual-tooltip').onTooltipClose()">Close tooltip</button>
+                        <p class="lead text-center p-1 mx-auto">No Arrow<core-tooltip no-visible-arrow placement="left">Hello!</core-tooltip></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" id="core-hello">
+                <div class="col-sm-5 p-sm-3 mx-auto my-1 text-center">
+                    <h2 class="display-4 font-weight-normal">Core-hello</h2>
+                    <core-hello>World!</core-hello>
+                    <br>
+                    <core-hello rainbow>World!</core-hello>
+                </div>
+            </div>
+
+            <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" id="core-bye">
+                <div class="col-sm-5 p-sm-3 mx-auto my-1 text-center">
+                    <h2 class="display-4 font-weight-normal">Core-bye</h2>
+                    <core-bye>World!</core-bye>
+                    <br>
+                    <core-bye rainbow>World!</core-bye>
+                </div>
+            </div>
+
+            <footer class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-md text-center">
+                        <img class="logo" src="static/friday_logo.png" width="75" height="75"alt="our logo">
+                        <small class="d-block mb-3 text-muted">&copy; Team Friday</small>
+                    </div>
+                </div>
+            </footer>
+
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+            <script>
+                $(document).on("scroll", function () {
+                    var pageTop = $(document).scrollTop()
+                    var pageBottom = pageTop + $(window).height()
+                    var tags = $("div")
+
+                    for (var i = 0; i < tags.length; i++) {
+                        var tag = tags[i]
+
+                        if ($(tag).position().top < pageBottom) {
+                            $(tag).addClass("visible")
+                        } else {
+                            $(tag).removeClass("visible")
+                        }
+                    }
+                })
+            </script>
+    </body>
+</html>
