@@ -1,4 +1,5 @@
 {
     "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false, 
-    "javascript.format.placeOpenBraceOnNewLineForFunctions": false
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
+    "liveServer.settings.port": 5501
 }
