@@ -2,7 +2,7 @@
 [![npm version](https://badge.fury.io/js/friday-webcomponents.svg)](https://badge.fury.io/js/friday-webcomponents)
 [![Maintainability](https://api.codeclimate.com/v1/badges/326f35bc460bb3deb322/maintainability)](https://codeclimate.com/github/ucsd-cse112/team13/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/326f35bc460bb3deb322/test_coverage)](https://codeclimate.com/github/ucsd-cse112/team13/test_coverage)
-[![Visual Regression Testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/ucsd-cse112/ucsd-cse112)
+[![Visual Regression Testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/CSE-112/Friday-Web-Components)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 =======================================
 

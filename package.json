@@ -5,10 +5,11 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
     "build": "webpack --mode production --config webpack.config.js && npm run docs",
+    "percy": "npx percy exec -- node ./tools/snapshots.js --enable_javascript",
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/ && npm run add",
     "add": "git add ./docs/api && git commit -m \"Auto update JSDocs\"",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
-    "test": "npm run lint && npm run coverage",
+    "test": "npm run lint && npm run coverage && npm run snapshot",
     "lcov-coverage": "istanbul report --root coverage --include=*.json --dir coverage lcov",
     "report-coverage": "istanbul report --root coverage --include=*.json --dir coverage/report html && npm run lcov-coverage",
     "coverage": "nyc --all --include \"src/**/*.js\" --reporter=json --reporter=text npm run e2e-test-headless && python3 tools/coverage.py && npm run report-coverage",
@@ -18,14 +19,17 @@
     "e2e-test-headless-slider": "testcafe chrome:headless test/core-slider.testcafe.js",
     "e2e-test-headless-link": "testcafe chrome:headless test/core-link.testcafe.js",
     "build-test": "npm run build && npm run e2e-test-headless",
-    "changelog": "auto-changelog --template keepachangelog --package --commit-limit false --output CHANGELOG.md"
+    "changelog": "auto-changelog --template keepachangelog --package --commit-limit false --output CHANGELOG.md",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -c .storybook -o ./docs/storybook",
+    "snapshot": "build-storybook && percy-storybook --widths=320,1280"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ucsd-cse112/team13.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ucsd-cse112/team13/issues"
   },
@@ -34,7 +38,11 @@
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-classes": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
+    "@percy/storybook": "^3.0.2",
     "@purtuga/web-components-polyfill-webpack-plugin": "^2.1.0",
+    "@storybook/addon-knobs": "^5.1.4",
+    "@storybook/html": "^5.1.3",
+    "@storybook/storybook-deployer": "^2.8.1",
     "auto-changelog": "^1.13.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-custom-element-classes": "^0.1.0",
@@ -61,5 +69,10 @@
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@percy/script": "^1.0.0",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "core-js": "^3.1.3",
+    "global": "^4.3.2"
+  }
 }
