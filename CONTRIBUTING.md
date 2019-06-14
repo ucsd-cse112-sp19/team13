@@ -42,6 +42,8 @@ Follow these steps to get going.
 
  > *[Template and structure of Friday's CONTRIBUTING.md courtesy of Mochajs CONTRIBUTING.md](https://github.com/mochajs/mocha/blob/master/.github/CONTRIBUTING.md)*
 
+ ## A Quick Tutorial on Writing Tests
+ See our [TestCafe Handguide](https://www.google.com/chrome/) on how to write tests.
 
 ## A Quick Tutorial on your First Contribution
 So you want to contribute to core components? Here's what you need to know.
@@ -211,6 +213,9 @@ propertyChangedCallback(property, oldValue, newValue) {
     }
 }
 ```
+
+##### Propagating changes/effects for an component
+After adding a change to a component, run `npm run build` for the changes to take effect
 
 ##### Adding your own functions
 Don't repeat yourself. If you find yourself writing the same code in multiple places, try putting them in a function. Even locally scope the function by declaring a function outside the class. These will be inaccessible to anyone else but this class. Here's an example:
