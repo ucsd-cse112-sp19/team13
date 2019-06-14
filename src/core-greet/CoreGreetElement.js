@@ -1,9 +1,8 @@
 import CoreElement from '../core-element/CoreElement';
-
 import TEMPLATE from './CoreGreetElement.html';
 import STYLE from './CoreGreetElement.css';
 
-const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
+const CoreGreetTemplate = CoreElement.templateNode(TEMPLATE, STYLE);
 
 /**
  * An element that displays some greeting from the language mapping with the passed-in name,
@@ -13,25 +12,25 @@ const STYLED_TEMPLATE = CoreElement.template(TEMPLATE, STYLE);
  * @property {String} lang the language to display in.
  */
 class CoreGreetElement extends CoreElement {
-  /**
-   * Creates a CoreGreet element and attaches the shadow root
-   */
+  /** @private */
+  static get properties() {
+    return {
+      name: { type: String },
+      rainbow: { type: Boolean },
+      lang: { type: String },
+    };
+  }
+
+  /** Creates a CoreGreet element and attaches the shadow root. */
   constructor(langMap = null) {
-    super(STYLED_TEMPLATE);
+    super(CoreGreetTemplate);
 
     this.langMapping = langMap || { en: 'Greet' };
 
     this.greetElement = this.shadowRoot.querySelector('#greet');
     this.nameElement = this.shadowRoot.querySelector('#name');
-  }
 
-  /** @private */
-  static get properties() {
-    return {
-      name: { type: String, value: 'World' },
-      rainbow: { type: Boolean },
-      lang: { type: String },
-    };
+    this.name = 'World';
   }
 
   /** @private */

@@ -2,7 +2,6 @@
 <html>
     <head>
         <title>core-components</title>
-        <script src="../dist/core-hello.js"></script>
         <script src="../dist/core-slider.js"></script>
         <style>
             .test-core-slider section {
@@ -19,6 +18,7 @@
             <section id="test-core-slider-default">
                 <label>Default</label>
                 <core-slider></core-slider>
+                <core-slider id="value10-2" value="10"></core-slider>
             </section>
             <section id="test-core-slider-step">
                 <label>Step</label>
@@ -39,7 +39,6 @@
             <section id="test-core-slider-init">
                 <label>Initialized</label>
                 <core-slider value="50"></core-slider>
-                <br/>
                 <core-slider id="value0" value="0"></core-slider>
                 <core-slider id="value10" value="10"></core-slider>
                 <core-slider id="value20" value="20"></core-slider>

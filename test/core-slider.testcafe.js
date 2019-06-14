@@ -2,14 +2,18 @@ import { TestCoreElement, ShadowChildSelector } from './testcore';
 
 /* eslint-disable */
 fixture `core-slider tests`
-    .page `./index.html`;
+    .page `./core-slider-index.html`;
 /* eslint-enable */
 
 function testCoreSlider(sectionName, testDesc, testFunc) {
   TestCoreElement('core-slider', sectionName, testDesc, testFunc);
 }
 
-/** Tests for default value of core-slider */
+/**
+* Purpose: checks default value of attribute value is 0
+* Test Attribute: value
+* Test Description: Default value
+*/
 testCoreSlider('default', '- Default value', async (t, ctx) => {
   const slider = ctx.target;
   await t
@@ -17,7 +21,11 @@ testCoreSlider('default', '- Default value', async (t, ctx) => {
     .eql(0);
 });
 
-/** Tests default min for core-slider */
+/**
+* Purpose: checks default min value for core-slider is 0
+* Test Attribute: min
+* Test Description: Default min
+*/
 testCoreSlider('default', '- Default min', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
@@ -27,7 +35,11 @@ testCoreSlider('default', '- Default min', async (t, ctx) => {
     .eql(0);
 });
 
-/** Tests default max for core-slider */
+/**
+* Purpose: checks default max value for core-slider is 100
+* Test Attribute: max
+* Test Description: Default max
+*/
 testCoreSlider('default', '- Default max', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
@@ -37,7 +49,11 @@ testCoreSlider('default', '- Default max', async (t, ctx) => {
     .eql(100);
 });
 
-/** Tests for initialized value of core-slider */
+/**
+* Purpose: checks that the initialized value for attribute value is 50
+* Test Attribute: value
+* Test Description: Set value attribute
+*/
 testCoreSlider('init', '- Set value attribute', async (t, ctx) => {
   const slider = ctx.target;
   await t
@@ -45,21 +61,29 @@ testCoreSlider('init', '- Set value attribute', async (t, ctx) => {
     .eql(50);
 });
 
-/** Tests dragging and updating value for core-slider */
+/**
+* Purpose: checks that dragging core-slider updates the value to 20
+* Test Attribute: value
+* Test Description: Dragging and updating to value
+*/
 testCoreSlider('default', '- Dragging and updating to value', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
-  const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value10' }, '#slider-thumb');
+  const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value20' }, '#slider-thumb');
   await t
     .dragToElement(sliderThumb, dstSliderThumb)
     .dragToElement(sliderThumb, dstSliderThumb)
     .dragToElement(sliderThumb, dstSliderThumb)
     .expect(slider.value)
-    .eql(10);
+    .eql(20);
 });
 
-/** Tests dragging with step for core-slider */
-testCoreSlider('step', '', async (t, ctx) => {
+/**
+* Purpose: checks that the step attribute only allows certain values for value
+* Test Attribute: step
+* Test Description: value after trying to drag slider to 50 should be 30
+*/
+testCoreSlider('step', 'value after trying to drag slider to 50 should be 30', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
   const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value50' }, '#slider-thumb');
@@ -69,8 +93,12 @@ testCoreSlider('step', '', async (t, ctx) => {
     .eql(30);
 });
 
-/** Tests min for core-slider */
-testCoreSlider('min', '', async (t, ctx) => {
+/**
+* Purpose: checks that the initialized min value for core-slider only allows values >= 100
+* Test Attribute: min
+* Test Description: value after trying to drag slider before min of 10 should be 10
+*/
+testCoreSlider('min', '- value after trying to drag slider before min of 10 should be 10', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
   await t
@@ -79,8 +107,12 @@ testCoreSlider('min', '', async (t, ctx) => {
     .eql(10);
 });
 
-/** Tests max for core-slider */
-testCoreSlider('max', '', async (t, ctx) => {
+/**
+* Purpose: checks that the initialized max value for core-slider only allows values <= 100
+* Test Attribute: max
+* Test Description: value after trying to drag slider after max of 100 should be 100
+*/
+testCoreSlider('max', '- value after trying to drag slider after max of 100 should be 100', async (t, ctx) => {
   const slider = ctx.target;
   const sliderThumb = ShadowChildSelector(t, ctx, '#slider-thumb');
   await t
@@ -89,8 +121,12 @@ testCoreSlider('max', '', async (t, ctx) => {
     .eql(20);
 });
 
-/** Tests disabled for core-slider */
-testCoreSlider('init', '- Make sure it can do it.', async (t, ctx) => {
+/**
+* Purpose: checks that without disabled attribute, the slider value can change
+* Test Attribute: disabled
+* Test Description: value after trying to drag slider should no longer be 50
+*/
+testCoreSlider('init', '- value after trying to drag slider should no longer be 50', async (t, ctx) => {
   const slider = ctx.target;
   const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value0' }, '#slider-thumb');
   await t
@@ -98,7 +134,13 @@ testCoreSlider('init', '- Make sure it can do it.', async (t, ctx) => {
     .expect(slider.value)
     .notEql(50);
 });
-testCoreSlider('disabled', '- Make sure it can\'t.', async (t, ctx) => {
+
+/**
+* Purpose: checks that with disabled attribute, the slider value can not change
+* Test Attribute: disabled
+* Test Description: value after trying to drag slider should still be 50
+*/
+testCoreSlider('disabled', '- value after trying to drag slider should still be 50', async (t, ctx) => {
   const slider = ctx.target;
   const dstSliderThumb = ShadowChildSelector(t, { targetQuerySelector: '#value0' }, '#slider-thumb');
   await t

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>core-components</title>
+        <script src="../dist/core-tooltip.js"></script>
+        <style>
+            section {
+                width: 400px;
+                padding: 10px;
+                margin: 10px;
+                border: 1px solid lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <core-tooltip></core-tooltip> -->
+        <div class="test-core-tooltip">
+            <section></section>
+            <section id="test-core-tooltip-content">
+                <label>
+                    Default Content
+                    <core-tooltip id="content-default"></core-tooltip>
+                </label>
+                
+                <label>
+                    Set Content
+                    <core-tooltip id="content-set"></core-tooltip>
+                </label>
+            </section>
+
+            <section id="test-core-tooltip-disabled">
+                <label>
+                    Default Disabled
+                    <core-tooltip id="disabled-default"></core-tooltip>
+                </label>
+                
+                <label>
+                    Set Disabled
+                    <core-tooltip id="disabled-set" disabled></core-tooltip>
+                </label>
+            </section>
+
+            <section id="test-core-tooltip-tabindex">
+                <label>
+                    Set Tabindex
+                    <core-tooltip id="tabindex-set"></core-tooltip>
+                </label>
+            </section>
+
+            <section id="test-core-tooltip-offset">
+                <label>
+                    Correct Offset
+                    <core-tooltip id="offset-correct" offset="0"></core-tooltip>
+                </label>
+                <label>
+                    Default Offset
+                    <core-tooltip id="offset-default"></core-tooltip>
+                </label>
+                
+                <label>
+                    Set Offset
+                    <core-tooltip id="offset-set"></core-tooltip>
+                </label>
+                
+            </section>
+
+            <section id="test-core-tooltip-hoverable">
+                <label id="hoverable-tooltip">
+                    Hoverable tooltip
+                    <core-tooltip id="hoverable-tooltip-box"></core-tooltip>
+                </label>
+                
+            </section>
+
+            <section id="test-core-tooltip-enterable">
+                <label id="enterable-tooltip">
+                    Enterable tooltip
+                    <core-tooltip id="enterable-tooltip-box"></core-tooltip>
+                </label>
+                
+            </section>
+
+            <section id="test-core-tooltip-closedelay">
+                <label id="closedelay-target1">Target1</label>
+                <label id="closedelay-tooltip1">
+                    Hide after tooltip 1
+                    <core-tooltip id="closedelay-tooltip1-box" close-delay="2000"></core-tooltip>
+                </label>
+
+                <label id="closedelay-tooltip2">
+                    Hide after tooltip 2
+                    <core-tooltip id="closedelay-tooltip2-box"></core-tooltip>
+                </label>
+                <label id="closedelay-target2">Target2</label>
+            </section>
+
+            <section id="test-core-tooltip-opendelay">
+                <label id="opendelay-tooltip1">
+                    open delay tooltip
+                    <core-tooltip id="opendelay-tooltip1-box" open-delay="2000"></core-tooltip>
+                </label>                
+            </section>
+
+
+            <section id="test-core-tooltip-effect">
+                <label id="label-light">
+                    Light Effect Content
+                    <core-tooltip id="effect-light" effect=light></core-tooltip>
+                </label>
+                
+                <label id="label-dark">
+                    Dark Effect Content
+                    <core-tooltip id="effect-dark" effect=dark></core-tooltip>
+                </label>
+                
+            </section>
+
+            <section id="test-core-tooltip-placement">
+                <label id="label-right">
+                    Placement right
+                    <core-tooltip id="right" placement='right'></core-tooltip>
+                </label>
+
+                <label id="label-left">
+                    Placement left
+                    <core-tooltip id="left" placement='left'></core-tooltip>
+                </label>
+                
+                <label id="label-up">
+                    Placement up
+                    <core-tooltip id="up"></core-tooltip>
+                </label>
+                
+                <label id="label-bottom">
+                    Placement down
+                    <core-tooltip id="bottom" placement='bottom'></core-tooltip>
+                </label>
+            </section>
+
+            <section id="test-core-tooltip-manual">
+                <label id="label-manual" onclick="manualClick()">
+                    Manual Property
+                    <core-tooltip id="manual" manual></core-tooltip>
+                </label>
+            </section>
+
+            <section id="test-core-tooltip-focusable">
+                <label>Focusable Property:
+                    <input id="label-focusable"/>
+                    <core-tooltip id="focusable" for="label-focusable" focusable></core-tooltip>
+                </label>
+            </section>
+
+            <section id="test-core-tooltip-noArrow">
+                <label>
+                    noVisisbleArrow Property:
+                    <core-tooltip id="no-arrow" no-visible-arrow>This tooltip has no arrow</core-tooltip>
+                </label>
+            </section>
+        </div>
+
+        <script>
+            /* eslint-disable no-unused-vars */
+            function manualClick() {
+              document.querySelector('#manual').toggle();
+            }
+        </script>
+    </body>
+</html>
