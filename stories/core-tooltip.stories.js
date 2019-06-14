@@ -15,23 +15,28 @@ function createCoreTooltip(content, openDelay, closeDelay, placement,
   element.closeDelay = number('close-delay', closeDelay);
   element.placement = text('placement', placement);
   element.focusable = boolean('focusable', focusable);
-  element.for = text('for', forID);
+  if (forID) {
+    element.for = text('for', forID);
+  }
   element.offset = number('offset', offset);
   element.effect = text('effect', effect);
   element.noVisibleArrow = text('no-visible-arrow', noVisibleArrow);
   element.manual = boolean('manual', manual);
   element.disabled = boolean('disabled', disabled);
 
-  const parent = document.createElement('a');
+  const parent = document.createElement('label');
+  parent.style.display = 'inline-block';
+  parent.style.marginTop = '4rem';
+  parent.style.marginLeft = '4rem';
   parent.textContent = 'Text';
   parent.appendChild(element);
-  return element;
+  return parent;
 }
 
 storiesOf('CoreTooltip', module)
   .addDecorator(withKnobs)
-  .add('default', () => createCoreTooltip('', 0, 1000, 'top', false, '', 0, '', false, false, false))
-  .add('content', () => createCoreTooltip('A tooltip\'s description', 0, 1000, 'top', false, '', 0, '', false, false, false))
+  .add('default', () => createCoreTooltip('Boo!', 0, 1000, 'top', false, '', 0, '', false, false, false))
+  .add('content', () => createCoreTooltip('A tooltip description', 0, 1000, 'top', false, '', 0, '', false, false, false))
   .add('open-delay', () => createCoreTooltip('Hello!', 1000, 1000, 'top', false, '', 0, '', false, false, false))
   .add('close-delay', () => createCoreTooltip('Hello!', 0, 0, 'top', false, '', 0, '', false, false, false))
   .add('placement="left"', () => createCoreTooltip('Hello!', 0, 0, 'left', false, '', 0, '', false, false, false))

@@ -21,7 +21,7 @@
     "build-test": "npm run build && npm run e2e-test-headless",
     "changelog": "auto-changelog --template keepachangelog --package --commit-limit false --output CHANGELOG.md",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -c .storybook -o .out"
+    "build-storybook": "build-storybook -c .storybook -o ./docs/storybook"
   },
   "repository": {
     "type": "git",
