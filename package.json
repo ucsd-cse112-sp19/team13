@@ -9,7 +9,7 @@
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/* && npm run add",
     "add": "git add docs/ && git commit -m 'Auto update JSDocs'",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
-    "test": "npm run lint && npm run coverage",
+    "test": "npm run lint && npm run coverage && npm run snapshot",
     "lcov-coverage": "istanbul report --root coverage --include=*.json --dir coverage lcov",
     "report-coverage": "istanbul report --root coverage --include=*.json --dir coverage/report html && npm run lcov-coverage",
     "coverage": "nyc --all --include \"src/**/*.js\" --reporter=json --reporter=text npm run e2e-test-headless && python3 tools/coverage.py && npm run report-coverage",
@@ -21,7 +21,8 @@
     "build-test": "npm run build && npm run e2e-test-headless",
     "changelog": "auto-changelog --template keepachangelog --package --commit-limit false --output CHANGELOG.md",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -c .storybook -o ./docs/storybook"
+    "build-storybook": "build-storybook -c .storybook -o ./docs/storybook",
+    "snapshot": "build-storybook && percy-storybook --widths=320,1280"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-classes": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
+    "@percy/storybook": "^3.0.2",
     "@purtuga/web-components-polyfill-webpack-plugin": "^2.1.0",
     "@storybook/addon-knobs": "^5.1.4",
     "@storybook/html": "^5.1.3",
