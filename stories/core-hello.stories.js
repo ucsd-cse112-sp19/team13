@@ -4,9 +4,15 @@ import '../dist/core-hello';
 
 function createCoreHello(name, lang, rainbow) {
   const element = document.createElement('core-hello');
-  element.name = text('name', name);
-  element.lang = text('lang', lang);
-  element.rainbow = boolean('rainbow', rainbow);
+  if (name) {
+    element.name = text('name', name);
+  }
+  if (lang) {
+    element.lang = text('lang', lang);
+  }
+  if (rainbow) {
+    element.rainbow = boolean('rainbow', rainbow);
+  }
   return element;
 }
 
@@ -18,4 +24,4 @@ storiesOf('CoreHello', module)
   .add('lang="fr"', () => createCoreHello('Peter', 'fr', false))
   .add('lang="jp"', () => createCoreHello('Peter', 'jp', false))
   .add('name', () => createCoreHello('Peter', 'en', false))
-  .add('rainbow', () => createCoreHello('Peter', 'en', true));
+  .add('rainbow', () => '<core-hello rainbow>Peter</core-hello>');
