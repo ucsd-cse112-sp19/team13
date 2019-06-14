@@ -1,0 +1,531 @@
+<html><head><title>E2E Testing, Testing in General, and Thursday Presentation Pointers</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e4c8417a-3821-4693-9ce8-49fb92b4e05a" class="page sans"><header><h1 class="page-title">E2E Testing, Testing in General, and Thursday Presentation Pointers</h1></header><div class="page-body"><p id="14f1ad3d-bcce-4a33-a54a-3fd3fa0a018d">Mondal OH 11-12pm Tuesday 5/14/19</p><p id="104c6ecb-b2be-41db-8b40-a40ca6ee2843"></p><div id="9f6a77b7-a8d9-4f0f-bf7b-dc421d91e1c7" class="collection-view"><h4 class="collection-title">Table of Contents</h4><table class="collection-content"><thead><tr><th>Question Number</th><th>Tag Descriptions</th></tr></thead><tbody><tr id="04857ab6-8aad-4917-8cc8-842cb9ce366c"><td class="cell-title"><a href="E2E Testing Testing in General and Thursday Presen/Table of Contents/1.html">1</a></td><td class="cell-&amp;Wgl">E2E, Unit test</td></tr><tr id="6b2bcf32-c93f-4e7c-ba01-f8bca0aaa3d2"><td class="cell-title"><a href="E2E Testing Testing in General and Thursday Presen/Table of Contents/2.html">2</a></td><td class="cell-&amp;Wgl">Sprint 1 Presentation</td></tr><tr id="9a3fd0b3-3b5e-4456-8820-e22c91830425"><td class="cell-title"><a href="E2E Testing Testing in General and Thursday Presen/Table of Contents/3.html">3</a></td><td class="cell-&amp;Wgl">Tips for visually testing components</td></tr><tr id="79172547-1357-42e2-8109-86af0da1344e"><td class="cell-title"><a href="E2E Testing Testing in General and Thursday Presen/Table of Contents/4.html">4</a></td><td class="cell-&amp;Wgl">Responsible parties involved in unit testing</td></tr><tr id="b3da86b2-1dfc-42ab-a2bf-37f351703a01"><td class="cell-title"><a href="E2E Testing Testing in General and Thursday Presen/Table of Contents/Point of Contact.html">Point of Contact</a></td><td class="cell-&amp;Wgl">Madeline or Mondal</td></tr></tbody></table></div><p id="d3230945-a764-4de6-a429-085efb3a8a87"><strong>Question 1) </strong>E2E testing in an application like Amazon is simple to think about: start from user logging in to user browsing and buying something to user logging out. But how does E2E testing work for web components?</p><p id="d7e35443-c24b-450c-b080-435a84d08946">A:</p><p id="02ad2960-47f5-4c7b-a3f9-d920ac92d9a2">TL;DR</p><ul id="ff4f51f5-55f1-4a4f-a20c-8d17c275ada3" class="bulleted-list"><li>We should not be writing anymore tests for E2E but rather we should just be calling a sequence of unit tests while specifying a different runner.</li></ul><ul id="415b085c-3ad1-4203-8513-b8bee2116971" class="bulleted-list"><li>A unit test should have only one assertion</li></ul><p id="05372049-a6b8-4757-ad30-277a8621d6f7">First consider what is meant by application. In terms of Amazon, there will be a user interface that user’s interact with. Then there is data flow from parts of the application which changes the state. So an app contains UI, data flow, and state service.</p><figure id="82d91a6f-5746-4dde-af86-9866745c5cc3" class="image"><a href="E2E Testing Testing in General and Thursday Presen/image4.png"><img style="width:349px" src="E2E Testing Testing in General and Thursday Presen/image4.png"/></a></figure><p id="cff6a668-7fca-438d-a614-6338011aa40c">Now in terms of web components. Say we have an input field and a slider. The value of the slider will determine the font-size of the text in the input field.</p><figure id="c7fba067-7803-416a-a26b-2bbcb62c4783" class="image"><a href="E2E Testing Testing in General and Thursday Presen/image1.png"><img style="width:508px" src="E2E Testing Testing in General and Thursday Presen/image1.png"/></a></figure><p id="38448486-b9ab-4223-8bf4-431285e5486a">Before writing an E2E test, we need to first draw an activity diagram:</p><figure id="39c4e9d7-8ed2-4132-ab33-cbfee6f0caff" class="image"><a href="E2E Testing Testing in General and Thursday Presen/image3.png"><img style="width:700px" src="E2E Testing Testing in General and Thursday Presen/image3.png"/></a></figure><figure id="52f5037c-b0b9-48d8-a2f6-afd02afd5d41" class="image"><a href="E2E Testing Testing in General and Thursday Presen/image6.png"><img style="width:700px" src="E2E Testing Testing in General and Thursday Presen/image6.png"/></a></figure><p id="36d8038d-e972-47d3-b721-b014c77e6011">Once we have an activity diagram, we can begin writing an E2E test. Before that, we need to see how to write tests in general. For web components, there are only a few things to test and those are key-value pairs (ex: &lt;input font-size=10 /&gt;). To test key-value pair font-size, we need two tests, testFontSizeGet() and testFontSizeSet(). We’ll show how to structure the test for testFontSizeSet() since the other will be exactly the same:</p><p id="4c0f7683-d36e-4c9d-9d64-941abb4ac078">testFontSizeSet()</p><figure id="550e22bd-7161-44bc-bb25-73d7d8af3177" class="image"><a href="E2E Testing Testing in General and Thursday Presen/image2.png"><img style="width:693px" src="E2E Testing Testing in General and Thursday Presen/image2.png"/></a></figure><p id="5b00923c-7289-4dc4-b71d-20f3641ff2bd">Right now, this diagram screams unit test. The unit tests for input font-size and slider would have a runner (in our case Mocha is our Test Runner) which sets up and cleans up the environment before and after the test runs. Now to make an E2E test, we use the same unit tests for input font-size and slider except we use a different runner, call it InputSliderInteractionRunner, instead of the runners associated with the unit tests. This way, the slider and input share the same environment throughout the E2E test.</p><figure id="32f3f84e-bdc0-4a50-bc2b-1e00346fa39b" class="image"><a href="E2E Testing Testing in General and Thursday Presen/image5.png"><img style="width:700px" src="E2E Testing Testing in General and Thursday Presen/image5.png"/></a></figure><p id="f9f52b27-01e1-457d-9e74-ff4ddeab24f9"><strong>Question 2) </strong>Thursday Presentation</p><p id="a478f999-f94d-46fc-9d3e-68649c049997">Items to absolutely hit and drive home</p><ol id="e02b2e0e-5cae-4a7f-8d71-16c761b7d748" class="numbered-list" start="1"><li>Motivation behind picking the components and monetization (i.e. what business value potential do the components give)</li></ol><ol id="d9088b41-b688-4aa6-80d6-47b77f1056b3" class="numbered-list" start="2"><li>Are decisions within the team made unanimously or are there a lot of 1 person decisions (this might be testing whether there are any hero units)</li></ol><p id="bcc973aa-55b8-4ac1-9aec-3d96d1b51333"><strong>Question 3)</strong> Please provide tips on writing unit tests for components. For instance a slider can have a vertical attribute which determines it orientation and we can programmatically check that the attribute has been set but we don’t know if setting the attribute resulted in the desired behavior visually.</p><p id="bb24641c-087d-47bc-8e8e-8c3b2ebd22e6">A:</p><p id="b72ed900-4d74-4d0f-860e-3dba3a782e95">TL;DR</p><ul id="cd27d6f1-7983-4a68-9793-2d6e59e2320a" class="bulleted-list"><li>Checking whether setting the vertical attribute oriented the slider vertically in the browser is a UI test NOT a unit test.</li></ul><ul id="4e66b3df-7ec5-4a41-ac41-44508c2091a5" class="bulleted-list"><li>UI tests are for testing visual aspects and unit tests are for programmatic aspects</li></ul><p id="efcb964c-15f2-4db7-a997-b842456e1989">Checking whether setting the vertical attribute oriented the slider vertically in the browser is a UI test. As the Professor demonstrated in class, we can use the tool Percy.io to create UI tests. Also, please do not confuse the types of tests going on:</p><ol id="5e3ff7b5-8dfc-47d8-a183-9e1cf9c0ff68" class="numbered-list" start="1"><li>setVertical(true) 2) Visual inspection</li></ol><p id="df1a6add-7aed-40d9-8104-82298e937196">1) Is a unit test where we need to see whether calling setVertical(true) actually sets the attribute vertical to true (i.e &lt;<mark class="highlight-pink">core-slider</mark> <mark class="highlight-teal">vertical</mark>=true&gt; &lt;/<mark class="highlight-pink">core-slider</mark>&gt; happens)</p><p id="60a396e3-c4db-49ba-ad3b-2d2234838a2b">2) Is a UI test where we see that the slider is visually vertical regardless of what attribute vertical is set to because that’s handled by 1)</p><p id="4955af58-7978-4fc1-88d3-b39f7338542f"><strong>Question 4) </strong>Should the whole team be writing unit tests or just a small portion?</p><p id="550648ae-f70e-4771-85bd-3ae4aa18b8e1">A:</p><p id="2ba64f41-ff15-45f7-95d2-2e5c3ba51440">TL;DR</p><ul id="8f6f9e29-7ffa-47f5-b0b0-c6f644e24a27" class="bulleted-list"><li>Developers writing the methods need to write getters and setters for the attribute/functionality they are implementing (ex for slider: getVertical(), setVertical(boolean))</li></ul><ul id="6ada7fc8-3060-4e0f-9d3b-569d7c3b6188" class="bulleted-list"><li>QA need to write the assertions (i.e. test cases)</li></ul><p id="97646144-2afe-4b24-95f4-e72979032ca2">Let’s say a developer is implementing the vertical functionality for a slider. Then the developer would need to provide getters and setters getVertical() and setVertical(boolean). These methods are for programmatic use in testing. These are completely separate from what the user will do. End users won’t call getVertical() and setVertical(boolean) but will just use the standard html like </p><p id="87a98822-e691-4f5d-9753-e7394f0267d8">&lt;<mark class="highlight-pink">core-slider</mark> <mark class="highlight-teal">vertical</mark>=true&gt;&lt;/<mark class="highlight-pink">core-slider</mark>&gt;</p><p id="a694b7ef-9c4c-4e3f-ab91-b1b17a1ebb10"></p></div></article></body></html>

@@ -1,0 +1,559 @@
+<html><head><title>TestCafe Handguide</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="12c6eace-e1bc-4466-a744-2a0697f0f7b9" class="page sans"><header><div class="page-header-icon"><span class="icon">🍵</span></div><h1 class="page-title">TestCafe Handguide</h1></header><div class="page-body"><p id="c1b37bb6-0703-4405-a019-b7e4e3c3d36a">Important stuff required for using Test Cafe</p><h1 id="34a118e0-2b60-4072-9385-71817d296281">What is TestCafe</h1><hr id="53be5776-a8b0-4c97-8204-d5ffb61525fc"/><p id="ef35132b-fe4d-4e3c-81e7-78198249e377">TestCafe allows you to write tests using TypeScript or JavaScript (with its modern features like async/await). You get all the advantages of strongly-typed languages like rich coding assistance, painless scalability, check-as-you-type code verification, etc., by using TypeScript to write your TestCafe tests. </p><p id="7acc592b-b948-4beb-bab2-f59b05f6f05f"><mark class="highlight-gray">This definition is based on </mark><mark class="highlight-gray"><a href="https://devexpress.github.io/testcafe/documentation/getting-started/">https://devexpress.github.io/testcafe/documentation/getting-started/</a></mark></p><p id="b78f25aa-67f0-4996-b98c-01e8ed061eb4"><a href="https://devexpress.github.io/testcafe/documentation/test-api/assertions/">https://devexpress.github.io/testcafe/documentation/test-api/assertions/</a></p><h1 id="7ad2e9de-ce71-4b52-9600-43ad4fb90e0e">Required Files</h1><hr id="737945fb-f945-4cdb-826f-a30ba24b8e0c"/><ul id="3ee343b8-c4f6-4796-8a7b-690dc70344e9" class="bulleted-list"><li>TestCafe JS testing file</li></ul><ul id="e3abcd02-1cee-4595-baf3-cd998e8399a0" class="bulleted-list"><li>Testing HTML page and its dependency</li></ul><h1 id="fbe1197f-08ea-42c6-b426-5f801504d32c">Testing JS File</h1><hr id="bb2502b0-455f-40cf-b5c3-fb4f3dda07af"/><p id="6a53433f-25ed-4397-832a-da698ef10c47">Setting up TestCafe is easy, you just need to add an empty JS file and add the following code:</p><pre id="9c4f3dcd-459d-40c0-a345-cf969a594f9e" class="code"><code>import { Selector } from &#x27;testcafe&#x27;;</code></pre><p id="768b8972-3df7-4c15-b094-c5a4822caae3">A selector is an important part of TestCafe. It is used to select an element from the HTML page. It works just like <code>document.querySelector()</code>. More info will be provided later below.</p><pre id="9e86922a-2eae-4338-b7db-dd81e5a19f4e" class="code"><code>/* eslint-disable */
+fixture `Core component Test`
+    .page `./test.html`;
+/* eslint-enable */</code></pre><p id="8dc6d533-178f-4a11-8b99-6e92c72c51f9">This code block gets the HTML page that will be tested. Make sure to make it as close as possible to the finished product</p><h1 id="c5e652f4-df60-43da-b901-3bfa87f4aed7">Testing HTML Page</h1><p id="0fa9e8e1-3af1-43e9-93ad-592420498e30">This is the page indicated by the fixture which by the example above would be &quot;test.html&quot;. An example of such a page is shown below</p><pre id="d1c9642a-d2d2-44eb-836c-6a069c4afbae" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Testing for core-slider&lt;/title&gt;
+        &lt;script src=&quot;../dist/core-slider.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;core-slider id=&quot;mySlider&quot;&gt;&lt;/core-slider&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="697a7a06-c1d0-4adb-a542-9f9f1430a7a7">This is the core of what a test page needs. The title tag should indicate what the document is for; in this case, we know that it is for testing the core-slider. One of the most important items to include is the script tag which must link to the js file of the component which is usually found in the &quot;dist&quot; folder. Inside the body is where you can create the components to manipulate; be sure to give each instantiated component unique ids for unambiguous referencing.</p><h1 id="215eb65a-6218-46c3-8970-fb7cc6be89cc">Testing Conventions and Rules</h1><p id="55637183-2258-4804-9c2f-fc417e698572">Here&#x27;s a list of guidelines to follow when writing tests</p><ul id="c80d8961-4f4e-478e-9df9-214cc25db3f9" class="bulleted-list"><li>All tests are contained in the &quot;test&quot; directory</li></ul><ul id="71013572-82b3-42e9-b3b5-f411005aeb62" class="bulleted-list"><li>All unit tests for a single component are contained inside a single js file</li></ul><ul id="eed56b75-1684-46b2-b586-78aa7c3e5d70" class="bulleted-list"><li>The js file containing the unit tests must be named &quot;nameOfComponent.testcafe.js&quot;</li></ul><ul id="b92fb151-4ab1-457d-b51c-0207859959ab" class="bulleted-list"><li>The html documents used to test components must be in the &quot;test&quot; directory</li></ul><h1 id="64b52ad4-bacb-4bdc-8bee-9294b496364f">Selector Syntax</h1><hr id="5d8dc4c9-a743-4060-8519-ce44fe1014e5"/><p id="8a499876-1d39-4c95-b141-47b014ec91ea">The common method to use the Selector is by using the listed format below</p><pre id="6ca647f1-4e65-47aa-9b92-a0b570ad8681" class="code"><code>// Selecting one element
+const testElement = Selector(&#x27;#ElementId&#x27;)
+
+// More detailed selection
+const testElementShadow = 
+Selector(() =&gt; document.querySelector(&#x27;#ElementId&#x27;)
+											 .shadowRoot.querySelector(&#x27;#ElementIdShadow&#x27;));</code></pre><h1 id="f1d003e3-1fa0-42ab-ad0b-6c44a37383f1">Testing Syntax</h1><hr id="14d04e7d-5781-4dc3-bdb6-784fac0bf396"/><p id="1dd05087-4edf-47cf-9337-14d99018c7d4">The basic syntax for each unit test is as described as below</p><pre id="088ea2e8-ce60-4732-98c6-c9826b90ad93" class="code"><code>/**
+ * What does it do tho
+ */
+test(&#x27;Unit test purpose&#x27;, async (t) =&gt; {
+		const NameInput = Selector(&#x27;#myInputBox&#x27;) // Get the element you are testing
+  await t
+    //.doSomething
+		.typeText(NameInput, &#x27;Peter&#x27;) // insert values into field
+    .expect(element.value).eql(&#x27;value&#x27;); // check for equality between arbitrary values
+		.expect(Selector(&quot;#element_id&quot;).visible).ok(); // check that value equals &#x27;true&#x27;
+});</code></pre><ul id="a7ec0b01-5fb0-4ebc-86f0-af985cfc61e9" class="toggle"><li><details open=""><summary>Below is the common method used that can replace <code>.doSomething</code>More information can be found <mark class="highlight-red"><a href="https://devexpress.github.io/testcafe/documentation/test-api/">here</a></mark></summary><ul id="4cc28101-26a8-4d30-aaad-a8b980cbad03" class="bulleted-list"><li>Click</li></ul><pre id="5084aa09-8763-4a24-bcc1-3c7bb8194495" class="code"><code>.click(checkbox)</code></pre><ul id="7eb67d4d-0b7e-478c-99c5-3ba7f717f3c7" class="bulleted-list"><li>Double Click</li></ul><pre id="5ab5ad2e-0235-4cd0-8f96-d4b183771914" class="code"><code>.doubleClick(&#x27;#thumbnail&#x27;)</code></pre><ul id="d18a6501-3e56-445a-a6b3-1eec70abdaa1" class="bulleted-list"><li>Right Clicking</li></ul><pre id="7a9f20a5-d85c-4a7f-9571-d608df73647c" class="code"><code>.rightClick(&#x27;#cell-1-1&#x27;)</code></pre><ul id="9f76fda8-b7cc-4b20-afa0-4942c1c8be00" class="bulleted-list"><li>Drag Element</li></ul><pre id="20324d0b-ab5f-4c5b-880b-89f098fc8ca8" class="code"><code>.dragToElement(&#x27;.toolbox-item.text-input&#x27;, &#x27;.design-surface&#x27;)</code></pre><ul id="29b6b136-689b-4b6c-8362-68b3b11b9729" class="bulleted-list"><li>Hover</li></ul><pre id="96309821-9a46-49fd-a999-b4d2707f77ca" class="code"><code>.hover(comboBox)</code></pre><ul id="32b49ae3-66da-4b39-9a8a-f5878b309a5e" class="bulleted-list"><li>Select Text</li></ul><pre id="eb55fb50-ce36-4c5c-9f1e-f7f587159a75" class="code"><code>.selectText(developerNameInput, 7, 1)</code></pre><ul id="fee66857-70d0-42f6-a5c1-2230f48f38ab" class="bulleted-list"><li>Type text</li></ul><pre id="a3eb3868-0386-47d7-8f42-e12d65792cc6" class="code"><code>.typeText(nameInput, &#x27;Peter&#x27;)</code></pre><ul id="e2a78923-4e5b-4743-a096-4ae1f734b106" class="bulleted-list"><li>Press Key</li></ul><pre id="fb4bbcf6-5fc9-43ba-a72a-508b8a7a35b7" class="code"><code>.pressKey(&#x27;home right . delete delete delete delete&#x27;)</code></pre></details></li></ul><h1 id="4e6769f8-1e3f-47a9-a758-fe72ed17bcb2">Starting the Test</h1><hr id="355db2e4-100e-4b3e-b6a7-5b2676c2b7dd"/><p id="809e3499-2450-4ad7-bf64-e48e4e8e2ef6">Starting the test is easy, you need the following command in your terminal</p><pre id="95842511-2d57-433d-b4c0-acddbb091522" class="code"><code>testcafe chrome test/test.testcafe.js</code></pre><p id="3e4525f6-cba3-4970-992c-7cf17e5ac21d">Alternatively, you can use the following command. Just check package.json to see what it does</p><pre id="11fac232-6375-45db-a7b4-bbe547a70fc6" class="code"><code>npm test</code></pre><p id="a743b2ca-d3fa-456a-91cc-4dde2e3997ba">If you want to do the test without creating an instance of chrome, you can add <code>:headless</code></p><pre id="c21c765f-2cc8-45f0-bf1d-a8563ff043fe" class="code"><code>testcafe chrome:headless test/test.testcafe.js</code></pre><p id="3faa6a65-7437-45f0-87b2-e25971a094d0">There is many choice for browser test, you can use the following browser</p><ul id="508c1d6a-2429-4353-b0b6-e5453664c29a" class="bulleted-list"><li>Google Chrome: Stable, Beta, Dev and Canary</li></ul><ul id="0d54f3a0-d2c7-40f2-b9c8-80dacb31e7c0" class="bulleted-list"><li>Internet Explorer (11+)</li></ul><ul id="ec3255a3-151a-45ae-aa29-b3eb40d208dd" class="bulleted-list"><li>Microsoft Edge</li></ul><ul id="6a1baf4b-e394-40e1-b69b-f8a7ef08f651" class="bulleted-list"><li>Mozilla Firefox</li></ul><ul id="c2550863-17a9-4165-9caf-a76a63fca5cc" class="bulleted-list"><li>Safari</li></ul><ul id="5ea457c7-acbc-413e-9583-46cdbceddbcf" class="bulleted-list"><li>Android browser</li></ul><ul id="5c43c706-47f1-43b9-b591-7a6b079cf30b" class="bulleted-list"><li>Safari mobile</li></ul><p id="b9bfe4c2-663e-493a-9eef-65210ff73a9b"></p></div></article></body></html>

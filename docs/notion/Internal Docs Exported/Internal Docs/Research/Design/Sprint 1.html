@@ -1,0 +1,532 @@
+<html><head><title>Sprint 1</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d394654a-82d5-4e1a-a6b2-ea400384bcfa" class="page sans"><header><h1 class="page-title">Sprint 1</h1></header><div class="page-body"><p id="2849718d-2aba-4f03-9b2d-26eeaac7f17c">Note to team, Please consider default values, and dependencies when implementing these features.
+Eg: show-input-controls requires show-input to be true</p><p id="634c06a1-05cd-4384-869c-ceac29a05482">Feature List for core-slider:</p><ol id="facb4709-f975-497f-9288-b4346254f62a" class="numbered-list" start="1"><li>Default State (without any args)</li></ol><ol id="cfeb6f7f-cdc3-43d1-b423-7a5ef8871e7a" class="numbered-list" start="2"><li>Disabled state</li></ol><ol id="a39793fd-36d0-48ed-8f52-7f4ae7f7088c" class="numbered-list" start="3"><li>Initialized start value</li></ol><ol id="273968d6-b20d-4565-b1a0-7f84bb6e3c22" class="numbered-list" start="4"><li>Show/Hide tooltip (won’t be able to see the current values slider is set to)</li></ol><ol id="9d7b9bef-19f2-4840-b33f-c7cb045e6b0a" class="numbered-list" start="5"><li>Format tooltip (value of slider tooltip can be decimal, integer, etc.)</li></ol><ol id="0b6e1fbe-80fb-4c81-990d-cc793bc7c517" class="numbered-list" start="6"><li>Show-stops (Breakpoints )</li></ol><ol id="a7dc9ad8-7918-47f2-afb0-9188dab3ec10" class="numbered-list" start="7"><li>Change color value</li></ol><ol id="1974964d-48a8-41bd-a1b7-1302ca293c2d" class="numbered-list" start="8"><li>Rainbow</li></ol><ol id="a71875a9-253d-4211-ad91-fb52e0b656e5" class="numbered-list" start="9"><li>Value (Binding value)</li></ol><ol id="ce20a68a-c49c-416f-9d22-57f5f8f319da" class="numbered-list" start="10"><li>Minimum value</li></ol><ol id="4c950ba9-e029-47be-be1f-360c091a183d" class="numbered-list" start="11"><li>Maximum Value</li></ol><ol id="815af920-d7d2-40ef-940b-a24cb4795ba1" class="numbered-list" start="12"><li>Step Size</li></ol><ol id="970399e5-ae9e-4b05-a724-4d3c6e66967c" class="numbered-list" start="13"><li>show-input (Whether to show input box default is false)</li></ol><ol id="5093c1bc-c487-47da-b8bb-589ba167a794" class="numbered-list" start="14"><li>Show-input-controls (whether to show the control buttons, default is true, only available when show-input is true)</li></ol><ol id="db7bec8d-29f3-44ab-a547-4bbc903c606c" class="numbered-list" start="15"><li>Input size (Size of the input box)</li></ol><ol id="946cc144-9e4d-4a5e-9932-dcef59077089" class="numbered-list" start="16"><li>Range Selector</li></ol><ol id="70f00529-f4bd-4081-a24c-9adf9a5a5688" class="numbered-list" start="17"><li>Vertical mode</li></ol><ol id="6b719ef8-eaed-4d99-9efa-5d69fbecabe3" class="numbered-list" start="18"><li>Height (Slider Height, required in vertical mode)</li></ol><ol id="a92d7460-4790-4191-991c-b94b11e7c6c3" class="numbered-list" start="19"><li>Label (Label for screen reader)</li></ol><ol id="bf7844ee-aeef-4ec1-bc3b-f518b0265351" class="numbered-list" start="20"><li>Marks</li></ol><p id="8eb8794f-890a-465e-b351-e412fbebc8ef"><strong>Component 1: Customizable slider.</strong></p><p id="7858e53d-5e34-406d-9a60-673d42672578">States (only 1 from 3 allowed):</p><ol id="8e1a8e6e-269b-4e71-bf0a-d9565005b73d" class="numbered-list" start="1"><li>Default (without any args)</li></ol><figure id="bc535c81-291c-4a89-855d-dc7424303e5e" class="image"><a href="Sprint 1/image8.png"><img style="width:700px" src="Sprint 1/image8.png"/></a></figure><p id="36e85215-9e00-4865-9e98-452b3b84a466">2) initialized (start value)</p><figure id="76280275-b145-44c6-8ceb-ce542a500517" class="image"><a href="Sprint 1/image16.png"><img style="width:700px" src="Sprint 1/image16.png"/></a></figure><p id="a155413e-a8f4-4573-bb1d-13c09274d5e3">--Begin Madeline--</p><p id="3e84a580-66dd-4126-b42e-baf81c39adda">4) Hide tooltip (won’t be able to see the current values slider is set to)</p><p id="6e5131cd-188f-48df-8068-54edeb4bc760">5) Format tooltip (value of slider tooltip can be decimal, integer, etc.)</p><p id="1d817db8-d67e-4475-b79c-e3526bac2a2d">--End Madeline--</p><p id="28a0f9a6-6ca8-4a63-83dd-e85f8e189e64">3) Disabled</p><figure id="cf750b2e-ad16-455c-89d9-5b8d2b416b41" class="image"><a href="Sprint 1/image14.png"><img style="width:700px" src="Sprint 1/image14.png"/></a></figure><p id="1f02af14-6154-441e-9cec-4b94fff839e1">Style properties:</p><p id="d82ddf4e-11db-4840-9a12-a7ad824c6fb2">1) Rainbow attribute</p><p id="10b3c07f-02cc-4754-929f-dd618ba68969">2)</p><div id="e3bdf8e0-0eb7-491c-b754-ac07d6a285e9" class="collection-view"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Attribute</th><th>Description</th><th>Type</th><th>Accepted Values</th><th>Default</th></tr></thead><tbody><tr id="0b8dce02-7a1a-492b-9b28-e16659c1efc5"><td class="cell-title"><a href="Sprint 1/Untitled Database/value v model.html">value / v-model</a></td><td class="cell-8O^x">binding value</td><td class="cell-!BsR">number</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">0</td></tr><tr id="f9dfcaac-903e-4416-a9c9-5dfe629bda9b"><td class="cell-title"><a href="Sprint 1/Untitled Database/min.html">min</a></td><td class="cell-8O^x">minimum value</td><td class="cell-!BsR">number</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">0</td></tr><tr id="406023ff-d397-46f7-a0cf-39d875bd2c3f"><td class="cell-title"><a href="Sprint 1/Untitled Database/max.html">max</a></td><td class="cell-8O^x">maximum value</td><td class="cell-!BsR">number</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">100</td></tr><tr id="22e0b155-1ffc-46f8-9f28-1fd5f0b2e454"><td class="cell-title"><a href="Sprint 1/Untitled Database/disabled.html">disabled</a></td><td class="cell-8O^x">whether Slider is disabled</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">false</td></tr><tr id="4698e093-6373-4b46-ad84-7640817ad676"><td class="cell-title"><a href="Sprint 1/Untitled Database/step.html">step</a></td><td class="cell-8O^x">step size</td><td class="cell-!BsR">number</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">1</td></tr><tr id="e465689e-3ec7-41b1-b710-96eead04495a"><td class="cell-title"><a href="Sprint 1/Untitled Database/show input.html">show-input</a></td><td class="cell-8O^x">whether to display an input box, works when range is false</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">False</td></tr><tr id="172d4534-7261-4760-94d3-27420740e6eb"><td class="cell-title"><a href="Sprint 1/Untitled Database/show input controls.html">show-input-controls</a></td><td class="cell-8O^x">whether to display control buttons when show-input is true</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">true</td></tr><tr id="1b5af364-d132-4a39-809d-ecb8bd785d7e"><td class="cell-title"><a href="Sprint 1/Untitled Database/input size.html">input-size</a></td><td class="cell-8O^x">size of the input box</td><td class="cell-!BsR">string</td><td class="cell-;Z^`"><span class="selected-value">large / medium / small / mini</span></td><td class="cell-`:EI">small</td></tr><tr id="ae57cfb9-4731-44ac-98f9-55df544ade17"><td class="cell-title"><a href="Sprint 1/Untitled Database/show stops.html">show-stops</a></td><td class="cell-8O^x">whether to display breakpoints</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">false</td></tr><tr id="8adcdac5-3a17-42d2-9b4b-e52bfadd48b4"><td class="cell-title"><a href="Sprint 1/Untitled Database/show tooltip.html">show-tooltip</a></td><td class="cell-8O^x">whether to display tooltip value</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">true</td></tr><tr id="2046f990-c354-4a82-9911-bc68f4655e66"><td class="cell-title"><a href="Sprint 1/Untitled Database/format tooltip.html">format-tooltip</a></td><td class="cell-8O^x">format to display tooltip value</td><td class="cell-!BsR">function(value)</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">—</td></tr><tr id="dbdb92d3-448a-4669-b161-74274fb0e176"><td class="cell-title"><a href="Sprint 1/Untitled Database/range.html">range</a></td><td class="cell-8O^x">whether to select a range</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">false</td></tr><tr id="84524ec6-a359-489b-bf9e-0815bbd5ffeb"><td class="cell-title"><a href="Sprint 1/Untitled Database/vertical.html">vertical</a></td><td class="cell-8O^x">vertical mode</td><td class="cell-!BsR">boolean</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">false</td></tr><tr id="f18e1e2b-14ff-4956-a8b0-beaa07dbc926"><td class="cell-title"><a href="Sprint 1/Untitled Database/height.html">height</a></td><td class="cell-8O^x">Slider height, required in vertical mode</td><td class="cell-!BsR">string</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">—</td></tr><tr id="0b5f49e5-3bb9-45d8-b428-abae4dee815f"><td class="cell-title"><a href="Sprint 1/Untitled Database/label.html">label</a></td><td class="cell-8O^x">label for screen reader</td><td class="cell-!BsR">string</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">—</td></tr><tr id="58d0d148-5b79-4c47-9180-8ea00305da11"><td class="cell-title"><a href="Sprint 1/Untitled Database/debounce.html">debounce</a></td><td class="cell-8O^x">debounce delay when typing, in milliseconds, works when show-input is true</td><td class="cell-!BsR">number</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">300</td></tr><tr id="8508f2f8-0394-43bf-a501-8f8c0c2b3ea2"><td class="cell-title"><a href="Sprint 1/Untitled Database/tooltip class.html">tooltip-class</a></td><td class="cell-8O^x">custom class name for the tooltip</td><td class="cell-!BsR">string</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">—</td></tr><tr id="b6ec43bd-1f11-41f6-9e50-2488009ca8a9"><td class="cell-title"><a href="Sprint 1/Untitled Database/marks.html">marks</a></td><td class="cell-8O^x">marks， type of key must be number and must in closed interval [min, max], each mark can custom style</td><td class="cell-!BsR">object</td><td class="cell-;Z^`"><span class="selected-value">—</span></td><td class="cell-`:EI">—</td></tr></tbody></table></div><p id="8be35dbe-148b-438d-b677-d4ebc4a9a3d4">2) Vertical mode</p><figure id="9cee0ca8-56fc-4825-91ea-019a9c34eed5" class="image"><a href="Sprint 1/image5.png"><img style="width:248px" src="Sprint 1/image5.png"/></a></figure><p id="f50e8fe4-2954-4b3a-86fb-ad698f5ed3c9">3) Allow to set breakpoints as such (Related to 4)</p><figure id="30404629-a5fd-47f4-b99a-54c2230a8eac" class="image"><a href="Sprint 1/image2.png"><img style="width:700px" src="Sprint 1/image2.png"/></a></figure><p id="45750ed0-5293-4652-ad23-dfaf27b8bb6e">4) Breakpoints</p><figure id="7fca114f-c137-4469-b8ba-a8c3b12f2aab" class="image"><a href="Sprint 1/image12.png"><img style="width:700px" src="Sprint 1/image12.png"/></a></figure><p id="ec567776-9d9b-4812-8d4f-4ce3bf9a3692">5) Change color of slider from default (Blue) to any color value</p><figure id="f3714266-206e-4a3a-8b56-486e19c652d0" class="image"><a href="Sprint 1/image11.png"><img style="width:700px" src="Sprint 1/image11.png"/></a></figure><p id="32b0c882-dfb4-40ee-b16f-369e596732fa">6) The slider options can be discrete values (i.e. 10,20,30, etc rather than all integers in range 10-30)</p><p id="fc58e6bc-43fe-4af3-bf6e-3ceafcc3ef20">Linkage properties</p><ol id="44aa0798-0054-4b12-8dad-2aadf108cebf" class="numbered-list" start="1"><li>With input box to select value</li></ol><figure id="733703cb-d608-40a2-9420-568e22e50df2" class="image"><a href="Sprint 1/image10.png"><img style="width:700px" src="Sprint 1/image10.png"/></a></figure><p id="fddaa8c7-1db1-4e32-8c1f-750c71960fb6"><del>2) with img to change img size</del></p><figure id="e99de1bf-f103-4837-84bb-7a3724bc2057" class="image"><a href="Sprint 1/image6.jpg"><img style="width:496px" src="Sprint 1/image6.jpg"/></a></figure><figure id="d7d49f35-85fb-4ebb-b4bb-5b00b8ceec2b" class="image"><a href="Sprint 1/image7.png"><img style="width:700px" src="Sprint 1/image7.png"/></a></figure><figure id="e633f19b-4c91-4b3f-be42-9e78c7e455ee" class="image"><a href="Sprint 1/image6.jpg"><img style="width:496px" src="Sprint 1/image6.jpg"/></a></figure><figure id="790825ff-1eb5-4938-8906-46e438637546" class="image"><a href="Sprint 1/image9.png"><img style="width:700px" src="Sprint 1/image9.png"/></a></figure><p id="3de2ebc1-a232-4cf2-b1e2-ecf26ac5df35">3) with Text to change text size/ color</p><p id="c431d928-8abd-4a76-9f9a-807e20b72ad9">So to summarize :</p><p id="20631e72-31d9-449d-b18d-01e958b611ff">Our slider has 3 initial states: default, initialized, and disabled.</p><p id="d4d2a139-690d-48b8-a956-85c27dc634d8">Our slider has 5 style properties: Rainbow, Vertical, Set breakpoints, show values at breakpoints, color of slider bar.</p><p id="a19cfbbf-9007-4c6a-bff5-e47c935d3644">Our slider has 3 linking properties: Link to input box, Link with image size, link with text size/color</p><p id="614443b9-cc89-4632-a9ee-b39a5bf19988">Things to consider/ change</p><ul id="86078581-1dec-4ca5-8879-3ff1389fa291" class="bulleted-list"><li>Allow user to set Initial value, end value.</li></ul><ul id="d4d40910-4b55-4aa9-a4a4-9d186d662154" class="bulleted-list"><li>Allow user to change the circle at the end of the slider to a few other things like star, &gt;, square etc.</li></ul><figure id="60e4d52f-2505-4b7e-8460-7d854463aee3" class="image"><a href="Sprint 1/image1.png"><img style="width:700px" src="Sprint 1/image1.png"/></a></figure><figure id="ea13f249-b0c1-4a55-a05a-297d05b448b3" class="image"><a href="Sprint 1/image13.png"><img style="width:700px" src="Sprint 1/image13.png"/></a></figure><p id="71e69863-48b3-4389-8010-06cdb2d11a97">(ignore the circle...)</p><p id="08cc3645-145a-4d56-8293-cf5ea868fa4a"><strong>Component 2: Input</strong></p><p id="b15c2165-f131-46f1-b2d2-d4fe3fb3f230">Documentation and requirements: <a href="https://element.eleme.io/#/en-US/component/input">https://element.eleme.io/#/en-US/component/input</a></p><p id="128f9f73-7277-4690-8729-cb2bd292945b">Slider Use Cases Research:</p><p id="562b72a2-5e94-4115-9390-f7fb50706f6e"><a href="https://www.nngroup.com/articles/gui-slider-controls/">https://www.nngroup.com/articles/gui-slider-controls/</a></p><ul id="07e50520-5885-439e-a3ad-4eba0217ba69" class="bulleted-list"><li>Sliders work <strong>best when the specific value does not matter</strong> to the user, but an approximate value is good enough.</li></ul><ul id="f26e75c7-c963-4f10-84e7-14722c045080" class="bulleted-list"><li><strong>The wider or the denser the range selectable through a slider, the harder it is to select a precise value.</strong></li></ul><ul id="77863eef-6c62-4fe0-8a7a-5b948b0307a2" class="bulleted-list"><li><strong>Ensure that the visual design of the element does not hinder its usability. For touchscreens, consider where the user’s finger will be placed on the screen—and what areas of the screen will thus be covered—while manipulating the slider.</strong></li></ul><ul id="5dc3ec26-c680-4ddd-8c5e-3200e38bf29d" class="bulleted-list"><li><strong>While labels placed directly below the slider may work on desktop designs used with a mouse cursor, the same label placement does not work well for mobile devices and other touchscreen designs because the labels may be obscured by the users’ finger while they are interacting with the control.</strong></li></ul><figure id="dc71ba0c-c398-4c2e-9b32-78ab443e1c25" class="image"><a href="Sprint 1/image17.png"><img style="width:700px" src="Sprint 1/image17.png"/></a></figure><ul id="7b430012-3f73-4c29-9cf9-b0ed7390c39b" class="bulleted-list"><li>Conclusion, Allow input box To be either on the side of the slider on on top,</li></ul><blockquote id="fbaf180d-a300-4e56-b0c3-a580b9c803d2">Features expected from slider:</blockquote><ul id="4238b376-b95e-4111-bb76-95555076cf40" class="bulleted-list"><li>Touchscreen friendly</li></ul><ul id="2e9a2326-c117-4629-b8d5-55231d691a7b" class="bulleted-list"><li>Recalculates onresize so suitable for use within responsive designs</li></ul><ul id="43aee188-1f8b-44ea-9689-327181b4fd7a" class="bulleted-list"><li>Small and fast</li></ul><ul id="d51959b1-39bb-4f58-a16a-679ce8f602f8" class="bulleted-list"><li>Supports all major browsers including IE8+</li></ul><figure id="e409f585-64dc-4c57-b913-ed0f597ac3be" class="image"><a href="Sprint 1/image3.png"><img style="width:700px" src="Sprint 1/image3.png"/></a></figure><p id="6917d736-00b2-41f6-839e-810fdd624f5d">(0 on right side ^)</p><figure id="fb6f6eda-e754-4be6-9e59-0ed2c2ce8653" class="image"><a href="Sprint 1/image4.png"><img style="width:700px" src="Sprint 1/image4.png"/></a></figure><p id="dc66ac71-f2d9-4424-87cf-c6502e9a6ee7">(Range 10 - 11)</p><figure id="65990f38-9819-49e0-92d1-475dece73b6d" class="image"><a href="Sprint 1/image15.png"><img style="width:700px" src="Sprint 1/image15.png"/></a></figure><p id="771954fc-7c99-4791-976e-d697365d6211">Things Andrew has wanted a component for in the past:</p><ul id="52f1610d-fb89-4f9b-abcd-0027c79bd3b0" class="bulleted-list"><li>Auto-Formatting input field for custom formats</li></ul><ul id="e63d5b5a-1ee8-4606-b7da-fa0151785088" class="bulleted-list"><li>Switch button</li></ul><ul id="075d7534-fafe-4ed0-b5aa-5a1698772bbd" class="bulleted-list"><li>A more Stylable select tag</li></ul><ul id="8013f642-cbef-42ca-9694-18c2e47a261f" class="bulleted-list"><li>Notification system (<a href="https://github.com/igorprado/react-notification-system">https://github.com/igorprado/react-notification-system</a>)</li></ul><ul id="574f8396-9c8c-46d0-8393-48d2b3c6acc9" class="bulleted-list"><li>Cool Loading Spinner</li></ul><ul id="2aa555df-ac06-4c5c-9d43-e44adde240f4" class="bulleted-list"><li>Color picker</li></ul><ul id="2ee11c71-0cdf-4aa6-b82f-78f6027a3869" class="bulleted-list"><li>In-button loading spinner button thing (<a href="https://github.com/yury-dymov/react-bootstrap-button-loader">https://github.com/yury-dymov/react-bootstrap-button-loader</a>)</li></ul><ul id="226330fb-6c69-4918-9ed7-c38ef5452810" class="bulleted-list"><li>Progress bar</li></ul><ul id="aef29323-a43e-4dc8-9b6a-439534081338" class="bulleted-list"><li>Tabs and navigation drawers</li></ul><ul id="5e1c3cf7-7653-4502-b513-d5e12a897537" class="bulleted-list"><li>Customizable sliders</li></ul><h1 id="d4c118b8-f5d1-4fa1-9531-8b9fb97ec1f7"><strong>SECTION (LAST): Attempts</strong></h1><p id="0963968d-82e6-4a0c-aa4d-4988a4af921e">Attempt 1: Let’s try a FormattedInput (for money / date / credit card / custom / etc.)</p><p id="a2137a36-fb89-4237-a9e1-2735ff11ec4f">Attempt 2: Let’s try a DatePicker</p></div></article></body></html>

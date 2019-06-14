@@ -1,0 +1,532 @@
+<html><head><title>Project Design Docs</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="660469a9-4938-4ff5-9305-22e47b6c44f5" class="page sans"><header><h1 class="page-title">Project Design Docs</h1></header><div class="page-body"><h1 id="f5695bab-e4d1-4ebc-a86d-b1df36e5c712">SECTION 1: Goals</h1><ul id="96fc0f95-baa9-4f90-a711-4ea0546a8fb8" class="bulleted-list"><li>Completely modular</li></ul><ul id="caee6063-55e4-4b32-a257-6f27aeb6ec7d" class="bulleted-list"><li>Entirely extensible</li></ul><ul id="9a6a139f-79b7-403f-bd98-67cd7347382e" class="bulleted-list"><li>Totally RAIL</li></ul><ul id="1e794bde-6e0f-4a39-9751-bc8eeb8e2cef" class="bulleted-list"><li>Always Mobile</li></ul><ul id="7002fd1c-1aec-429f-8bef-5df20e3ee792" class="bulleted-list"><li>Developer-friendly</li></ul><ul id="00d6f136-98db-4c05-bdcc-24773aaefd12" class="bulleted-list"><li>Pretty, Logically, Intuitive (minimal extra fluff / jargon)</li></ul><ul id="9821108c-8a56-41ae-95d0-de5fe4a7459d" class="bulleted-list"><li>Universally Inclusive</li></ul><ul id="3ca0cd96-49d6-4e91-b596-239f5cdf7c03" class="bulleted-list"><li>Progressive Web App-ness</li></ul><h1 id="b971163a-618d-45b2-b9f3-3e8a39102bb1">SECTION 2: Ideas</h1><p id="b83a1210-7250-4b45-a6a1-b9864d877354">STATEMENT I: Single Document Web Components</p><p id="62f93a9d-5640-4098-b51f-f2c959a4e06d">So a component consists of 3 things:</p><ul id="92f9e9e1-ae5d-4813-aadb-04404d12650c" class="bulleted-list"><li>HTML template</li></ul><ul id="a38293ee-3af9-41f6-a2a6-45e5343475d5" class="bulleted-list"><li>CSS default style</li></ul><ul id="d1766e81-9757-4636-b10e-5a7098522426" class="bulleted-list"><li>JS logic</li></ul><blockquote id="3ebf1a93-3b26-4b77-9ff2-96e62f37dce1">Since components are meant to be completely closed, tight-coupling of HTML/CSS/JS should be encouraged. When you change any of the 3 categories, the dev should be immediately aware of the others. Therefore, they should ideally be all in the same file.Proposal: All parts of a web component should be in a single file.</blockquote><p id="30d61602-0c63-4dcf-af8a-9d8edc7becb1">STATEMENT II: HTML or JS Web Component</p><p id="d0513c5a-d318-44c7-8b1c-9eff024c0b25">There are currently 2 known ways of writing Web Components:</p><ul id="93196217-963a-4af1-9e40-e880ffd6d721" class="bulleted-list"><li>Put everything in a .js file, where the HTML and CSS are defined as a string and created with innerHTML.</li></ul><ul id="b366cf4d-7be4-4774-90a3-a45da1840098" class="bulleted-list"><li>Put everything in a .html file, where everything is in its own tag (i.e. javascript is put in a &lt;script&gt; tag).</li></ul><blockquote id="3e66fabb-1e28-49dc-96d1-859172582c0a">Initially, it seems as though the HTML format is much better than the JS format. The HTML/CSS in a .js file are treated as strings, therefore any formatting or auto-complete is thrown out the window. Although the string will be parsed on load like the HTML document, it is not treated as such until then. So your editor will pretty much just ignore any HTML/CSS code you’re trying to write.In the HTML format though, each type of code is placed in their respective tag, therefore all formatting is present. The code is also nicely separated from each other. To me, this reads much more easily than JS code and has the bonus of the editor recognizing my code.However, if we were to go the HTML route, there is a couple of issues.First, I do not believe you can export your WebComponent class for future devs to extend. In essence, you are declaring a “final class” WebComponent. Although this is sometimes what you want, it is counter to the idea of modularity and extensibility that WebComponents are meant for.Second, you must specify the “id” for the template tag in order to reference it in the setup code. Although I have yet to test this, it may conflict with potential outside id’s. The template tag is not in a ShadowDOM, so it does not need to cross the Shadow Boundary. It just lives outside, with all other user-defined tags. This may cause unsuspecting conflicts, so it should be avoided.So until these issue are solved, we must use the JS format.POSSIBLE SOLUTION:One way to solve this is to use some sort of bundler to “transform” the HTML document into a JS file. This way we get to write the code in HTML and reap the benefits of the editor recognition, but also the final format is in the JS format, so the issues with HTML are gone. There is still one issue with this solution though:Since the JS format does not exist until after the bundle, how would your own components extend each other?Proposal: For the web component file, use the Javascript format unless we find a solution for the HTML issues (exporting classes and exposed template id conflict)</blockquote><p id="8d7273da-37df-426d-81fc-a259b9f40c99">STATEMENT III: Default Styling</p><blockquote id="e9e38e91-19d4-4277-9a17-1d7433068507">Our components should support arbitrary theme styling across everything. In-component CSS should only be used as a default style. For user-defined styling, I have yet to come across an ideal method to achieve this, so hopefully, we’ll find it together.Proposal: Nothing concrete yet, but just try to make sure we never force the user the style something a certain way (unless it is by design).Madeline:The user can introduce styling through the HTML template tag as outlined in https://css-tricks.com/styling-a-web-component/. Here the user defines the global style for the shadow DOM tree but for complete effectiveness, it would need to be decided how much of the component’s implementation details to reveal in order for the user to create the appropriate CSS rules. CSS variables can also be used as hooks within the component code that users’ can use to change the style https://meowni.ca/posts/styling-the-dome/.
+Andrew:Although CSS variables is a decent solution (love the last article btw), the best solution would allow devs to specify “themes” that can be applied everywhere with as little modification as possible. This would require every “theme” dev to include all possible properties from every component they would anticipate their users to use, which makes it impossible to create such a thing.Possible Solution: They could chain css variables, sorta like redirect, and maybe we can come up with a system that can manage that somehow?</blockquote><p id="621a20bd-b98e-462f-bf29-48bbe4ae6935">STATEMENT IV: Single Import</p><blockquote id="309d36cd-94ca-44a9-835d-b44af8f86836">As explained by Professor Powell, the user should only need to use &lt;script src=”our-file.js”&gt; (or some similar one line) to start using the component. This reduces the hassle and cost of entry for using the component. The idea is that we handle as much of the setup code as possible, and leave the user to spend as much of their time to work on what they want.Proposal: The web component should only require a single line, a statement of import, to set up for use. Any more is a hassle.</blockquote><h1 id="eae9d874-3ce8-414d-b61e-79f6f865e036">SECTION 3: Why I Personally Don’t Use Components (from libraries)</h1><p id="d0e45890-1b3f-4041-86c8-0c2ebb3c3fad">I never liked using components that come from libraries. And thinking about it, I have come up with a few reasons why:</p><p id="40848b9f-ce96-49c4-bbfa-136ba724e3d9">ZEROTH ISSUE</p><blockquote id="89dc825a-fb28-4790-9206-e63439590a96">The most important reason is often times they are non-extensible and do not play well with others. I use components because they are modular and can fit anywhere. It defeats the purpose if 2 components conflict. This should be utmost priority really, cause it is the core reason why we use these.</blockquote><p id="2f024021-8f0c-46a6-8a8e-5ca6eff8fdef">FIRST ISSUE</p><blockquote id="1dad36c9-6835-48b3-9d1f-0a54b38cf581">The primary and (second) most important issue for me is styling; it is almost impossible to maintain a consistent theme across all imported components. Either they use their own class names or a special way of doing things (or just not at all, like &lt;select&gt;).SECOND ISSUEThey are bulky. Some try to do too much and become a massive codebase. I think this issue can be solved if we just make sure that we don’t try to solve everything (but allow it to be solved by the user any way they want using our thing).</blockquote><p id="85725c29-d705-4677-9a52-3f235bdde64f">THIRD ISSUE</p><blockquote id="d4943f53-e32e-482c-8151-53fdb9213d9b">They are a hassle to use. Really, like if there’s no documentation, I won’t even try to use it.</blockquote><p id="dae125ab-e64a-44e9-b17a-edc96b9013d0">FOURTH ISSUE</p><blockquote id="894ea384-4941-4e8b-ba01-060cacca70cf">They are ugly. When there are tags called like &lt;my-weird-date-picker&gt; and they require you to know what arbitrary setup they use, it is offputting. All names should be common terminology. Setup should follow common computer science designs. This way it looks more “professional” (and less “documentation-reading”).</blockquote><p id="38153fc4-0242-4833-baa3-2c928405c9b8">FIFTH ISSUE</p><p id="a02d8f43-0b46-4fe1-80a1-c7c06d2eb01f">They are inefficient. This is basically bad code.</p><p id="e67fe563-6bab-437b-9bd7-fd19b26ff5d3">SIXTH ISSUE</p><p id="2d3ff6d9-3d8e-421d-b645-534fe92b218b">...</p><p id="5f7798ff-3c01-4ffe-9bf9-caae4764f211"><strong>** Therefore, we should answer these issues (and any others you want to add) **</strong></p><h1 id="b7ad6b10-024e-4ac8-bbf9-822c40726dc6">SECTION 4: Use Cases</h1><p id="6366d356-dcf5-4fe3-af73-afdac0e04f35">Types of Websites Used:</p><ul id="7aea0892-8939-4e7a-b05e-f125597ce1d0" class="bulleted-list"><li>Personal Websites</li></ul><ul id="308006a5-5e63-4bd4-8baa-a84fdfcd160b" class="bulleted-list"><li>Single Page Applications</li></ul><ul id="4f7d0227-f83a-4d71-b74c-d9603581976d" class="bulleted-list"><li>Shopping Web</li></ul><p id="8067b900-5cc9-4dae-9737-b4c30f93c3c5">Some thoughts on web component libraries:</p><p id="c30c0e3a-8587-4de8-bd99-7928b15f853e"><strong>New is nice, but niche is not</strong>: Most general-purpose web components are likely to have already been implemented. If we can come up with something that many developers want to have but don’t, great, but implementing something that is only useful in niche cases probably means that whoever wants it is better off implementing a customized version themselves.</p><p id="0c03971c-74b7-4811-95e0-56155276c5fb"><strong>Libraries should have some common theme</strong>: This has more to do with coordinating efforts among the various teams. For instance, <a href="https://github.com/github/time-elements">https://github.com/github/time-elements</a> provides convenient ways of displaying time in various ways, and <a href="https://bit.dev/wiredjs/wired-elements">https://bit.dev/wiredjs/wired-elements</a> has a consistent, unique style (hand-drawn and variable). In general, having a bunch of disparate elements which are unlikely to be used together in your library means it’s more likely that your user will need more than just your library to satisfy their component needs. Having to use multiple libraries means likely dealing with the zeroth issue in section 3.</p><p id="06958fda-a793-4963-95e7-07ad946131cb">Starting point for a deep dive into web component libraries:</p><p id="628e3817-dcbd-47ce-bba7-7a23ed448e4f"><a href="https://blog.bitsrc.io/9-web-component-ui-libraries-you-should-know-in-2019-9d4476c3f103">https://blog.bitsrc.io/9-web-component-ui-libraries-you-should-know-in-2019-9d4476c3f103</a></p><p id="1d54d155-ace2-467d-93ad-9a690c4b7266">Libraries to reference:</p><ul id="3eb8643f-7e91-4a19-893d-547c1c7a8a1e" class="bulleted-list"><li>React.js</li></ul><ul id="7259a43a-24c4-4426-9c7e-c9b94de51887" class="bulleted-list"><li>Vue.js</li></ul><ul id="07e2f2aa-af38-43f9-9433-4045b23bcf80" class="bulleted-list"><li>Angular.js</li></ul><ul id="c49095fb-1d7f-48dc-bda6-3712d832ace2" class="bulleted-list"><li>Bootstrap</li></ul><ul id="fd8f75f2-ae9a-40eb-a0a0-62bdd649dada" class="bulleted-list"><li>Material-UI (<a href="https://github.com/material-components/material-components-web-components">https://github.com/material-components/material-components-web-components</a>)</li></ul><ul id="0eac79de-0959-49bf-8d88-ec4d698afa33" class="bulleted-list"><li>Elix (<a href="https://component.kitchen/elix">https://component.kitchen/elix</a>)</li></ul><ul id="059b9c14-39bb-4531-8238-c6cde77da8a5" class="bulleted-list"><li>Bosonic (<a href="http://bosonic.github.io/">http://bosonic.github.io/</a>)</li></ul><ul id="2ea655b1-397d-4fea-b26a-0596ee0871c1" class="bulleted-list"><li>Awesome WC stuff (<a href="https://github.com/obetomuniz/awesome-webcomponents">https://github.com/obetomuniz/awesome-webcomponents</a>)</li></ul><ul id="ce27392c-689e-4c6a-9048-2e49bf9ebbf9" class="bulleted-list"><li>Polymer (<a href="https://www.polymer-project.org/">https://www.polymer-project.org/</a>)</li></ul><ul id="004f3af4-e49c-4fb3-b171-7fbe515bccd7" class="bulleted-list"><li><a href="https://bit.dev/">https://bit.dev/</a> - platform for sharing / downloading individual web components (18k+ available)</li></ul><p id="f36ffc87-3b0d-4fe3-9529-6a442fc36d8d">Useful things to make:</p><p id="13bf8796-e6b7-4259-bd0b-a551529ecc38">Things Andrew has wanted a component for in the past:</p><ul id="686b2f11-29f3-4ce3-a519-28f9a86f16c3" class="bulleted-list"><li>Auto-Formatting input field for custom formats</li></ul><ul id="4a2adbec-999f-42ad-bc63-8b208735d1c8" class="bulleted-list"><li>Switch button</li></ul><ul id="15a90620-a88e-463f-a002-bb7f5a16e47b" class="bulleted-list"><li>A more Stylable select tag</li></ul><ul id="9210af60-5cdd-4b0f-9f49-ab627c53d94d" class="bulleted-list"><li>Notification system (<a href="https://github.com/igorprado/react-notification-system">https://github.com/igorprado/react-notification-system</a>)</li></ul><ul id="a3007b33-1e14-4ecc-803b-a61c227169e3" class="bulleted-list"><li>Cool Loading Spinner</li></ul><ul id="18d7f7f1-db4a-431a-831f-33ec0d8d4cc5" class="bulleted-list"><li>Color picker</li></ul><ul id="bd70a209-3904-4218-86e4-95e3a70a07d9" class="bulleted-list"><li>In-button loading spinner button thing (<a href="https://github.com/yury-dymov/react-bootstrap-button-loader">https://github.com/yury-dymov/react-bootstrap-button-loader</a>)</li></ul><ul id="79ee8771-39df-4065-a7cd-15dcdd6d6f65" class="bulleted-list"><li>Progress bar</li></ul><ul id="55cf1f16-6e11-40ca-a481-36077bbf4c3d" class="bulleted-list"><li>Tabs and navigation drawers</li></ul><ul id="180c5114-0d2c-47ac-ad85-8e23e3358d50" class="bulleted-list"><li>Customizable sliders</li></ul><h1 id="01b8f01d-a961-4716-8c3c-401887f75af8">SECTION (LAST): Attempts</h1><p id="17ee6b31-45c8-45d8-93c2-3fcc70c252be">Attempt 1: Let’s try a FormattedInput (for money / date / credit card / custom / etc.)</p><p id="3c6f1d5f-634d-49b1-8620-523a071219be">Attempt 2: Let’s try a DatePicker</p></div></article></body></html>

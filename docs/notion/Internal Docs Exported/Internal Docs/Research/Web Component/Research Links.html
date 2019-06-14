@@ -1,0 +1,649 @@
+<html><head><title>Research &amp; Links</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7210e790-7ae3-4952-a743-33b717c4adab" class="page sans"><header><h1 class="page-title">Research &amp; Links</h1></header><div class="page-body"><p id="bb9e9234-c0b2-40b6-b7e2-79f0ca4197f2"><strong>Intro to Web Components (technical)</strong></p><p id="32596dfb-a71d-4865-b62a-eb1d33423ed1"><a href="https://css-tricks.com/modular-future-web-components/">https://css-tricks.com/modular-future-web-components/</a> (this is good stuff)</p><p id="affbcb39-75b0-4aa7-973f-c0609d94f7dd"><a href="https://www.sitepen.com/blog/web-components-in-2018/">https://www.sitepen.com/blog/web-components-in-2018/</a> (this has more detail)</p><p id="906560e1-8051-4fe3-a13d-7c20180dceb2"><a href="https://www.webcomponents.org/introduction">https://www.webcomponents.org/introduction</a> (This is more general and is basically documentation)</p><p id="b807c1b0-aa88-460e-8217-53559d4bcae6"><a href="https://blog.revillweb.com/write-web-components-with-es2015-es6-75585e1f2584">https://blog.revillweb.com/write-web-components-with-es2015-es6-75585e1f2584</a> (This has some info on ES6 and transpiling for web components)</p><p id="20deafd8-bece-4b28-b906-e34211ca860c"><a href="https://dev.w3.org/html5/html-author/">https://dev.w3.org/html5/html-author/</a> (Main source for HTML5)</p><p id="abf26395-c460-4f0c-bd47-58ca7a553c57">If nothing else, I hope that can get you guys started.</p><p id="80884228-c1a1-4e1f-81c0-71845c2dfd0b"><strong>FROM HERE ON OUT IS MY OPINION FROM MY LIMITED EXPERIENCE, WHICH MAY BE WRONG:</strong></p><p id="3b0bfbda-e396-4bdf-87be-5a8c056b5264">Basically, this is what I know:
+So you want less redundant code and more modular HTML code. So you realize that there exists tags like &lt;video&gt; or &lt;iframe&gt; that pretty much have styled/ready-to-use modular html/css/js already builtin. We are basically building that.</p><p id="056045a0-0133-4970-a98c-39912d69f392">The way they achieve this is by using templates, the ShadowDOM, and custom tags.</p><p id="c862f835-5cad-4598-965c-a8c3fd29621c"><mark class="highlight-pink">Note: If you are familiar with React, this is very similar to how React components are used. The main difference (besides setup code, how it works, VirtualDOM, etc.) is that React also controls data between/within components with props and states. Web components have nothing to do with managing data. This makes Web components less cumbersome and more flexible (and supported everywhere). This also means it is up to us to make a safe, consistent “data flow” between our components (something like Redux). Just something to keep in mind.</mark></p><p id="bbdab49b-f253-4145-9ebd-911b43021458"><strong>TL;DR</strong></p><p id="e7c82119-ec66-45b1-961f-624d62a73168">Use &lt;template&gt; to create your html DOM subtree with &lt;style&gt; and &lt;script&gt; (no external files). &lt;template&gt; tags will be “inert” (meaning stuff inside does not execute on load). This subtree is also completely isolated from other code, so styling and logic cannot cross the SHADOW BOUNDARY! By itself, this does nothing.
+Then register it with the ShadowDOM to make it actually mean something and make it a custom-tag so it’s not just div tags everywhere (they are meaningless, no semantic value). There are ShadowDOM events you can listen to, like created, etc. You can use the &lt;content select=””&gt; tag to specify parameters for the user. Now you can use it like:</p><pre id="d4956af3-db33-45e7-a97e-42d8e1798920" class="code"><code>&lt;template&gt;
+	&lt;content select=”img”&gt;
+	...
+&lt;/template&gt;
+&lt;script&gt;
+	//Registration stuff...
+&lt;/script&gt;
+&lt;i-am-your-tag&gt;
+	&lt;img … /&gt;
+	&lt;img … /&gt;
+	&lt;img … /&gt;
+&lt;/i-am-your-tag&gt;</code></pre><p id="4dce91d5-aedf-4b9e-909b-20b579b1272d">-=- Now back to our regularly scheduled content: -=-</p><p id="8e72742e-9ec7-4b73-bf2f-c10f2f303baf"><strong>Templates</strong></p><p id="e8df25eb-faf3-4d79-9286-740cfc5b1158">For web components, templates are how you specify the layout of that inner DOM. It’s basically HTML/CSS(cause you MUST you style tags)/JS that represent the thing you want wrapped in &lt;template&gt;. However, everything inside these tags are NOT executed immediately on load, only when needed. So script tags, etc. won’t trigger until later.</p><p id="f7c34a8c-5cd5-46c9-a4a3-cec07abb4778"><strong>ShadowDOM</strong></p><p id="f29187e7-0553-4cff-9652-a5b47d4d8841">The ShadowDOM is a separate place completely disconnected from the one true DOM (meaning that styles, javascript, etc cannot reach out or in the ShadowDOM subtree or the DOM. i.e. styling h1 outside, does not affect inside). You can have multiple ShadowDOM’s, one for each custom-tag you want.</p><p id="a3df518c-3d1f-4e80-973f-565a139b5436">Here’s how you create a ShadowRoot (basically the container for your shadow content).</p><pre id="22389c97-b38c-468e-8140-d9d8f8116e62" class="code"><code>&lt;div class=&quot;container&quot;&gt;&lt;/div&gt;
+	&lt;script&gt;
+var host = document.querySelector(&#x27;.container&#x27;);
+var root = host.createShadowRoot();
+root.innerHTML = &#x27;&lt;p&gt;How &lt;em&gt;you&lt;/em&gt; doin?&lt;/p&gt;&#x27;
+&lt;/script&gt;</code></pre><p id="f99b5e1b-ae00-42b9-816e-fdab4a0532f4">Now, attaching the template to the ShadowDOM</p><pre id="40a9504c-60f4-4797-b762-7a49a13c21b5" class="code"><code>&lt;template&gt;
+&lt;!-- Full of slider awesomeness --&gt;
+&lt;/template&gt;
+
+&lt;div class=&quot;img-slider&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// Add the template to the Shadow DOM
+var tmpl = document.querySelector(&#x27;template&#x27;);
+var host = document.querySelector(&#x27;.img-slider&#x27;);
+var root = host.createShadowRoot();
+root.appendChild(document.importNode(tmpl.content, true));
+&lt;/script&gt;</code></pre><p id="624484b0-64e1-4399-a701-9e8b8bb6e350">Now to allow something like:</p><pre id="2bc5d353-7900-4154-9b5e-a9fcaba7f684" class="code"><code>&lt;video&gt;
+		&lt;source&gt; ...
+	&lt;/video&gt;</code></pre><p id="43131ccb-09f7-4d2b-b0f4-c0b735de5ec4">You can use a &lt;content&gt; tag that selects these child tags, like parameters. They are used in &lt;template&gt; blocks. You can then style them in the ShadowDOM’s css with ::content and other things.</p><pre id="f293f38d-a359-46ff-bcb1-f9d739c51ffc" class="code"><code>&lt;template&gt;
+…
+&lt;div class=&quot;inner&quot;&gt;
+&lt;content select=&quot;img&quot;&gt;&lt;/content&gt;
+&lt;/div&gt;
+&lt;/template&gt;</code></pre><p id="449bce0f-167a-417b-aab1-436d241a093b">Now we are not done yet. Currently, you can use it like this, but it isn’t as pretty as it could be. For example:</p><pre id="e452c122-ac17-4828-87ec-1a8b397227cf" class="code"><code>&lt;div class=&quot;img-slider&quot;&gt;
+  &lt;img src=&quot;images/rock.jpg&quot; alt=&quot;an interesting rock&quot;&gt;
+  &lt;img src=&quot;images/grooves.jpg&quot; alt=&quot;some neat grooves&quot;&gt;
+  &lt;img src=&quot;images/arch.jpg&quot; alt=&quot;a rock arch&quot;&gt;
+  &lt;img src=&quot;images/sunset.jpg&quot; alt=&quot;a dramatic sunset&quot;&gt;
+&lt;/div&gt;</code></pre><p id="05da35ca-f706-46af-b6c6-68a36ae856bb">This still makes us div-happy. So here we use custom-tags to be more specific. This is done through code.</p><p id="1d20eb78-2c5c-464c-b001-178901b42ae3">Here’s the code that the tutorial I read had:</p><pre id="8cb786a2-636e-4ccc-8963-20777a49eca5" class="code"><code>&lt;template&gt; … &lt;/template&gt;
+&lt;script&gt;
+  // Grab our template full of slider markup and styles
+  var tmpl = document.querySelector(&#x27;template&#x27;);
+
+  // Create a prototype for a new element that extends HTMLElement
+  var ImgSliderProto = Object.create(HTMLElement.prototype);
+
+  // Setup our Shadow DOM and clone the template
+  ImgSliderProto.createdCallback = function() {
+    var root = this.createShadowRoot();
+    root.appendChild(document.importNode(tmpl.content, true));
+  };
+
+  // Register our new element
+  var ImgSlider = document.registerElement(&#x27;img-slider&#x27;, {
+    prototype: ImgSliderProto
+  });
+&lt;/script&gt;</code></pre><p id="c4860460-4bd9-4d83-adcc-2c85b23e0183">Here’s the way I think is better:</p><pre id="dba36f98-cfeb-4cb7-b51f-4b2ee32dc241" class="code"><code>&lt;template&gt; … &lt;/template&gt;
+&lt;!-- They don’t have to be style tags, you can use external files too --&gt;
+	&lt;script&gt;
+const template = document.querySelector(&#x27;template&#x27;);
+class ImgSlider extends HTMLElement
+{
+	constructor() { super(); }
+	createdCallback()
+{
+	Let root = this.createShadowRoot();
+	root.appendChild(document.importNode(template.content, true));
+}
+}
+document.registerElement(‘img-slider, ImgSlider);
+&lt;/script&gt;</code></pre><p id="f672df17-a4a4-4bd6-a740-c98974126432">Since this is using ES6, we should use Babel or something to make it compatible with older browsers. In addition, I think we should use a uglify/minify thing and some sort of dev-server (hopefully with hot-reload of some kind to speed things up). We could also use some sort of bundler if we want, like webpack or something, but they do get messy really quick, so I would suggest caution if we are going down that route (I’m currently in a project using webpack, and although it automates a lot of things, it is challenging/time-consuming to update/change.)</p><p id="1822b28b-391e-43f7-875d-75d523599930">I hope that helped. :D</p><p id="72b0ca64-9d20-417b-9158-bb4b4c9dd6c3"></p><ul id="e748fecd-68f0-4189-8640-25aa8722fb5d" class="bulleted-list"><li>This is one of the <a href="https://youtu.be/XrD8X8h1Wds">sources</a> that I got from youtube. I think this is better since it is similar with developer.mozilla: </li></ul><pre id="fea4ab43-c345-4c68-a3e4-986b63154e1c" class="code"><code>&lt;body&gt;
+
+&lt;my-component&gt;&lt;/my-component&gt;
+
+&lt;template id =&quot;my-component&quot;&gt;
+
+&lt;style media=&quot;screen&quot;&gt;
+
+h1 {
+
+color: purple;
+
+}
+
+&lt;/style&gt;
+
+&lt;h1&gt;Component Header&lt;/h1&gt;
+
+&lt;/template&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+class MyComponent extends HTMLElement {
+
+constructor() {
+
+super();
+
+// This will attach shadow-root to MyComponent
+
+let shadowdom = this.attachShadow({mode: &#x27;open&#x27;});
+
+let template = document.getElementById(&#x27;my-component&#x27;);
+
+let templateHtml = template.content.cloneNode(true);
+
+shadowdom.appendNode(templateHtml);
+
+}
+
+}
+
+&lt;/script&gt;
+
+&lt;/body&gt;</code></pre><ul id="91e0742c-b01b-4250-b3fa-4718c1bd87d2" class="bulleted-list"><li>Popular web-components:</li></ul><figure id="0d6e707b-ec3a-4640-8fad-e5e943e68479" class="image"><a href="Research Links/Untitled.png"><img style="width:688px" src="Research Links/Untitled.png"/></a></figure><p id="b43afa54-fa70-470a-a381-0f072b10d5d3">This website contains a collection of web components:</p><p id="181251a5-02d2-4b53-b9d1-46dcf41c8033">1. https://www.webcomponents.org/element/@polymer</p><p id="00cb72d2-a525-4324-998f-45149abbbefe">2. https://material.io/design/components</p><p id="b8307827-5331-4675-ad42-bcc08d4d7a4f"></p></div></article></body></html>

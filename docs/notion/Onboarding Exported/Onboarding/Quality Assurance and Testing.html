@@ -1,0 +1,576 @@
+<html><head><title>Quality Assurance and Testing</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="aa8162b8-c458-430d-9f60-155e52e2db59" class="page sans"><header><div class="page-header-icon"><span class="icon">🔑</span></div><h1 class="page-title">Quality Assurance and Testing</h1></header><div class="page-body"><h1 id="fc5188a5-54fa-40cd-a40b-a66208d04a4c">Onboarding for Quality Assurance and Testing</h1><p id="7cd110ed-0d9c-4068-a446-745789eda37d">Hello and welcome to QA and Testing!</p><p id="34c15eda-a007-4d24-94e9-9659b918c8a1">Check out the tips below to get started with testing.</p><figure id="12c6eace-e1bc-4466-a744-2a0697f0f7b9" class="link-to-page"><a href="Quality Assurance and Testing/TestCafe Handguide.html"><span class="icon">🍵</span>TestCafe Handguide</a></figure><div id="4e19b144-21ea-4a57-bdbe-96d53c1eac2d" class="collection-view"><h4 class="collection-title">Table of Contents</h4><table class="collection-content"><thead><tr><th>Type of Testing</th><th>Status</th></tr></thead><tbody><tr id="5a23252c-e571-419b-a3fa-c142b974f8eb"><td class="cell-title"><a href="Quality Assurance and Testing/Table of Contents/Unit testing.html">Unit testing</a></td><td class="cell-Y~C:">Implemented</td></tr><tr id="f4e7c2a8-130a-49fc-a9b3-6f1f33534bdf"><td class="cell-title"><a href="Quality Assurance and Testing/Table of Contents/Cross browser testing.html">Cross browser testing</a></td><td class="cell-Y~C:">In Progress</td></tr><tr id="7d7d8258-3b3a-467f-8a4d-2e098d4b946b"><td class="cell-title"><a href="Quality Assurance and Testing/Table of Contents/Research.html">Research</a></td><td class="cell-Y~C:"></td></tr><tr id="d0e55b29-d43b-470e-aab3-a8c1f2387932"><td class="cell-title"><a href="Quality Assurance and Testing/Table of Contents/Questions.html">Questions</a></td><td class="cell-Y~C:"></td></tr><tr id="9858aedd-ee55-4e17-9062-43de78f12154"><td class="cell-title"><a href="Quality Assurance and Testing/Table of Contents/Showroom and Mocha 101 Guide.html">Showroom and Mocha 101 Guide</a></td><td class="cell-Y~C:">Implemented</td></tr></tbody></table></div><h3 id="37872034-2623-4340-bcb7-4a93f9edac9c"><mark class="highlight-red"><strong>Unit Testing</strong></mark></h3><p id="0ad946c8-5553-4045-ba91-d01f7cf861b4">Background</p><p id="f5973a79-f057-4e9d-bee8-09669b76c103">There are 3 technologies used in unit testing:</p><ul id="a821204b-9c08-407b-afab-18c52183d9a4" class="bulleted-list"><li><a href="https://mochajs.org/">Mocha</a> - JavaScript Test Framework<ul id="e7f82214-005e-4a53-9a51-caac6aa3105f" class="bulleted-list"><li>Purpose:<ul id="d08df630-faf4-49a0-bea3-2aece4680ade" class="bulleted-list"><li>Organize all the tests</li></ul></li></ul></li></ul><ul id="dc84a961-376f-4b68-9fd8-f22924addc92" class="bulleted-list"><li><a href="https://www.chaijs.com/">Chai</a> - Assertion Library<ul id="3ea99b16-add0-4b75-b6c9-f7c0573007db" class="bulleted-list"><li>Purpose<ul id="08c741c3-0516-4577-87e9-bd097a57ddc2" class="bulleted-list"><li>Allow programmers to use easier and more intuitive assert statements</li></ul></li></ul></li></ul><ul id="cebe3cc0-d18e-4a46-b4f5-5be9058b7d6e" class="bulleted-list"><li><a href="https://github.com/eavichay/showroom">Showroom</a> - Test Launcher<ul id="9bd02aeb-edf9-4dcd-b433-432cd9890d25" class="bulleted-list"><li>Purpose:<ul id="add42049-3278-4691-904e-bc3ffd84b4ca" class="bulleted-list"><li>Launches a browser and runs the unit tests in the browser</li></ul></li></ul><ul id="095d7350-87fb-463d-b728-b8c3a6f3fa69" class="bulleted-list"><li>Observations:<ul id="5356b00f-0bd7-4110-bd77-940921babd5e" class="bulleted-list"><li>Showroom is just a thin layer built on top of <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> (A node library which enables the Test Launch feature of Showroom)</li></ul><ul id="9eab82bc-b61c-4676-b708-3753a308072b" class="bulleted-list"><li>May be helpful to look at Puppeteer documentation if Showroom’s is too scarce</li></ul></li></ul></li></ul><p id="4ba5bad8-4e78-4213-b4a9-7e392938f473">Getting Started</p><ol id="53a1960e-4915-4c77-be82-847586886f51" class="numbered-list" start="1"><li>Pull branch master</li></ol><ol id="2e21cbd8-adc6-4364-9a7e-24f69f1cc5f4" class="numbered-list" start="2"><li>Run &quot;npm test&quot; and check that all tests pass</li></ol><ol id="3b95af3a-c2cf-44bc-a0ad-95b4b582e033" class="numbered-list" start="3"><li>In “test” directory, view core-hello.js for an example of how to write unit tests using Mocha, Chai, and Showroom</li></ol><ol id="82fb423d-f239-44df-9c5a-ef656d5cc98f" class="numbered-list" start="4"><li>In “.showroom” directory, view core-hello.js for example of the syntax and information Showroom needs about a component in order to work<ol id="dbd91533-2f71-4dae-9925-0a5e0ea8149b" class="numbered-list" start="1"><li>Helpful links<ol id="a1a0bbd7-3e1a-4cf7-b4aa-c7acf97e8686" class="numbered-list" start="1"><li><a href="https://medium.com/@eavichay/testing-web-components-fe48a49117f7">Writing unit tests for web components using Showroom</a> - shows an example of a unit test written using Showroom</li></ol></li></ol></li></ol><p id="df9678db-d6ea-4584-a546-44b8fab26e4e">Writing Your Own Tests</p><p id="c8151cbc-ec43-4e13-8124-634328067186">Rules</p><ol id="721b91be-d7ac-4620-b5e7-ca3857a9b082" class="numbered-list" start="1"><li>Mocha unit tests<ol id="b29a3a5b-9c83-4507-93de-9c01539bb3d6" class="numbered-list" start="1"><li>All the unit tests go in the “test directory”</li></ol><ol id="e4af45b9-da41-494d-a7a4-e9ed91cfcd68" class="numbered-list" start="2"><li>There is only one js unit test file per component</li></ol><ol id="76cba7cb-ab70-4b19-8bcb-333768fb5df3" class="numbered-list" start="3"><li>Each component’s js unit test file must be named “nameOfComponent.js”. In the core-hello component case, the test file would be named “core-hello.js”</li></ol></li></ol><ol id="dc5509f2-9d18-4d6c-b8d4-a36bd8ede4a3" class="numbered-list" start="2"><li>Showroom descriptor files for components<ol id="36bfe277-4dc2-4c25-8434-1e3c9e170894" class="numbered-list" start="1"><li>Every component must have one and only one showroom descriptor file in directory “.showroom”</li></ol><ol id="37839651-0b30-4b12-948b-48e878f6a8cf" class="numbered-list" start="2"><li>The descriptor file for the component must be named “nameOfComponent.showroom.js”. In the core-hello component case, the descriptor file would be “core-hello.showroom.js”</li></ol></li></ol><h3 id="9ec02efd-0081-4ebc-9202-231ab93bc4d2"><mark class="highlight-red"><strong>Cross Browser Testing</strong></mark></h3><p id="2835cd7b-343f-493b-9c52-1d3cab3cd7f9">Cross browser testing is currently NOT part of the pipeline. Check back for</p><p id="631748a6-28b4-454a-be25-79dd0d13846c">updates.</p><h3 id="d97642f2-aefe-4b44-8a7b-cd6826d118a4"><strong><mark class="highlight-red">Research</mark></strong></h3><p id="5618a7ce-ab77-4a7e-90fc-53efa0f09bc8">Link:<a href="https://docs.google.com/document/d/1a9scvXe2Vl4sU9Q4-pGq7qoVHpzSKUpPyLNk68SPiOE/edit">https://docs.google.com/document/d/1a9scvXe2Vl4sU9Q4-pGq7qoVHpzSKUpPyLNk68SPiOE/edit</a></p><h3 id="d9d2465e-8385-407e-a664-6fe850b2c8db"><mark class="highlight-red"><strong>Questions</strong></mark></h3><p id="4ad36463-82a8-47f7-94a9-282a9b88cb3d">Please direct all questions and comments to the QA channel on T13 slack for the fastest and most up-to-date answer</p><h1 id="28ec8c2b-e0c1-46bb-b198-4acaf856e621"><strong>QA HANDGUIDE</strong></h1><h1 id="4030c4ec-3e2d-4e31-97d7-54e63b87f722">SHOWROOM AND MOCHA 101</h1><h3 id="c1630bde-aa48-416f-829c-1678a3705590">File requirements</h3><ol id="82ce0086-36e2-4ceb-a692-834a750c9cc8" class="numbered-list" start="1"><li><strong>.showroom </strong><strong>folder</strong></li></ol><ol id="3a44227a-f588-4038-818e-1d67bd849d16" class="numbered-list" start="2"><li>File descriptor file <strong>inside </strong>.showroom folder</li></ol><ol id="f4d52d24-8cd2-4e7d-b22e-b0f2e2e03048" class="numbered-list" start="3"><li>Testing file inside test directory</li></ol><ol id="5204fbf1-1cc8-4431-bb9e-44f9073804db" class="numbered-list" start="4"><li>Source file</li></ol><h3 id="6e1c4109-c7fc-473b-83e5-ca0b0e86151d">Format for file descriptor - REQUIRED</h3><pre id="7d24b2c9-864c-44d5-8ae5-29b3326519fe" class="code"><code>export default {
+ component: &#x27;component-name&#x27;,
+ path: &#x27;../src/component-name.js&#x27;,
+ outerHTML:`
+   &lt;component-name&gt;
+     content
+   &lt;/component-name&gt;
+ `
+}</code></pre><div id="ba22615b-c8de-4270-952f-088375053c03" class="collection-view"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Name</th><th>Definition</th></tr></thead><tbody><tr id="be7a0723-1d40-449d-b64e-9432473020d1"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/component.html">component</a></td><td class="cell-]G}@">Name of the component</td></tr><tr id="16d7f70b-ea2c-4f5d-add0-e3de7d740079"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/path.html">path</a></td><td class="cell-]G}@">Directory of the component class</td></tr><tr id="d75e996b-c2fd-45a8-bb51-944980becf26"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/outerHTML.html">outerHTML</a></td><td class="cell-]G}@">Required for `showroom` command and make it shows in the browser</td></tr><tr id="3c524e1f-45d7-47d1-893d-bb5ed9fab92b"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/ADDITIONAL PROPERTIES.html">ADDITIONAL PROPERTIES</a></td><td class="cell-]G}@"></td></tr><tr id="a3cabd6c-2143-4341-a7bc-edb852f9b5ef"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/description.html">description</a></td><td class="cell-]G}@">Description of component usage</td></tr><tr id="67afabd7-a51a-48a3-beb7-b21c06f1e565"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/events.html">events</a></td><td class="cell-]G}@">Used for component that utilizes dispatchEvent() method</td></tr><tr id="89277044-0ebb-4876-bed2-0fcdb6a23d6d"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/properties.html">properties</a></td><td class="cell-]G}@">The component’s properties</td></tr><tr id="f082378e-62ca-4058-836a-58ac55ab6474"><td class="cell-title"><a href="Quality Assurance and Testing/Untitled Database/attributes.html">attributes</a></td><td class="cell-]G}@">The components attributes</td></tr></tbody></table></div><h3 id="d2ab6c95-9d14-47b2-8a29-b43ded81f6c9">Format for testing file</h3><pre id="73c78576-2b60-4298-80e1-73d9a9442eba" class="code"><code>const { assert } = require(&#x27;chai&#x27;);
+const showroom = require(&#x27;showroom/puppeteer&#x27;)();
+
+/**
+ * Main testing method using mocha
+ */
+
+describe(&#x27;component-name&#x27;, () =&gt; {
+  /**
+   * Starting showroom and puppeteer in order to create the html document
+   * to be tested
+   */
+  before(async () =&gt; {
+    await showroom.start();
+  });
+
+  /**
+   * Stopping showroom and puppeteer
+   */
+  after(async () =&gt; {
+    await showroom.stop();
+  });
+
+
+  /**
+   * Creating new component for each test case based on the descriptor
+   */
+  beforeEach(async () =&gt; {
+    await showroom.setTestSubject(&#x27;component-name&#x27;);
+  });
+
+  /**
+   * This test checks ....
+   */
+  it(&#x27;Should be the result&#x27;, async () =&gt; {
+    assert.equal(true, true);
+  });
+});</code></pre><h3 id="ec89e45f-47e8-45de-8dcf-bdfe95c70e4a">Important <a href="https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d">Mocha</a>, Showroom and Puppeteer Function:</h3><p id="33fd748c-b547-4dad-a05b-d409244371a8">const { assert } = require(&#x27;chai&#x27;);const showroom = require(&#x27;showroom/puppeteer&#x27;)();</p><p id="3b3aeeb9-9137-475e-9ebb-a906ab810843">Showroom/puppeteer</p><ol id="c9c1d47d-6054-4378-aa38-04f8515c89c8" class="numbered-list" start="1"><li>showroom.setTestSubject(componentName:string):Promise&lt;JSHandle&gt;</li></ol><ol id="ec722668-0245-4b9f-9882-1d853bab689e" class="numbered-list" start="2"><li>showroom.setProperty(propertyName:string, value: any):Promise</li></ol><ol id="90dc2824-e6ad-4e4b-b047-76b61766f866" class="numbered-list" start="3"><li>showroom.getProperty(propertyName:string):Promise&lt;any&gt;</li></ol><ol id="cf0faba3-95c6-46a3-a12c-b6bb7f7b5134" class="numbered-list" start="4"><li>showroom.setAttribute(attributeName:string, value: string):Promise</li></ol><ol id="a4b3d738-2402-4dd1-a2a6-05217ff973ef" class="numbered-list" start="5"><li>showroom.getAttribute(attributeName:string):Promise&lt;string&gt;</li></ol><ol id="177d75b7-06ac-4353-af10-688bfe2039ad" class="numbered-list" start="6"><li>showroom.hasAttribute(attributeName:string):Promise&lt;boolean&gt;</li></ol><ol id="5142f700-217d-48eb-8f39-ffc4eb1cfe57" class="numbered-list" start="7"><li>showroom.removeAttribute(attributeName:string):Promise</li></ol><ol id="895ec963-55be-40ee-a725-72aafd979641" class="numbered-list" start="8"><li>showroom.find(path:string):Promise&lt;JSHandle&gt; - search DOM within the component, use double slash // for shadow-DOM penetration (DOM from src, not outerHTML)</li></ol><ol id="f9d49236-829d-46e0-bafb-9c09a546c72e" class="numbered-list" start="9"><li>showroom.getEventList():Promise&lt;SerializedEventObject[]&gt; - search event from file descriptor</li></ol><ol id="848ef137-4165-4d59-9416-6a4a8a5d106f" class="numbered-list" start="10"><li>showroom.getLastEvent():Promise&lt;SerializedEventObject&gt;</li></ol><p id="175ad695-eb93-45d8-a109-5e3ca92258e7"><strong>Note: </strong>await is required, so every mocha function must be async because showroom function returns promise</p><p id="97435734-4daa-454a-a25c-2aab6f0f2e04"></p><p id="d8a77e01-0f1a-4bdd-a1aa-beaaee3ef3e0"></p></div></article></body></html>

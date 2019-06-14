@@ -1,0 +1,531 @@
+<html><head><title>Repository Structure</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0e6af7b5-79f4-443b-b2da-148768658252" class="page sans"><header><div class="page-header-icon"><span class="icon">🏛</span></div><h1 class="page-title">Repository Structure</h1></header><div class="page-body"><hr id="6fb46dd6-d7a5-4960-b338-e8aed83e68ff"/><p id="dfbb1cf4-e517-46de-b32e-1b28f0df36a7"></p><h1 id="afe30196-f751-493e-a661-14202b389d54">🗂  Folders</h1><hr id="a52bf249-1a82-4512-8d4c-0b9a388044d0"/><h3 id="3778c929-ef7e-464e-8b86-dc736b1dcc56"><a href="https://github.com/ucsd-cse112/team13/tree/master/dist">dist</a></h3><p id="e5f9e155-17cf-436b-90a5-c960123772c0">This folder holds our index.html file which contains examples and uses of all of our working components. Also contains all the JS files needed to import our custom tags. This is the location of the files needed for public use of our components.</p><p id="e1c5ef07-88c8-4b3d-a979-9c185495b162">Naming: core-<mark class="highlight-red"><em>example</em></mark>.js</p><figure id="3fd4ca93-05b4-4f6b-ba47-8c97d570262a" class="image"><a href="Repository Structure/Screen_Shot_2019-06-13_at_12.35.03_AM.png"><img style="width:1770px" src="Repository Structure/Screen_Shot_2019-06-13_at_12.35.03_AM.png"/></a></figure><p id="a2a20fc4-e6b1-4271-abdd-7badb39473b1"></p><h3 id="4b1ea07c-0ba1-46f5-9ebb-cfeaa29732b0"><a href="https://github.com/ucsd-cse112/team13/tree/master/docs">docs</a></h3><p id="ecf7dae5-7491-449d-ab97-228ecd90bc71">This folder contains all of our files that generate our documentation for our components. (Needs further explanation between CoreByeElement.html and core-greet_core-bye... files)</p><figure id="d0d96310-3f29-4fde-98ba-7e518e08a639" class="image"><a href="Repository Structure/Screen_Shot_2019-06-13_at_1.00.17_AM.png"><img style="width:1758px" src="Repository Structure/Screen_Shot_2019-06-13_at_1.00.17_AM.png"/></a></figure><p id="34b79b05-4c4e-4b1f-b570-3ae1646cc869"></p><h3 id="86a5158c-08d5-4361-bc37-40a59c024da3"><a href="https://github.com/ucsd-cse112/team13/tree/master/res">res</a></h3><p id="2cde44bf-05e6-4c25-87b0-4b59fc6bf518">Contains our team logo and team resource information. Where our team website is generated from.</p><figure id="e86f3f27-430f-46a4-a8d1-1b2680a64b51" class="image"><a href="Repository Structure/Screen_Shot_2019-06-13_at_12.46.15_AM.png"><img style="width:1774px" src="Repository Structure/Screen_Shot_2019-06-13_at_12.46.15_AM.png"/></a></figure><p id="d6d90ad1-252f-4276-bde8-bd9c0f93de39"></p><h3 id="3ff17446-1dd1-45ba-b35b-535dfee22c70"><a href="https://github.com/ucsd-cse112/team13/tree/master/src">src</a></h3><p id="8fa31663-c805-4337-8bce-30fe1c654164">Contains the source code for all components that we have worked on. Each component folder name should follow the same syntax as &quot;core-<mark class="highlight-red"><em>examplecomponent</em></mark><em>&quot;</em></p><figure id="2fb5edd6-9db6-460f-be4b-21e01b887d08" class="image"><a href="Repository Structure/Screen_Shot_2019-06-11_at_11.45.19_AM.png"><img style="width:1782px" src="Repository Structure/Screen_Shot_2019-06-11_at_11.45.19_AM.png"/></a></figure><p id="66f24c3b-b9d5-4721-a95c-e5b5c59090d5">In each of these folders, they should contain the corresponding CSS, HTML, and JS files. The naming conventions for these files should follow as &quot;Core<mark class="highlight-red"><em>Examplecomponent</em></mark>Element.css&quot;, &quot;Core<mark class="highlight-red"><em>Examplecomponent</em></mark>Element.html&quot;, and &quot;Core<mark class="highlight-red"><em>Examplecomponent</em></mark>Element.js&quot;.</p><figure id="397004b9-0f13-4c33-8b10-7af28d84e909" class="image"><a href="Repository Structure/Screen_Shot_2019-06-11_at_11.49.55_AM.png"><img style="width:1782px" src="Repository Structure/Screen_Shot_2019-06-11_at_11.49.55_AM.png"/></a></figure><p id="e4beb276-2140-4027-a756-5c0c27c7d97b"></p><h3 id="dbd75b63-9d02-4510-96d0-e5959fc6b547"><a href="https://github.com/ucsd-cse112/team13/tree/master/test">test</a></h3><p id="feb369b0-6068-467a-a3a6-5dd537ce9a14">Contains all necessary files to test our components. Similar to most of our naming conventions, for testing we wanted to keep it consistent. Any future tests for other components will be here.</p><p id="bc619522-d440-4334-b9b3-0d608c4f230c">Naming: core-<mark class="highlight-red"><em>example</em></mark><em>.</em>js</p><figure id="004612a3-5487-4800-b6a3-ac7b85502af7" class="image"><a href="Repository Structure/Screen_Shot_2019-06-13_at_1.29.20_AM.png"><img style="width:1780px" src="Repository Structure/Screen_Shot_2019-06-13_at_1.29.20_AM.png"/></a></figure><p id="7f3ff94f-656b-42d6-95b2-13a3264a1cd7"></p><h3 id="c0944fdc-986d-429e-a8e8-9c0244a23819"><a href="https://github.com/ucsd-cse112/team13/tree/master/tools">tools</a></h3><p id="1b1772ae-0866-4be9-b1f7-263388f94fa8">Work in Progress?</p><hr id="4f537cfe-e5cb-4c5c-833e-3f9515ea446a"/><p id="d63d186f-440d-40be-aeef-cccd27f978b3"></p><h1 id="bcf1cc0a-4081-4887-9366-e80b8233d5c3">🌲 Branches</h1><hr id="51f1af52-c0b6-4701-855b-1e7366f93e28"/><p id="26f5fe60-42c5-47f8-843c-db57da3e31bd">In our repository, you will notice that we have distinct branches that serve specific tasks and here we will explain the purpose of each branch. (Something about Master)</p><p id="92f9fd8b-c78c-40f1-8b45-1605ef267923"></p><h3 id="b1da43e1-197d-4574-b88f-6a04640ee098">Component </h3><p id="e9578971-4df1-4442-9a53-bf363dde587d">The component branch is where we create all of our components. This is also where all of our changes to a component will be until it is ready to be pushed to master.</p><p id="08eafe89-7884-4380-bf3f-88ddbb544e37">Naming: <strong>component/core-</strong><mark class="highlight-red"><strong>example</strong></mark></p><p id="6fd55636-d82e-49b8-9f0f-5740b2361b3d"></p><h3 id="628c5736-b886-4ff9-ab43-ce215d616b94">Feature</h3><p id="d4c5605f-4062-4e5b-9bfe-4d8401844236">We create a feature branch for each feature of a component we are working on. These branch off of the corresponding component branch. For example, after finishing code on feature/core-slider/rainbow, changes are pulled to component/core-slider.</p><p id="acc881f1-6ea2-4044-9e92-65c2d95ebbe7">Naming: <strong>feature/</strong><mark class="highlight-red"><strong>feature-name</strong></mark><strong>/core-</strong><mark class="highlight-red"><strong>example</strong></mark></p><p id="0d8be28b-2f09-455d-b6c2-fada0c4ea6c2"></p><h3 id="9bb72811-0331-4505-9a8f-bfa2df6f7b6c">Test</h3><p id="29801349-2245-47e9-b3ef-fb4381762246">We create a test branch for every corresponding component that we create. This is where we write all of our tests for each component. After completing tests these changes are pushed to master.</p><p id="60f7dcc7-dd80-4439-8e69-7adf27d7ad56">Naming: <strong>test/core-</strong><mark class="highlight-red"><strong>example</strong></mark></p><hr id="2e955194-5b7f-4857-893a-45325ac43f7e"/><h1 id="75c68582-10ec-417f-aef6-ebb2ae5048b6">🧩 Miscellaneous </h1><p id="4bf507c1-ccb6-45c0-977d-c8e901572d87">Files that help us with keeping our project clean and organized. <a href="http://readme.md">README.md</a> addresses setup and works as a directory for simple questions. We also have the config file for the Travis CI environment. <a href="http://contributing.md">CONTRIBUTING.md</a> hold answers to all questions about helping or adding to the project. </p><figure id="43e4085f-e0ce-4eb8-aa9f-3cd74dc3bd1d" class="image"><a href="Repository Structure/Screen_Shot_2019-06-13_at_1.46.50_AM.png"><img style="width:1782px" src="Repository Structure/Screen_Shot_2019-06-13_at_1.46.50_AM.png"/></a></figure></div></article></body></html>
