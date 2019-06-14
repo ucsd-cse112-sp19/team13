@@ -9,22 +9,25 @@
 <h1 align="center"> Thank God It's Friday</h1>
 <p align="center"> Welcome To UCSD-CSE112's Public Repository for Team Friday!</p>
 <h4 align="center"> <img alt="Logo" src="https://imgur.com/e9SoakZ.png"></h4>
-![Logo](https://imgur.com/e9SoakZ.png)
 
 Table of contents
 =================
 
 <!--ts-->
    * [Table of Contents](#Table-of-contents)
-   * [Use-out-components](#Use-our-components)
-   * [Usage](#usage)
+   * [Use our components](#Use-our-components)
    * [Documentation](#Documentation)
    * [Meet The Team](#Meet-The-Team)
    * [How to Contribute](#Contributing)
 <!--te-->
 
 # Use our components
+Make sure that your project has npm initialized. If not, run the following command. It will ask you questions pertaining to your project. Don't worry, these can be changed in the future in 'package.json'.
+
+`npm init`
+
 To download our components, simply run:
+
 `npm i friday-webcomponents`
 
 Then, in your HTML page, include the components you want to use in the `<head>...</head>` tags. For example:

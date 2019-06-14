@@ -4,7 +4,7 @@
   "description": "Team Fridays Free Open Source Web Components",
   "scripts": {
     "start": "webpack-dev-server --mode development --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js",
+    "build": "webpack --mode production --config webpack.config.js && npm run docs",
     "docs": "jsdoc --destination ./docs/api --readme ./README.md --recurse ./src/ && npm run add",
     "add": "git add ./docs/api && git commit -m \"Auto update JSDocs\"",
     "lint": "eslint \"./**/*.js\" \"./**/*.html\" --ext .html && stylelint \"./**/*.css/\" \"./**/*.html/\"",
