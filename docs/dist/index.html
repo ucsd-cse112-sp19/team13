@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World</title>
+
+		<link rel="stylesheet" type="text/css" href="./style.css"/>
+        <script src="core-hello.js"></script>
+        <script src="core-slider.js"></script>
+        <script src="core-bye.js"></script>
+        <script src="core-tooltip.js"></script>
+        <script src="core-greet.js"></script>
+        <script src="core-link.js"></script>
+    </head>
+    <body>
+        <h1>
+            <core-hello id="title-hello" lang="en" rainbow>Team 13</core-hello>
+            <label>(</label>
+                <core-hello name="Team 13" lang="jp"></core-hello>
+            <label>)</label>
+        </h1>
+        <h1>
+            <core-bye id="title-bye" lang="en" rainbow></core-bye>
+            <label>(</label>
+                <core-bye lang="jp">Team 13</core-bye>
+            <label>)</label>
+        </h1>
+        <div>
+            <core-link href="index.html" type="warning">Looking for Team13 Demo?</core-link>
+            <core-link href="index.html" underline>Or Not?</core-link>
+        </div>
+
+        <section id="core-link-group" class="display-group">
+            <h2>This is core-link</h2>
+            <div>
+                <core-link href="https://www.google.com/">Simple google link</core-link>
+            </div>
+        </section>
+
+        <section id="default-group" class="display-group">
+            <h2>Basics<core-tooltip effect="dark">Yep, these are the basics.</core-tooltip></h2>
+            <div>
+                <core-slider id="size-slider" min="10" max="100" value="20" step="5"></core-slider>
+                <label>Font Size</label>
+            </div>
+            <div>
+                <core-slider min="0" max="10" value="1" step="1" disabled></core-slider>
+                <label>Disabled Slider</label>
+            </div>
+        </section>
+        <section id="tooltip-group" class="display-group">
+            <div>
+                <h2>Here is <span class="tooltip"><a>some</a><core-tooltip> Hi! </core-tooltip></span> text. Just for tooltips :D</h2>
+                <span class="tooltip">
+                    <input type="text" id="hello-input"/>
+                    <core-tooltip placement="right" content="Hello All." for="hello-input"></core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Top</label>
+                    <core-tooltip placement="top" effect="light"> This is an input box! </core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Left</label>
+                    <core-tooltip placement="left" effect="dark"> This is an input box! </core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Right</label>
+                    <core-tooltip placement="right"> This is an input box! </core-tooltip>
+                </span>
+                <span class="tooltip">
+                    <label>Bottom</label>
+                    <core-tooltip placement="bottom"> This is an input box! </core-tooltip>
+                </span>
+            </div>
+            <div>
+                <a>HOVER ME<core-tooltip open-delay="1000" close-delay="0" placement="bottom" offset="20">TOOLTIPS!</core-tooltip></a>
+                <a>HOVER ME TOO<core-tooltip open-delay="2000" offset="10">MAOR TOOLTUPS!</core-tooltip></a>
+            </div>
+            <div>
+                <span class="tooltip">
+                    <label>Manual (mouseenter and mouseleave have no effect)</label>
+                    <core-tooltip id="manual-tooltip" manual>Shouldn't show up on hover!</core-tooltip>
+                </span>
+                <button onclick="document.querySelector('#manual-tooltip').onTooltipOpen()">Click me to open tooltip!</button>
+                <button onclick="document.querySelector('#manual-tooltip').onTooltipClose()">Click me to close tooltip!</button>
+                <span class="tooltip">
+                    <label>Bottom and no arrow</label>
+                    <core-tooltip placement="bottom" no-visible-arrow>I have no arrow :'(</core-tooltip>
+                </span>
+            </div>
+        </section>
+        <section id="vertical-group" class="display-group">
+            <h2>Vertical</h2>
+            <div>
+                <span style="display: inline-block;">
+                    <core-slider id="vert1" value="5" vertical></core-slider>
+                    <core-tooltip id="vert1-tooltip" placement="left"></core-tooltip>
+                    <script>
+                        const tooltip = document.querySelector("#vert1-tooltip");
+                        const slider = document.querySelector("#vert1");
+                        slider.addEventListener('input', (e) => {
+                            tooltip.content = `Value: ${slider.value}`;
+                        });
+                    </script>
+                </span>
+                <core-slider id="vert2" value="10" color="tomato" vertical></core-slider>
+                <core-slider id="vert3" value="50" vertical></core-slider>
+                <core-slider id="vert4" value="100" vertical></core-slider>
+            </div>
+        </section>
+        <section id="bootstrap-group" class="display-group">
+            <h2>With Bootstrap Support!</h2>
+            <div>
+                <core-slider class="custom-range"></core-slider>
+                <label>Bootstrap with .custom-range</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" disabled></core-slider>
+                <label>Bootstrap with .custom-range and disabled</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" vertical></core-slider>
+                <label>Bootstrap with .custom-range and vertical</label>
+            </div>
+            <div>
+                <core-slider class="custom-range" color="tomato"></core-slider>
+                <label>Custom color</label>
+            </div>
+            <div>
+                <core-slider class="form-control-range"></core-slider>
+                <label>Bootstrap with .form-control-range</label>
+            </div>
+        </section>
+
+
+
+
+        <script>
+            const titleHello = document.getElementById('title-hello');
+            const sizeSlider = document.getElementById('size-slider');
+            const vert1 = document.getElementById('vert1');
+            const vert2 = document.getElementById('vert2');
+            vert1.addEventListener('input', (e) => {
+                const value = parseInt(e.target.value, 10);
+                vert2.value = value * 2;
+                vert3.value = value / 2;
+                vert4.value = value + 10;
+            });
+            sizeSlider.addEventListener('input', (e) => {
+                titleHello.style.fontSize = `${e.target.value}px`;
+            });
+        </script>
+    </body>
+</html>
