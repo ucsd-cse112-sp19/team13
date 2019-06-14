@@ -65,7 +65,7 @@ See in-depth documentation [here](https://ucsd-cse112.github.io/team13/api)
 
 # Meet The Team
 This project could only be finished with the contribution of our members
-[meet us](https://github.com/ucsd-cse112/team13/blob/master/teamProfile.html)
+[meet us](https://ucsd-cse112.github.io/team13/teamintro)
 
 # Contributing
 If youre as passionate as we are, Thats all you need. 
