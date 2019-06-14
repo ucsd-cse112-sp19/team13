@@ -2,7 +2,7 @@ import CoreElement from '../../core-element/CoreElement';
 import CoreGreetElement from '../CoreGreetElement';
 
 const HELLO_STRING = {
-  en: 'Hello',
+  en: 'Hello World',
   es: 'Hola',
   jp: 'こんにちは',
   fr: 'Bonjour',
