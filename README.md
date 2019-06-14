@@ -56,7 +56,8 @@ Then, in your HTML page, include the components you want to use in the `<head>..
 	<script src="./node_modules/friday-webcomponents/dist/core-link.js"></script>
 ```
 # Documentation
-### See fridays webpage [here](https://ucsd-cse112.github.io/team13)!
+### See Fridays Webpage 
+[here](https://ucsd-cse112.github.io/team13)!
 ### Confused about how to use our components ?
 See simple examples of our components [here](https://ucsd-cse112.github.io/team13/storybook)!<!-- todo -->
 ### Read our API docs here
