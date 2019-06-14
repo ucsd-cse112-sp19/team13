@@ -39,45 +39,15 @@ storiesOf('CoreTooltip', module)
   .add('content', () => createCoreTooltip('A tooltip description', 0, 1000, 'top', false, '', 0, '', false, false, false))
   .add('open-delay', () => createCoreTooltip('Hello!', 1000, 1000, 'top', false, '', 0, '', false, false, false))
   .add('close-delay', () => createCoreTooltip('Hello!', 0, 0, 'top', false, '', 0, '', false, false, false))
-  .add('placement="left"', () => createCoreTooltip('Hello!', 0, 0, 'left', false, '', 0, '', false, false, false))
-  .add('placement="right"', () => createCoreTooltip('Hello!', 0, 0, 'right', false, '', 0, '', false, false, false))
-  .add('placement="top"', () => createCoreTooltip('Hello!', 0, 0, 'top', false, '', 0, '', false, false, false))
-  .add('placement="bottom"', () => createCoreTooltip('Hello!', 0, 0, 'bottom', false, '', 0, '', false, false, false))
-  .add('focusable', () => {
-    const element = createCoreTooltip('Hello!', 0, 0, 'top', true, 'text-input', 0, '', false, false, false);
-    const parentElement = document.createElement('div');
-    const inputElement = document.createElement('input');
-    inputElement.type = 'text';
-    inputElement.id = 'text-input';
-    parentElement.appendChild(inputElement);
-    parentElement.appendChild(element);
-    return parentElement;
-  })
-  .add('for', () => {
-    const element = createCoreTooltip('Bye!', 0, 0, 'top', true, 'text-input', 0, '', false, false, false);
-    const parentElement = document.createElement('div');
-    const inputElement = document.createElement('input');
-    inputElement.type = 'text';
-    inputElement.id = 'text-input';
-    parentElement.appendChild(inputElement);
-    parentElement.appendChild(element);
-    return parentElement;
-  })
+  .add('placement="left"', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip placement="left">Hello!</core-toolip></a>')
+  .add('placement="right"', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip placement="right">Hello!</core-toolip></a>')
+  .add('placement="top"', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip placement="top">Hello!</core-toolip></a>')
+  .add('placement="bottom"', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip placement="bottom">Hello!</core-toolip></a>')
+  .add('focusable', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;"><input type="text" id="text-input"/><core-tooltip for="text-input" focusable>Hello!</core-tooltip></a>')
+  .add('for', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;"><input type="text" id="text-input"/><core-tooltip for="text-input" focusable>Hello!</core-tooltip></a>')
   .add('offset', () => createCoreTooltip('Hello!', 0, 0, 'bottom', false, '', 10, '', false, false, false))
-  .add('no-visible-arrow', () => createCoreTooltip('Hello!', 0, 0, 'bottom', false, '', 0, '', true, false, false))
+  .add('no-visible-arrow', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip no-visible-arrow>Hello!</core-toolip></a>')
   .add('disabled', () => createCoreTooltip('You will never see me!', 0, 0, 'bottom', false, '', 0, '', false, false, true))
-  .add('manual', () => {
-    const element = createCoreTooltip('Hi there!', 0, 0, 'bottom', false, '', 0, '', false, true, false);
-    const buttonElement = document.createElement('button');
-    buttonElement.textContent = 'Toggle Tooltip';
-    buttonElement.addEventListener('click', () => {
-      element.toggle();
-    });
-    const parentElement = document.createElement('div');
-    parentElement.textContent = 'Some More Text';
-    parentElement.appendChild(element);
-    parentElement.appendChild(buttonElement);
-    return parentElement;
-  })
-  .add('effect="light"', () => createCoreTooltip('Hello!', 0, 0, 'bottom', false, '', 0, 'light', false, false, false))
-  .add('effect="dark"', () => createCoreTooltip('Hello!', 0, 0, 'bottom', false, '', 10, 'dark', false, false, false));
+  .add('manual', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip manual>Hello!</core-tooltip></a><button onclick="document.querySelector(\'core-tooltip\').toggle()">Toggle tooltip</button>')
+  .add('effect="light"', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip effect="light">Hello!</core-toolip></a>')
+  .add('effect="dark"', () => '<a style="display: inline-block; margin-left: 4rem; margin-top: 4rem;">Some Text<core-tooltip effect="dark">Hello!</core-toolip></a>');

@@ -28,12 +28,6 @@ storiesOf('CoreSlider', module)
   .add('max', () => createCoreSlider(0, 0, 20, 1, '', false, false, false))
   .add('step', () => createCoreSlider(0, 0, 100, 10, '', false, false, false))
   .add('color', () => createCoreSlider(0, 0, 100, 1, 'var(--primary, blue)', false, false, false))
-  .add('vertical', () => {
-    const element = createCoreSlider(0, 0, 100, 1, '', true, false, false);
-    const parentElement = document.createElement('div');
-    parentElement.style.height = '10rem';
-    parentElement.appendChild(element);
-    return parentElement;
-  })
-  .add('rainbow', () => createCoreSlider(0, 0, 100, 1, '', false, true, false))
-  .add('disabled', () => createCoreSlider(0, 0, 100, 1, '', false, false, true));
+  .add('vertical', () => '<core-slider style="height: 10rem;" vertical></core-slider>')
+  .add('rainbow', () => '<core-slider color="red" rainbow></core-slider>')
+  .add('disabled', () => '<core-slider disabled></core-slider>');
