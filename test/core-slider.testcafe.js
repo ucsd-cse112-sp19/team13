@@ -17,7 +17,7 @@ function testCoreSlider(sectionName, testDesc, testFunc) {
 testCoreSlider('default', '- Default value', async (t, ctx) => {
   const slider = ctx.target;
   await t
-    .expect(slider.value)
+    .expect(100)
     .eql(0);
 });
 
