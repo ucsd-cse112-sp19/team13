@@ -1,0 +1,532 @@
+<html><head><title>Sprint 2 research</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a8e9bd3c-7ae8-4251-98ab-00377e0e71e4" class="page sans"><header><h1 class="page-title">Sprint 2 research</h1></header><div class="page-body"><h3 id="0e72e228-e2c9-44f4-b807-be1d7bf5e146">Initial Components list:</h3><ul id="e70c491d-5dda-4674-91ba-6bc07c236bcc" class="bulleted-list"><li><a href="https://www.notion.so/team13friday/Sprint-2-research-a8e9bd3c7ae8425198ab00377e0e71e4#525493912358448a8cbea937409aff51">Input box</a></li></ul><ul id="b3d2128e-f925-4a2f-9f63-5436c0d5c62f" class="bulleted-list"><li><a href="https://www.notion.so/team13friday/Sprint-2-research-a8e9bd3c7ae8425198ab00377e0e71e4#3ed0087561be4b8ab751969eda2f0087">Tooltip</a><ul id="4022b415-62b8-45c4-bbb5-e612fd64a7a3" class="bulleted-list"><li><del>Effect</del></li></ul><div id="ea8edb1d-4612-4f10-9b7c-8994b7052626" class="collection-view"><h4 class="collection-title">Progress Chart</h4><table class="collection-content"><thead><tr><th>Name</th><th>Feature Ticket</th><th>Test Ticket</th><th>Feature By</th><th>Test By</th><th>Test Done</th><th>Feature Done</th></tr></thead><tbody><tr id="405c41ec-127e-4d9f-a66b-597f0ebfe881"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Delay.html">Delay</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">D, And</td><td class="cell-Q(vS">Yosuke</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-on"></div></td></tr><tr id="ad501f81-cd1a-41c5-8b38-55060df03398"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Focusable.html">Focusable</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Andrew</td><td class="cell-Q(vS">Keven</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="621f3deb-2c88-43c6-9e8e-59518f377518"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Hoverable.html">Hoverable</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Andrew</td><td class="cell-Q(vS">Zifeng</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="a75c7ff3-0dc1-4f05-85f7-f6c2cec61959"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Content.html">Content</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Sharad, An</td><td class="cell-Q(vS">Madeline</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-on"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-on"></div></td></tr><tr id="3e89fd3f-fcc8-4747-99ce-b97605d1d74a"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Placement.html">Placement</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Andrew</td><td class="cell-Q(vS">Keven</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-on"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-on"></div></td></tr><tr id="1b4f0343-c795-4781-970e-0643b689eaf4"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/TabIndex.html">TabIndex</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Andrew</td><td class="cell-Q(vS">Madeline</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="ee8ac39e-431e-4d1d-ab0a-0a7fa5d0ebcf"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Enterable.html">Enterable</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Calvin</td><td class="cell-Q(vS">Zifeng</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="618da494-4626-428d-bff2-2c5fa8952abd"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Visibility.html">Visibility</a></td><td class="cell-z)K9"><div class="checkbox checkbox-off"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-off"></div></td><td class="cell-gLrJ"></td><td class="cell-Q(vS"></td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="1496dc19-0c9b-4563-a5fd-29985771eebc"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Disabled.html">Disabled</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Calvin</td><td class="cell-Q(vS">Madeline</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="97d97b7a-1db9-4157-8897-9f89344de608"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Offset.html">Offset</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Duy</td><td class="cell-Q(vS">Madeline</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="13e20e11-05b8-4a70-8cc9-7ae569d0e224"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Visible Arrow.html">Visible Arrow</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Will</td><td class="cell-Q(vS">Keven</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="0050df66-21ef-4b60-8299-0618fd7b301b"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Manual.html">Manual</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Will</td><td class="cell-Q(vS">Keven</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-on"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr><tr id="29e869c2-ab40-4d13-a581-da3e50084966"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Hide after.html">Hide-after</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">D, And</td><td class="cell-Q(vS">Zifeng</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-on"></div></td></tr><tr id="276bc302-ab2e-42f6-93d7-7aeeb45e7757"><td class="cell-title"><a href="Sprint 2 research/Progress Chart/Effect.html">Effect</a></td><td class="cell-z)K9"><div class="checkbox checkbox-on"></div></td><td class="cell-9gZX"><div class="checkbox checkbox-on"></div></td><td class="cell-gLrJ">Sharad, An</td><td class="cell-Q(vS">Keven</td><td class="cell-b,n&#x27;"><div class="checkbox checkbox-off"></div></td><td class="cell-]4BA"><div class="checkbox checkbox-off"></div></td></tr></tbody></table></div><ul id="5d479ce9-72fd-48a7-a5c0-e638870ac425" class="bulleted-list"><li><del>Delay</del></li></ul><ul id="f67fa5f3-0167-49ea-9487-c80fb6b04b63" class="bulleted-list"><li>focusable</li></ul><ul id="3247db93-961f-41ed-8a94-3144d50c09c4" class="bulleted-list"><li><del>hoverable</del></li></ul><ul id="bc345940-c459-4c5c-82d7-fe2491fd3bb3" class="bulleted-list"><li><del>content</del></li></ul><ul id="634d6a64-d41a-45e5-8eef-2d7408e73ecc" class="bulleted-list"><li><del>placement</del></li></ul><ul id="8a7e8b7c-42fd-4463-8f91-92ff467d55ed" class="bulleted-list"><li>tabindex</li></ul><ul id="e0e569a7-9bad-4b88-963d-5aa2852f277a" class="bulleted-list"><li><del>enterable</del></li></ul><ul id="f30b21a8-6044-4429-9265-e941be27f6a5" class="bulleted-list"><li>visibility</li></ul><ul id="7e45cc5c-37fe-4834-b052-1c33e8545a59" class="bulleted-list"><li><del>disabled</del></li></ul><ul id="a3bffa6f-46cd-49e7-a253-5321e358eecf" class="bulleted-list"><li>offset</li></ul><ul id="3e6974f2-515d-4c11-bb97-58021d4251f2" class="bulleted-list"><li>Visible Arrow</li></ul><ul id="33bbdd5f-153b-4203-8f4a-f4a397c504b1" class="bulleted-list"><li>manual</li></ul><ul id="d0255bb3-1339-4181-877d-1651fd0a5a65" class="bulleted-list"><li><del>hide-after</del></li></ul></li></ul><ul id="87a37ec8-b4b6-4c49-9a01-1cf5a12b1539" class="bulleted-list"><li>Image Carousel</li></ul><h1 id="3ed00875-61be-4b8a-b751-969eda2f0087">Tooltip</h1><ul id="d5f783cb-ef7e-424b-b1fa-e08f57472da0" class="bulleted-list"><li>Contains most of elements ported functionality with placement, transitions, themes, and additional content features.
+</li></ul><p id="108a1386-c6d1-41b5-8ecd-3c6e68ed6abb">But what are we adding to it ?</p><ul id="0487efb1-2552-4299-a903-760b41b83eb4" class="bulleted-list"><li><strong>Enable Tooltips everywhere!</strong><figure id="40beb6c5-cb6d-48a3-99ff-8386e7deebcd" class="image"><a href="Sprint 2 research/Untitled.png"><img style="width:672px" src="Sprint 2 research/Untitled.png"/></a></figure></li></ul><p id="d21a06d3-7f80-40d0-b149-053f0f6dbd01"></p><ul id="c9944173-072a-4fc9-8372-71157d35d985" class="bulleted-list"><li><strong>Additional Themes, </strong><strong><em>obviously- </em></strong><ul id="86791e4d-ecb5-4b25-ac3f-b38b6e28fd47" class="bulleted-list"><li>Currently Elements has 2 themes<p id="2c202048-4d63-4219-9439-810d04bb202e">Dark</p><figure id="2cbcb58b-2180-46c6-a82c-5ebbd380f6c4" class="image"><a href="Sprint 2 research/Untitled 1.png"><img style="width:288px" src="Sprint 2 research/Untitled 1.png"/></a></figure><p id="c1fa678a-b13a-46bd-9c52-62f6dd36575e">Light</p><figure id="93efdb45-c0dc-4e1c-96da-0f91bdf7dc1d" class="image"><a href="Sprint 2 research/Untitled 2.png"><img style="width:240px" src="Sprint 2 research/Untitled 2.png"/></a></figure></li></ul></li></ul><ul id="96db041e-0aa4-4fa6-8f41-324da673c1a9" class="bulleted-list"><li><strong>Bootstrap !</strong><ul id="03b07d87-1615-4035-b607-24c1ef73b70c" class="bulleted-list"><li><a href="https://getbootstrap.com/docs/4.0/components/tooltips/">https://getbootstrap.com/docs/4.0/components/tooltips/</a></li></ul><ul id="9dcc7c4a-8cf3-4874-aebd-404e1e616f32" class="bulleted-list"><li>Bootstrap has 5 placements</li></ul><ul id="33b0a4b9-6efb-403c-9e50-12feb3504dd2" class="bulleted-list"><li>Bootstrap doesn&#x27;t have its own color schemes or themes</li></ul><figure id="cc251f3d-5bbd-4bf3-b405-243d07f1b707" class="image"><a href="Sprint 2 research/Untitled 3.png"><img style="width:1834px" src="Sprint 2 research/Untitled 3.png"/></a></figure><p id="ad9afda0-6b52-411f-9675-0adbc2f5b50e"></p></li></ul><ul id="7a143b58-827b-4791-903c-f515fa0932d5" class="bulleted-list"><li><strong>Tooltip mode - </strong><ul id="54ed3941-3106-476b-b94e-0ecdfb46a27a" class="bulleted-list"><li>When user hovers over an item for a x seconds (open-delay property), </li></ul><ul id="5dd99fc9-25f5-4a60-a09c-ad54e0b28ad4" class="bulleted-list"><li>and then tooltip is visible, </li></ul><ul id="cbf7bdde-c45b-45b2-855d-99ed066b5e03" class="bulleted-list"><li>if they quickly hover to another element, </li></ul><ul id="54886a42-8c56-4c73-8aa3-38ba819ecbaa" class="bulleted-list"><li>then its tooltip should show instantly and not in x ms, </li></ul><ul id="2803d9b0-5df7-46ea-9d9b-60375247779c" class="bulleted-list"><li>And old tooltip should not be visible anymore (hide-after property).<figure id="29e28ad3-3a72-462d-b181-789b43fa85f5" class="image"><a href="Sprint 2 research/Untitled 4.png"><img style="width:2880px" src="Sprint 2 research/Untitled 4.png"/></a></figure><p id="c1c722e8-1119-4563-9c54-4b1c9fb1a876"></p></li></ul></li></ul><ul id="f4a96a54-587f-450f-8080-ea8a771857a5" class="bulleted-list"><li><strong>On keyboard navigate as well instead of just on hover</strong><ul id="b6736fe0-505b-4351-937b-015a6c7ba28b" class="bulleted-list"><li><a href="https://stackoverflow.com/questions/18198089/css-tooltips-that-are-both-keyboard-navigable-and-touchscreen-functional">https://stackoverflow.com/questions/18198089/css-tooltips-that-are-both-keyboard-navigable-and-touchscreen-functional</a></li></ul></li></ul><h1 id="52549391-2358-448a-8cbe-a937409aff51">Input Box</h1><p id="a4017196-2183-464c-99e1-eca880b18191"></p><p id="59edd5b8-68b1-4e7b-a475-222b53f7dde4"></p><p id="73ddd151-eb54-426a-8468-602d83d07626"></p><p id="a42ebc0a-654e-4eb5-9ada-96a2bc624317"></p><p id="3ff94291-3361-4b8a-af62-022486b7df03">Web component use cases research: </p><ul id="ceb21033-7134-403f-8a4d-803f42b71a9c" class="bulleted-list"><li>You can tell a Web Component from a regular HTML element because it has a hyphen (`-`) in the name. For example:</li></ul><pre id="1a3c4b89-ead6-488d-a305-16b58d27bfe0" class="code"><code>&lt;special-button&gt;&lt;/special-button&gt;</code></pre><p id="19851791-9509-449f-9535-64ea8604d4c0"></p><p id="0b35e442-fc55-4d28-a57b-5f4cabb05364"></p><ul id="55be7ee0-1aca-4986-b61b-cf3eeb31f794" class="bulleted-list"><li><strong>State</strong> is maintained by each component individually and can be accessed by properties on the object. Sometimes similar elements need to work together and share state. Inspired by <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> tags this is where we would make a wrapper element:</li></ul><pre id="937aa55f-c1d6-40ad-98e6-a7ec91e15a07" class="code"><code>&lt;magic-slider-wrapper&gt;  &lt;magic-slider&gt;&lt;/magic-slider&gt;  &lt;magic-slider&gt;&lt;/magic-slider&gt;  &lt;magic-slider&gt;&lt;/magic-slider&gt;&lt;/magic-slider-wrapper&gt;</code></pre><ul id="e8d1816b-96f5-4a1a-936d-8a735a02b411" class="bulleted-list"><li>In this case each <code>magic-slider</code> can fire events when it is changed or used and the <code>magic-slider-wrapper</code> can then maintain the group’s state and handle any changes accordingly.</li></ul><ul id="a994bd13-e192-47f9-9221-db362be14130" class="bulleted-list"><li><strong>Inter-component messaging</strong> is handled by event listeners. In the above example <code>&lt;magic-slider-wrapper&gt;</code> can listen for events on all of its children.</li></ul><p id="2da71f4a-1b2f-4082-bd45-d9d5c027a552"></p><p id="71917def-bd35-4c65-b106-a709d0a698f0"></p><p id="a04d1f6d-ca2b-491d-945c-ff460e9d0adb">Additional Links</p><ul id="5911cc9a-6dc8-4c24-812f-f37565ba98a9" class="bulleted-list"><li>Simple custom element with polyfil </li></ul><p id="5397a1d3-893c-4de6-86c0-721ff1c19287"><a href="https://glitch.com/edit/#!/simple-custom-element?path=views/index.html:1:0">https://glitch.com/edit/#!/simple-custom-element?path=views/index.html:1:0</a></p><ul id="5be9bf65-20d7-407c-918b-b20ae4e06106" class="bulleted-list"><li><a href="https://medium.com/samsung-internet-dev/lessons-learned-making-our-app-with-web-components-bf55379cfcda">https://medium.com/samsung-internet-dev/lessons-learned-making-our-app-with-web-components-bf55379cfcda</a></li></ul><p id="9d2a5ffa-807f-4a8a-8678-ded4463966bb"></p><p id="8f766b28-f385-4a29-aa6e-599bd3eafd1f"></p><blockquote id="f9863ce5-b502-4803-9c71-9a901c9a09e5">Features expected from components:</blockquote><ul id="b53cbcb4-3a96-403b-9988-5382d7c91c61" class="bulleted-list"><li>Touchscreen friendly</li></ul><ul id="2cdd043a-9f1d-4b4b-b0df-e29db1ddf978" class="bulleted-list"><li>Recalculates onresize so suitable for use within responsive designs</li></ul><ul id="6991e461-6776-4e13-86fd-43bd3a69f997" class="bulleted-list"><li>Small and fast</li></ul><ul id="cb747937-f9a0-48a5-92d7-69af99a73080" class="bulleted-list"><li>Supports all major browsers including IE8+</li></ul></div></article></body></html>

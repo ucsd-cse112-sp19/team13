@@ -1,0 +1,531 @@
+<html><head><title>Midterm Answers</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ef5fea99-592e-4be5-8da0-2d5ef9fdb412" class="page sans"><header><h1 class="page-title">Midterm Answers</h1></header><div class="page-body"><blockquote id="e65e55a1-3458-41ba-8bfc-1d46e410ab4d"></blockquote><figure id="2d27b7de-9daa-4761-9669-ba979b499726" class="image"><a href="Midterm Answers/image4.png"><img style="width:564px" src="Midterm Answers/image4.png"/></a></figure><p id="b74db379-025a-4566-beca-fdd8836edc85">Team # 13 - Friday</p><blockquote id="1fb2344e-3b48-4399-9a29-ee62fdafbf74">Part 1: The questions here include material from lecture, slides, content from 110 and information beyond the course but easily findable online. The Midterm will be composed exclusively of a time appropriate set of these questions reduced or with some variations.You may work together to answer these questions together and prepare for the test. Your team must return your final team agreed upon answers back to your TA/tutor mentor contact by Monday May 6th at noon for any adjustments. Those adjustments may be discussed in discussion in case modifications for study need to be made for the midterm.</blockquote><ol id="faaa4502-0fa1-437b-a4a5-9fbac61a51cb" class="numbered-list" start="1"><li>Definitions<ol id="90e44a0c-3b54-4e74-a026-ac5dac4edff3" class="numbered-list" start="1"><li>In your own words try to precisely define Software Engineering. (Hint: Focus on the second word)</li></ol></li></ol><blockquote id="5e9e72e9-2bf6-46fa-994c-840b1a2a1793">Software engineering is the production of software through a series of well-defined processes with an emphasis on reliability, security, maintainability, and repeatability. Software engineering is not a “miraculous event”, but the result of a strict adherence to processes.Software engineering is an application of a widely researched and accepted methodology in designing, developing and maintaining software in order to reach the highest possible effectiveness.Just like engineering processes, we need to make our software development more repeatable and ‘engineering-like’ even though we may think of it as ‘artistry’. We have to focus on security and dependability just as much as an engineer building a bridge, who is unable to go back and do bug fixes or version updates.</blockquote><ol id="4111a4e2-de23-4c5a-a0f4-3a9dc32b532c" class="numbered-list" start="1"><li>Define what you think Code Craftsmanship involves</li></ol><blockquote id="8e9c0b04-1c70-4596-acca-6323f5050075">Code craftsmanship describes the artistic processes behind software engineering; craftsmanship involves creativity, ingenuity, and out-of-the-box thinking. It is the more emotional element behind software.</blockquote><ol id="f7a8e656-61de-49db-9d93-3367d5320f1b" class="numbered-list" start="1"><li>Define what you think Software Manufacturing involves?</li></ol><blockquote id="4a70f7f7-e0b5-4f31-b7bf-c0fdfb2f2a37">Software manufacturing is the process of producing software in ways similar to the manufacturing of tangible goods. It is methodical, repeatable, and largely automated. It describes the more logical, less people-involved element behind software. Hence an important part of this process is the conveyor belt which allows code to go through the same processes to produce predictable results.</blockquote><ol id="d73f0a43-8e6e-4539-ab7f-e75d273ac488" class="numbered-list" start="1"><li>Does Software Engineering contain these ideas or is it separate and different? Explain your opinion</li></ol><blockquote id="dd825469-6f95-4a26-b439-eeded5f96918">Software engineering contains these ideas; without the craftsmanship, there is no ingenuity in designing software solutions to problems; we need the human element to come up with solutions in the first place. However, without the manufacturing part, our process of building these solutions devolves into chaos. Software that works becomes a “miracle event”, and there is no repeatable and rational way to build software solutions.</blockquote><ol id="1d423587-0756-4231-a175-13f4714f9d13" class="numbered-list" start="1"><li>The Atlantic article we read for the first homework suggested that our industry is a bit loose in its use of the word Engineer, why did the article’s author feel that is the case?<ul id="37524e7e-0786-4e8c-9756-34b594f8151c" class="bulleted-list"><li>This is because the word engineer carries a much heavier meaning when it comes to traditional description of the engineering job. Engineer is an aspirational title that is expected to be certified, regulated, and subject to apprenticeship and continuing education. They should claim and explicit responsibility to public safety, even if it doesn’t always deliver. However, this is not always the case as there is a lot of data breaches caused by software failures. Moreover, the word engineer traditionally related to licensure, certification, and ABET-approved 4 year degree, but that is not the case of Information-technology industry since they don’t value certification as much as other engineer sector does. Additionally, software engineer has moved on from creating a long-term plan and intricate documentation to a short term, but adaptable, agile development method which contradicts to the traditional meaning of dependable and long live product of engineering.</li></ul></li></ol><ol id="96143a2d-ea6e-46c0-8c12-4a02ddf5cb2c" class="numbered-list" start="2"><li>If a super tool/language/framework existed that could make our developer productivity significantly better what downsides might we encounter if we adopted that super thing?</li></ol><blockquote id="f55889d0-7948-47ae-b048-dbfa6e7f308b">Possible downsides we might encounter if we adopt the super tool/language/framework:</blockquote><ul id="89e730ad-15ed-4d42-b265-20651aaa23d4" class="bulleted-list"><li>learning curve that will waste development time</li></ul><ul id="8ec08c2e-a6ad-4311-8aba-9a40c46ed867" class="bulleted-list"><li>Might become obsolete when the next super tool comes out</li></ul><ul id="0f4444ed-b4f7-4657-b1e0-58e8c8f0247a" class="bulleted-list"><li>Too much abstractions, don’t understand what’s happening under the hood</li></ul><ul id="68ee8d8c-ffdc-4a89-b473-af8d3c8b35d6" class="bulleted-list"><li>Might run into problems when it’s no longer supported</li></ul><ul id="693c73bd-e5f1-4f70-885b-0a780ecb5708" class="bulleted-list"><li>User performance/ experience may be worse</li></ul><ol id="5676ad19-8715-46ac-b2a8-341a000b0815" class="numbered-list" start="1"><li>It is commonly held that in fact people are the key to productivity more than tools. If this assertion is true and then we should aim to have great people. It is also suggested that 10x programmers exists which are programmers are many times more productive than others.<ol id="93905bc1-567f-46e8-b425-24d93d453fba" class="numbered-list" start="1"><li>Do you believe in a 10x programmer? YES</li></ol><ol id="a187d700-356b-4602-bef3-64a123834325" class="numbered-list" start="2"><li>If you do believe in this how does one become a 10x programmer?</li></ol></li></ol><blockquote id="40f5d845-fdb1-4539-b734-b6f4960bf376">Becoming a 10x programmer is a matter of experience and familiarity in programming in a certain environment. As stated in johndcook.com, the big differences between experienced programmers and those who are not is that experienced programmer might remember a familiar problem that they have solved before, so it takes much less time in developing the solution.</blockquote><ol id="7b0e5e6b-d667-4587-8909-f3a6dc143963" class="numbered-list" start="1"><li>Do you believe that a process can be built where the effects of the human programmer could be vastly minimized? YES</li></ol><ol id="31fb33d6-f4eb-4840-b19c-b96658749dcb" class="numbered-list" start="2"><li>If you believe you can design a more human interchangeable process what would we have to guarantee with our programmers?</li></ol><ul id="38182c92-ba44-477a-8ab9-563b0c927f9c" class="bulleted-list"><li>Good pipeline (conveyer belt)</li></ul><ul id="f030383f-c15d-46d4-820a-0c80aa236062" class="bulleted-list"><li>Extensive onboarding documentation, so new hires can get up to speed quickly</li></ul><ul id="61f01743-dcde-47a6-a2e4-c4fc2da98386" class="bulleted-list"><li>Relatively similar levels of experience among programmers</li></ul><ul id="cfadd870-70e9-40bc-9a71-715195caefcc" class="bulleted-list"><li>Internal documentation which details how various parts of the project fit together</li></ul><ul id="ef5914dc-bc5c-4814-b629-37ec156f2161" class="bulleted-list"><li>Open channels of communication so everyone is on the same page</li></ul><ul id="54b10cc3-7162-42b1-ba48-c51db4c0e5ec" class="bulleted-list"><li>Style enforcement / structure enforcement between programmers</li></ul><ol id="8877b1b1-0e6a-4eee-a9d8-b14bf6d3887b" class="numbered-list" start="1"><li>One popular philosophy for building software is often termed (BDUF) &quot;Big Design Up Front&quot;. This approach is more traditionally known as the Waterfall model. Draw a diagram below describing the rough steps of this model and give each a name. Describe next to the diagram the purpose of each step.</li></ol><blockquote id="1e6e4e38-1b51-4d17-924c-177ab8fb8c18">Requirements: Capturing and analyzing of the projects’ potential requirements (what the application should do). Requirements should be clear and concise.Design: System Design helps in specifying hardware and system requirements and also helps in defining overall system architecture.(Examples: deciding what programming languages/ frameworks/tools to use)Implementation: Execution of the design, the actual coding part of the project.Verification: Ensuring that the product meets the requirements, and there are no defects.Maintenance: Ensuring the product is functional and up-to-date throughout its life-cycle.</blockquote><figure id="61381d81-eb2b-4bd9-bbc2-79a79f80aa03" class="image"><a href="Midterm Answers/image3.png"><img style="width:435px" src="Midterm Answers/image3.png"/></a></figure><ol id="f582b814-ba2d-4260-9e55-b79ab0f8286d" class="numbered-list" start="1"><li>The model presented in #4 has been criticized for a number of legitimate reasons. Write two criticisms below, suggest a solution for the criticism and a counterpoint to the criticism.</li></ol><div id="97556aab-9143-43d3-9123-3b4bbade6603" class="collection-view"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Criticism</th><th>Property</th><th>Counterpoint</th><th>Solution</th></tr></thead><tbody><tr id="8b734b1f-93da-400f-85a1-a5a034115001"><td class="cell-title"><a href="Midterm Answers/Untitled Database/Does not take account of future problem which lead.html">Does not take account of future problem which leads to increased cost and development time in redesigning the plan.</a></td><td class="cell-t6P*">1</td><td class="cell-qgD-">Some problems have few ways they can go wrong in the late stages of development. Situations without surprises are amenable to BDUF.</td><td class="cell-V#bz">Move to a more adaptable modified waterfall model, which allows overlapping phases and the creation of subproject when needed.</td></tr><tr id="7223b956-7fd8-46f1-8de2-9c3a834546d3"><td class="cell-title"><a href="Midterm Answers/Untitled Database/There is no working model until the late stage of .html">There is no working model until the late stage of development</a></td><td class="cell-t6P*">2</td><td class="cell-qgD-">May not need a working model for each phase; no prototyping necessary because there is already an experience with the given project.</td><td class="cell-V#bz">With a modified waterfall model, it is possible to create a subproject that will create a working model for the currently working project.</td></tr></tbody></table></div><ol id="1b60271d-f670-4b51-8459-5946e467f1fb" class="numbered-list" start="1"><li>Discussing incremental approaches in contrast to the model discussed in #4 &amp; #5.<ol id="bd0be373-c579-4108-81ed-cee39d1dac50" class="numbered-list" start="1"><li>Name at least one instance “name” of an incremental Software Engineering approach (earn an extra point if you can name two others).</li></ol></li></ol><ul id="e9b3fc6e-896b-4093-af88-7f955689be16" class="bulleted-list"><li>Agile</li></ul><ul id="e5406cea-e2c9-4bc4-b30c-728e83373e2d" class="bulleted-list"><li>V model</li></ul><ul id="08e72890-6d54-486c-948f-a566f9c3c021" class="bulleted-list"><li>Joint Application Model</li></ul><blockquote id="6ce15ad1-cb32-4533-bc75-6c0c540e610c">Iterative and Incremental Model - It is developed to overcome the weaknesses of the waterfall model. It starts with an initial planning and ends with deployment with the cyclic interactions in between.</blockquote><ol id="2cde7025-fac3-4006-bfb8-d8c81ea87db6" class="numbered-list" start="1"><li>What gains we get from these incremental approaches that counters some of the problems of the BDUF approaches?<ul id="91720d05-e108-4264-ac3c-d3073b7245ba" class="bulleted-list"><li>Adaptable, easier to commit changes to an upcoming problem</li></ul><ul id="2634073e-4ddc-483b-942b-a9b4aeaae0b0" class="bulleted-list"><li>Increase user involvement since the goal can be adapted during development.</li></ul><ul id="096efc9c-9621-4150-863a-8b017fca8a5b" class="bulleted-list"><li>Safer because there is no need to have a huge planning, and it is risky because there are too many unknown factors in planning ahead.</li></ul><ul id="45369cf7-e354-4694-8194-4d191201715b" class="bulleted-list"><li>Produces business value early in the development lifecycle.</li></ul></li></ol><ol id="e03f4ffc-2c81-4a16-8695-a68228898b63" class="numbered-list" start="2"><li>What problems exist in the incremental approach that we should be aware of?<ul id="fed37c4f-36fb-49c8-9a25-65a747855d7d" class="bulleted-list"><li>It is a FAST, easily fallible process. It expects the outcome to fail and often. There are many instances where this is not desired.</li></ul><ul id="aa84a1b5-9f6c-4295-b73e-854a5267bbce" class="bulleted-list"><li>Requires more customer involvement than the linear approaches.</li></ul><ul id="bf807fdc-7dbb-4dde-88fb-2dbc3400334c" class="bulleted-list"><li>Reliance on customer input = introduction of chaotic element. Can turn out poorly.</li></ul><ul id="fff042b1-61c7-4fb2-87ad-c9a5badc8f3f" class="bulleted-list"><li>Overhead of learning the approach; lots of jargon and processes to be aware of.</li></ul></li></ol><ol id="8bb60505-5647-45ab-9f3f-49a3c09f5fa9" class="numbered-list" start="3"><li>Draw a diagram to explain incremental approaches.</li></ol><blockquote id="76bec78c-cda1-4034-8f1d-0d5ba0c1a09f">Planning / Ideation -&gt; Design -&gt; Development -&gt; Testing -&gt; Retro / Release -&gt; LOOP</blockquote><figure id="be15be62-8093-4f6c-bd0d-878b7e4ea977" class="image"><a href="Midterm Answers/image1.png"><img style="width:512px" src="Midterm Answers/image1.png"/></a></figure><ol id="d8812fd3-713e-4bcd-8240-8c4764c5afa8" class="numbered-list" start="1"><li>Question<ol id="d912526d-238c-4c4e-b287-44f47ccf2f6f" class="numbered-list" start="1"><li>The Google team study and the HRT methodology emphasis a number of dynamics and characteristics that lead to high performing teams. Describe these characteristics</li></ol></li></ol><blockquote id="f86fd040-8f50-40c4-8b71-efa207960915">Google Study Reveals the following primary characteristics among high performing teams:</blockquote><ol id="fa82a12b-ec9e-4b6c-87c3-98d607409577" class="numbered-list" start="1"><li><strong>Psychological Safety</strong> - Team members feel that their position and standing in the team is not jeopardized by failure; they trust their teammates to support them and not to judge them.</li></ol><ol id="1b8eccc0-e9f5-42eb-8c5b-f1f893539462" class="numbered-list" start="2"><li><strong>Dependability</strong> - Team members can trust their fellow teammates word; all members of the team follow through on their promises; no one is habitually late to meetings, doesn’t do their work, etc.</li></ol><ol id="a695945e-e36d-42cd-8d14-c499b2fea200" class="numbered-list" start="3"><li><strong>Structure and Clarity</strong> - Expectations and duties are made clear to all team members; regularly scheduled team meetings establish goals in the short and long term; open channels of communication enable clarification whenever necessary</li></ol><ol id="d7af7f8f-4c37-4404-888d-ed328af5c656" class="numbered-list" start="4"><li><strong>Meaning of Work</strong> - Team members understand where their work fits into the greater goal of the team; each member sees themselves as part of the whole and each feels that everyone’s work is a vital piece of the puzzle.</li></ol><ol id="60751a69-0a60-41a9-8a34-51dfb3ec3a10" class="numbered-list" start="5"><li><strong>Impact of Work -</strong> Team members understand the greater goal of the team and consider it a worthwhile approach. Regardless of the size of the project, the team sees it as an important endeavor.</li></ol><blockquote id="f4a3b622-6383-4b3a-9233-28521457ff92">HRT (Heart) breaks down core team dynamics into 3 characteristics:</blockquote><ol id="e730d7ec-fc1c-41bf-98c4-804130b7b858" class="numbered-list" start="1"><li>Humility - No big egos or people who consider themselves above the rest. Everyone is willing and able to take feedback and criticisms to heart.</li></ol><ol id="61c976e2-4c91-4b3d-b75f-a787e36a1295" class="numbered-list" start="2"><li><strong>Respect</strong> - Team members show appreciation for each other, and treat each other as human beings on equal footing.</li></ol><ol id="3315be87-8531-4b3e-9154-c11b5ec30358" class="numbered-list" start="3"><li><strong>Trust</strong> - Knowing that you team members are capable and will do their work without your intervention<ol id="36677df5-9c30-4558-a991-c93cf888f68c" class="numbered-list" start="1"><li>Google’s research describes one characteristic as overwhelming all others, explain what it is and why you think that leads to good team outcomes.<ul id="5476b92f-4522-418f-85e1-147c1e3b0a68" class="bulleted-list"><li><strong>Psychological Safety</strong> is the most important characteristic</li></ul><ul id="7559e489-0565-4f20-98ed-9069ddc39bac" class="bulleted-list"><li>Psychological Safety = team members feel they will not be judged or shamed for their failures and shortcomings will.</li></ul><ul id="b9ca379c-cb06-46bf-9b36-3e7d5d857dcc" class="bulleted-list"><li>Team fosters psychological safety = less “hiding”, open communication, general sense of trust</li></ul><ul id="29ed68cd-0fd6-48ed-a61b-cdcf40a79be2" class="bulleted-list"><li>Good team outcomes because failures do not bog down the team with distrust, shame, or resentment.</li></ul></li></ol><ol id="46e0823f-e228-4222-8ac3-f8c563db7bc7" class="numbered-list" start="2"><li>Describe the reverse of 7b. What aspects of individuals on teams lead to toxic outcomes. In other words what don’t you want for your software engineering team?<ul id="8d3cc500-bc34-468f-ba03-e96d872968aa" class="bulleted-list"><li>Distrust among team members</li></ul><ul id="106bd428-ef33-4166-99a3-7407159963d2" class="bulleted-list"><li>When things go wrong, people jump to assign blame</li></ul><ul id="f90bf606-215e-4408-bf33-c9cf271d464d" class="bulleted-list"><li>Fear of failure</li></ul><ul id="f51bf3df-c2c9-4175-9793-edb1ff1f35f2" class="bulleted-list"><li>“Hiding” from risks or responsibility</li></ul><ul id="e00ece3a-d8e6-44fa-8d40-0510c341c061" class="bulleted-list"><li>Lack of empathy</li></ul></li></ol></li></ol><ol id="36ed9bf0-bdf0-4001-8b8c-82e72a3d081d" class="numbered-list" start="4"><li>The professor has expressed in numerous manners in class that there is an inherent tension between DX (Developer Experience) and UX (user experience). Provide an example of how an improved DX might lead to poor UX or the reverse if you like (improved UX and worse DX).<ul id="71d8f74e-8628-4820-95e2-2a98ecf6e08d" class="bulleted-list"><li>Features vs Functionality</li></ul></li></ol><blockquote id="9f72c4f9-f9e7-4f8e-b573-4602b2331419">One example that Professor Powell gave us was one of his projects he created with his friend who worked for bank security. The first launch of the security software was unsuccessful because of how complicated the design was. The software was too complex with an overwhelming amount of features, switches, and sliders that users just couldn’t comprehend at once. Like we talked about in lecture, the program seemed more tailored toward the DX Professor’s Powell’s friend not toward UX. Once they added two pages and simplified the software, it became more successful.</blockquote><ol id="df842c5e-2333-4aa6-9f00-807a14bd5762" class="numbered-list" start="1"><li>Explain how both “You can’t be the tester” and “You must be the tester” are both simultaneously true statements for software engineers.<ul id="c63a0992-cb55-4891-8388-f48feaff440d" class="bulleted-list"><li>&quot;You can&#x27;t be the tester&quot; is true because as a software engineer you architected and wrote the code and are therefore biased and blind to holes in the product.</li></ul><ul id="4f024603-b218-4fbb-8751-98514d8b52f4" class="bulleted-list"><li>&quot;You must be the tester&quot; is true because writing tests gives you time to think and refactor (it is like editing your own writing).</li></ul></li></ol><ol id="78ccb6cc-b819-4bb2-a0f1-246dd9f9b5b6" class="numbered-list" start="2"><li>What does the “iceberg model” mean? Diagrams allowed. What does this idea suggest you should do in your software development process? Are there cases were the advice you just gave is not a good idea?</li></ol><blockquote id="1973b104-ec4c-4bbe-9e29-6f68a728ac66"></blockquote><figure id="cb3408e8-5006-4a76-a861-989ce2fb5bd4" class="image"><a href="Midterm Answers/image2.png"><img style="width:512px" src="Midterm Answers/image2.png"/></a></figure><ul id="25209e10-6958-4e5b-bbf8-564579266bbf" class="bulleted-list"><li>The iceberg model is an analogy to not focus on the ‘tip of the iceberg’ and focus on the core of the iceberg under the water as it much larger and more important than what&#x27;s on top.</li></ul><ul id="43b3bdce-ef97-4d75-b0cc-3d1c91013fe9" class="bulleted-list"><li>The iceberg model suggests we should take User interface/user experience into account because they are very important and decide whether your software is appealing to the user or not.</li></ul><ul id="6e3f43af-321a-4757-a8ee-4b069c823bcf" class="bulleted-list"><li>However, it is still not as important as the underlying system that is hidden to the general user such as metadata, blueprints, planning, etc which consists most of the software engineering process</li></ul><ul id="1a0d047e-3824-490a-86d4-f1fef6fe8465" class="bulleted-list"><li>We still need to focus more on the underlying process such as security, planning, and strategies even though we need to sacrifice some user experience.</li></ul><ol id="4019873c-d84b-4285-8a00-43f9b86eb610" class="numbered-list" start="1"><li>To beat the other teams your team has decided to add numerous exciting features to Peter’s lego library. Explain in software engineering terms how feature additions could cause your project great risks or result in potentially unacceptable trade-offs.</li></ol><blockquote id="ff86f375-d73d-4c24-987b-01501a88caae">According to the Iron Triangle, to retain quality when adding features one must have additional time, money, or both. So either we must hire additional team members, or we must delay the release of the project. Each of those comes with its own cost, so if we can’t do either then we are forced to sacrifice the quality of our features for quantity. Peter wants his product to be of utmost quality, so this may be an unacceptable outcome.</blockquote><ol id="4078a736-7c6c-4c17-bbc7-9f519611bb09" class="numbered-list" start="1"><li>Despite all the worries you presented in the previous questions many products still add as many features as possible. Provide some explanation(s) of why they might do that.</li></ol><ul id="85dd32e5-7549-4464-806c-904daae38c50" class="bulleted-list"><li>People like big numbers - long feature lists are attractive to consumers</li></ul><ul id="7e86b472-ab19-4114-8c52-f938c3da8389" class="bulleted-list"><li>Designer’s don’t take customer needs into account; wants to solve all the problems so designs an unwieldy swiss army knife when customer only needs a knife</li></ul><ul id="adb6268a-c49b-43e7-b3ce-359c160ffa65" class="bulleted-list"><li>Designer puts too much emphasis on customer that doesn’t know what they want; tells designer they want a multi-tool when all they need is a knife; ends up with unwieldy swiss army knife</li></ul><ol id="99002d0c-835f-4a50-aa92-c2a502ca072a" class="numbered-list" start="1"><li>The “conveyor belt” idea has been a big emphasis of this course. Draw your team’s conveyor belt. Annotate each step to indicate the purpose or value of the individual step (in other words what benefit does the step provide?)</li></ol><blockquote id="5dd39010-5c60-4ca2-8bec-f9c1a2e38055"></blockquote><figure id="748c5e4b-3650-4b20-8280-e2528be23d5f" class="image"><a href="Midterm Answers/image6.jpg"><img style="width:700px" src="Midterm Answers/image6.jpg"/></a></figure><div id="a3954a3d-679c-4aa7-bb70-6f945729e3fa" class="collection-view"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th>Git branch</th><th>Master branch is protected for increased code security</th></tr></thead><tbody><tr id="d7a38744-838f-449b-8daf-95c7e65d58f9"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Linting.html">Linting</a></td><td class="cell-6/Fv">For linting Javascript, HTMl and CSS - maintain consistent style throughout code base</td></tr><tr id="95533134-1e57-472e-ba74-5cadb2088e5e"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/TravisCI.html">TravisCI</a></td><td class="cell-6/Fv">Runner for CI pipeline, runs unit tests and end to end tests automatically</td></tr><tr id="3a426521-aed6-4cfe-b8c2-9f60fa4cbcf9"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Mocha Chai Showroom and Puppeteer.html">Mocha/Chai, Showroom and Puppeteer</a></td><td class="cell-6/Fv">For running unit tests, end to end tests, and browser tests. Ensures code correctness.</td></tr><tr id="ed9dfcfb-6014-4940-b1c1-267aff4f894b"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Code climate.html">Code climate</a></td><td class="cell-6/Fv">Shows how much coverage our tests have, ensures no holes in testing</td></tr><tr id="87ee7c5f-0c94-4301-bcc6-b7614a08ed21"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/JSDocs.html">JSDocs</a></td><td class="cell-6/Fv">Automated document generation, generates API docs for users</td></tr><tr id="1b18ee13-c720-4d9c-9310-9eb8c401b9fb"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Create pull request.html">Create pull request</a></td><td class="cell-6/Fv">Local code is put up for review before being pushed to master</td></tr><tr id="deaf9fd7-265a-4a77-bd9f-4681b02f5e42"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Review Pull Request.html">Review Pull Request</a></td><td class="cell-6/Fv">Reviewers look over changes to ensure correctness / coding standards are met before pushing changes to master branch</td></tr><tr id="83074cb2-5292-46d4-a357-84393db0ff85"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Merge Pull Request.html">Merge Pull Request</a></td><td class="cell-6/Fv">Changes are committed to master branch for deployment</td></tr><tr id="23b57b17-f173-4a4b-adef-d72505a1fd2d"><td class="cell-title"><a href="Midterm Answers/Untitled Database 1/Slack.html">Slack</a></td><td class="cell-6/Fv">Open communication channels throughout CI process; notifies developers in case manual intervention is needed</td></tr></tbody></table></div><ol id="ab5eb54d-56e6-4fb6-ad15-671ee7e72eae" class="numbered-list" start="1"><li>What is having the process from #12 being ironed out being stressed so forcefully instead of letting us write code? What downsides can you come up with if we got down to building apps instead? What would be better about skipping the “belt” set-up effort?</li></ol><blockquote id="dbb83ae5-6c08-4706-b4b6-6e3c506ba44a">The reason we wanted to get the “conveyor belt” process ironed out instead of letting us write code is that it forces our team to have a more standardized process and to produce similar code. Some downsides of just getting down to build apps is that we have no standard or uniformity. Skipping the belt effort if easier for prototyping and waterfall but for small projects with minimal code footprint.</blockquote><ol id="cb29ae3f-03a2-4c5c-ab7a-169e5dadeaca" class="numbered-list" start="1"><li>Due to some recently uncovered &quot;glitches,&quot; your boss Bill Lumbergh has asked you to write code for a new internal payroll system at your company Initech. The intended budget for the project is $50,000. Discuss the impact of the fixed budget constraint on your project. Mention what will be necessary to ensure software success, given this constraint.</li></ol><blockquote id="c549ec2e-c957-43e7-b9f4-b97c42ca9aa1">Since we are introducing Agile process in the project, we actively accept the change which might add additional resources or change in cost. So, it is likely for our project to end up over budget if the budget is fixed. To overcome the potential problem, you should try to not underestimate the cost, and try to negotiate with the customer if the additional requirements might add too much cost.From the Iron Triangle, to overcome a fixed budget we may need to make additional sacrifices in terms of the deadline on the project or the feature requirements. Agile methodology will help us revise feature lists iteratively to stay under budget.</blockquote><ol id="b07a0df1-f6cc-47bb-b560-935803520a96" class="numbered-list" start="1"><li>Draw the iron triangle of project management and briefly explain what it means.</li></ol><blockquote id="24c674b1-74bd-4675-897a-cee1f9f75e21">The iron triangle of project management is used by project managers to analyze or understand the difficulties that may arise in a project. There are three main independent constraints which decide the quality of the project. This helps managers to realize what may be required for the project to take off / expand.It is considered “Iron”, because there is no getting around it - an increase at any of the points means a sacrifice at the others.</blockquote><figure id="6b186a64-f97c-42a6-be12-016bbbba07fb" class="image"><a href="Midterm Answers/image7.png"><img style="width:480px" src="Midterm Answers/image7.png"/></a></figure><ol id="9e3f64af-426c-4670-8249-1cc2a281d7b7" class="numbered-list" start="1"><li>Explain how a coding standard could be a problem for a time constrained project.</li></ol><blockquote id="8c77f941-1e86-4efb-bbab-a840025688a0">Keeping the codebase in line with the coding standard introduces an overhead which takes up developer time.</blockquote><ol id="764ee450-9d96-4663-846a-2565018703b2" class="numbered-list" start="1"><li>Explain how non-adherence to a coding standard catches up with our code bases.</li></ol><blockquote id="b9d5504e-2b49-4e13-820b-f4b7977d4cb2">The lack of coding standard increase the time needed to understand and analyze the code which causes a decrease in productivity. New hires will have a hard time getting up to speed with the code-base. Overall maintainability of code base goes down.</blockquote><ol id="5e87811d-b801-428f-8160-0fcc2f4e6405" class="numbered-list" start="1"><li>Give at least two reasons why you think people don’t follow coding standards rigorously.<ul id="53cd998a-7ac5-4db9-ae73-35c5e65e4258" class="bulleted-list"><li>They think it is not worth paying attention since they never experienced the importance such that they never reused the code. The benefits aren’t readily seen.</li></ul><ul id="8ea59cdc-768c-4bf4-9dec-44d9ed2e942e" class="bulleted-list"><li>They do not have enough experience or do not have enough training which gives you the opportunity to follow the coding standards as a routine.</li></ul><ul id="90ebd7c7-6ed4-4b26-add7-93577ce805f8" class="bulleted-list"><li>People are lazy, don’t want to invest time in something they don’t see benefit of</li></ul><ul id="4d86095d-ef7c-46c8-b52a-dd84d5f63fdc" class="bulleted-list"><li>There is a time pressure in the programmer team which cause an urgency to finish the project as soon as possible</li></ul><ul id="fb28b386-9103-424a-b139-dcc9d4ab036f" class="bulleted-list"><li>Coding standard is been set up that too hard to follow, takes up too much developer time</li></ul></li></ol><ol id="ae851927-7905-498c-af67-89e40d153e56" class="numbered-list" start="2"><li>The professor believes the distribution medium, economic and social environment has influenced software development practices greatly. Provide at least 3 examples of how the industry or medium has affected our development practices.<ul id="7112d223-4fa6-44fd-ab2e-51eef97e4f73" class="bulleted-list"><li>996. Employers believe in longer work time lead to better outcome rather than the productivity of engineer.</li></ul><ul id="3defde21-e9ef-4c03-8d76-da6d2a8f960f" class="bulleted-list"><li>Development of technology made it possible to work remotely</li></ul><ul id="0d07e5d0-811c-402d-8f18-e34f0daea855" class="bulleted-list"><li>Environment impact on software development such as The German Environment Agency (UBA) has developed criteria to assess the environmental impact of software products.</li></ul><ul id="efe6a92e-0ad9-447a-aa03-7820bd3295c3" class="bulleted-list"><li>App store = influx of web developers and iterative models to keep up with fast-paced consumer environment.</li></ul><ul id="501e9f48-d719-4af5-a49e-94a932d04128" class="bulleted-list"><li>Accessibility of tools to learn coding = lots of coders with not much experience = drop in overall quality of code</li></ul></li></ol><ol id="b81cdb88-af40-4fe2-8c50-899da49666b4" class="numbered-list" start="3"><li>Test Driven Development</li></ol><ol id="f1107489-10a5-473a-a6cb-ba99e1b95672" class="numbered-list" start="4"><li>What is test driven development (TDD)</li></ol><ul id="db98bb42-7ff8-479d-8be9-926b01cb0c78" class="bulleted-list"><li>TDD is the process of writing initially failing test cases that define a desired improvement and then writing the minimum amount of code needed to pass the tests.</li></ul><ul id="551edeff-cf5c-4da8-bc07-cd1d47d289ad" class="bulleted-list"><li>Once the tests pass, the code is refactored to acceptable standards.</li></ul><ol id="6893603a-3745-40ee-bfb7-188e43bf3f4e" class="numbered-list" start="1"><li>Why is TDD a good idea?</li></ol><ul id="5b76319d-f892-4262-8e96-cb0035945800" class="bulleted-list"><li>TDD is a good idea because more tests are written and there is less need for debuggers.</li></ul><ul id="a20f6751-58bb-47cd-8f0e-346875286414" class="bulleted-list"><li>TDD enforces requirement driven development and makes developers more concerned with the interface before the implementation since the developer must imagine how the functionality is used by the clients in order to write the test cases.</li></ul><ol id="b22582a4-2932-422f-b389-06bf8b5dd004" class="numbered-list" start="1"><li>Why is TDD a bad idea?</li></ol><ul id="1a737a18-e07b-4148-b58d-24ddb91a83b9" class="bulleted-list"><li>a high number of passing unit tests may give a false sense of security and result in fewer testing activities like integration and compliance testing.</li></ul><ul id="666df226-e339-41ec-a878-ca932a1e1129" class="bulleted-list"><li>tests must be maintained as part of the project overhead</li></ul><ul id="c35f94b0-3acc-4790-859c-128044ff2d5a" class="bulleted-list"><li>Initial time investment is higher.</li></ul><ol id="1c39572e-e899-41a4-9196-b3684ce6124d" class="numbered-list" start="1"><li>Why wouldn’t people use TDD?</li></ol><ul id="b06694d8-90db-4996-b28d-8e7d408eb087" class="bulleted-list"><li>Management support of TDD is essential</li></ul><ul id="9f89f80e-fc4b-4885-a2c8-27c5401e14fb" class="bulleted-list"><li>Requires initial investment and takes time from startup.</li></ul><ul id="e18a6df3-f0ed-460c-afb9-385f903857f0" class="bulleted-list"><li>If the entire organization doesn&#x27;t believe TDD will improve the product, then management may feel time spent writing tests is wasted.</li></ul><ul id="79ebd22d-468e-46be-b93d-52fc0012e70f" class="bulleted-list"><li>Without management support, people may not use TDD.</li></ul><ol id="e89fa084-190c-42e9-b58f-6b70a8782704" class="numbered-list" start="1"><li>The professor seems to think that the hardest part of developing software is not at all the code, but the people involved, complete with all their irrationalities and foibles. Generally, we can expect to encounter three groups when building software: end-users, stakeholders (business owners / product owners), and fellow programmers. Write down what each group is likely to care about most and make a statement or two about how/why you should interact with them.</li></ol><ol id="092b669b-18e1-4853-ac25-6eecc1bc588d" class="numbered-list" start="2"><li>End users<ol id="fed5dbec-f786-4b01-8c73-9883b31bd7ed" class="numbered-list" start="1"><li>Interested in:<ol id="57d6863a-ca7d-478d-8bc4-55365a97c397" class="numbered-list" start="1"><li>features, UI, usability and security.</li></ol></li></ol><ol id="4f94db48-33c3-4863-a477-cc14c7e910e2" class="numbered-list" start="2"><li>Why interact:<ol id="e725a9de-0c77-4290-9352-a555276030c1" class="numbered-list" start="1"><li>We are not the users, so we have to ask the users; if we don’t build something that people want to use then we haven’t built anything at all.</li></ol></li></ol><ol id="0f9d4467-9778-40ce-8af4-1f5e7b331cf9" class="numbered-list" start="3"><li>How to interact:<ol id="88a10ff4-330f-43fb-b5d7-ba10102ec865" class="numbered-list" start="1"><li>We have to observe their review on the product.</li></ol><ol id="4c10a7f6-8289-4581-ba33-298a070163bb" class="numbered-list" start="2"><li>Observe “in their natural environment”</li></ol><ol id="ff96e148-5b44-4146-8040-90f3bbd47e28" class="numbered-list" start="3"><li>Truth about users: Most of them don&#x27;t care about how you build something and are quite surfacy.</li></ol></li></ol></li></ol><ol id="8defe975-5c49-4794-9228-ed5fcbb1fb32" class="numbered-list" start="3"><li>Stakeholders<ol id="93d15375-cbfb-4502-9fd4-a3afd45bcd02" class="numbered-list" start="1"><li>Interested in: Bottom line<ol id="4c86320c-854c-419a-9fbf-171003963b6b" class="numbered-list" start="1"><li>Making a return on their investment</li></ol><ol id="7be12324-e24f-46f4-9c4c-3ee8b44411e8" class="numbered-list" start="2"><li>The time taken to gain a return on investment</li></ol></li></ol><ol id="6eeae0df-ed21-4a00-afea-762825d9d8ab" class="numbered-list" start="2"><li>Why interact: they are the sponsors of the project<ol id="65fd4174-0d74-47e2-9a60-ca5c58e83956" class="numbered-list" start="1"><li>They need to be confident in project to continue funding</li></ol></li></ol><ol id="e733c820-83b7-42f8-b65d-6d87e4b42894" class="numbered-list" start="3"><li>How to interact:<ol id="d8fd0e27-40c9-4edc-a09f-14ac1d5ee8c8" class="numbered-list" start="1"><li>Weekly email update at a high level about what was completed</li></ol><ol id="e13ae63e-7f42-4294-a25e-a0766ddaa94d" class="numbered-list" start="2"><li>Not focused on tech; demonstrate progress at a higher level, i.e. abstract ideas rather than specific tooling</li></ol><ol id="0489ba0c-14fa-4073-8e33-5bbcb992bb52" class="numbered-list" start="3"><li>Burndown charts, velocity, slide presentations, graphics</li></ol></li></ol></li></ol><ol id="793537b9-73fb-4e2d-a3c1-7bb65e588b27" class="numbered-list" start="4"><li>Fellow programmers<ol id="e560731a-93c5-4246-b35b-6baa1d41ce16" class="numbered-list" start="1"><li>Interested in: Developer experience<ol id="123143c1-a351-43d3-96df-87bad71c7877" class="numbered-list" start="1"><li>The scope of the project</li></ol><ol id="9d6312fe-0065-4b94-af86-66c3027d880c" class="numbered-list" start="2"><li>The technology that is going to be utilized</li></ol><ol id="3d81d482-ace0-41be-bd80-7be4ea900841" class="numbered-list" start="3"><li>Reasonable hours / work life balance</li></ol></li></ol><ol id="f33e54bc-bb51-4b82-8c5e-19b1e768fa12" class="numbered-list" start="2"><li>Why interact with them:<ol id="172a5768-4abe-499b-9ae2-545ff4429ef9" class="numbered-list" start="1"><li>Maintain communication about project requirements and deadlines</li></ol><ol id="079a15b0-032f-47e6-bc24-da32556d1bb1" class="numbered-list" start="2"><li>More efficient teamwork</li></ol></li></ol><ol id="e5ec2255-6d03-466b-abf3-aff6f9637727" class="numbered-list" start="3"><li>How to interact with them:<ol id="0f9f4043-ea7b-4eaa-b392-c5e2ac44aacb" class="numbered-list" start="1"><li>Code review and team meeting</li></ol><ol id="a90d8462-afc6-4027-a685-71304679c700" class="numbered-list" start="2"><li>Treat team according to HRT (Heart) method</li></ol></li></ol></li></ol><ol id="71731f1e-7e28-435f-a36e-50ff979bf75a" class="numbered-list" start="5"><li>An analogy about a ladder was made in the class and drawn on the board, what did the ladder describe (what’s at the top of the ladder and what is at the bottom)? What was the point of the ladder, in other words what was it getting you to think about?</li></ol><blockquote id="082a4b00-b0e6-4a79-9d85-a57f502264ca">The ladder was an analogy for us as engineers to escape the ‘math world’ at the bottom of the ladder even though it is logical and predictable. When we climb higher we gain perspective and we reach ‘humans’ where it is more unpredictable and possibly chaotic.At the top is chaotic “people”; at the bottom is logical “bits”. The idea is we must be willing and able to climb up and down the ladder. We need to interact at all levels, not just the “logical” level where we are safe and comfortable.</blockquote><ol id="f2bda2f1-c42f-42ed-97c7-c50381b43b2f" class="numbered-list" start="1"><li>The Professor at various times railed on various different decisions made to embrace technologies like React. Later he revealed that in previous iterations he used Ruby on Rails, Angular, and other technologies Peter might say are the new “hotness”. Since the Professor wants you to give him the benefit of the doubt that he isn’t grouchy and there is a lesson here about railing about a “hot” technology describe what he is trying to warn about. In other words what is danger the Professor is trying to help you guard against as an engineer entering the field?<ul id="be6f1c76-ad09-42fd-b35e-c1927973f246" class="bulleted-list"><li>Tools come and go, there is no magic tool</li></ul><ul id="fcd6f65e-9e73-415d-bab7-9af96ac1b5d8" class="bulleted-list"><li>He doesn’t want us to believe that there is a swiss-army knife, even though everyone would claim that it is.</li></ul><ul id="718c9ff4-0fa2-4450-a3c0-bcbfcd82afb1" class="bulleted-list"><li>He doesn’t want us to only focus on a tool which may not even be supported in the future.</li></ul><ul id="80c0419d-54f6-4c39-a207-f880b4344ab1" class="bulleted-list"><li>He wants us to understand the fallacy in the idea that tools are the solution to making a project work.</li></ul></li></ol><ol id="57773295-02f4-4163-83aa-a2fcb21d3597" class="numbered-list" start="2"><li>Why you should put slower steps farther down your continuous integration pipeline (conveyor belt)?</li></ol><blockquote id="f47f4e33-dd53-4430-8d48-ed48fc5d069c">Processes that are slow should be placed later in the conveyor belt so that we can get feedback as soon as possible. This way the faster and more recurrent steps like linters or unit testing can be placed earlier and give more valuable feedback earlier in the pipeline. Moreover, adding the slower steps farther will increase the average turnaround time of the pipeline.</blockquote><ol id="d5334113-718f-4bec-a7ed-705f66fc7112" class="numbered-list" start="1"><li>Draw the testing pyramid and explain each type of test. Make sure your explanation suggests what the type of test addresses and any pros/cons that may exist.</li></ol><blockquote id="372ff2a3-0346-4517-91ae-aad069735fab"></blockquote><figure id="f225d0f3-bba5-4c9c-b24c-cd60411073c8" class="image"><a href="Midterm Answers/image5.png"><img style="width:353px" src="Midterm Answers/image5.png"/></a></figure><ol id="1c30b474-5f19-4620-be39-4cb1d80cce81" class="numbered-list" start="1"><li>Unit tests: account for the majority of the tests in the codebase and test the smallest unit of code or specific features.<ol id="d42eec51-59f6-44f2-a4ad-218d707d2ac4" class="numbered-list" start="1"><li>pros: improves safety of the code passing these tests</li></ol><ol id="9e881a07-0e9c-489d-8af3-336c269c4a3f" class="numbered-list" start="2"><li>cons: projects may start with them but then fall out of date. If tests are trivial, then passing them is trivial as well. Must be maintained alongside codebase - adds overhead</li></ol></li></ol><ol id="f39095a6-89e2-45a8-b2ab-e327f3dd0491" class="numbered-list" start="2"><li>Integration tests: designed to verify that the different components of the system work correctly together (EX: integration with a Database, Framework, 3rd party software systems, etc)</li></ol><ol id="e6d23736-2931-41f1-9570-eb199b42a7ba" class="numbered-list" start="3"><li>End to end tests: usually black box tests which test the system from the user-action entry point right to the end of the system down to the database level (interaction between user and system).</li></ol><ol id="2d5fe7fc-c3f7-4ee6-8c67-452a043201c2" class="numbered-list" start="4"><li>UI tests: tests the user interface of your system</li></ol><ol id="059eb315-ce07-4f10-bcdd-1832d66256a8" class="numbered-list" start="5"><li>User tests: black box testing that tests the whole system</li></ol><ol id="699008d2-1854-4f1a-833d-5fbd4aeba92d" class="numbered-list" start="6"><li>Code Reviews can be quite difficult to perform. Explain why you should do them. Next explain what the biggest dangers badly run code reviews may lead to. Finally explain at least three tips on performing good code reviews.</li></ol><blockquote id="48980234-ac0a-4095-a02e-24edb6257f3f">Why should we do code review?</blockquote><ul id="391b5e47-b95c-49ce-a026-f41cbbb0e75b" class="bulleted-list"><li>Help to improve code quality and maintainability</li></ul><ul id="7e55ce60-6e99-477f-9595-e23937aa84fc" class="bulleted-list"><li>Help to find defects in code to ensure correctness, and identify potential performance and security issues in the code</li></ul><ul id="1bd88076-5b71-4afc-afc5-d42814e5149c" class="bulleted-list"><li>Help to share knowledge across the teams, it help all team members better understand the project</li></ul><ul id="e6bea493-593e-4bcc-adee-3488532ebb9b" class="bulleted-list"><li>Help to increase the sense of collective code ownership and responsibility for team</li></ul><ul id="82f11394-e833-489f-946a-ceae2d25896e" class="bulleted-list"><li>Help to find potential better solution for the problem</li></ul><blockquote id="2f147a7c-ecec-42b0-9017-242fb16c96f1">Biggest dangers badly run code review may lead to?</blockquote><ul id="13c311c8-d1e8-4e97-aa4d-e70a16cc84a2" class="bulleted-list"><li>Code bashing : make fun of the code the programmer wrote</li></ul><ul id="a99fd303-8a0e-4ead-a0ff-5d9c17010706" class="bulleted-list"><li>Create divisiveness among team members; teammates view some as “weak links”</li></ul><ul id="b0e1fc67-e9f3-46a9-b163-a20dfcd48c3d" class="bulleted-list"><li>Decreased productivity, developers don’t want to write code that will get bashed</li></ul><blockquote id="a1a85254-ded4-4a0e-9bd9-9d6c5019f62b">Tips on performing good code review</blockquote><ul id="e2ab73fd-d583-4742-b603-3d7c1bf690be" class="bulleted-list"><li>Has a clear goal of the code review, and has a standard that the teams agree on the quality of code</li></ul><ul id="ccc8c34c-c5a4-4598-8eb3-939ddf9d2d09" class="bulleted-list"><li>Keep each code review section short, just review one or two functionality to avoid confusion and move on when appropriate</li></ul><ul id="7ae100a7-a4af-43bd-ab5d-5ed017d00b3d" class="bulleted-list"><li>Not just try to identify the problem, but finding a way to solve the problem.</li></ul><ul id="91550873-3069-43c6-ba61-f6d0a9099ec3" class="bulleted-list"><li>Keeping documentation / note on the code review, so it can be referred on future development</li></ul><ul id="caa55b11-05f4-4e09-99e6-d9a5f0fd8f56" class="bulleted-list"><li>Emphasize learning from failure, not the failure itself</li></ul><ul id="a390b93d-28c5-4827-9333-f669bb4b3c01" class="bulleted-list"><li>Treat all code as the team’s code, not each individual programmer’s code</li></ul><ul id="384e3894-a81c-4fa9-a292-51580268a81c" class="bulleted-list"><li>Review small segments of code to focus on quality, not quantity.</li></ul><ul id="ef0081a7-b4e7-4ff4-bb7c-949a71c20b19" class="bulleted-list"><li>Be critical, but also empathetic and understanding.</li></ul><ul id="97985c51-44ef-4b0e-8c34-88861b2a9a0e" class="bulleted-list"><li>Communicate with every member.</li></ul><ol id="3d785153-0ff0-49ef-ac2a-75c01870a7c5" class="numbered-list" start="1"><li>The Professor has suggested that software is more than just the code itself but includes potentially many other artifacts (documents, diagrams, etc.). Explain some of the artifacts that should exist. Next explain what happens when these artifacts are not available or kept up to date and what might happen to the software or team without them.</li></ol><ol id="670b3b15-294c-4efd-b4bb-3093dc198783" class="numbered-list" start="2"><li>Onboarding documentation - Key installs and such to help new hires<ol id="ca62bca8-0df4-456f-b8d0-170e9db7ba0e" class="numbered-list" start="1"><li>Without: Makes onboarding new hires difficult</li></ol></li></ol><ol id="bc1beac7-b613-4c9c-88fa-1f1aa06e3cde" class="numbered-list" start="3"><li>API Docs - Explaining the core functionality of the project<ol id="98435460-d693-43d7-b625-d01926d5dc08" class="numbered-list" start="1"><li>Without: Project cannot be effectively used by end users. It is basically useless</li></ol></li></ol><ol id="7a6adbf6-1585-411a-b200-0b498919425d" class="numbered-list" start="4"><li>User story and use case - Core project specifications are contained here<ol id="74b0b21b-4279-4daa-95f7-a415ea89095d" class="numbered-list" start="1"><li>Without: Project is in danger of going off-rails and not meeting user’s needs.</li></ol></li></ol><ol id="bd1372b9-2532-467b-ab0a-0054003149af" class="numbered-list" start="5"><li>UML diagram - Diagram the workflow of the project<ol id="ce59eb27-3288-4c11-bdac-d1cfb31a6af5" class="numbered-list" start="1"><li>Without: Developers may lose sight of how the project works as a whole</li></ol></li></ol><ol id="392dc261-4f73-4b60-a04f-5cee11bd1100" class="numbered-list" start="6"><li>Test Cases - document what tests the project must pass<ol id="35dff811-e97b-497e-b4b4-97136d8b51c9" class="numbered-list" start="1"><li>Without: May have holes in test coverage without knowing</li></ol></li></ol><blockquote id="fd8e0d11-2f6b-4af4-a677-b2d4557c3360">Part 2: The Wild Idea – Testing What Matters to YouYour team has experienced many things in five weeks both in lecture, discussion and on your own. As a group come up with 5 questions you want to make sure that each of the members of your team can answer about software engineering, your team, hard lessons, etc. that you think will serve you as software engineers. These questions will absolutely be on your team’s midterm. However, to avoid you from just putting questions like “Is 3 an odd number?” we must see the questions and approve them. Turn in your questions by Saturday May 4th at Noon for vetting to your group mentor (TA/tutor). This part of the test will be graded separately from the main part and will be normalized to avoid group gaming of the grade. It is roughly worth 15% of the overall grade of the midterm.</blockquote><p id="4f641810-fb2a-432e-b77e-f5a95c8158e4">(SUBMITTED)</p></div></article></body></html>
