@@ -73,5 +73,5 @@ See our [How To Contribute](./CONTRIBUTING.md) docs for simple steps!
 
 Please make sure to update tests as appropriate.
 
-#License
+# License
 [MIT](https://opensource.org/licenses/MIT)
