@@ -10,7 +10,7 @@ const HELLO_STRING = {
 
 /**
  * An element that displays "Hello" with the passed-in name.
- * @property {string} new_name the string that will be displayed that I was here.
+ * @property {string} name the string that will be displayed.
  * @property {boolean} rainbow whether the name should be colorfully animated.
  * @property {String} lang the language to display in.
  */
@@ -18,23 +18,6 @@ class CoreHelloElement extends CoreGreetElement {
   /** Creates a CoreHello element. */
   constructor() {
     super(HELLO_STRING);
-    function dummy() {
-      console.log("dummy");
-      console.log("dummy");
-      console.log("dummy");
-      console.log("dummy");
-      console.log("dummy");
-      console.log("dummy");
-      console.log("dummy");
-    }
-    dummy();
-    console.log("dummy");
-    console.log("dummy");
-    console.log("dummy");
-    console.log("dummy");
-    console.log("dummy");
-    console.log("dummy");
-    console.log("dummy");
   }
 }
 
