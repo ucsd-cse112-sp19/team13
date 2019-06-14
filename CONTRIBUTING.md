@@ -43,7 +43,7 @@ Follow these steps to get going.
  > *[Template and structure of Friday's CONTRIBUTING.md courtesy of Mochajs CONTRIBUTING.md](https://github.com/mochajs/mocha/blob/master/.github/CONTRIBUTING.md)*
 
  ## A Quick Tutorial on Writing Tests
- See our [TestCafe Handguide](https://www.google.com/chrome/) on how to write tests.
+ See our [TestCafe Handguide](https://ucsd-cse112.github.io/team13/notion/Onboarding%20Exported/Onboarding/Quality%20Assurance%20and%20Testing.html) on how to write tests.
 
 ## A Quick Tutorial on your First Contribution
 So you want to contribute to core components? Here's what you need to know.
